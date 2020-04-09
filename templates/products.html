@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+	<h1 style="margin-top: 100px;text-align:center;">Lista de Productos</h1>
+
+	<div class="card-columns">
+		{% for p in listProducts %}
+			<div class="col mb-4">
+				<div class="card text-center prod-item">
+					<img src="{{ p.imagef }}">
+					<div class="card-body">
+						<h2 class="card-title">{{ p.price }}<span>Lps.</span></h2>
+						<h5 class="card-title">{{ p.title }}</h5>
+						<a href="{% url 'product_app:single-product' p.slug %}" class="btn">Comprar</a>
+					</div>
+				</div>
+			</div><!-- End Of Product -->
+		{% endfor %}
+	</div>
+
+{% endblock content %}
