@@ -316,6 +316,31 @@ PRODUCTS STYLES
   	}
 }
 
+.wrap-single-product
+{
+	margin-top: 150px;
+}
+
+.wrap-single-product .image-prod
+{
+	float: left;
+}
+
+.wrap-single-product .image-prod img
+{
+	width: 100%;
+}
+
+.wrap-single-product .info-prod
+{
+	float: right;
+}
+
+.wrap-single-product .info-prod .wrap-info
+{
+	width: 100%;
+}
+
 /*------------------------------------------------------
 FOOTER STYLES
 ------------------------------------------------------*/

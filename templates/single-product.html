@@ -1,22 +1,26 @@
 {% extends "index.html" %}
 
 {% block content %}
-
-	<h1 style="margin-top: 100px;text-align:center;">Producto</h1>
-
-	<div class="card-columns">
-		{% for lp in singleProduct %}
-			<div class="col mb-4">
-				<div class="card text-center prod-item">
-					<img src="{{ lp.imagef }}">
-					<div class="card-body">
-						<h2 class="card-title">{{ lp.price }}<span>Lps.</span></h2>
-						<h5 class="card-title">{{ lp.title }}</h5>
-						<a href="#" class="btn">Agregar al carrito</a>
+	
+	<div class="container-fluid wrap-single-product">
+		<div class="container">
+			{% for lp in singleProduct %}
+				<div class="rows">
+					<div class="image-prod col-12 col-md-6">
+						<img src="{{ lp.imagef.url }}">
+					</div>
+					<div class="info-prod col-12 col-md-6">
+						<div class="wrap-info">
+							<h2 class="card-title">{{ lp.title }}</h2>
+							<h5 class="card-title">{{ lp.price }}<span>Lps.</span></h5>
+							<p>{{ lp.company }}</p>
+							<p>{{ lp.resume }}</p>
+							<a href="#" class="btn">Agregar al carrito</a>
+						</div>
 					</div>
 				</div>
-			</div><!-- End Of Product -->
-		{% endfor %}
+			{% endfor %}
+		</div>
 	</div>
 
 {% endblock content %}

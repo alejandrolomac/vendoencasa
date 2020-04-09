@@ -1,6 +1,8 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 SECRET_KEY = '&mcng4k3l9@5y4&(8(4j*1$o022z%3(^v2hfe#y=!71@k@#ja$'
 

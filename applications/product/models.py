@@ -4,7 +4,7 @@ from django.utils.text import slugify
 class Company(models.Model):
 	name = models.CharField('Nombre', max_length=150, blank=False)
 	address = models.CharField('Direccion', max_length=400, blank=True)
-	logo = models.ImageField('Logo', upload_to='company/% Y/% m/% d/', blank=True)
+	logo = models.ImageField('Logo', upload_to='company/%Y/%m/%d/', blank=True)
 	facebook = models.URLField('Facebook', blank=True)
 	twitter = models.URLField('Twitter', blank=True)
 	instagram = models.URLField('Instagram', blank=True)
@@ -24,7 +24,7 @@ class Company(models.Model):
 
 class Category(models.Model):
 	name = models.CharField('Categoria', max_length=100, unique=False)
-	icono = models.ImageField('Icono', upload_to='category/% Y/% m/% d/', blank=True)
+	icono = models.ImageField('Icono', upload_to='category/%Y/%m/%d/', blank=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 
 	def save(self, *args, **kwargs):
@@ -36,7 +36,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
 	name = models.CharField('Sub Categoria', max_length=100, unique=False)
-	icono = models.ImageField('Icono', upload_to='subcategory/% Y/% m/% d/', blank=True)
+	icono = models.ImageField('Icono', upload_to='subcategory/%Y/%m/%d/', blank=True)
 	category = models.ForeignKey(Category, models.SET_NULL, null=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 
@@ -52,9 +52,9 @@ class Products(models.Model):
 	company = models.ForeignKey(Company, on_delete=models.CASCADE)
 	subCategory = models.ForeignKey(SubCategory, models.SET_NULL, null=True)
 	resume = models.TextField('Descripcion', blank=True)
-	imagef = models.ImageField('Imagen 1', upload_to='product/% Y/% m/% d/', blank=True)
-	images = models.ImageField('Imagen 2', upload_to='product/% Y/% m/% d/', blank=True)
-	imaget = models.ImageField('Imagen 3', upload_to='product/% Y/% m/% d/', blank=True)
+	imagef = models.ImageField('Imagen 1', upload_to='product/%Y/%m/%d/', blank=True)
+	images = models.ImageField('Imagen 2', upload_to='product/%Y/%m/%d/', blank=True)
+	imaget = models.ImageField('Imagen 3', upload_to='product/%Y/%m/%d/', blank=True)
 	price = models.CharField('Precio', max_length=12, blank=False)
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
