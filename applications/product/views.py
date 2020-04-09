@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from django.views.generic import (
+	ListView,
+)
+from .models import Company, Category, SubCategory, Products
 
-# Create your views here.
+class Index(ListView):
+	template_name = 'index.html'
+	model = Products
+	context_object_name = 'productos'

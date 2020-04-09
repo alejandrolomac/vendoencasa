@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Vendo en Casa</title>
+</head>
+<body>
+	<h1>Vendo en Casa</h1>
+	<section>
+		{% for p in productos %}
+			<img src="{{ p.imagef }}">
+			<h2>{{ p.title }}</h2>
+			<h3>{{ p.price }}</h3>
+			<a href="">Comprar</a>
+		{% endfor %}
+	</section>
+</body>
+</html>
