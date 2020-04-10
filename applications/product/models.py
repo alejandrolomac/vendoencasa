@@ -12,13 +12,13 @@ def company_image(instance, filename):
     return u'Company/{0}'.format(filename)
 
 def category_image(instance, filename):
-    return u'Company/{0}'.format(filename)
+    return u'Category/{0}'.format(filename)
 
 def subCategory_image(instance, filename):
-    return u'Company/{0}'.format(filename)
+    return u'SubCategory/{0}'.format(filename)
 
 def product_image(instance, filename):
-    return u'Products/%Y/%m/%d/{0}'.format(filename)
+    return u'Products/{0}'.format(filename)
 
 
 class Company(models.Model):
@@ -34,6 +34,8 @@ class Company(models.Model):
 	phone = models.CharField('Telefono', max_length=15, blank=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	resume = models.TextField('Resumen', blank=True)
+	delivery = models.BooleanField('Nuestro Delivery', default=True)
+	phoneDelivery = models.CharField('Telefono de Delivery', max_length=15, blank=True)
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
