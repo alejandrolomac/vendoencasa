@@ -9,8 +9,9 @@ MEDIA_URL = "/media/"
 SECRET_KEY = '&mcng4k3l9@5y4&(8(4j*1$o022z%3(^v2hfe#y=!71@k@#ja$'
 
 DEBUG = False
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['vendoencasa.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['*', 'vendoencasa.herokuapp.com', '127.0.0.1']
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -96,5 +97,6 @@ STATIC_URL = '/static/'
 #STATICFILES_STORAGE = 'whitenoise.dejango.GzipManiFestStatticFilesStorage'
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 django_heroku.settings(locals())
