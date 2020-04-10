@@ -319,6 +319,7 @@ PRODUCTS STYLES
 .wrap-single-product
 {
 	margin-top: 150px;
+	overflow: hidden;
 }
 
 .wrap-single-product .image-prod
