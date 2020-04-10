@@ -336,9 +336,24 @@ PRODUCTS STYLES
 	float: right;
 }
 
+.wrap-single-product .info-prod .btn
+{
+	margin-top: 20px;
+}
+
 .wrap-single-product .info-prod .wrap-info
 {
 	width: 100%;
+}
+
+.wrap-single-product .wrap-comments
+{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	float: left;
+	background: #dedede;
+	padding: 50px 0px;
 }
 
 /*------------------------------------------------------

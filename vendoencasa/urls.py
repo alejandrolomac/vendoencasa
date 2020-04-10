@@ -5,3 +5,5 @@ urlpatterns = [
 	re_path(r'', include('applications.product.urls')),
     re_path('admin/', admin.site.urls),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
