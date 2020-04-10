@@ -208,6 +208,9 @@ HOME STYLES
 {
 	margin-top: 0px;
 	margin-bottom: 100px;
+	min-height: 700px;
+	height: 100vh !important;
+	overflow: hidden;
 }
 
 #bestsellerslider
