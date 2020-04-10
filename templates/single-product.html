@@ -6,8 +6,9 @@
 		<div class="container">
 			{% for lp in singleProduct %}
 				<div class="rows">
+					<h2>{{ MEDIA_URL }}</h2>
 					<div class="image-prod col-12 col-md-6">
-						<img src="{{ MEDIA_URL + lp.imagef.url }}">
+						<img src="{{ lp.imagef.url }}">
 					</div>
 					<div class="info-prod col-12 col-md-6">
 						<div class="wrap-info">
