@@ -4,8 +4,8 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 
 image_storage = FileSystemStorage(
-    location=u'{0}/my_sell/'.format(settings.MEDIA_ROOT),
-    base_url=u'{0}my_sell/'.format(settings.MEDIA_URL),
+    location=u'{0}/'.format(settings.MEDIA_ROOT),
+    base_url=u'{0}/'.format(settings.MEDIA_URL),
 )
 
 def company_image(instance, filename):
@@ -18,7 +18,7 @@ def subCategory_image(instance, filename):
     return u'Company/{0}'.format(filename)
 
 def product_image(instance, filename):
-    return u'Products/{0}/%Y/%m/%d/'.format(filename)
+    return u'Products/%Y/%m/%d/{0}'.format(filename)
 
 
 class Company(models.Model):
