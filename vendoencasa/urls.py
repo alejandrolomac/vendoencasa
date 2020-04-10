@@ -4,3 +4,5 @@ urlpatterns = [
 	re_path(r'', include('applications.product.urls')),
     re_path('admin/', admin.site.urls),
 ]
+
+urlpatterns += patterns("", (r'^static/(?P.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),)

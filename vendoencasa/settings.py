@@ -95,7 +95,9 @@ STATICFILES_DIRS = (
 #STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_ROOT = "/var/www/vendoencasa.net/static/"
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
