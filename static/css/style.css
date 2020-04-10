@@ -208,42 +208,6 @@ HOME STYLES
 {
 	margin-top: 0px;
 	margin-bottom: 100px;
-	height: 700px !important;
-}
-
-#carouselExampleIndicators .carousel-inner
-{
-	height: 100% !important;
-}
-
-#carouselExampleIndicators .carousel-item
-{
-	height: 100% !important;
-}
-
-#carouselExampleIndicators img
-{
-	height: 100% !important;
-	display: block;
-	width: 100%;
-}
-
-.slide1
-{
-	background: url(https://picsum.photos/id/1/1400/800) center center no-repeat;
-	background-size: cover;
-}
-
-.slide2
-{
-	background: url(https://picsum.photos/id/2/1400/800) center center no-repeat;
-	background-size: cover;
-}
-
-.slide3
-{
-	background: url(https://picsum.photos/id/3/1400/800) center center no-repeat;
-	background-size: cover;
 }
 
 #bestsellerslider
