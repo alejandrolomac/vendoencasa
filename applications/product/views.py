@@ -4,7 +4,6 @@ from django.views.generic import (
 	ListView,
 )
 from .models import Company, Category, SubCategory, Products
-from .filters import OrderFilter
 from django.db.models import Q
 
 class Index(TemplateView):
