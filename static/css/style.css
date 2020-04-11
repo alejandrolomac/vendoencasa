@@ -24,10 +24,6 @@ body
 	font-size: 16px;
 }
 
-:focus {
-	outline: 0;
-}
-
 h1, h2, h3, h4, h5, h6
 {
 	font-weight: bold;
@@ -200,6 +196,27 @@ header ul li a:hover
 	text-decoration: none;
 }
 
+header nav .input-group-prepend
+{
+	background: #dedede !important;
+	border-radius: 5px 0px 0px 5px !important;
+	border: none !important;
+}
+
+header nav .form-control
+{
+	background: #fff;
+	border-radius: 0px !important;
+	border: 0px !important;
+}
+
+header nav .input-group-postpend .btn
+{
+	border-radius: 0px 5px 5px 0px !important;
+	border: none !important;
+	height: 100%;
+}
+
 /*------------------------------------------------------
 HOME STYLES
 ------------------------------------------------------*/
@@ -308,7 +325,7 @@ PRODUCTS STYLES
 	padding: 150px 0px 100px 0px;
 }
 
-.wrap-products .card-columns {
+.wrap-products .card-group {
 	@include media-breakpoint-only(md) {
     	column-count: 4;
   	}
@@ -371,6 +388,43 @@ PRODUCTS STYLES
 	text-align: center;
 	padding-bottom: 15px;
 	border-bottom: 1px solid #ccc;
+}
+
+.wrap-products-list .card
+{
+	border-radius: 0px !important;
+}
+
+/*------------------------------------------------------
+SEARCH STYLES
+------------------------------------------------------*/
+
+.search-container, .product-container
+{
+	margin-top: 50px !important;
+	padding-top: 100px !important;
+	padding-bottom: 100px !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+
+#pagination
+{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: 50px 0px 25px 0px;
+	text-align: center;
+}
+
+#pagination .btn-secondary 
+{
+    border-color: #fff !important;
+}
+
+#pagination .active
+{
+    background: #A31C15 !important;
 }
 
 /*------------------------------------------------------

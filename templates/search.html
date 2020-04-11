@@ -2,20 +2,20 @@
 
 {% block content %}
 	
-	<div class="container-fluid product-container">
+	<div class="container-fluid search-container">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
-				{% for p in listProducts %}
+				{% for s in object_list %}
 					<div class="card text-center prod-item" style="width: 18rem;">
-						{% if p.imagef.url == '' %}
+						{% if s.imagef.url == '' %}
 							<img src="https://picsum.photos/300/300">
 						{% else %}
-							<img src="{{ p.imagef.url }}">
+							<img src="{{ s.imagef.url }}">
 						{% endif %}
 						<div class="card-body">
-							<h2 class="card-title">{{ p.price }}<span>Lps.</span></h2>
-							<h5 class="card-title">{{ p.title }}</h5>
-							<a href="{% url 'product_app:single-product' p.slug %}" class="btn">Comprar</a>
+							<h2 class="card-title">{{ s.price }}<span>Lps.</span></h2>
+							<h5 class="card-title">{{ s.title }}</h5>
+							<a href="{% url 'product_app:single-product' s.slug %}" class="btn">Comprar</a>
 						</div>
 					</div><!-- End Of Product -->
 				{% endfor %}
