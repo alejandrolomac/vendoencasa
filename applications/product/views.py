@@ -46,13 +46,6 @@ class ListProducts(ListView):
 	paginate_by = 4
 
 
-class ListCompanys(ListView):
-	template_name = 'companys.html'
-	model = Company
-	context_object_name = 'listCompanys'
-	paginate_by = 4
-
-
 class SingleProduct(ListView):
 	template_name = "single-product.html"
 	context_object_name = 'singleProduct'
