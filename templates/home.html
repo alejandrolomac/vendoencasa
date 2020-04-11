@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 {% block content %}
 	
-	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+	<!--<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	  	<ol class="carousel-indicators">
 	    	<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 	    	<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -24,74 +24,166 @@
 	  	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
 	    	<i class="fa fa-arrow-circle-right"></i>
 	  	</a>
-	</div><!-- End Of Slider -->
+	</div>--><!-- End Of Slider -->
+	
+	{% load static %}
+	<div class="container-fluid list-cats">
+		<div class="container">
+			<h3 class="text-center">Categorías</h3>
+			<div class="card-deck row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+				{% for cat in listCategorys %}
+					<div class="card text-center" style="width: 18rem; border:none;">
+						<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}">
+							{% if cat.imagef.url == '' %}
+								<img src="{% static 'img/categoria.jpg' %}">
+							{% else %}
+								<img src="{{ cat.icono.url }}">
+							{% endif %}
+						</a>
+						<div class="card-body">
+							<h5 class="card-title">{{ cat.name }}</h5>
+						</div>
+					</div><!-- End Of Product -->
+				{% endfor %}
+			</div><!-- End Of Categorys -->
 
-	<div id="bestsellerslider" class="carousel slide" data-ride="carousel">
-	  	<div class="carousel-inner container">
-	  		<h3 class="text-center">Más Vendidos</h3>
-	    	<div class="carousel-item active">
-	    		<div class="card-deck">
-				    <div class="card text-center">
-				        <img src="https://picsum.photos/200/150" class="card-img-top">
-				        <div class="card-body">
-				            <h2 class="card-title">150 <span>lps</span></h2>
-				        </div>
-				    </div>
-				    <div class="card text-center">
-				        <img src="https://picsum.photos/200/150" class="card-img-top">
-				        <div class="card-body">
-				            <h2 class="card-title">120 <span>lps</span></h2>
-				        </div>
-				    </div>
-				    <div class="card text-center">
-				        <img src="https://picsum.photos/200/150" class="card-img-top">
-				        <div class="card-body">
-				            <h2 class="card-title">350 <span>lps</span></h2>
-				        </div>
-				    </div>
-				    <div class="card text-center">
-				        <img src="https://picsum.photos/200/150" class="card-img-top">
-				        <div class="card-body">
-				            <h2 class="card-title">310 <span>lps</span></h2>
-				        </div>
-				    </div>
-				</div>
-	    	</div>
-	    	<div class="carousel-item">
-	    		<div class="card-deck">
-				    <div class="card text-center">
-				        <img src="https://picsum.photos/200/150" class="card-img-top">
-				        <div class="card-body">
-				            <h2 class="card-title">1222 <span>lps</span></h2>
-				        </div>
-				    </div>
-				    <div class="card text-center">
-				        <img src="https://picsum.photos/200/150" class="card-img-top">
-				        <div class="card-body">
-				            <h2 class="card-title">560 <span>lps</span></h2>
-				        </div>
-				    </div>
-				    <div class="card text-center">
-				        <img src="https://picsum.photos/200/150" class="card-img-top">
-				        <div class="card-body">
-				            <h2 class="card-title">950 <span>lps</span></h2>
-				        </div>
-				    </div>
-				    <div class="card text-center">
-				        <img src="https://picsum.photos/200/150" class="card-img-top">
-				        <div class="card-body">
-				            <h2 class="card-title">350 <span>lps</span></h2>
-				        </div>
-				    </div>
-				</div>
-	    	</div>
-	  	</div>
-	  	<a class="carousel-control-prev" href="#bestsellerslider" role="button" data-slide="prev">
-	    	<i class="fa fa-arrow-circle-left"></i>
-	  	</a>
-	  	<a class="carousel-control-next" href="#bestsellerslider" role="button" data-slide="next">
-	    	<i class="fa fa-arrow-circle-right"></i>
-	  	</a>
-	</div><!-- End Of Best Seller -->
+
+			<div id="newslider" class="carousel slide" data-ride="carousel">
+			  	<div class="carousel-inner container">
+			  		<h3 class="text-center">Ultimos Agregados</h3>
+			    	<div class="carousel-item active">
+			    		<div class="card-deck">
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">150 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">120 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">350 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">310 <span>lps</span></h2>
+						        </div>
+						    </div>
+						</div>
+			    	</div>
+			    	<div class="carousel-item">
+			    		<div class="card-deck">
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">1222 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">560 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">950 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">350 <span>lps</span></h2>
+						        </div>
+						    </div>
+						</div>
+			    	</div>
+			  	</div>
+			  	<a class="carousel-control-prev" href="#newslider" role="button" data-slide="prev">
+			    	<i class="fa fa-arrow-circle-left"></i>
+			  	</a>
+			  	<a class="carousel-control-next" href="#newslider" role="button" data-slide="next">
+			    	<i class="fa fa-arrow-circle-right"></i>
+			  	</a>
+			</div><!-- End Of Best Seller -->
+
+			<div id="bestsellerslider" class="carousel slide" data-ride="carousel">
+			  	<div class="carousel-inner container">
+			  		<h3 class="text-center">Más Vendidos</h3>
+			    	<div class="carousel-item active">
+			    		<div class="card-deck">
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">150 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">120 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">350 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">310 <span>lps</span></h2>
+						        </div>
+						    </div>
+						</div>
+			    	</div>
+			    	<div class="carousel-item">
+			    		<div class="card-deck">
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">1222 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">560 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">950 <span>lps</span></h2>
+						        </div>
+						    </div>
+						    <div class="card text-center">
+						        <img src="https://picsum.photos/200/150" class="card-img-top">
+						        <div class="card-body">
+						            <h2 class="card-title">350 <span>lps</span></h2>
+						        </div>
+						    </div>
+						</div>
+			    	</div>
+			  	</div>
+			  	<a class="carousel-control-prev" href="#bestsellerslider" role="button" data-slide="prev">
+			    	<i class="fa fa-arrow-circle-left"></i>
+			  	</a>
+			  	<a class="carousel-control-next" href="#bestsellerslider" role="button" data-slide="next">
+			    	<i class="fa fa-arrow-circle-right"></i>
+			  	</a>
+			</div><!-- End Of News -->
+		</div>
+	</div>
 
 {% endblock content %}

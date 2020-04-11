@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 
 {% block content %}
-	
+	{% load static %}
 	<div class="container-fluid wrap-single-product">
 		<div class="container">
 
@@ -12,7 +12,7 @@
 						  	<div class="carousel-inner">
 						    	{% if lp.imagef.url == '' %}
 							    	<div class="carousel-item active">
-							      		<img src="https://picsum.photos/300/300" class="d-block w-100">
+							      		<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100">
 							    	</div>
 								{% else %}
 									<div class="carousel-item active">
@@ -45,8 +45,8 @@
 							<h2 class="card-title">{{ lp.title }}</h2>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item"><h5 class="card-title">{{ lp.price }}<span>Lps.</span></h5></li>
-							    <li class="list-group-item">Categoría: <a href="#">{{ lp.subCategory }}</a></li>
-							    <li class="list-group-item">Empresa: <a href="#">{{ lp.company }}</a></li>
+							    <li class="list-group-item">Categoría: <a href="{% url 'product_app:sub-catproducts' lp.subCategory lp.subCategory.id %}">{{ lp.subCategory }}</a></li>
+							    <li class="list-group-item">Empresa: <a href="{% url 'product_app:company-products' lp.company lp.company.id %}">{{ lp.company }}</a></li>
 							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume }}</p></li>
 							    <li class="list-group-item"><a href="#" class="btn">Agregar al Carrito</a></li>
 							</ul>

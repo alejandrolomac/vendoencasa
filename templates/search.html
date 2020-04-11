@@ -1,14 +1,14 @@
 {% extends "index.html" %}
 
 {% block content %}
-	
+	{% load static %}
 	<div class="container-fluid search-container">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
 				{% for s in object_list %}
 					<div class="card text-center prod-item" style="width: 18rem;">
 						{% if s.imagef.url == '' %}
-							<img src="https://picsum.photos/300/300">
+							<img src="{% static 'img/default_thumbnail.jpg' %}">
 						{% else %}
 							<img src="{{ s.imagef.url }}">
 						{% endif %}

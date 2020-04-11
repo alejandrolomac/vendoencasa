@@ -399,13 +399,14 @@ PRODUCTS STYLES
 SEARCH STYLES
 ------------------------------------------------------*/
 
-.search-container, .product-container
+.search-container, .product-container, .list-cats
 {
 	margin-top: 50px !important;
 	padding-top: 100px !important;
 	padding-bottom: 100px !important;
 	height: auto !important;
 	overflow: hidden !important;
+	min-height: 800px;
 }
 
 #pagination
@@ -425,6 +426,26 @@ SEARCH STYLES
 #pagination .active
 {
     background: #A31C15 !important;
+}
+
+/*------------------------------------------------------
+CATEGORYS STYLES
+------------------------------------------------------*/
+
+.list-cats
+{
+	margin-top: 150px;
+}
+
+.list-cats h3
+{
+	margin-bottom: 50px;
+	font-size: 2.5em;
+}
+
+.list-cats .card-title
+{
+	color: #ef4036;
 }
 
 /*------------------------------------------------------

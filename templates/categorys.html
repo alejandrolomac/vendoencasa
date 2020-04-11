@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+	{% load static %}
+	<div class="container-fluid list-cats">
+		<div class="container">
+			<h3 class="text-center">Sub Categorías</h3>
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
+				{% for subcat in object_list %}
+					<div class="card text-center prod-item" style="width: 18rem;">
+						<a href="{% url 'product_app:sub-catproducts' subcat.slug subcat.id %}">
+							{% if subcat.icono.url == '' %}
+								<img src="{% static 'img/subcategoria.jpg' %}">
+							{% else %}
+								<img src="{{ subcat.icono.url }}">
+							{% endif %}
+						</a>
+						<div class="card-body">
+							<h5 class="card-title">{{ subcat.name }}</h5>
+						</div>
+					</div><!-- End Of Product -->
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
