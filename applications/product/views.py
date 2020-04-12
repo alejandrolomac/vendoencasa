@@ -5,11 +5,13 @@ from django.views.generic import (
 )
 from .models import Company, Category, SubCategory, Products
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-class Index(ListView):
-	template_name = 'home.html'
-	model = Category
-	context_object_name = 'listCategorys'
+
+def index(request):
+	categorys = Category.objects.all()
+	new_prod = Products.objects.all().order_by('-pub_date')[:4]
+	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod})
 
 
 class ListSubCategorys(ListView):
@@ -23,6 +25,7 @@ class ListSubCategorys(ListView):
 
 class ListSubCatProducts(ListView):
 	template_name = 'cat-products.html'
+	paginate_by = 4
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
@@ -32,6 +35,7 @@ class ListSubCatProducts(ListView):
 
 class ListCompanyProducts(ListView):
 	template_name = 'company.html'
+	paginate_by = 4
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
@@ -39,11 +43,15 @@ class ListCompanyProducts(ListView):
 		return object_list
 
 
-class ListProducts(ListView):
-	template_name = 'products.html'
-	model = Products
-	context_object_name = 'listProducts'
-	paginate_by = 4
+def listproducts(request):
+	paginate_by = 3
+	categorys = Category.objects.all()
+	productslist = Products.objects.all().order_by('-pub_date')
+	paginator = Paginator(productslist, 3)
+
+	page = request.GET.get('page')
+	contacts = paginator.get_page(page)
+	return render(request, 'products.html', {'listCategorys': categorys, 'contacts': contacts})
 
 
 class SingleProduct(ListView):
@@ -70,10 +78,10 @@ class SearchResults(ListView):
 		if( cat_query == '' ):
 			object_list = Products.objects.filter(
 		    	Q(title__icontains=query) | Q(resume__icontains=query)
-		    )
+		    ).order_by('-pub_date')
 		else:
 			object_list = Products.objects.filter(
 		    	Q(title__icontains=query) | Q(resume__icontains=query)
-		    ).filter( subCategory__id=cat_query )
+		    ).filter( subCategory__id=cat_query ).order_by('-pub_date')
 
 		return object_list

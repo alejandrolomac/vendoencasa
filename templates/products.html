@@ -4,10 +4,75 @@
 	{% load static %}
 	<div class="container-fluid product-container">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
+			<div class="row">
+				<div class="col-3">
+					<ul class="list-group">
+						<li class="list-group-item"><h4 style="font-weight:bold;">Categorías</h4></li>
+						{% for listcatleft in listCategorys %}
+							<li class="list-group-item list-group-item-action"><a href="{% url 'product_app:sub-categorys' listcatleft.slug listcatleft.id %}">{{ listcatleft.name }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="col-9">
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 wrap-products-list" style="margin-top: -10px;">
+						{% for p in contacts %}
+							<div class="card text-center prod-item" style="border:none; padding: 10px;">
+								<a href="{% url 'product_app:single-product' p.slug %}" class="thumbnail">
+									{% if p.imagef.url == '' %}
+										<img src="{% static 'img/default_thumbnail.jpg' %}">
+									{% else %}
+										<img src="{{ p.imagef.url }}">
+									{% endif %}
+								</a>
+								<div class="card-body">
+									<h2 class="card-title">{{ p.price }}<span>Lps.</span></h2>
+									<h5 class="card-title">{{ p.title }}</h5>
+									<a href="{% url 'product_app:single-product' p.slug %}" class="btn">Comprar</a>
+								</div>
+							</div><!-- End Of Product -->
+						{% endfor %}
+					</div>
+
+<nav aria-label="Page navigation example" style="margin-top: 25px;">
+  <ul class="pagination">
+
+    {% if contacts.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page=1" aria-label="Previous">
+          <span aria-hidden="true">&laquo;&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ contacts.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+    {% endif %}
+
+    <li class="page-item"><a class="page-link">{{ contacts.number }} de {{ contacts.paginator.num_pages }}</a></li>
+
+    {% if contacts.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ contacts.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{ contacts.paginator.num_pages }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;&raquo;</span>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+
+
+				</div>
+			</div>
+			<!--<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
 				{% for p in listProducts %}
-					<div class="card text-center prod-item" style="width: 18rem;">
-						<a href="{% url 'product_app:single-product' p.slug %}">
+					<div class="card text-center prod-item" style="border:none; padding: 10px;">
+						<a href="{% url 'product_app:single-product' p.slug %}" class="thumbnail">
 							{% if p.imagef.url == '' %}
 								<img src="{% static 'img/default_thumbnail.jpg' %}">
 							{% else %}
@@ -19,7 +84,7 @@
 							<h5 class="card-title">{{ p.title }}</h5>
 							<a href="{% url 'product_app:single-product' p.slug %}" class="btn">Comprar</a>
 						</div>
-					</div><!-- End Of Product -->
+					</div>
 				{% endfor %}
 			</div>
 
@@ -37,7 +102,7 @@
 			            {% endif %}
 					{% endif %}
 				</div>
-			</nav>
+			</nav>-->
 		</div>
 	</div>
 
