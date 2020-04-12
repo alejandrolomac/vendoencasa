@@ -52,6 +52,29 @@ a:hover
 	transition: all .2s linear;
 }
 
+.thumbnail
+{
+	opacity: 1;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.thumbnail:hover
+{
+	opacity: .8;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
 /*------------------------------------------------------
 HEADER STYLES
 ------------------------------------------------------*/
@@ -114,6 +137,11 @@ header .form-inline button i
 header .form-inline button:hover
 {
 	background: #A31C15;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
 }
 
 header .navbar-toggler
@@ -149,6 +177,11 @@ header .navbar-car
 header .navbar-car:hover
 {
 	color: #A31C15;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
 }
 
 header .navbar-brand 
@@ -194,13 +227,29 @@ header ul li a:hover
 {
 	color: #ef4036;
 	text-decoration: none;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
 }
 
-header nav .input-group-prepend
+header nav .custom-select
 {
-	background: #dedede !important;
 	border-radius: 5px 0px 0px 5px !important;
-	border: none !important;
+	border: 0px !important;
+	background: #f0f0f0 url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right .75rem center/8px 10px !important;
+	border-radius: 5px 0px 0px 5px;
+}
+
+header nav .custom-select:hover
+{
+	background: #e6e6e6 url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right .75rem center/8px 10px !important;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
 }
 
 header nav .form-control
@@ -224,18 +273,15 @@ HOME STYLES
 #carouselExampleIndicators
 {
 	margin-top: 0px;
-	margin-bottom: 100px;
-	min-height: 500px !important;
-	height: 100vh !important;
-	max-height: 800px !important;
+	margin-bottom: 0px;
+	max-height: 700px !important;
 	overflow: hidden !important;
 }
 
 #bestsellerslider
 {
-	margin-bottom: 100px;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 #bestsellerslider h3
@@ -325,18 +371,6 @@ PRODUCTS STYLES
 	padding: 150px 0px 100px 0px;
 }
 
-.wrap-products .card-group {
-	@include media-breakpoint-only(md) {
-    	column-count: 4;
-  	}
-  	@include media-breakpoint-only(lg) {
-    	column-count: 1;
-  	}
-  	@include media-breakpoint-only(xl) {
-    	column-count: 1;
-  	}
-}
-
 .wrap-single-product
 {
 	margin-top: 150px;
@@ -409,23 +443,55 @@ SEARCH STYLES
 	min-height: 800px;
 }
 
-#pagination
+.list-cats
 {
-	width: 100%;
+	margin-top: 50px !important;
+	padding-top: 0px !important;
+	padding-bottom: 50px !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+
+.pagination
+{
+	width: max-content;
 	height: auto;
 	overflow: hidden;
 	padding: 50px 0px 25px 0px;
 	text-align: center;
+	margin: 0px auto;
 }
 
-#pagination .btn-secondary 
+.pagination .btn-secondary 
 {
     border-color: #fff !important;
 }
 
-#pagination .active
+.pagination .active
 {
     background: #A31C15 !important;
+}
+
+.pagination a
+{
+	background: #ef4036 !important;
+	color: #fff !important;
+	border: 1px solid #fff !important;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+.pagination a:hover
+{
+	background: #A31C15 !important;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
 }
 
 /*------------------------------------------------------
@@ -434,7 +500,7 @@ CATEGORYS STYLES
 
 .list-cats
 {
-	margin-top: 150px;
+	margin-top: 50px;
 }
 
 .list-cats h3
@@ -455,4 +521,56 @@ FOOTER STYLES
 footer .copy p
 {
 	color: #fff;
+}
+
+footer .social, footer .menufooter
+{
+	width: 100%;
+	overflow: hidden;
+	height: auto;
+	text-align: center;
+}
+
+footer .social ul, footer .menufooter ul
+{
+	width: max-content;
+	margin: 0px auto;
+	height: auto;
+	overflow: hidden;
+}
+
+footer .menufooter ul
+{
+	margin-top: 50px;
+}
+
+footer .social ul li, footer .menufooter ul li
+{
+	list-style: none;
+	width: max-content;
+	text-align: center;
+	display: block;
+	float: left;
+}
+
+footer .social ul li a, footer .menufooter ul li a
+{
+	display: inline-block;
+	width: max-content;
+	text-align: center;
+	color: #ccc !important;
+	font-size: 1.3em;
+	padding: 5px;
+	margin: 2px 10px;
+}
+
+footer .menufooter ul li a
+{
+	font-size: 1.1em;
+}
+
+footer .social ul li a:hover, footer .menufooter ul li a:hover
+{
+	color: #ef4036 !important;
+	text-decoration: none;
 }
