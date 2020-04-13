@@ -31,22 +31,22 @@
 		<div class="container">
 			{% if listCategorys %}
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Categorías</h3>
-				<div class="row" style="overflow: hidden; max-with: 100%; padding: 0px; margin: 0px;">
+				<div class="row" style="overflow: hidden; max-width: 100%; padding: 0px; margin: 0px;">
 					<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="6000" id="catslider">
 				    	<div class="carousel-inner">
 				    		{% for cat in listCategorys %}
-								<div class="item card text-left" style="border:none; padding: 10px;">
-									<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="thumbnail">
-										{% if cat.imagef.url == '' %}
-											<img src="{% static 'img/categoria.jpg' %}">
-										{% else %}
-											<img src="{{ cat.icono.url }}">
-										{% endif %}
-									</a>
-									<div class="card-body" style="padding: 15px 0px;">
-										<h5 class="card-title">{{ cat.name }}</h5>
-									</div>
-								</div><!-- End Of Product -->
+					    		<div class="item text-left">
+							        <div class="col-md-3 col-sm-6 col-xs-12">
+							        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}">
+							        		{% if cat.imagef.url == '' %}
+												<img src="{% static 'img/categoria.jpg' %}" class="img-responsive">
+											{% else %}
+												<img src="{{ cat.icono.url }}" class="img-responsive">
+											{% endif %}
+											<h5 class="card-title" style="padding: 15px 0px;">{{ cat.name }}</h5>
+							        	</a>
+							        </div>
+							    </div><!-- End Of item -->
 							{% endfor %}
 				    	</div>
 				    	<a class="left carousel-control" href="#catslider" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
