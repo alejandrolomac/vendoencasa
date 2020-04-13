@@ -38,10 +38,10 @@
 					    		<div class="item text-left">
 							        <div class="col-12 col-md-3 col-sm-6 float-left">
 							        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none;">
-							        		{% if cat.icono.url == '' %}
-												<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
+							        		{% if cat.icono.url %}
+												<img src="{{ cat.icono.url }}" class="img-responsive thumbnail">
 											{% else %}
-												<img src="{{ cat.icono.url }}" class="img-responsive">
+												<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
 											{% endif %}
 											<h5 class="card-title" style="padding: 15px 0px;">{{ cat.name }}</h5>
 							        	</a>
