@@ -33,18 +33,16 @@
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Categorías</h3>
 	    		<div class="container-fluid catslider">
 				    {% for cat in listCategorys %}
-						<div class="item text-left">
-					        <div class="card text-left">
-					        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none;">
-					        		{% if cat.icono.url != '' %}
-										<img src="{{ cat.icono.url }}" class="img-responsive thumbnail">
-									{% else %}
-										<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
-									{% endif %}
-									<h5 class="card-title" style="padding: 15px 0px;">{{ cat.name }}</h5>
-					        	</a>
-					        </div>
-					    </div><!-- End Of item -->
+				        <div class="card text-left">
+				        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none;">
+				        		{% if cat.icono.url != '' %}
+									<img src="{{ cat.icono.url }}" class="img-responsive thumbnail">
+								{% else %}
+									<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
+								{% endif %}
+								<h5 class="card-title" style="padding: 15px 0px;">{{ cat.name }}</h5>
+				        	</a>
+				        </div><!-- End Of item -->
 					{% endfor %}
 				</div><!-- End Of Categorias -->
 			{% endif %}

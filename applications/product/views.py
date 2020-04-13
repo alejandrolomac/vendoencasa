@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
 	categorys = Category.objects.all()
-	new_prod = Products.objects.all().order_by('-pub_date')[:4]
+	new_prod = Products.objects.all().order_by('-pub_date')[:8]
 	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod})
 
 

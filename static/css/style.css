@@ -637,3 +637,8 @@ img {
 img:hover {
   opacity: 0.9;
 }
+
+.card
+{
+	border: none !important;
+}
