@@ -584,9 +584,26 @@ SLIDERS STYLES
 	font-size: 1em;
 }
 
-.carousel-control
+.contro-slider-right, .contro-slider-left
 { 
-	width:  4%;
+	width:  20px;
+	height: 20px;
+	position: absolute;
+	top: 50%;
+	font-size: 20px;
+	display: block;
+	color: red;
+	transform: translateY(-50%);
+}
+
+.contro-slider-left
+{
+	left: 0px;
+}
+
+.contro-slider-right
+{
+	right: 0px;
 }
 
 .carousel-control.left,.carousel-control.right 

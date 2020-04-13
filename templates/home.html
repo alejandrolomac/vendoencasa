@@ -31,15 +31,15 @@
 		<div class="container">
 			{% if listCategorys %}
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Categorías</h3>
-				<div class="row" style="overflow: hidden; max-width: 100%; padding: 0px; margin: 0px;">
-					<div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="6000" id="catslider">
+				<div class="row" style="overflow: hidden; max-width: 100%; padding: 0px; margin: 0px; position: relative;">
+					<div class="carousel slide w-100" data-ride="carousel" data-type="multi" data-interval="6000" id="catslider">
 				    	<div class="carousel-inner">
 				    		{% for cat in listCategorys %}
 					    		<div class="item text-left">
-							        <div class="col-md-3 col-sm-6 col-xs-12">
+							        <div class="col-md-3 col-sm-6 col-xs-12 float-left">
 							        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem">
 							        		{% if cat.imagef.url == '' %}
-												<img src="{% static 'img/categoria.jpg' %}" class="img-responsive">
+												<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
 											{% else %}
 												<img src="{{ cat.icono.url }}" class="img-responsive">
 											{% endif %}
@@ -49,8 +49,8 @@
 							    </div><!-- End Of item -->
 							{% endfor %}
 				    	</div>
-				    	<a class="left carousel-control" href="#catslider" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-				    	<a class="right carousel-control" href="#catslider" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+				    	<a class="left carousel-control contro-slider-left" href="#catslider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+				    	<a class="right carousel-control contro-slider-right" href="#catslider" data-slide="next"><i class="fa fa-angle-right"></i></a>
 				  	</div>
 				</div>
 			{% endif %}
