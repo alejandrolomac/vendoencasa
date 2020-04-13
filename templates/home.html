@@ -48,9 +48,9 @@
 			{% endif %}
 
 			{% if newProd %}
-				<div class="fluid-cotainer" style="margin: 25px 0px; padding: 0px;">
+				<div class="fluid-cotainer" style="padding: 0px; margin: 25px 0px;">
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Novedades</h3>
-				  	<div class="container-fluid catslider">
+				  	<div class="container-fluid catslider" style="padding: 0px; margin: 25px 0px;">
 					    {% for nprod in newProd %}
 							<div class="card text-left" style="border: none !important; padding: 10px;">
 				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
@@ -73,7 +73,7 @@
 			{% if newProd %}
 				<div class="fluid-cotainer" style="margin: 25px 0px; padding: 0px;">
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Más Buscados</h3>
-				  	<div class="container-fluid catslider">
+				  	<div class="container-fluid catslider" style="padding: 0px; margin: 25px 0px;">
 					    {% for nprod in newProd %}
 							<div class="card text-left" style="border: none !important; padding: 10px; border: none !important;">
 				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
