@@ -33,7 +33,7 @@
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Categorías</h3>
 	    		<div class="container-fluid catslider">
 				    {% for cat in listCategorys %}
-				        <div class="card text-left">
+				        <div class="card text-left" style="padding: 10px; border: none;">
 				        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none;">
 				        		{% if cat.icono.url != '' %}
 									<img src="{{ cat.icono.url }}" class="img-responsive thumbnail">
@@ -52,8 +52,8 @@
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Novedades</h3>
 				  	<div class="container-fluid catslider">
 					    {% for nprod in newProd %}
-							<div class="card text-left" style="border:none; padding: 10px;">
-				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail">
+							<div class="card text-left" style="border: none !important; padding: 10px;">
+				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important;">
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}">
 									{% else %}
@@ -61,6 +61,7 @@
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px;">
+									<h2 style="color: #343a40; font-size: 14px;">{{ nprod.title }}</h2>
 									<h2 class="card-title">{{ nprod.price }}<span>L.</span></h2>
 								</div>
 				  			</div><!-- End Of item -->
@@ -74,7 +75,7 @@
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Más Buscados</h3>
 				  	<div class="container-fluid catslider">
 					    {% for nprod in newProd %}
-							<div class="card text-left" style="border:none; padding: 10px;">
+							<div class="card text-left" style="border: none !important; padding: 10px; border: none !important;">
 				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail">
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}">
@@ -83,6 +84,7 @@
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px;">
+									<h2 style="color: #343a40; font-size: 14px;">{{ nprod.title }}</h2>
 									<h2 class="card-title">{{ nprod.price }}<span>L.</span></h2>
 								</div>
 				  			</div><!-- End Of item -->
