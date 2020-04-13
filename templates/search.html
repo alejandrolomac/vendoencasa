@@ -30,29 +30,29 @@
 			<nav aria-label="Page navigation example" style="margin-top: 25px;">
 			  <ul class="pagination">
 
-			    {% if contacts.has_previous %}
+			    {% if object_list.has_previous %}
 			      <li class="page-item">
 			        <a class="page-link" href="?page=1" aria-label="Previous">
 			          <span aria-hidden="true">&laquo;&laquo;</span>
 			        </a>
 			      </li>
 			      <li class="page-item">
-			        <a class="page-link" href="?page={{ contacts.previous_page_number }}" aria-label="Previous">
+			        <a class="page-link" href="?page={{ object_list.previous_page_number }}" aria-label="Previous">
 			          <span aria-hidden="true">&laquo;</span>
 			        </a>
 			      </li>
 			    {% endif %}
 
-			    <li class="page-item"><a class="page-link">{{ contacts.number }} de {{ contacts.paginator.num_pages }}</a></li>
+			    <li class="page-item"><a class="page-link">{{ object_list.number }} de {{ object_list.paginator.num_pages }}</a></li>
 
-			    {% if contacts.has_next %}
+			    {% if object_list.has_next %}
 			      <li class="page-item">
-			        <a class="page-link" href="?page={{ contacts.next_page_number }}" aria-label="Next">
+			        <a class="page-link" href="?page={{ object_list.next_page_number }}" aria-label="Next">
 			          <span aria-hidden="true">&raquo;</span>
 			        </a>
 			      </li>
 			      <li class="page-item">
-			        <a class="page-link" href="?page={{ contacts.paginator.num_pages }}" aria-label="Next">
+			        <a class="page-link" href="?page={{ object_list.paginator.num_pages }}" aria-label="Next">
 			          <span aria-hidden="true">&raquo;&raquo;</span>
 			        </a>
 			      </li>
