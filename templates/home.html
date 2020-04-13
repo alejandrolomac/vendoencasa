@@ -29,10 +29,10 @@
 	{% load static %}
 	<div class="container-fluid list-cats">
 		<div class="container">
-			<h3 class="text-center">Categorías</h3>
+			<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Categorías</h3>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
 				{% for cat in listCategorys %}
-					<div class="card text-center" style="border:none; padding: 10px;">
+					<div class="card text-left" style="border:none; padding: 10px;">
 						<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="thumbnail">
 							{% if cat.imagef.url == '' %}
 								<img src="{% static 'img/categoria.jpg' %}">
@@ -40,7 +40,7 @@
 								<img src="{{ cat.icono.url }}">
 							{% endif %}
 						</a>
-						<div class="card-body">
+						<div class="card-body" style="padding: 15px 0px;">
 							<h5 class="card-title">{{ cat.name }}</h5>
 						</div>
 					</div><!-- End Of Product -->
@@ -49,10 +49,10 @@
 
 
 			<div class="fluid-cotainer" style="margin: 25px 0px;">
-			  	<h3 class="text-center">Ultimos Agregados</h3>
+			  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Novedades</h3>
 			  	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
 			  		{% for nprod in newProd %}
-			  			<div class="card text-center" style="border:none; padding: 10px;">
+			  			<div class="card text-left" style="border:none; padding: 10px;">
 			  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail">
 								{% if nprod.imagef.url == '' %}
 									<img src="{% static 'img/default_thumbnail.jpg' %}">
@@ -60,7 +60,7 @@
 									<img src="{{ nprod.imagef.url }}">
 								{% endif %}
 							</a>
-							<div class="card-body">
+							<div class="card-body" style="padding: 15px 0px;">
 								<h2 class="card-title">{{ nprod.price }}<span>Lps.</span></h2>
 							</div>
 			  			</div>
@@ -69,10 +69,10 @@
 			</div><!-- End Of News -->
 
 			<div class="fluid-cotainer" style="margin: 25px 0px;">
-			  	<h3 class="text-center">Más Vendidos</h3>
+			  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Más Buscados</h3>
 			  	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
 			  		{% for nprod in newProd %}
-			  			<div class="card text-center" style="border:none; padding: 10px;">
+			  			<div class="card text-left" style="border:none; padding: 10px;">
 			  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail">
 								{% if nprod.imagef.url == '' %}
 									<img src="{% static 'img/default_thumbnail.jpg' %}">
@@ -80,7 +80,7 @@
 									<img src="{{ nprod.imagef.url }}">
 								{% endif %}
 							</a>
-							<div class="card-body">
+							<div class="card-body" style="padding: 15px 0px;">
 								<h2 class="card-title">{{ nprod.price }}<span>Lps.</span></h2>
 							</div>
 			  			</div>

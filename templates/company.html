@@ -5,7 +5,7 @@
 	{% load static %}
 	<div class="container-fluid list-cats">
 		<div class="container">
-			<h1 class="text-center" style="padding: 50px 0px;">Productos de Empresa</h1>
+			<h1 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 30px; padding-top: 50px;">Productos de Empresa</h1>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
 				{% for comp in object_list %}
 					<div class="card text-center prod-item" style="border:none; padding: 10px;">
@@ -16,7 +16,7 @@
 								<img src="{{ comp.imagef.url }}">
 							{% endif %}
 						</a>
-						<div class="card-body">
+						<div class="card-body" style="padding: 15px 0px;">
 							<h2 class="card-title">{{ comp.price }}<span>Lps.</span></h2>
 							<h5 class="card-title">{{ comp.title }}</h5>
 							<a href="{% url 'product_app:single-product' comp.slug %}" class="btn">Comprar</a>
@@ -24,22 +24,6 @@
 					</div><!-- End Of Product -->
 				{% endfor %}
 			</div>
-
-			<nav id="pagination">
-				<div class="btn-group" role="group" aria-label="Basic example">
-					{% if is_paginated %}
-						{% if page_obj.has_previous %}
-							<a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
-			            {% endif %}
-			            {% for i in paginator.page_range %}
-			                <a href="?page={{i}}" {% if page_obj.number == i %} class="btn btn-secondary active" {% else %} class="btn btn-secondary" {% endif %}>{{ i }}</a>
-			            {% endfor %}
-			            {% if page_obj.has_next %}
-			            	<a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
-			            {% endif %}
-					{% endif %}
-				</div>
-			</nav>
 		</div>
 	</div>
 

@@ -85,3 +85,16 @@ class SearchResults(ListView):
 		    ).filter( subCategory__id=cat_query ).order_by('-pub_date')
 
 		return object_list
+
+
+def handler400(request, exception):
+	data = {}
+	return render(request,'400.html', data)
+
+def handler403(request, exception):
+	data = {}
+	return render(request,'403.html', data)
+
+def handler404(request, exception):
+	data = {}
+	return render(request,'404.html', data)
