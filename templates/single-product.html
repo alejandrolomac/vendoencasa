@@ -44,7 +44,7 @@
 						<div class="wrap-info">
 							<h2 class="card-title">{{ lp.title }}</h2>
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item"><h5 class="card-title">{{ lp.price }}<span>Lps.</span></h5></li>
+								<li class="list-group-item"><h5 class="card-title">{{ lp.price }}<span>L.</span></h5></li>
 							    <li class="list-group-item">Categoría: <a href="{% url 'product_app:sub-catproducts' lp.subCategory.slug lp.subCategory.id %}">{{ lp.subCategory }}</a></li>
 							    <li class="list-group-item">Empresa: <a href="{% url 'product_app:company-products' lp.company.slug lp.company.id %}">{{ lp.company }}</a></li>
 							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume }}</p></li>
