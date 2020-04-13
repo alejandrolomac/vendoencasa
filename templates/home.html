@@ -31,51 +31,30 @@
 		<div class="container">
 			{% if listCategorys %}
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Categorías</h3>
-				<div class="col-md-12 col-md-offset-3" style="overflow: hidden; max-width: 100%; padding: 0px; margin: 0px; position: relative;">
-					<div class="carousel slide w-100" data-ride="carousel" data-type="multi" data-interval="6000" id="catslider">
-				    	<div class="carousel-inner">
-				    		{% for cat in listCategorys %}
-					    		<div class="item text-left">
-							        <div class="col-12 col-md-3 col-sm-6 float-left">
-							        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none;">
-							        		{% if cat.icono.url != '' %}
-												<img src="{{ cat.icono.url }}" class="img-responsive thumbnail">
-											{% else %}
-												<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
-											{% endif %}
-											<h5 class="card-title" style="padding: 15px 0px;">{{ cat.name }}</h5>
-							        	</a>
-							        </div>
-							    </div><!-- End Of item -->
-							{% endfor %}
-				    	</div>
-				    	<a class="left carousel-control contro-slider-left" href="#catslider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-				    	<a class="right carousel-control contro-slider-right" href="#catslider" data-slide="next"><i class="fa fa-angle-right"></i></a>
-				  	</div>
+	    		<div class="container-fluid catslider">
+				    {% for cat in listCategorys %}
+						<div class="item text-left">
+					        <div class="col-12 col-md-3 col-sm-6 float-left">
+					        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none;">
+					        		{% if cat.icono.url != '' %}
+										<img src="{{ cat.icono.url }}" class="img-responsive thumbnail">
+									{% else %}
+										<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
+									{% endif %}
+									<h5 class="card-title" style="padding: 15px 0px;">{{ cat.name }}</h5>
+					        	</a>
+					        </div>
+					    </div><!-- End Of item -->
+					{% endfor %}
 				</div><!-- End Of Categorias -->
-
-				
-
-<div class="catslider">
-    <div class="inner"><img src="http://placehold.it/350x250"></div>
-    <div class="inner"><img src="http://placehold.it/350x250"></div>
-   	<div class="inner"><img src="http://placehold.it/350x250"></div>
-   	<div class="inner"><img src="http://placehold.it/350x250"></div>
-   	<div class="inner"><img src="http://placehold.it/350x250"></div>
-    <div class="inner"><img src="http://placehold.it/350x250"></div>
-    <div class="inner"><img src="http://placehold.it/350x250"></div>
-    <div class="inner"><img src="http://placehold.it/350x250"></div>
-</div>
-
-				
 			{% endif %}
 
 			{% if newProd %}
 				<div class="fluid-cotainer" style="margin: 25px 0px;">
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Novedades</h3>
-				  	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-				  		{% for nprod in newProd %}
-				  			<div class="card text-left" style="border:none; padding: 10px;">
+				  	<div class="container-fluid catslider">
+					    {% for nprod in newProd %}
+							<div class="card text-left" style="border:none; padding: 10px;">
 				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail">
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}">
@@ -84,20 +63,20 @@
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px;">
-									<h2 class="card-title">{{ nprod.price }}<span>Lps.</span></h2>
+									<h2 class="card-title">{{ nprod.price }}<span>L.</span></h2>
 								</div>
-				  			</div>
-				  		{% endfor %}
-				  	</div>
+				  			</div><!-- End Of item -->
+						{% endfor %}
+					</div>
 				</div><!-- End Of Novedades -->
 			{% endif %}
 
 			{% if newProd %}
 				<div class="fluid-cotainer" style="margin: 25px 0px;">
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Más Buscados</h3>
-				  	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-				  		{% for nprod in newProd %}
-				  			<div class="card text-left" style="border:none; padding: 10px;">
+				  	<div class="container-fluid catslider">
+					    {% for nprod in newProd %}
+							<div class="card text-left" style="border:none; padding: 10px;">
 				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail">
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}">
@@ -106,11 +85,11 @@
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px;">
-									<h2 class="card-title">{{ nprod.price }}<span>Lps.</span></h2>
+									<h2 class="card-title">{{ nprod.price }}<span>L.</span></h2>
 								</div>
-				  			</div>
-				  		{% endfor %}
-				  	</div>
+				  			</div><!-- End Of item -->
+						{% endfor %}
+					</div>
 				</div><!-- End Of Mas Buscados -->
 			{% endif %}
 		</div>
