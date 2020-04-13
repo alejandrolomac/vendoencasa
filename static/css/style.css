@@ -617,43 +617,11 @@ SLIDERS STYLES
 	right: 0px;
 }
 
-.carousel-control.left,.carousel-control.right 
-{
-	margin-left:15px;
-	background-image:none;
-}
-
-@media (max-width: 767px) {
-	.carousel-inner .active.left { left: -100%; }
-	.carousel-inner .next { left:  100%; }
-	.carousel-inner .prev { left: -100%; }
-	.active > div { display:none; }
-	.active > div:first-child { display:block; }
-
-}
-
-@media (min-width: 767px) and (max-width: 992px ) {
-	.carousel-inner .active.left { left: -50%; }
-	.carousel-inner .next { left:  50%; }
-	.carousel-inner .prev { left: -50%; }
-	.active > div { display:none; }
-	.active > div:first-child { display:block; }
-	.active > div:first-child + div { display:block; }
-}
-
-@media (min-width: 992px ) {
-	.carousel-inner .active.left { left: -25%; }
-	.carousel-inner .next { left:  25%; }
-	.carousel-inner .prev { left: -25%; }	
-}
-
-
 
 
 /*------------------------------------------------------
  STYLES
 ------------------------------------------------------*/
-
 
 @media (min-width: 768px) {
 
@@ -722,14 +690,3 @@ SLIDERS STYLES
     }
 
 }
-
- /* Bootstrap Lightbox using Modal */
-
-#profile-grid { overflow: auto; white-space: normal; } 
-#profile-grid .profile { padding-bottom: 40px; }
-#profile-grid .panel { padding: 0 }
-#profile-grid .panel-body { padding: 15px }
-#profile-grid .profile-name { font-weight: bold; }
-#profile-grid .thumbnail {margin-bottom:6px;}
-#profile-grid .panel-thumbnail { overflow: hidden; }
-#profile-grid .img-rounded { border-radius: 4px 4px 0 0;}
