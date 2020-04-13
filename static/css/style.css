@@ -650,6 +650,10 @@ img:hover {
 	border: none !important;
 }
 
+.slick-prev {
+    left: -35px !important;
+}
+
 .slick-prev:before, .slick-next:before {
     color: #ef4036 !important;
     font-size: 30px !important;

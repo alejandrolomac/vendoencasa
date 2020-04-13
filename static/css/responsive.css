@@ -32,6 +32,12 @@
 	{
 		display: none !important;
 	}
+	
+	header nav #inlineFormInputGroupUsername2
+	{
+		border-left: 1px solid #f3f3f3 !important;
+    	border-radius: 5px 0px 0px 5px !important;
+	}
 }
 
 @media screen and ( max-width: 370px )
