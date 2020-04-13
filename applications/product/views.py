@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
 	categorys = Category.objects.all()
-	new_prod = Products.objects.all().order_by('-pub_date')[:8]
+	new_prod = Products.objects.all().order_by('pub_date')[:8]
 	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod})
 
 
@@ -46,7 +46,7 @@ class ListCompanyProducts(ListView):
 def listproducts(request):
 	paginate_by = 3
 	categorys = Category.objects.all()
-	productslist = Products.objects.all().order_by('-pub_date')
+	productslist = Products.objects.all().order_by('pub_date')
 	paginator = Paginator(productslist, 3)
 
 	page = request.GET.get('page')
@@ -78,11 +78,11 @@ class SearchResults(ListView):
 		if( cat_query == '' ):
 			object_list = Products.objects.filter(
 		    	Q(title__icontains=query) | Q(resume__icontains=query)
-		    ).order_by('-pub_date')
+		    ).order_by('pub_date')
 		else:
 			object_list = Products.objects.filter(
 		    	Q(title__icontains=query) | Q(resume__icontains=query)
-		    ).filter( subCategory__id=cat_query ).order_by('-pub_date')
+		    ).filter( subCategory__id=cat_query ).order_by('pub_date')
 
 		return object_list
 
