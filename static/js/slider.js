@@ -1,4 +1,4 @@
-$('#carouselExample').on('slide.bs.carousel', function (e) {
+$('#catscarousel').on('slide.bs.carousel', function (e) {
 
   
     var $e = $(e.relatedTarget);
@@ -21,7 +21,7 @@ $('#carouselExample').on('slide.bs.carousel', function (e) {
 });
 
 
-  $('#carouselExample').carousel({ 
+  $('#catscarousel').carousel({ 
                 interval: 2000
         });
 
