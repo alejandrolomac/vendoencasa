@@ -34,7 +34,7 @@
 	    		<div class="container-fluid catslider">
 				    {% for cat in listCategorys %}
 						<div class="item text-left">
-					        <div class="col-12 col-md-3 col-sm-6 float-left">
+					        <div class="card text-left">
 					        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none;">
 					        		{% if cat.icono.url != '' %}
 										<img src="{{ cat.icono.url }}" class="img-responsive thumbnail">
