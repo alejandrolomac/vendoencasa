@@ -73,6 +73,13 @@ HEADER STYLES
 	width: 100%;
 }
 
+header
+{
+	background: #fff;
+	border-bottom: 1px solid #ccc;
+	box-shadow: 0px 0px 10px hsla(0, 0%, 0%, 0.3);
+}
+
 header .row
 {
 	width: 100%;
@@ -641,4 +648,12 @@ img:hover {
 .card
 {
 	border: none !important;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: #ef4036 !important;
+}
+
+.slick-prev:before:hover, .slick-next:before:hover {
+    color: #A31C15 !important;
 }

@@ -26,7 +26,7 @@
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-	<header class="container-fluid bg-dark fixed-top">
+	<header class="container-fluid fixed-top">
         <div class="pos-f-t">
 		  	<div class="collapse" id="navbarToggleExternalContent">
 		    	<div class="bg-dark p-4">
@@ -65,7 +65,7 @@
 							    	<option value="6">Musica</option>
 							    </select>
 						    </div>
-						    <input type="search" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Buscar..." name="search-field" style="outline: none;">
+						    <input type="search" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Buscar..." name="search-field" style="outline: none; border-top: 1px solid #f3f3f3 !important; border-bottom: 1px solid #f3f3f3 !important;">
 						    <div class="input-group-postpend">
 						    	<button class="btn btn-outline-success" type="submit">
 									<i class="fa fa-search"></i>
@@ -129,11 +129,13 @@
 
 	<script>
 		$('.catslider').slick({
-		    dots: true,
+		    dots: false,
 		    infinite: true,
 		    speed: 300,
 		    slidesToShow: 4,
 		    slidesToScroll: 4,
+		    centerMode: true,
+  			centerPadding: '60px',
 		    responsive: [
 		      {
 		        breakpoint: 1024,
@@ -141,7 +143,7 @@
 		          slidesToShow: 3,
 		          slidesToScroll: 3,
 		          infinite: true,
-		          dots: true
+		          dots: false
 		        }
 		      },
 		      {
