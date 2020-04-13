@@ -56,19 +56,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vendoencasa.wsgi.application'
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}"""
-
+}
+"""
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+"""
 
 AUTH_PASSWORD_VALIDATORS = [
     {
