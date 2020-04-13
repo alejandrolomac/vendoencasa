@@ -78,6 +78,7 @@ class Products(models.Model):
 	images = models.ImageField('Imagen 2', upload_to=product_image, storage=image_storage, blank=True)
 	imaget = models.ImageField('Imagen 3', upload_to=product_image, storage=image_storage, blank=True)
 	price = models.CharField('Precio', max_length=12, blank=False)
+	available = models.BooleanField('Disponible', default=True)
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	pub_date = models.DateField(auto_now=True)
