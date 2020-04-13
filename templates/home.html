@@ -37,7 +37,7 @@
 				    		{% for cat in listCategorys %}
 					    		<div class="item text-left">
 							        <div class="col-md-3 col-sm-6 col-xs-12">
-							        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}">
+							        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem">
 							        		{% if cat.imagef.url == '' %}
 												<img src="{% static 'img/categoria.jpg' %}" class="img-responsive">
 											{% else %}
