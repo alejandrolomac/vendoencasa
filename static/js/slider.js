@@ -1,5 +1,5 @@
 $(document).ready(function(){
-      $('.responsive-slider').slick({
+      $('.slider').slick({
         dots: true,
         infinite: true,
         speed: 300,
@@ -32,3 +32,8 @@ $(document).ready(function(){
         ]
       });
       });
+
+$('.single-item-rtl').slick({
+  rtl: true
+});
+    
