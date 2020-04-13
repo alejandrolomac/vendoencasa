@@ -652,6 +652,7 @@ img:hover {
 
 .slick-prev:before, .slick-next:before {
     color: #ef4036 !important;
+    font-size: 30px !important;
 }
 
 .slick-prev:before:hover, .slick-next:before:hover {
