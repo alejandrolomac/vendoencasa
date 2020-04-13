@@ -62,7 +62,6 @@
 					               <div class="panel panel-default">
 					                  <div class="panel-thumbnail">
 					                    <a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" title="image 1" class="thumb">
-					                      <img class="img-fluid mx-auto d-block" src="//via.placeholder.com/600x400?text=1" alt="slide 1">
 					                      {% if cat.icono.url != '' %}
 												<img src="{{ cat.icono.url }}" class="thumbnail img-fluid mx-auto d-block">
 											{% else %}
