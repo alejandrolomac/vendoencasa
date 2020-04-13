@@ -31,14 +31,14 @@
 		<div class="container">
 			{% if listCategorys %}
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Categorías</h3>
-	    		<div class="container-fluid catslider">
+	    		<div class="container-fluid catslider" style="padding: 0px; margin: 25px 0px;">
 				    {% for cat in listCategorys %}
 				        <div class="card text-left" style="padding: 10px; border: none;">
-				        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none;">
+				        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none; border-radius: 0;">
 				        		{% if cat.icono.url != '' %}
-									<img src="{{ cat.icono.url }}" class="img-responsive thumbnail">
+									<img src="{{ cat.icono.url }}" class="img-responsive thumbnail" style="border-radius: 0;">
 								{% else %}
-									<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
+									<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail" style="border-radius: 0;">
 								{% endif %}
 								<h5 class="card-title" style="padding: 15px 0px;">{{ cat.name }}</h5>
 				        	</a>
@@ -48,16 +48,16 @@
 			{% endif %}
 
 			{% if newProd %}
-				<div class="fluid-cotainer" style="margin: 25px 0px;">
+				<div class="fluid-cotainer" style="margin: 25px 0px; padding: 0px;">
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Novedades</h3>
 				  	<div class="container-fluid catslider">
 					    {% for nprod in newProd %}
 							<div class="card text-left" style="border: none !important; padding: 10px;">
-				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important;">
+				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
 									{% if nprod.imagef.url == '' %}
-										<img src="{% static 'img/default_thumbnail.jpg' %}">
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
 									{% else %}
-										<img src="{{ nprod.imagef.url }}">
+										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px;">
@@ -71,16 +71,16 @@
 			{% endif %}
 
 			{% if newProd %}
-				<div class="fluid-cotainer" style="margin: 25px 0px;">
+				<div class="fluid-cotainer" style="margin: 25px 0px; padding: 0px;">
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Más Buscados</h3>
 				  	<div class="container-fluid catslider">
 					    {% for nprod in newProd %}
 							<div class="card text-left" style="border: none !important; padding: 10px; border: none !important;">
-				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail">
+				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
 									{% if nprod.imagef.url == '' %}
-										<img src="{% static 'img/default_thumbnail.jpg' %}">
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
 									{% else %}
-										<img src="{{ nprod.imagef.url }}">
+										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px;">
