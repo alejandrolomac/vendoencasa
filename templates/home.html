@@ -36,8 +36,8 @@
 				    	<div class="carousel-inner">
 				    		{% for cat in listCategorys %}
 					    		<div class="item text-left">
-							        <div class="col-md-3 col-sm-6 col-xs-12 float-left">
-							        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem">
+							        <div class="col-12 col-md-3 col-sm-6 float-left">
+							        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail">
 							        		{% if cat.imagef.url == '' %}
 												<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail">
 											{% else %}
