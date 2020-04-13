@@ -7,22 +7,27 @@
 		<div class="container">
 			<h1 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 30px; padding-top: 50px;">Productos de Empresa</h1>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
-				{% for comp in object_list %}
-					<div class="card text-left prod-item" style="border:none; padding: 10px;">
-						<a href="{% url 'product_app:single-product' comp.slug %}" class="thumbnail">
-							{% if comp.imagef.url == '' %}
-								<img src="{% static 'img/default_thumbnail.jpg' %}">
-							{% else %}
-								<img src="{{ comp.imagef.url }}">
-							{% endif %}
-						</a>
-						<div class="card-body" style="padding: 15px 0px;">
-							<h2 class="card-title">{{ comp.price }}<span>Lps.</span></h2>
-							<h5 class="card-title">{{ comp.title }}</h5>
-							<a href="{% url 'product_app:single-product' comp.slug %}" class="btn">Comprar</a>
-						</div>
-					</div><!-- End Of Product -->
-				{% endfor %}
+				{% if object_list %}
+					{% for comp in object_list %}
+						<div class="card text-left prod-item" style="border:none; padding: 10px;">
+							<a href="{% url 'product_app:single-product' comp.slug %}" class="thumbnail">
+								{% if comp.imagef.url == '' %}
+									<img src="{% static 'img/default_thumbnail.jpg' %}">
+								{% else %}
+									<img src="{{ comp.imagef.url }}">
+								{% endif %}
+							</a>
+							<div class="card-body" style="padding: 15px 0px;">
+								<h2 class="card-title">{{ comp.price }}<span>Lps.</span></h2>
+								<h5 class="card-title">{{ comp.title }}</h5>
+								<a href="{% url 'product_app:single-product' comp.slug %}" class="btn">Comprar</a>
+							</div>
+						</div><!-- End Of Product -->
+					{% endfor %}
+				{% else %}
+					<h3 class="text-center" style="padding: 100px 0px; font-size: 20px; width: 100% !important; margin: 0px auto;">No encontramos resultados</h3>
+				{% endif %}
+				
 			</div>
 		</div>
 	</div>

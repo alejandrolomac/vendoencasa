@@ -14,6 +14,3 @@ urlpatterns = [
 	path('empresa/<slug>/<pk>/', views.ListCompanyProducts.as_view(), name="company-products"),
 	path('search/', views.SearchResults.as_view(), name='search'),
 ] 
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
