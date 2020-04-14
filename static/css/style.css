@@ -15,7 +15,7 @@ body
 
 h1, h2, h3, h4, h5, h6
 {
-	font-weight: bold;
+	font-weight: lighter;
 	color: #343a40;
 }
 
@@ -429,7 +429,7 @@ PRODUCTS STYLES
 SEARCH STYLES
 ------------------------------------------------------*/
 
-.search-container, .product-container, .list-cats
+.search-container, .product-container, .list-cats, .plans-container
 {
 	margin-top: 50px !important;
 	padding-top: 100px !important;
@@ -629,20 +629,20 @@ SLIDERS STYLES
 ------------------------------------------------------*/
 
 .slider {
-  flex: 1 1 0;
-  background-color: #fff;
+	flex: 1 1 0;
+	background-color: #fff;
 }
 
 .inner {
-  padding: 6px;
+	padding: 6px;
 }
 
 img {
-  width: 100%;
-  height: auto;
+	width: 100%;
+	height: auto;
 }
 img:hover {
-  opacity: 0.9;
+	opacity: 0.9;
 }
 
 .card
@@ -651,14 +651,14 @@ img:hover {
 }
 
 .slick-prev {
-    left: -35px !important;
+	left: -35px !important;
 }
 
 .slick-prev:before, .slick-next:before {
-    color: #ef4036 !important;
-    font-size: 30px !important;
+	color: #ef4036 !important;
+	font-size: 30px !important;
 }
 
 .slick-prev:before:hover, .slick-next:before:hover {
-    color: #A31C15 !important;
+	color: #A31C15 !important;
 }

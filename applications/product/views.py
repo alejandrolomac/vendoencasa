@@ -25,7 +25,7 @@ class ListSubCategorys(ListView):
 
 class ListSubCatProducts(ListView):
 	template_name = 'cat-products.html'
-	paginate_by = 4
+	paginate_by = 1
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
@@ -35,7 +35,7 @@ class ListSubCatProducts(ListView):
 
 class ListCompanyProducts(ListView):
 	template_name = 'company.html'
-	paginate_by = 4
+	paginate_by = 1
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
@@ -86,6 +86,8 @@ class SearchResults(ListView):
 
 		return object_list
 
+def plan(request):
+	return render(request, 'plan.html')
 
 def handler400(request, exception):
 	data = {}
