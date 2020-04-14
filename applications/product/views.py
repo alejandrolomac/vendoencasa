@@ -69,7 +69,7 @@ class SingleProduct(ListView):
 class SearchResults(ListView):
 	model = Products
 	template_name = 'search.html'
-	paginate_by = 4
+	paginate_by = 3
 
 	def get_queryset(self):
 		query = self.request.GET.get('search-field')
