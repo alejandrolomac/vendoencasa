@@ -73,13 +73,13 @@ def search(request):
 	if( cat_query == '' ):
 		queryset = ( 
 			Q(title__icontains=query) | Q(resume__icontains=query)
-		).order_by('-pub_date')
+		)
 	else:
 		queryset = (
 			Q(title__icontains=query) | Q(resume__icontains=query)
-		).filter( subCategory__id=cat_query ).order_by('-pub_date')
+		).filter( subCategory__id=cat_query)
 
-	results = Products.objects.filter(queryset).distinct()
+	results = Products.objects.filter(queryset).distinct().order_by('-pub_date')
 	paginator = Paginator(results, 3)
 	page = request.GET.get('page')
 	contacts = paginator.get_page(page)
