@@ -26,7 +26,7 @@ h1 b, h2 b, h3 b, h4 b, h5 b, h6 b
 
 p
 {
-	color: #343a40;
+	color: #c5cfda;
 }
 
 a
@@ -667,6 +667,7 @@ img:hover {
 .slick-prev:before:hover, .slick-next:before:hover {
 	color: #A31C15 !important;
 }
+
 
 /*------------------------------------------------------
 PLANS STYLES
