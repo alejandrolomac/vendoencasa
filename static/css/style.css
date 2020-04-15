@@ -672,6 +672,11 @@ img:hover {
 PLANS STYLES
 ------------------------------------------------------*/
 
+.pricing
+{
+	margin-bottom: 50px;
+}
+
 .pricing .card {
 	border: none;
 	border-radius: 1rem;
