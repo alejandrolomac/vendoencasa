@@ -67,7 +67,7 @@ class Products(models.Model):
 	available = models.BooleanField('Disponible', default=True)
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
-	pub_date = models.DateField(auto_now=True)
+	pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
