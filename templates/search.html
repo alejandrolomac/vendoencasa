@@ -6,7 +6,7 @@
 		<div class="container">
 			<h3 style="text-align: left; padding-bottom 15px; border-bottom 1px solid #ccc; margin-bottom: 25px; font-size: 13px;">
 				{% if querytext %}
-					resultados para: <b>{{ querytext }}</b>. <b>{{ contacts.count() }} - {{ contacts.countsearch }}</b> resultados.
+					resultados para: <b>{{ querytext }}</b>. <b>{{ count.count }} - {{ count|length }}</b> resultados.
 				{% else %}
 					resultados de busqueda. <b>{{ count.count }} - {{ count|length }}</b> resultados.
 				{% endif %}

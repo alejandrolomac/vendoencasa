@@ -16,6 +16,7 @@ class Company(models.Model):
 	phone = models.CharField('Telefono', max_length=15, blank=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	resume = models.TextField('Resumen', blank=True)
+	plan = models.BooleanField('Premium', default=False)
 	delivery = models.BooleanField('Nuestro Delivery', default=True)
 	phoneDelivery = models.CharField('Telefono de Delivery', max_length=15, blank=True)
 
@@ -60,6 +61,9 @@ class Products(models.Model):
 	images = models.ImageField('Imagen 2', upload_to='Product', blank=True)
 	imaget = models.ImageField('Imagen 3', upload_to='Product', blank=True)
 	price = models.CharField('Precio', max_length=12, blank=False)
+	priceAnchor = models.CharField('Precio Anclaje', max_length=12, blank=True)
+	pricePromo = models.CharField('Precio Promocion', max_length=12, blank=True)
+	promotion = models.BooleanField('Promocion', default=False)
 	available = models.BooleanField('Disponible', default=True)
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
