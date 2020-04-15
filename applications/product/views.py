@@ -84,7 +84,7 @@ def search(request):
 	paginator = Paginator(results, 3)
 	page = request.GET.get('page')
 	contacts = paginator.get_page(page)
-	return render(request, 'search.html', {'contacts': contacts})
+	return render(request, 'search.html', {'contacts': contacts, 'querytext': query})
 
 
 # class SearchResults(ListView):

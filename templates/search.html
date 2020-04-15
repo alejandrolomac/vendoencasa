@@ -4,6 +4,7 @@
 	{% load static %}
 	<div class="container-fluid search-container">
 		<div class="container">
+			<h3>Resultado de busqueda: {{ querytext }}</h3>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
 				{% if contacts %}
 					{% for s in contacts %}
