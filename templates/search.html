@@ -4,7 +4,13 @@
 	{% load static %}
 	<div class="container-fluid search-container">
 		<div class="container">
-			<h3 style="text-align: left; padding-bottom 15px; border-bottom 1px solid #ccc; margin-bottom: 25px; font-size: 13px;">resultados para: <b>{{ querytext }}</b> numero:  <b>{{ contacts|length }} - {{ contacts.count }} - {{ contacts.countsearch }}</b></h3>
+			<h3 style="text-align: left; padding-bottom 15px; border-bottom 1px solid #ccc; margin-bottom: 25px; font-size: 13px;">
+				{% if querytext %}
+					resultados para: <b>{{ querytext }}</b>. <b>{{ contacts.count() }} - {{ contacts.countsearch }}</b> resultados.
+				{% else %}
+					resultados de busqueda. <b>{{ contacts.count() }} - {{ contacts.countsearch }}</b> resultados.
+				{% endif %}
+			</h3>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
 				{% if contacts %}
 					{% for s in contacts %}

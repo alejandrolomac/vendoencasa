@@ -84,7 +84,7 @@ def search(request):
 	paginator = Paginator(results, 1)
 	page = request.GET.get('page')
 	contacts = paginator.get_page(page)
-	countsearch = results.count()
+	countsearch = results.objects.count()
 	return render(request, 'search.html', {'contacts': contacts, 'querytext': query, 'countsearch': countsearch})
 
 
