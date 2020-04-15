@@ -65,7 +65,7 @@ class SingleProduct(ListView):
 		return lista
 
 def search(request):
-	paginate_by = 3
+	paginate_by = 1
 	query = request.GET.get('search-field')
 	cat_query = request.GET.get('search-category')
 	queryset = (Q(text__icontains=query))
@@ -81,10 +81,11 @@ def search(request):
 		)
 		results = Products.objects.filter(queryset).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
 	
-	paginator = Paginator(results, 3)
+	paginator = Paginator(results, 1)
 	page = request.GET.get('page')
 	contacts = paginator.get_page(page)
-	return render(request, 'search.html', {'contacts': contacts, 'querytext': query})
+	countsearch = contacts.count()
+	return render(request, 'search.html', {'contacts': contacts, 'querytext': query, 'countsearch': countsearch})
 
 
 # class SearchResults(ListView):
