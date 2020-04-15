@@ -66,8 +66,8 @@ class SingleProduct(ListView):
 
 def search(request):
 	paginate_by = 3
-	query = self.request.GET.get('search-field')
-	cat_query = self.request.GET.get('search-category')
+	query = request.GET.get('search-field')
+	cat_query = request.GET.get('search-category')
 	queryset = (Q(text__icontains=query))
 
 	if( cat_query == '' ):
