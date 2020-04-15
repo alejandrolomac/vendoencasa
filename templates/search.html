@@ -5,8 +5,8 @@
 	<div class="container-fluid search-container">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
-				{% if results %}
-					{% for s in results %}
+				{% if contacts %}
+					{% for s in contacts %}
 						<div class="card text-left prod-item" style="border:none; padding: 10px;">
 							<a href="{% url 'product_app:single-product' s.slug %}" class="thumbnail">
 								{% if s.imagef.url == '' %}

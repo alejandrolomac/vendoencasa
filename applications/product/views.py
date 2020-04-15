@@ -74,38 +74,38 @@ def search(request):
 		queryset = ( 
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.filter(queryset).distinct().order_by('-pub_date')[:3]
+		results = Products.objects.filter(queryset).distinct().order_by('-pub_date')
 	else:
 		queryset = (
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.filter(queryset).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')[:3]
+		results = Products.objects.filter(queryset).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
 	
 	paginator = Paginator(results, 3)
 	page = request.GET.get('page')
 	contacts = paginator.get_page(page)
-	return render(request, 'search.html', {'results':results, 'query':query, 'contacts': contacts})
+	return render(request, 'search.html', {'contacts': contacts})
 
 
-class SearchResults(ListView):
-	model = Products
-	template_name = 'search.html'
-	paginate_by = 3
+# class SearchResults(ListView):
+# 	model = Products
+# 	template_name = 'search.html'
+# 	paginate_by = 3
 
-	def get_queryset(self):
-		query = self.request.GET.get('search-field')
-		cat_query = self.request.GET.get('search-category')
+# 	def get_queryset(self):
+# 		query = self.request.GET.get('search-field')
+# 		cat_query = self.request.GET.get('search-category')
 
-		if( cat_query == '' ):
-			object_list = Products.objects.filter(
-				Q(title__icontains=query) | Q(resume__icontains=query)
-			).order_by('-pub_date')
-		else:
-			object_list = Products.objects.filter(
-				Q(title__icontains=query) | Q(resume__icontains=query)
-			).filter( subCategory__id=cat_query ).order_by('-pub_date')
+# 		if( cat_query == '' ):
+# 			object_list = Products.objects.filter(
+# 				Q(title__icontains=query) | Q(resume__icontains=query)
+# 			).order_by('-pub_date')
+# 		else:
+# 			object_list = Products.objects.filter(
+# 				Q(title__icontains=query) | Q(resume__icontains=query)
+# 			).filter( subCategory__id=cat_query ).order_by('-pub_date')
 
-		return object_list
+# 		return object_list
 
 def plan(request):
 	return render(request, 'plan.html')
