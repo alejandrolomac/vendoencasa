@@ -83,11 +83,8 @@ class SearchResults(ListView):
 				Q(title__icontains=query) | Q(resume__icontains=query)
 			).filter( subCategory__id=cat_query ).order_by('-pub_date')
 
-		#return object_list
-		paginator = Paginator(object_list, 3)
-		page = request.GET.get('page')
-		contacts = paginator.get_page(page)
-		return render(object_list, contacts)
+		queryset = object_list.objects.all()
+		return object_list
 
 def plan(request):
 	return render(request, 'plan.html')
