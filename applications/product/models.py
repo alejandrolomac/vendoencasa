@@ -20,6 +20,9 @@ class Company(models.Model):
 	delivery = models.BooleanField('Nuestro Delivery', default=True)
 	phoneDelivery = models.CharField('Telefono de Delivery', max_length=15, blank=True)
 
+	def __unicode__(self):
+		return self.name
+
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
 		super(Company, self).save(*args, **kwargs)
@@ -31,6 +34,9 @@ class Category(models.Model):
 	name = models.CharField('Categoria', max_length=100, unique=False)
 	icono = models.ImageField('Icono', upload_to='Category', blank=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
+
+	def __unicode__(self):
+		return self.name
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
@@ -44,6 +50,9 @@ class SubCategory(models.Model):
 	icono = models.ImageField('Icono', upload_to='SubCategory', blank=True)
 	category = models.ForeignKey(Category, models.SET_NULL, null=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
+
+	def __unicode__(self):
+		return self.name
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
@@ -67,7 +76,10 @@ class Products(models.Model):
 	available = models.BooleanField('Disponible', default=True)
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
-	pub_date = models.DateTimeField(auto_now_add=True, null=True)
+	pub_date = models.DateTimeField(editable=False, auto_now=True)
+
+	def __unicode__(self):
+		return self.title
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
