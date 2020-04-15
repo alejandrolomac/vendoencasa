@@ -50,11 +50,9 @@
 							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume }}</p></li>
 							    <li class="list-group-item">
 							    	<p>Compartir: 
-										<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-facebook"></i>f</a>
-										<a href="https://twitter.com/home?status={{ lp.resume }}%20{{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-twitter"></i>t</a>
-										<a href="https://plus.google.com/share?url={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-google-plus-g"></i>g</a>
-										<a href="https://www.linkedin.com/shareArticle?mini=true&url=http://swiftforentrepreneurs.com/&title={{ lp.title }}&summary={{ lp.resume }}&source={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-linkedin-in"></i>l</a>
-										<a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}%20{{ lp.resume }}"style="margin-right: 15px; font-size: 18px;"><i class="fa fa-twitter" ></i></a>
+										<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-facebook"></i></a>
+										<a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}%20{{ lp.resume }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-twitter" ></i></a>
+										<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title=&summary={{ lp.title }}&source={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fab fa-linkedin-in"></i></a>
 									</p>
 									
 							    </li>
