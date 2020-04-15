@@ -74,12 +74,12 @@ def search(request):
 		queryset = ( 
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.filter(queryset).distinct().order_by('-pub_date')
+		results = Products.objects.filter(queryset).distinct().order_by('-pub_date')[:3]
 	else:
 		queryset = (
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.filter(queryset).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
+		results = Products.objects.filter(queryset).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')[:3]
 	
 	paginator = Paginator(results, 3)
 	page = request.GET.get('page')
