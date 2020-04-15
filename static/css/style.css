@@ -501,12 +501,12 @@ CATEGORYS STYLES
 
 .list-cats
 {
-	margin-top: 50px;
+	margin-top: 25px !important;
 }
 
 .list-cats h3
 {
-	margin-bottom: 50px;
+	margin-bottom: 15px;
 	font-size: 2.5em;
 }
 
