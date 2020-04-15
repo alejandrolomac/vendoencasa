@@ -64,6 +64,27 @@ class SingleProduct(ListView):
 		)
 		return lista
 
+def search(request):
+	paginate_by = 3
+	query = self.request.GET.get('search-field')
+	cat_query = self.request.GET.get('search-category')
+	queryset = (Q(text__icontains=query))
+
+	if( cat_query == '' ):
+		queryset = ( 
+			Q(title__icontains=query) | Q(resume__icontains=query)
+		).order_by('-pub_date')
+	else:
+		queryset = (
+			Q(title__icontains=query) | Q(resume__icontains=query)
+		).filter( subCategory__id=cat_query ).order_by('-pub_date')
+
+	results = Products.objects.filter(queryset).distinct()
+	paginator = Paginator(results, 3)
+	page = request.GET.get('page')
+	contacts = paginator.get_page(page)
+	return render(request, 'search.html', {'results':results, 'query':query, 'contacts': contacts})
+
 
 class SearchResults(ListView):
 	model = Products
@@ -83,7 +104,6 @@ class SearchResults(ListView):
 				Q(title__icontains=query) | Q(resume__icontains=query)
 			).filter( subCategory__id=cat_query ).order_by('-pub_date')
 
-		queryset = object_list.objects.all()
 		return object_list
 
 def plan(request):
