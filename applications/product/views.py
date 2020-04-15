@@ -73,9 +73,6 @@ class SearchResults(ListView):
 	def get_queryset(self):
 		query = self.request.GET.get('search-field')
 		cat_query = self.request.GET.get('search-category')
-		paginator = Paginator(productslist, 20)
-		page = request.GET.get('page')
-		contacts = paginator.get_page(page)
 
 		if( cat_query == '' ):
 			object_list = Products.objects.filter(
@@ -87,6 +84,9 @@ class SearchResults(ListView):
 			).filter( subCategory__id=cat_query ).order_by('-pub_date')
 
 		#return object_list
+		paginator = Paginator(object_list, 3)
+		page = request.GET.get('page')
+		contacts = paginator.get_page(page)
 		return render(object_list, contacts)
 
 def plan(request):
