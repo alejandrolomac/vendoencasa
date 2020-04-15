@@ -8,7 +8,7 @@
 				{% if querytext %}
 					resultados para: <b>{{ querytext }}</b>. <b>{{ contacts.count() }} - {{ contacts.countsearch }}</b> resultados.
 				{% else %}
-					resultados de busqueda. <b>{{ contacts.count() }} - {{ contacts.countsearch }}</b> resultados.
+					resultados de busqueda. <b>{{ count.count }} - {{ count|length }}</b> resultados.
 				{% endif %}
 			</h3>
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
