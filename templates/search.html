@@ -27,39 +27,37 @@
 				{% endif %}
 			</div>
 
-			<nav id="pagination">
-				<div class="btn-group" role="group" aria-label="Basic example">
-					{% if is_paginated %}
-						{% if page_obj.has_previous %}
-							<a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
-						{% endif %}
-						{% for i in paginator.page_range %}
-							<a href="?page={{i}}" {% if page_obj.number == i %} class="btn btn-secondary active" {% else %} class="btn btn-secondary" {% endif %}>{{ i }}</a>
-						{% endfor %}
-						{% if page_obj.has_next %}
-							<a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
-						{% endif %}
+			<nav aria-label="Page navigation example" >
+				<ul class="pagination">
+					{% if contacts.has_previous %}
+						<li class="page-item">
+							<a class="page-link" href="?page=1" aria-label="Previous">
+							<span aria-hidden="true">&laquo;&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page={{ contacts.previous_page_number }}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
 					{% endif %}
-				</div>
+
+					<li class="page-item"><a class="page-link">{{ contacts.number }} de {{ contacts.paginator.num_pages }}</a></li>
+
+					{% if contacts.has_next %}
+						<li class="page-item">
+							<a class="page-link" href="?page={{ contacts.next_page_number }}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+						<li class="page-item">
+							<a class="page-link" href="?page={{ contacts.paginator.num_pages }}" aria-label="Next">
+							<span aria-hidden="true">&raquo;&raquo;</span>
+							</a>
+						</li>
+					{% endif %}
+				</ul>
 			</nav><!-- End of Pagination -->
-
-			<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
 
 		</div>
 	</div>
