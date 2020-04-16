@@ -507,14 +507,8 @@ CATEGORYS STYLES
 .list-cats h3
 {
 	margin-bottom: 15px;
-	font-size: 2.5em;
+	font-size: 2em;
 }
-
-.list-cats .card-title
-{
-	color: #ef4036;
-}
-
 /*------------------------------------------------------
 FOOTER STYLES
 ------------------------------------------------------*/

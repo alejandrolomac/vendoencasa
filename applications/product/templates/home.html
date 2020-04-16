@@ -124,19 +124,21 @@
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Promociones</h3>
 				  	<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
 					    {% for nprod in newProd %}
-							<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
-				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
-									{% if nprod.imagef.url == '' %}
-										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
-									{% else %}
-										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
-									{% endif %}
-								</a>
-								<div class="card-body" style="padding: 15px 0px 0px 0px;">
-									<h2 class="card-title"><b>{{ nprod.price }}</b><span>L.</span></h2>
-									<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
-								</div>
-				  			</div><!-- End Of item -->
+							{% if nprod.promotion %}
+								<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
+									<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
+										{% if nprod.imagef.url == '' %}
+											<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
+										{% else %}
+											<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
+										{% endif %}
+									</a>
+									<div class="card-body" style="padding: 15px 0px 0px 0px;">
+										<h2 class="card-title"><b>{{ nprod.price }}</b><span>L.</span></h2>
+										<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
+									</div>
+								</div><!-- End Of item -->
+							{% endif %}
 						{% endfor %}
 					</div>
 				</div><!-- End Of Promociones -->
