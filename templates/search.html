@@ -58,6 +58,22 @@
 				</ul>
 			</nav><!-- End of Pagination -->
 
+
+			<section>
+				{% if contacts %} 
+					<p class="contactss_len">contactss found: {{ contacts|length }}.</p>
+					<ul> 
+						{% for contactss in contacts %} 
+							<li><a href="{% url 'translations' contactss.id %}">{{ contactss.title }}</a> </li>
+						{% endfor %}
+					</ul>
+					{% elif contacts == None %}
+						<p id="error_message">You left the form empty</p>
+					{% else %} 
+						<p id="error_message">Nothing found</p>
+				{% endif %}
+			</section>
+
 		</div>
 	</div>
 
