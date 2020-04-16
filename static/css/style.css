@@ -403,9 +403,24 @@ PRODUCTS STYLES
 	width: 100%;
 }
 
-.wrap-single-product .info-prod h2
+.wrap-single-product .info-prod h5
 {
 	color: #ef4036;
+}
+
+.wrap-single-product .info-prod a
+{
+	color: #1F8CF0 !important;
+}
+
+.wrap-single-product .info-prod a:hover
+{
+	color: #1D63A3 !important;
+}
+
+.wrap-single-product .info-prod .btn, .wrap-single-product .info-prod .btn:hover
+{
+	color: #fff !important;
 }
 
 .wrap-single-product .wrap-comments

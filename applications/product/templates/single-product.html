@@ -54,18 +54,24 @@
 						</div><!-- endof Slider Single Product-->
 					</div>
 					<div class="info-prod col-12 col-md-6">
+					{% load mathfilters %}
 						<div class="wrap-info">
 							<h2 class="card-title">{{ lp.title }}</h2>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<h5 class="card-title" style="font-size: 30px; font-weight: bold !important;">
 										{% if lp.priceAnchor %}
-											<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc;">{{ lp.priceAnchor }}</span>
+											<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.priceAnchor }}</span>
 										{% endif %}
 										{{ lp.price }}<span style="font-size: 14px;">L.</span>
+										{% if lp.priceAnchor %}
+											<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.priceAnchor|sub:lp.price }}<span style="font-size: 10px;">L.</span></span>
+										{% endif %}
 									</h5>
 								</li>
-							    <li class="list-group-item">Categoría: <a href="{% url 'product_app:sub-catproducts' lp.subCategory.slug lp.subCategory.id %}">{{ lp.subCategory }}</a></li>
+							    <li class="list-group-item">
+									Categoría: <a href="{% url 'product_app:sub-categorys' lp.subCategory.category.slug lp.subCategory.category.id %}">{{ lp.subCategory.category }}</a> - Sub Categoría: <a href="{% url 'product_app:sub-catproducts' lp.subCategory.slug lp.subCategory.id %}">{{ lp.subCategory }}</a>
+								</li>
 							    <li class="list-group-item">Empresa: <a href="{% url 'product_app:company-products' lp.company.slug lp.company.id %}">{{ lp.company }}</a></li>
 							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume }}</p></li>
 							    <li class="list-group-item">
@@ -80,11 +86,34 @@
 							</ul>
 						</div>
 					</div>
-					<div class="wrap-comments col-12">
-						<h3>Comentarios</h3>
-					</div>
 				</div>
+				
 			{% endfor %}
+
+				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px;">
+				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px;">Productos relacionados</h3>
+				  	<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
+					    {% for nprod in related_prod %}
+							<div class="card text-left" style="border: none !important; padding: 5px;">
+				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
+									{% if nprod.imagef.url == '' %}
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
+									{% else %}
+										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
+									{% endif %}
+								</a>
+								<div class="card-body" style="padding: 15px 0px 0px 0px;">
+									<h2 class="card-title"><b>{{ nprod.price }}</b><span>L.</span></h2>
+									<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
+								</div>
+				  			</div><!-- End Of item -->
+						{% endfor %}
+					</div>
+				</div><!-- End Of Related objets -->
+
+				<div class="wrap-comments col-12">
+					<h3>Comentarios</h3>
+				</div>
 		</div>
 	</div>
 
