@@ -93,15 +93,8 @@ def search(request):
 	
 	paginator = Paginator(results, 1)
 	page = request.GET.get('page', 1)
-	try:
-		posts = paginator.page(page)
-	except PageNotAnInteger:
-		posts = paginator.page(1)
-	except EmptyPage:
-		posts = paginator.page(paginator.num_pages)
-
-	#contacts = paginator.get_page(page)
-	return render(request, 'search.html', {'contacts': posts, 'querytext': query, 'count': results})
+	contacts = paginator.get_page(page)
+	return render(request, 'search.html', {'contacts': contacts, 'querytext': query, 'count': results})
 
 
 # class SearchResults(ListView):
