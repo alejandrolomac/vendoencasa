@@ -78,7 +78,7 @@ class SingleProduct(ListView):
 		id = self.kwargs['slug']
 		context = super(SingleProduct, self).get_context_data(**kwargs)
 		product_select = Products.objects.get(slug=id)
-		products_cats = Products.objects.all().filter(subCategory=product_select.subCategory)
+		products_cats = Products.objects.all().filter(subCategory=product_select.subCategory)[:10]
 		context['related_prod'] = products_cats
 		return context
 
@@ -99,7 +99,7 @@ def search(request):
 		)
 		results = Products.objects.filter(queryset).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
 	
-	paginator = Paginator(results, 1)
+	paginator = Paginator(results, 20)
 	page = request.GET.get('page', 1)
 	contacts = paginator.get_page(page)
 	return render(request, 'search.html', {'contacts': contacts, 'querytext': query, 'count': results})

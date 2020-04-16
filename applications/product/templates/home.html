@@ -74,6 +74,32 @@
 			{% endif %}
 
 			{% if newProd %}
+				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px; background: whitesmoke; border-radius: 25px; padding-bottom: 15px;">
+					<div class="wrap-title-offert">
+						<h3 class="text-left" style="margin-bottom: 0px; color: #fff;"><i class="fa fa-tags" style="color: #ef4036; background: #fff;padding: 8px; border-radius: 50%; font-size: .8em; margin-right: 15px;"></i>Descuentos</h3>
+						<p style="font-size: 1.2em; color: #dedede; padding-top: 10px;">Aprobecha los descuentos especiales</p>
+					</div>
+				  	<div class="container-fluid catslider" style="padding: 0px; margin: 0px; padding-top: 10px;">
+					    {% for nprod in newProd %}
+							<div class="card text-left" style="border: none !important; padding: 5px; background: none;">
+				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
+									{% if nprod.imagef.url == '' %}
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
+									{% else %}
+										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
+									{% endif %}
+								</a>
+								<div class="card-body" style="padding: 15px 0px 0px 0px;">
+									<h2 class="card-title"><b>{{ nprod.price }}</b><span>L.</span></h2>
+									<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
+								</div>
+				  			</div><!-- End Of item -->
+						{% endfor %}
+					</div>
+				</div><!-- End Of Descuentos -->
+			{% endif %}
+
+			{% if newProd %}
 				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px;">
 				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Novedades</h3>
 				  	<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">

@@ -363,6 +363,13 @@ HOME STYLES
 	height: auto;
 }
 
+.wrap-title-offert
+{
+	background: #ef4036;
+	padding: 15px 15px;
+	border-radius: 25px 25px 0px 0px;
+}
+
 /*------------------------------------------------------
 PRODUCTS STYLES
 ------------------------------------------------------*/
