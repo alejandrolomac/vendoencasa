@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load custom_tags %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -57,12 +57,7 @@
 						    <div class="input-group-prepend">
 							    <select class="custom-select" name="search-category">
 							    	<option selected value="">Categorías</option>
-							    	<option value="1">Hogar</option>
-							    	<option value="2">Comida</option>
-							    	<option value="3">Deportes</option>
-							    	<option value="4">Tecnologia</option>
-							    	<option value="5">Cuidado Personal</option>
-							    	<option value="6">Musica</option>
+									{% show_cats_header %}
 							    </select>
 						    </div>
 						    <input type="search" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Buscar..." name="search-field" style="outline: none; border-top: 1px solid #f3f3f3 !important; border-bottom: 1px solid #f3f3f3 !important;">

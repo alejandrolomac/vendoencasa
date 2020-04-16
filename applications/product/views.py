@@ -6,7 +6,7 @@ from django.views.generic import (
 from .models import Company, Category, SubCategory, Products
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.template.loader import get_template
 
 def index(request):
 	categorys = Category.objects.all()
@@ -16,11 +16,21 @@ def index(request):
 
 class ListSubCategorys(ListView):
 	template_name = 'categorys.html'
+	paginate_by = 20
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
 		object_list = SubCategory.objects.filter(category__id=id)
 		return object_list
+	
+	def get_context_data(self, **kwargs):
+		id = self.kwargs['pk']
+		context = super(ListSubCategorys, self).get_context_data(**kwargs)
+		cats_selected = Category.objects.get(id=id)
+		products_cats = Products.objects.all().filter(subCategory_id__category_id__id=id)
+		context['catSelect'] = cats_selected
+		context['productsCatSelect'] = products_cats
+		return context
 
 
 class ListSubCatProducts(ListView):
@@ -64,6 +74,7 @@ class SingleProduct(ListView):
 		)
 		return lista
 
+
 def search(request):
 	query = request.GET.get('search-field')
 	cat_query = request.GET.get('search-category')
@@ -80,10 +91,10 @@ def search(request):
 		)
 		results = Products.objects.filter(queryset).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
 	
-	paginator = Paginator(results, 4)
+	paginator = Paginator(results, 1)
 	page = request.GET.get('page', 1)
 	contacts = paginator.get_page(page)
-	return render_to_response(request, 'search.html', {'contacts': contacts, 'querytext': query, 'count': results})
+	return render(request, 'search.html', {'contacts': contacts, 'querytext': query, 'count': results})
 
 
 # class SearchResults(ListView):
