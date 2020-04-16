@@ -126,7 +126,9 @@ def search(request):
 # 		return object_list
 
 def plan(request):
-	return render(request, 'plan.html')
+	companysCount = Company.objects.all().count()
+	productsCount = Products.objects.all().count()
+	return render(request, 'plan.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount})
 
 def handler400(request, exception):
 	data = {}
