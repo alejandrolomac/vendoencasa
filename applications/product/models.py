@@ -91,7 +91,7 @@ class Products(models.Model):
 		super(Products, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):
-		return reverse("cart_app:product", kwargs={"slug": self.slug})
+		return reverse("product_app:product", kwargs={"slug": self.slug})
 	
 	def get_add_to_cart_url(self):
 		return reverse("cart_app:add-to-cart", kwargs={"slug": self.slug})
