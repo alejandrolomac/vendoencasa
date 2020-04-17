@@ -1,0 +1,44 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="card form-account" style="margin: 0px auto; border: 1px solid #ccc !important; border-radius: 25px; box-shadow: 0px 0px 10px #dede;">
+    <article class="card-body">
+        <h3 class="card-title mb-4 mt-1">Registrarse</h3>
+        <hr>
+        <p>
+          <a href="" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i>  Entrar via facebook</a>
+        </p>
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+            <div class="form-group">
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            </div>
+          {% endif %}
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group text-center">
+                <button type="submit" class="btn" style="margin: 0px auto;">{% trans "Sign Up" %}</button>
+              </div>
+            </div> 
+          </div>                                               
+      </form>
+      
+    </article>
+  </div>
+
+</div>
+<div class="row text-center">
+  <p class="text-center w-100" style="margin-top: 10px;">Si ya estas registrado <a href="{{ login_url }}">Entra</a></p>
+</div> 
+
+{% endblock %}
+

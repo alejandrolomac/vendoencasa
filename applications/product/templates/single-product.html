@@ -63,7 +63,11 @@
 										{% if lp.priceAnchor %}
 											<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.priceAnchor }}<span style="font-size: 10px;">L.</span></span>
 										{% endif %}
-										{{ lp.price }}<span style="font-size: 14px;">L.</span>
+										{% if lp.pricePromo %}
+											{{ lp.pricePromo }}<span style="font-size: 14px;">L.</span>
+										{% else %}
+											{{ lp.price }}<span style="font-size: 14px;">L.</span>
+										{% endif %}
 										{% if lp.priceAnchor %}
 											<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.priceAnchor|sub:lp.price }}<span style="font-size: 10px;">L.</span></span>
 										{% endif %}
@@ -81,8 +85,10 @@
 										<a href="whatsapp://send?text={{ request.build_absolute_uri }}" target="_blank" data-action="share/whatsapp/share" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-whatsapp" ></i></a>
 									</p>
 									
-							    </li>
-							    <li class="list-group-item"><a href="#" class="btn">Agregar al Carrito</a></li>
+								</li>
+								<li class="list-group-item">
+									<a href="{{ lp.get_add_to_cart_url }}" class="btn">Agregar al Carrito <i class="fa fa-shopping-cart"></i></a>
+								</li>
 							</ul>
 						</div>
 					</div>

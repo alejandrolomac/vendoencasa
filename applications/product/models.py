@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify 
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+from django.urls import reverse
 
 class Company(models.Model):
 	name = models.CharField('Nombre', max_length=150, blank=False)
@@ -69,14 +70,18 @@ class Products(models.Model):
 	imagef = models.ImageField('Imagen 1', upload_to='Product', blank=True)
 	images = models.ImageField('Imagen 2', upload_to='Product', blank=True)
 	imaget = models.ImageField('Imagen 3', upload_to='Product', blank=True)
-	price = models.CharField('Precio', max_length=12, blank=False)
-	priceAnchor = models.CharField('Precio Anclaje', max_length=12, blank=True)
-	pricePromo = models.CharField('Precio Promocion', max_length=12, blank=True)
+	price = models.FloatField('Precio', blank=False)
+	priceAnchor = models.FloatField('Precio Anclaje', blank=True)
+	pricePromo = models.FloatField('Precio Promocion', blank=True)
 	promotion = models.BooleanField('Promocion', default=False)
 	available = models.BooleanField('Disponible', default=True)
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	pub_date = models.DateTimeField(editable=False, auto_now=True)
+	quantity = models.IntegerField(default=1)
+
+	def __str__(self):
+		return self.title
 
 	def __unicode__(self):
 		return self.title
@@ -85,5 +90,11 @@ class Products(models.Model):
 		self.slug = slugify(self.title)
 		super(Products, self).save(*args, **kwargs)
 
-	def __str__(self):
-		return self.title
+	def get_absolute_url(self):
+		return reverse("cart_app:product", kwargs={"slug": self.slug})
+	
+	def get_add_to_cart_url(self):
+		return reverse("cart_app:add-to-cart", kwargs={"slug": self.slug})
+
+	def get_remove_from_cart_url(self):
+		return reverse("cart_app:remove-to-cart", kwargs={"slug": self.slug})

@@ -7,6 +7,8 @@ handler403 = 'applications.product.views.handler403'
 handler400 = 'applications.product.views.handler400'
 
 urlpatterns = [
-	re_path(r'', include('applications.product.urls')),
+	re_path('', include('applications.product.urls')),
     re_path('admin/', admin.site.urls),
+    re_path('accounts/', include('allauth.urls')),
+    re_path('', include('applications.cart.urls')),
 ]
