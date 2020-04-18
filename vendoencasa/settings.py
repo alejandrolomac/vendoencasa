@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'applications.cart',
 ]
 
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -186,5 +185,7 @@ SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'product_app:index'
+
+SITE_ID = 2
 
 django_heroku.settings(locals())
