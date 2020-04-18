@@ -168,8 +168,8 @@ AUTHENTICATION_BACKENDS = (
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+#LOGIN_URL = '/accounts/login/'
+#LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '1101009556925363'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '1c9ae744a8357026cdbac1c16544d8e4'  # App Secret
