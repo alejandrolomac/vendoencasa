@@ -14,6 +14,10 @@ ALLOWED_HOSTS = ['*', 'http://www.vendoencasa.net', 'www.vendoencasa.net', 'http
 
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -23,10 +27,6 @@ INSTALLED_APPS = [
     'applications.product',
     'storages',
     'mathfilters',
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'applications.cart',
 ]
 
