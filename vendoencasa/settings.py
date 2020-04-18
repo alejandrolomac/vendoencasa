@@ -14,6 +14,7 @@ ALLOWED_HOSTS = ['*', 'localhost', 'vendoencasa.net', 'http://www.vendoencasa.ne
 
 
 INSTALLED_APPS = [
+    'django.contrib.sitemaps',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -184,6 +185,6 @@ SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'product_app:index'
 
 django_heroku.settings(locals())
