@@ -12,6 +12,5 @@ urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path('accounts/', include('allauth.urls')),
     re_path('', include('applications.cart.urls')),
-    re_path('loginfacebook/', TemplateView.as_view(template_name='login.html')),
-    path('oauth/', include('social_django.urls', namespace='social')),
+    re_path('oauth/', include('social_django.urls', namespace='social')),
 ]

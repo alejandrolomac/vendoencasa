@@ -10,7 +10,7 @@ DEBUG = True
 TEMPLATE_DEBUG = False
 THUMBNAIL_DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'localhost', 'vendoencasa.net', 'http://www.vendoencasa.net', 'https://vendoencasa.net', 'http://vendoencasa.herokuapp.com/']
 
 
 INSTALLED_APPS = [
@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'applications.cart',
 ]
 
-SITE_ID = 1
+SITE_ID=1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
