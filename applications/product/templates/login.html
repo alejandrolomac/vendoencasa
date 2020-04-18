@@ -7,6 +7,16 @@
 
 <body>
     <a href="{% provider_login_url 'facebook' method='js_sdk' %}">Facebook Connect</a>
+
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <br>
+    <p><strong>-- OR --</strong></p>
+    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
 </body>
 
 </html>
