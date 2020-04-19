@@ -84,9 +84,9 @@
 							<div class="card text-left" style="border: none !important; padding: 5px; background: none;">
 				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
 									{% if nprod.imagef.url == '' %}
-										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 									{% else %}
-										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
+										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;" class="thumbnail">
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
@@ -117,9 +117,9 @@
 							<div class="card text-left" style="border: none !important; padding: 5px;">
 				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
 									{% if nprod.imagef.url == '' %}
-										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 									{% else %}
-										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
+										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;" class="thumbnail">
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
@@ -140,9 +140,9 @@
 							<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
 				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
 									{% if nprod.imagef.url == '' %}
-										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 									{% else %}
-										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
+										<img src="{{ nprod.imagef.url }}" style="border-radius: 0;" class="thumbnail">
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
@@ -164,9 +164,9 @@
 								<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
 									<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
 										{% if nprod.imagef.url == '' %}
-											<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;">
+											<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 										{% else %}
-											<img src="{{ nprod.imagef.url }}" style="border-radius: 0;">
+											<img src="{{ nprod.imagef.url }}" style="border-radius: 0;" class="thumbnail">
 										{% endif %}
 									</a>
 									<div class="card-body" style="padding: 15px 0px 0px 0px;">
