@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '&mcng4k3l9@5y4&(8(4j*1$o022z%3(^v2hfe#y=!71@k@#ja$'
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False
 THUMBNAIL_DEBUG = False
 
@@ -28,9 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'applications.product',
+    'applications.cart',
+    'applications.useradmin',
     'storages',
     'mathfilters',
-    'applications.cart',
 ]
 
 
@@ -176,6 +177,14 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '1101009556925363'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '1c9ae744a8357026cdbac1c16544d8e4'  # App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
+    ('name', 'name'),
+    ('email', 'email'),
+]
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'

@@ -37,7 +37,7 @@
 		    			<li><a href="#">Contáctanos</a></li>
 						{% if request.user.is_authenticated %}
 							<li>
-								<a class="navbar-car btn" href="{% url 'account_logout' %}" style="font-size: 1em;">
+								<a class="navbar-car btn" href="{% url 'useradmin_app:salir' %}" style="font-size: 1em;">
 									Salir <i class="fa fa-user"></i>
 								</a>
 							</li>
@@ -72,11 +72,11 @@
 	                
 	                <div class="col-6 col-md-3 col-lg-2 text-right float-right third ">
 						{% if request.user.is_authenticated %}
-							<a class="navbar-car" href="/">
+							<a class="navbar-car" href="{% url 'cart_app:order' %}">
 								<span style="padding: 0px 5px;font-size: .5em; border-radius: 5px; background: #fff;">{{ request.user|cart_item_count }}</span><i class="fa fa-shopping-cart"></i>
 							</a>
 						{% else %}
-							<a class="navbar-car" href="{% url 'account_login' %}" style="font-size: 1.3em;">Entrar <i class="fa fa-user"></i></a>
+							<a class="navbar-car" href="{% url 'useradmin_app:entrar' %}" style="font-size: 1.3em;">Entrar <i class="fa fa-user"></i></a>
 						{% endif %}
 	                	
 			            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,9 +87,6 @@
 		  	</nav>
 		</div>
 	</header><!-- End Of Header -->
-
-
-
 
 	{% if messages %}
 		{% for message in messages %}
@@ -107,6 +104,8 @@
 		</div>
 		{% endfor %}
 	{% endif %}
+
+
   {% block body %}
 
     <div class="container-fluid" style="padding: 150px 0px; margin-top: 30px;">

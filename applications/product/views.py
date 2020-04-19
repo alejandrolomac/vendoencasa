@@ -103,27 +103,7 @@ def search(request):
 	page = request.GET.get('page', 1)
 	contacts = paginator.get_page(page)
 	return render(request, 'search.html', {'contacts': contacts, 'querytext': query, 'count': results, 'query_page': query, 'query_page_tag': cat_query})
-
-
-# class SearchResults(ListView):
-# 	model = Products
-# 	template_name = 'search.html'
-# 	paginate_by = 3
-
-# 	def get_queryset(self):
-# 		query = self.request.GET.get('search-field')
-# 		cat_query = self.request.GET.get('search-category')
-
-# 		if( cat_query == '' ):
-# 			object_list = Products.objects.filter(
-# 				Q(title__icontains=query) | Q(resume__icontains=query)
-# 			).order_by('-pub_date')
-# 		else:
-# 			object_list = Products.objects.filter(
-# 				Q(title__icontains=query) | Q(resume__icontains=query)
-# 			).filter( subCategory__id=cat_query ).order_by('-pub_date')
-
-# 		return object_list
+	
 
 def plan(request):
 	companysCount = Company.objects.all().count()

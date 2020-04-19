@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-@login_required
+@login_required(login_url='useradmin:entrar')
 def add_to_cart(request, slug):
     item = get_object_or_404(Products, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
@@ -36,7 +36,7 @@ def add_to_cart(request, slug):
         messages.success(request, "Se agrego el producto al carrito")
         return redirect("cart_app:order")
 
-@login_required
+@login_required(login_url='useradmin:entrar')
 def remove_from_cart(request, slug):
     item = get_object_or_404(Products, slug=slug)
     order_qs = Order.objects.filter(
@@ -75,7 +75,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
             return redirect("/")
 
 
-@login_required
+@login_required(login_url='useradmin:entrar')
 def remove_single_item_from_cart(request, slug):
     item = get_object_or_404(Products, slug=slug)
     order_qs = Order.objects.filter(
@@ -101,3 +101,7 @@ def remove_single_item_from_cart(request, slug):
             return redirect("product_app:single-product", slug=slug)
     else:
         return redirect("product_app:single-product", slug=slug)
+
+
+def finalize_purchase(request):
+    pass
