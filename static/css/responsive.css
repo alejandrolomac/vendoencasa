@@ -51,4 +51,10 @@
 	{
 		padding: 0px;
 	}
+
+	header .navbar-car
+	{
+		margin-right: 0px !important;
+	}
+
 }
