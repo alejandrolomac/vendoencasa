@@ -7,11 +7,13 @@ from .models import Company, Category, SubCategory, Products
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import get_template
+from django.contrib.auth.models import User
 
 def index(request):
 	categorys = Category.objects.all()
 	new_prod = Products.objects.all().order_by('-pub_date')[:10]
-	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod})
+	promo_prod = Products.objects.all().filter(promotion=True).order_by('-pub_date')[:10]
+	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod, 'promoProd': promo_prod})
 
 
 class ListSubCategorys(ListView):
@@ -108,7 +110,8 @@ def search(request):
 def plan(request):
 	companysCount = Company.objects.all().count()
 	productsCount = Products.objects.all().count()
-	return render(request, 'plan.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount})
+	usersCount = User.objects.all().count()
+	return render(request, 'plan.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount, 'UsersCount': usersCount})
 
 def handler400(request, exception):
 	data = {}

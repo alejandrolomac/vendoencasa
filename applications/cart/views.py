@@ -66,13 +66,19 @@ class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
+            #mensaje de compra
+            purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
+            final_message = purchase_message + "probando compra"
+            #mensaje de compra
             context = {
-                'object': order
+                'object': order,
+                'purchase_message': final_message
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
             messages.error(self.request, 'No tienes ninguna lista de compras')
             return redirect("/")
+    
 
 
 @login_required(login_url='useradmin:entrar')
@@ -104,4 +110,7 @@ def remove_single_item_from_cart(request, slug):
 
 
 def finalize_purchase(request):
-    pass
+    purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
+    order = Order.objects.get(user=request.user)
+    final_message = purchase_message + order
+    return render(self.request, 'order_summary.html', final_message)

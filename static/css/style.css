@@ -54,12 +54,35 @@ a:hover
 	-ms-transition: all .2s linear;
 	-o-transition: all .2s linear;
 	transition: all .2s linear;
-	border: 1px solid #ccc;
+	border: 1px solid #ccc !important;
 	border-radius: 5px;
 	overflow: hidden;
 }
 
 .thumbnail:hover
+{
+	opacity: .8;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+.thumbnail-cat
+{
+	opacity: 1;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
+	border: none !important;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.thumbnail-cat:hover
 {
 	opacity: .8;
 	-webkit-transition: all .2s linear;
