@@ -10,7 +10,7 @@
 				<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
 					{% for cat in object_list %}
 						<div class="card text-left" style="padding: 5px; border: none;">
-							<a href="{% url 'product_app:sub-catproducts' cat.slug cat.id %}" class="linkitem thumbnail" style="border: none; border-radius: 0;">
+							<a href="{% url 'product_app:sub-catproducts' cat.slug cat.id %}" class="linkitem thumbnail-cat" style="border: none; border-radius: 0;">
 								{% if cat.icono.url != '' %}
 									<img src="{{ cat.icono.url }}" class="img-responsive thumbnail" style="border-radius: 0;">
 								{% else %}
