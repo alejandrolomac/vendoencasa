@@ -33,21 +33,21 @@
 							<div class="slider-nav">
 								{% if lp.imagef.url == '' %}
 									<div class="item">
-										<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail">
+										<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
 									</div>
 								{% else %}
 									<div class="item">
-										<img src="{{ lp.imagef.url }}" class="d-block w-100 thumbnail">
+										<img src="{{ lp.imagef.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
 									</div class="item">
 								{% endif %}
 								{% if lp.images.url != '' %}
 									<div class="item">
-										<img src="{{ lp.images.url }}" class="d-block w-100 thumbnail">
+										<img src="{{ lp.images.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
 									</div>
 								{% endif %}
 								{% if lp.imaget.url != '' %}
 									<div class="item">
-										<img src="{{ lp.imaget.url }}" class="d-block w-100 thumbnail">
+										<img src="{{ lp.imaget.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
 									</div>
 								{% endif %}
 							</div>
