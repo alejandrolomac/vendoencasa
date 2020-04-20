@@ -80,7 +80,7 @@ class SingleProduct(ListView):
 	def get_context_data(self, **kwargs):
 		id = self.kwargs['slug']
 		context = super(SingleProduct, self).get_context_data(**kwargs)
-		product_select = Products.objects.get(slug=id).filter(available=True)
+		product_select = Products.objects.get(slug=id)
 		products_cats = Products.objects.all().filter(subCategory=product_select.subCategory, available=True)[:10]
 		context['related_prod'] = products_cats
 		return context
