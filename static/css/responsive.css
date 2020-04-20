@@ -1,4 +1,4 @@
-@media screen and ( max-width: 766px )
+@media screen and ( max-width: 767px )
 {
 	.first
 	{ 
@@ -24,6 +24,26 @@
 	{
 		margin-top: 100px;
 	}
+
+	.wrap-image-season
+	{
+		display: none !important;
+	}
+
+	.image-prod
+	{
+		margin-bottom: 50px;
+	}
+
+	.catslist-prodpage
+	{
+		margin-bottom: 50px;
+	}
+
+	.list-cats
+	{
+		margin-top: 150px !important;
+	}
 }
 
 @media screen and ( max-width: 460px )
@@ -37,6 +57,22 @@
 	{
 		border-left: 1px solid #f3f3f3 !important;
     	border-radius: 5px 0px 0px 5px !important;
+	}
+
+	h1, h2, h3, h4, h5, h6
+	{
+		font-size: 1.2em !important;
+	}
+
+	.wrap-title-season p, .wrap-title-offert p
+	{
+		font-size: .8em !important;
+		text-align: center;
+	}
+
+	.card h5
+	{
+		font-size: .8em !important;
 	}
 }
 

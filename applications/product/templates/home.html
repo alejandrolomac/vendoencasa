@@ -108,7 +108,7 @@
 							</div>
 						</div><!-- End of Items Season -->
 
-						<div class="col-12 col-md-6 col-lg-5" style="padding:0px; background: url({% static 'img/season.png' %})left center no-repeat; background-size: cover; min-height: 250px; height: auto;">
+						<div class="col-12 col-md-6 col-lg-5 wrap-image-season" style="padding:0px; background: url({% static 'img/season.png' %})left center no-repeat; background-size: cover; min-height: 250px; height: auto;">
 							<!--<img src="" class="d-block w-100">-->
 						</div><!-- End of Image Season -->
 
@@ -200,7 +200,7 @@
 
 			{% if lessProd %}
 				<div class="fluid-cotainer" style="margin: 15px 0px; padding: 0px;">
-					<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Todo a menos de 100L.</h3>
+					<h3 class="text-left" style="background: #efc136; border-radius: 15px 15px 0px 0px; padding: 10px; color: #fff; margin: 0px;">Todo a menos de 100L.</h3>
 					<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
 						{% for lprod in lessProd %}
 							<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
