@@ -47,5 +47,5 @@ class Order(models.Model):
     def stringNames(self):
         text = ''
         for name in self.items.all():
-            text += '- ' + name.item.title + ' > ' + name.item.company.name + '%0D%0A'
+            text += '- ' + name.item.title + ': ' + str(name.item.quantity) + ' > ' + name.item.company.name + '%0D%0A'
         return text

@@ -70,8 +70,14 @@
 				        	</a>
 				        </div><!-- End Of item -->
 					{% endfor %}
-				</div><!-- End Of Categorias -->
-			{% endif %}
+					<div class="card text-left" style="padding: 5px; border: none;">
+						<a href="{% url 'product_app:less-products' %}" class="linkitem thumbnail-cat" style="border: none; border-radius: 0;">
+							<img src="{% static 'img/less.jpg' %}" class="img-responsive thumbnail" style="border-radius: 0;">
+							<h5 class="card-title" style="padding: 15px 0px 0px 0px;">Todo a Menos de 100L.</h5>
+						</a>
+					</div><!-- End Of item -->
+				</div>
+			{% endif %}<!-- End Of Categorias -->
 
 			{% if promoProd %}
 				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px; background: whitesmoke; border-radius: 25px; padding-bottom: 15px;">
@@ -106,8 +112,8 @@
 				  			</div><!-- End Of item -->
 						{% endfor %}
 					</div>
-				</div><!-- End Of Descuentos -->
-			{% endif %}
+				</div>
+			{% endif %}<!-- End Of Descuentos -->
 
 			{% if newProd %}
 				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px;">
@@ -129,8 +135,8 @@
 				  			</div><!-- End Of item -->
 						{% endfor %}
 					</div>
-				</div><!-- End Of Novedades -->
-			{% endif %}
+				</div>
+			{% endif %}<!-- End Of Novedades -->
 
 			{% if newProd %}
 				<div class="fluid-cotainer" style="margin: 15px 0px; padding: 0px;">
@@ -152,33 +158,67 @@
 				  			</div><!-- End Of item -->
 						{% endfor %}
 					</div>
-				</div><!-- End Of Mas Buscados -->
-			{% endif %}
+				</div>
+			{% endif %}<!-- End Of Más Buscados -->
 
-			{% if newProd %}
+			{% if seasonProd %}
 				<div class="fluid-cotainer" style="margin: 15px 0px; padding: 0px;">
-				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Promociones</h3>
-				  	<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
-					    {% for nprod in newProd %}
-							{% if nprod.promotion %}
-								<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
-									<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
-										{% if nprod.imagef.url == '' %}
-											<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
-										{% else %}
-											<img src="{{ nprod.imagef.url }}" style="border-radius: 0;" class="thumbnail">
-										{% endif %}
-									</a>
-									<div class="card-body" style="padding: 15px 0px 0px 0px;">
-										<h2 class="card-title" style="font-size: 22px;">{{ nprod.price }}<span>L.</span></h2>
-										<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
-									</div>
-								</div><!-- End Of item -->
-							{% endif %}
+					<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Productos de Temporada</h3>
+					<div class="row">
+						<div class="col-12 col-md-6 col-lg-7">
+							<div class="container-fluid seasonslider" style="padding: 0px; margin: 0px;">
+								{% for nprod in seasonProd %}
+									{% if nprod.season %}
+										<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
+											<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
+												{% if nprod.imagef.url == '' %}
+													<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
+												{% else %}
+													<img src="{{ nprod.imagef.url }}" style="border-radius: 0;" class="thumbnail">
+												{% endif %}
+											</a>
+											<div class="card-body" style="padding: 15px 0px 0px 0px;">
+												<h2 class="card-title" style="font-size: 22px;">{{ nprod.price }}<span>L.</span></h2>
+												<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
+											</div>
+										</div><!-- End Of item -->
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div><!-- End of Items Season -->
+
+						<div class="col-12 col-md-6 col-lg-5">
+							<img src="{% static 'img/season.png' %}" class="d-block w-100">
+						</div><!-- End of Image Season -->
+
+					</div>
+				</div>
+			{% endif %}<!-- End of Season Slider -->
+
+
+			{% if lessProd %}
+				<div class="fluid-cotainer" style="margin: 15px 0px; padding: 0px;">
+					<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Todo a menos de 100L.</h3>
+					<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
+						{% for lprod in lessProd %}
+							<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
+								<a href="{% url 'product_app:single-product' lprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
+									{% if lprod.imagef.url == '' %}
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
+									{% else %}
+										<img src="{{ lprod.imagef.url }}" style="border-radius: 0;" class="thumbnail">
+									{% endif %}
+								</a>
+								<div class="card-body" style="padding: 15px 0px 0px 0px;">
+									<h2 class="card-title" style="font-size: 22px;">{{ lprod.price }}<span>L.</span></h2>
+									<h5 class="card-title" style="color: #343a40;">{{ lprod.title }}</h5>
+								</div>
+							</div><!-- End Of item -->
 						{% endfor %}
 					</div>
-				</div><!-- End Of Promociones -->
-			{% endif %}
+				</div>
+			{% endif %}<!-- End Of Menos de 100-->
+
 		</div>
 	</div><!-- End Of Sliders -->
 

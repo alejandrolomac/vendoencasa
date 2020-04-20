@@ -8,12 +8,15 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import get_template
 from django.contrib.auth.models import User
+from django.db.models import Count
 
 def index(request):
 	categorys = Category.objects.all()
 	new_prod = Products.objects.all().filter(available=True).order_by('-pub_date')[:10]
 	promo_prod = Products.objects.all().filter(promotion=True, available=True).order_by('-pub_date')[:10]
-	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod, 'promoProd': promo_prod})
+	season_prod = Products.objects.all().filter(season=True, available=True).order_by('-pub_date')
+	less_prod = Products.objects.all().filter(price__lte=100)
+	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod, 'promoProd': promo_prod, 'seasonProd': season_prod, 'lessProd': less_prod})
 
 
 class ListSubCategorys(ListView):
@@ -113,6 +116,15 @@ def plan(request):
 	productsCount = Products.objects.all().count()
 	usersCount = User.objects.all().count()
 	return render(request, 'plan.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount, 'UsersCount': usersCount})
+
+
+def lessProduct(request):
+	less_prod = Products.objects.all().filter(price__lte=100)
+	paginator = Paginator(less_prod, 20)
+	page = request.GET.get('page', 1)
+	contacts = paginator.get_page(page)
+	return render(request, 'less100.html', {'lessProd': contacts})
+
 
 def handler400(request, exception):
 	data = {}

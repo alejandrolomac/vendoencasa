@@ -8,6 +8,7 @@ app_name = "product_app"
 urlpatterns = [
 	path('', views.index, name="index"),
 	path('productos', views.listproducts, name="list-products"),
+	path('menos100', views.lessProduct, name="less-products"),
 	path('producto/<slug>', views.SingleProduct.as_view(), name="single-product"),
 	path('sub-categoria/<slug>/<pk>', views.ListSubCategorys.as_view(), name="sub-categorys"),
 	path('productos/<slug>/<pk>/', views.ListSubCatProducts.as_view(), name="sub-catproducts"),
