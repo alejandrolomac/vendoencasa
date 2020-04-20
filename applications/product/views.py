@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 
 def index(request):
 	categorys = Category.objects.all()
-	new_prod = Products.objects.all().order_by('-pub_date')[:10]
-	promo_prod = Products.objects.all().filter(promotion=True).order_by('-pub_date')[:10]
+	new_prod = Products.objects.all().filter(available=True).order_by('-pub_date')[:10]
+	promo_prod = Products.objects.all().filter(promotion=True, available=True).order_by('-pub_date')[:10]
 	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod, 'promoProd': promo_prod})
 
 
@@ -29,7 +29,7 @@ class ListSubCategorys(ListView):
 		id = self.kwargs['pk']
 		context = super(ListSubCategorys, self).get_context_data(**kwargs)
 		cats_selected = Category.objects.get(id=id)
-		products_cats = Products.objects.all().filter(subCategory_id__category_id__id=id)
+		products_cats = Products.objects.all().filter(subCategory_id__category_id__id=id, available=True)
 		context['catSelect'] = cats_selected
 		context['productsCatSelect'] = products_cats
 		return context
@@ -41,7 +41,7 @@ class ListSubCatProducts(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = Products.objects.filter(subCategory__id=id)
+		object_list = Products.objects.all().filter(subCategory__id=id, available=True)
 		return object_list
 
 
@@ -50,14 +50,14 @@ class ListCompanyProducts(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = Products.objects.filter(company__id=id)
+		object_list = Products.objects.all().filter(company__id=id, available=True)
 		return object_list
 
 
 def listproducts(request):
 	paginate_by = 20
 	categorys = Category.objects.all()
-	productslist = Products.objects.all().order_by('-pub_date')
+	productslist = Products.objects.all().filter(available=True).order_by('-pub_date')
 	paginator = Paginator(productslist, 20)
 
 	page = request.GET.get('page')
@@ -71,16 +71,17 @@ class SingleProduct(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['slug']
-		lista = Products.objects.filter(
-			slug=id
+		lista = Products.objects.all().filter(
+			slug=id, 
+			available=True
 		)
 		return lista
 
 	def get_context_data(self, **kwargs):
 		id = self.kwargs['slug']
 		context = super(SingleProduct, self).get_context_data(**kwargs)
-		product_select = Products.objects.get(slug=id)
-		products_cats = Products.objects.all().filter(subCategory=product_select.subCategory)[:10]
+		product_select = Products.objects.get(slug=id).filter(available=True)
+		products_cats = Products.objects.all().filter(subCategory=product_select.subCategory, available=True)[:10]
 		context['related_prod'] = products_cats
 		return context
 
@@ -94,12 +95,12 @@ def search(request):
 		queryset = ( 
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.filter(queryset).distinct().order_by('-pub_date')
+		results = Products.objects.all().filter(queryset, available=True).distinct().order_by('-pub_date')
 	else:
 		queryset = (
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.filter(queryset).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
+		results = Products.objects.all().filter(queryset, available=True).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
 	
 	paginator = Paginator(results, 20)
 	page = request.GET.get('page', 1)

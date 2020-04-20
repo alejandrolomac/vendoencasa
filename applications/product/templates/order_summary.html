@@ -8,7 +8,7 @@
 			<h1 class="text-left" style="padding-bottom: 20px; margin-bottom: 30px; padding-top: 100px;">Pedido de {{request.user.username}}</h1>
 			<div class="table-responsive">
 				<table class="table table-hover">
-					<!--<caption>Lista de compras</caption>-->
+					<caption>El precio incluye envío</caption>
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">Cantidad</th>
@@ -49,7 +49,7 @@
 											{{oreder_item.item.price}}<span style="font-size: .8em;">L.</span>
 										{% endif %}
 									{% endif %}
-									<a href="{% url 'cart_app:remove-to-cart' oreder_item.item.slug %}"><i class="fa fa-trash ml-2"></i></a>
+									<a href="{% url 'cart_app:remove-to-cart' oreder_item.item.slug %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
 								</td>
 							</tr>
 						{% empty %}

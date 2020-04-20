@@ -68,7 +68,9 @@ class OrderSummaryView(LoginRequiredMixin, View):
             order = Order.objects.get(user=self.request.user, ordered=False)
             #mensaje de compra
             purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
-            final_message = purchase_message + "probando compra"
+            price_total = Order.objects.get(user=self.request.user, ordered=False).get_total()
+            title_product = Order.objects.get(user=self.request.user, ordered=False).stringNames()
+            final_message = purchase_message + '--- Nuevo pedido de ' + self.request.user.username + '---%0D%0A%0D%0A'+ title_product + '%0D%0A' + "----- Pago total: " + str(price_total) + "L.";
             #mensaje de compra
             context = {
                 'object': order,

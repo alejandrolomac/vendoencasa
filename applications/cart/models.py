@@ -43,3 +43,9 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
+
+    def stringNames(self):
+        text = ''
+        for name in self.items.all():
+            text += '- ' + name.item.title + ' > ' + name.item.company.name + '%0D%0A'
+        return text
