@@ -162,14 +162,17 @@
 			{% endif %}<!-- End Of Más Buscados -->
 
 			{% if seasonProd %}
-				<div class="fluid-cotainer" style="margin: 15px 0px; padding: 0px;">
-					<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Productos de Temporada</h3>
+				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px; background: whitesmoke; border-radius: 25px; padding-bottom: 0px; overflow: hidden;">
+					<div class="wrap-title-season">
+						<h3 class="text-left" style="margin-bottom: 0px; color: #fff;"><i class="fa fa-tags" style="color: #a836ef; background: #fff;padding: 8px; border-radius: 50%; font-size: .8em; margin-right: 15px;"></i>Productos de Temporada</h3>
+						<p style="font-size: 1.2em; color: #dedede; padding-top: 10px;">¡Aprovecha los descuentos de temporada!</p>
+					</div>
 					<div class="row">
 						<div class="col-12 col-md-6 col-lg-7">
 							<div class="container-fluid seasonslider" style="padding: 0px; margin: 0px;">
 								{% for nprod in seasonProd %}
 									{% if nprod.season %}
-										<div class="card text-left" style="border: none !important; padding: 5px; border: none !important;">
+										<div class="card text-left" style="border: none !important; padding: 5px; border: none !important; background: transparent;">
 											<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
 												{% if nprod.imagef.url == '' %}
 													<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
@@ -178,8 +181,8 @@
 												{% endif %}
 											</a>
 											<div class="card-body" style="padding: 15px 0px 0px 0px;">
-												<h2 class="card-title" style="font-size: 22px;">{{ nprod.price }}<span>L.</span></h2>
-												<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
+												<h2 class="card-title" style="font-size: 18px;">{{ nprod.price }}<span>L.</span></h2>
+												<h5 class="card-title" style="color: #343a40;font-size: 14px;">{{ nprod.title }}</h5>
 											</div>
 										</div><!-- End Of item -->
 									{% endif %}
