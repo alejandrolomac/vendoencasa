@@ -58,10 +58,10 @@ class ListCompanyProducts(ListView):
 
 
 def listproducts(request):
-	paginate_by = 20
+	paginate_by = 18
 	categorys = Category.objects.all()
 	productslist = Products.objects.all().filter(available=True).order_by('-pub_date')
-	paginator = Paginator(productslist, 20)
+	paginator = Paginator(productslist, 18)
 
 	page = request.GET.get('page')
 	contacts = paginator.get_page(page)
