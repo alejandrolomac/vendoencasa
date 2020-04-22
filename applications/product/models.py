@@ -76,6 +76,7 @@ class Products(models.Model):
 	promotion = models.BooleanField('Promocion', default=False)
 	available = models.BooleanField('Disponible', default=True)
 	season = models.BooleanField('Temporada', default=False)
+	virus = models.BooleanField('Virus', default=False)
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	pub_date = models.DateTimeField(editable=False, auto_now=True)

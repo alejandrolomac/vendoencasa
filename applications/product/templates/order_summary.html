@@ -28,25 +28,25 @@
 								<td><a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title }}</a></td>
 								<td>
 								{% if oreder_item.item.pricePromo %}
-									{{ oreder_item.item.pricePromo }}<span style="font-size: .8em;">L.</span>
+									{{ oreder_item.item.pricePromo|floatformat:2 }}<span style="font-size: .8em;">L.</span>
 								{% else %}
-									{{ oreder_item.item.price }}<span style="font-size: .8em;">L.</span>
+									{{ oreder_item.item.price|floatformat:2 }}<span style="font-size: .8em;">L.</span>
 								{% endif %}
 								</td>
 								<td>
 									{% if oreder_item.item.pricePromo %}
 										{% if oreder_item.quantity != 0 %}
-											{{oreder_item.get_total_discount_item_price}}<span style="font-size: .8em;">L.</span> <span class="badge badge-primary">Ahorraste: {{oreder_item.get_amount_saved}}<span style="font-size: .8em;">L.</span>
+											{{oreder_item.get_total_discount_item_price|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-primary">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
 											</span>
 										{% else %}
-											{{oreder_item.item.pricePromo}}<span style="font-size: .8em;">L.</span> <span class="badge badge-primary">Ahorraste: {{oreder_item.get_amount_saved}}<span style="font-size: .8em;">L.</span>
+											{{oreder_item.item.pricePromo|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-primary">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
 											</span>
 										{% endif %}
 									{% else %}
 										{% if oreder_item.quantity != 0 %}
-											{{oreder_item.get_total_item_price}}<span style="font-size: .8em;">L.</span>
+											{{oreder_item.get_total_item_price|floatformat:2}}<span style="font-size: .8em;">L.</span>
 										{% else %}
-											{{oreder_item.item.price}}<span style="font-size: .8em;">L.</span>
+											{{oreder_item.item.price|floatformat:2}}<span style="font-size: .8em;">L.</span>
 										{% endif %}
 									{% endif %}
 									<a href="{% url 'cart_app:remove-to-cart' oreder_item.item.slug %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
@@ -70,7 +70,7 @@
 								<td scope="col"></td>
 								<td scope="col"></td>
 								<td scope="col">Total a pagar: </td>
-								<td scope="col"><strong>{{ object.get_total }}</strong><span>L.</span></td>
+								<td scope="col"><strong>{{ object.get_total|floatformat:2 }}</strong><span>L.</span></td>
 							</tr>
 							<tr>
 								<td scope="col"></td>
