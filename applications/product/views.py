@@ -16,7 +16,7 @@ def index(request):
 	new_prod = Products.objects.all().filter(available=True).order_by('?')[:10]
 	promo_prod = Products.objects.all().filter(promotion=True, available=True).order_by('?')[:10]
 	season_prod = Products.objects.all().filter(season=True, available=True).order_by('?')
-	less_prod = Products.objects.all().filter(price__lte=100)
+	less_prod = Products.objects.all().filter(price__lte=100).order_by('?')
 	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod, 'promoProd': promo_prod, 'seasonProd': season_prod, 'lessProd': less_prod, 'virusProd': virus_prod})
 
 
