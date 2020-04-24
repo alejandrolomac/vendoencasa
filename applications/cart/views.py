@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Order, OrderItem
-from applications.product.models import Products
+from applications.product.models import Products, Color
 from django.utils import timezone
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, View
@@ -8,18 +8,22 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-@login_required(login_url='useradmin:entrar')
+@login_required(login_url='useradmin_app:entrar')
 def add_to_cart(request, slug):
     item = get_object_or_404(Products, slug=slug)
+    if request.POST:
+        colorid = request.POST.get('colorlist')
+    else: 
+        colorid = ''
     order_item, created = OrderItem.objects.get_or_create(
         item=item,
+        color=colorid,
         user=request.user,
         ordered=False
     )
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
-        #check if the order item is in the order
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
             order_item.save()
@@ -36,7 +40,7 @@ def add_to_cart(request, slug):
         messages.success(request, "Se agrego el producto al carrito")
         return redirect("cart_app:order")
 
-@login_required(login_url='useradmin:entrar')
+@login_required(login_url='useradmin_app:entrar')
 def remove_from_cart(request, slug):
     item = get_object_or_404(Products, slug=slug)
     order_qs = Order.objects.filter(
@@ -70,20 +74,25 @@ class OrderSummaryView(LoginRequiredMixin, View):
             purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
             price_total = Order.objects.get(user=self.request.user, ordered=False).get_total()
             title_product = Order.objects.get(user=self.request.user, ordered=False).stringNames()
-            final_message = purchase_message + '--- Nuevo pedido de ' + self.request.user.username + '---%0D%0A%0D%0A'+ title_product + '%0D%0A' + "----- Pago total: " + str(price_total) + "L.";
+            if( self.request.user.first_name ):
+                usuario_name = self.request.user.first_name
+            elif( self.request.user.first_name and self.request.user.last_name ):
+                usuario_name = self.request.user.first_name + " " + self.request.user.last_name
+            else:
+                usuario_name = self.request.user.username
+            final_message = purchase_message + 'VendoenCasa%0D%0A' + '--- Nuevo pedido de ' + usuario_name + '---%0D%0A%0D%0A'+ title_product + '%0D%0A' + "----- Pago total: " + str(price_total) + "L.";
             #mensaje de compra
             context = {
                 'object': order,
-                'purchase_message': final_message
+                'purchase_message': final_message,
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
             messages.error(self.request, 'No tienes ninguna lista de compras')
             return redirect("/")
-    
 
 
-@login_required(login_url='useradmin:entrar')
+@login_required(login_url='useradmin_app:entrar')
 def remove_single_item_from_cart(request, slug):
     item = get_object_or_404(Products, slug=slug)
     order_qs = Order.objects.filter(
@@ -109,10 +118,3 @@ def remove_single_item_from_cart(request, slug):
             return redirect("product_app:single-product", slug=slug)
     else:
         return redirect("product_app:single-product", slug=slug)
-
-
-def finalize_purchase(request):
-    purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
-    order = Order.objects.get(user=request.user)
-    final_message = purchase_message + order
-    return render(self.request, 'order_summary.html', final_message)

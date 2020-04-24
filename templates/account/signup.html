@@ -13,7 +13,7 @@
         <h3 class="card-title mb-4 mt-1">Registrarse</h3>
         <hr>
         <p>
-          <a href="" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i>  Entrar via facebook</a>
+          <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i>  Entrar via facebook</a>
         </p>
         <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
           {% csrf_token %}

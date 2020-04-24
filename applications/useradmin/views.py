@@ -1,25 +1,41 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
+@transaction.atomic
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('product_app:index')
     else:
-        form = CreateUserForm()
         if request.method == 'POST':
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, "Se ha creado tu cuenta " + user)
-                return redirect("useradmin_app:entrar")
+            form = CreateUserForm(data=request.POST)
+            profile_form = ProfileForm(data=request.POST)
+            if form.is_valid() and profile_form.is_valid():
+                user = form.save(commit=False)
+                user.save()
+                
+                profile = profile_form.save(commit=False)
+                profile.user = user
+                #profile.save()
 
-        context = {'form':form}
-        return render(request, 'registration/register.html', context)
+                messages.success(request, "Se ha creado tu cuenta " + str(user))
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password1')
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect("product_app:index")
+        else:
+            form = CreateUserForm()
+            profile_form = ProfileForm()
+
+        return render(request, 'registration/register.html', {
+            'form':form,
+            'profile_form':profile_form
+        })
 
 def loginPage(request):
     form = AuthenticationForm()

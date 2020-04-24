@@ -9,7 +9,7 @@
         <h4 class="card-title text-center mb-3 mt-1">Registrarse</h4>
         <hr>
         <p>
-          <a href="" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i> Registrarse via facebook</a>
+          <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i> Registrarse via facebook</a>
         </p>
         <form class="login" method="POST" action="">
           {% csrf_token %}
@@ -19,6 +19,7 @@
               {{ field }}
             </div>
           {% endfor %}
+          {{ profile_form.as_p }}
           <div class="row">
             <div class="col-md-12">
               <div class="form-group text-center" style="margin-top: 20px;">

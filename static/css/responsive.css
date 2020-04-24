@@ -40,7 +40,7 @@
 		margin-bottom: 50px;
 	}
 
-	.list-cats
+	.list-cats, .cart-top
 	{
 		margin-top: 150px !important;
 	}

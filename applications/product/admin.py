@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import Company, Category, SubCategory, Products
+from .models import Company, Category, SubCategory, Products, Color
+
+class ColorAdmin(admin.ModelAdmin):
+	list_display = (
+		'name',
+		'color',
+	)
 
 class CompanyAdmin(admin.ModelAdmin):
 	list_display = (
@@ -38,3 +44,4 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Products, ProductsAdmin)
+admin.site.register(Color, ColorAdmin)

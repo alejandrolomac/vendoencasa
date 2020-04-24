@@ -12,10 +12,10 @@ from django.db.models import Count
 
 def index(request):
 	categorys = Category.objects.all()
-	virus_prod = Products.objects.all().filter(available=True, virus=True).order_by('-pub_date')[:10]
+	virus_prod = Products.objects.all().filter(available=True, virus=True).order_by('?')
 	new_prod = Products.objects.all().filter(available=True).order_by('?')[:10]
-	promo_prod = Products.objects.all().filter(promotion=True, available=True).order_by('-pub_date')[:10]
-	season_prod = Products.objects.all().filter(season=True, available=True).order_by('-pub_date')
+	promo_prod = Products.objects.all().filter(promotion=True, available=True).order_by('?')[:10]
+	season_prod = Products.objects.all().filter(season=True, available=True).order_by('?')
 	less_prod = Products.objects.all().filter(price__lte=100)
 	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod, 'promoProd': promo_prod, 'seasonProd': season_prod, 'lessProd': less_prod, 'virusProd': virus_prod})
 

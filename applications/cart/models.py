@@ -3,8 +3,9 @@ from django.db import models
 from applications.product.models import Products
 
 class OrderItem(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Products, on_delete=models.CASCADE)
+    color = models.CharField(max_length=50, blank=True)
     quantity = models.IntegerField(default=1)
     ordered = models.BooleanField(default=False)
 
@@ -28,6 +29,17 @@ class OrderItem(models.Model):
             return self.get_total_discount_item_price()
         return self.get_total_item_price()
 
+    def get_color(self):
+        if self.color:
+            colortext = ' -Color: ' + str(self.color) + '- ' 
+        else:
+            colortext = ''
+        return colortext
+
+    def get_quantity(self):
+        quantitytext = self.quantity
+        return quantitytext
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     items = models.ManyToManyField(OrderItem)
@@ -47,5 +59,5 @@ class Order(models.Model):
     def stringNames(self):
         text = ''
         for name in self.items.all():
-            text += '- ' + name.item.title + ': ' + str(name.item.quantity) + ' > ' + name.item.company.name + '%0D%0A'
+            text += '- ' + name.item.title + ': ' + name.get_color() + str(name.get_quantity()) + ' > ' + name.item.company.name + '%0D%0A'
         return text

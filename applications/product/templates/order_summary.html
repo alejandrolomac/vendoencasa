@@ -5,7 +5,15 @@
 	{% load static %}
 	<div class="container-fluid list-cats">
 		<div class="container">
-			<h1 class="text-left" style="padding-bottom: 20px; margin-bottom: 30px; padding-top: 100px;">Pedido de {{request.user.username}}</h1>
+			<div class="cart-top text-left" style="padding-bottom: 40px; padding-top: 100px;">
+				<h2>Pedido de <b>{% if request.user.first_name %} {{request.user.first_name}} {{request.user.last_name}} {% else %} {{request.user.username}} {% endif %}</b></h2>
+				{% if request.user.profile.location %}
+					<h5><b>Ubicación:</b> {{ request.user.profile.location }}</h5>
+				{% endif %}
+				{% if request.user.profile.location %}
+					<h5><b>Teléfono:</b> {{ request.user.profile.phone }}</h5>
+				{% endif %}
+			</div>
 			<div class="table-responsive">
 				<table class="table table-hover">
 					<caption>El precio no incluye envío</caption>
@@ -25,7 +33,12 @@
 										{{ oreder_item.quantity }}
 									<a href="{% url 'cart_app:add-to-cart' oreder_item.item.slug %}"><i class="fa fa-plus ml-2"></i></a>
 								</td>
-								<td><a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title }}</a></td>
+								<td>
+									<a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title }}</a>
+									{% if oreder_item.color %}
+										<span class="badge badge-primary">{{ oreder_item.color }}</span>
+									{% endif %}
+								</td>
 								<td>
 								{% if oreder_item.item.pricePromo %}
 									{{ oreder_item.item.pricePromo|floatformat:2 }}<span style="font-size: .8em;">L.</span>
