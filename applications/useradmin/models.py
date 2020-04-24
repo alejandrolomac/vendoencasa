@@ -10,7 +10,7 @@ GENDER_CHOICES = (
 )
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     gender = models.TextField(max_length=500, choices=GENDER_CHOICES, blank=True, null=True)
     location = models.CharField('Direccion', max_length=400, blank=True, null=True)
     phone = models.CharField('Telefono', max_length=15, blank=True, null=True)

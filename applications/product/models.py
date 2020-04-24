@@ -89,7 +89,7 @@ class Products(models.Model):
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	pub_date = models.DateTimeField(editable=False, auto_now=True)
-	quantity = models.IntegerField(default=1)
+	quantity = models.IntegerField('Cantidad', default=1)
 
 	def __str__(self):
 		return self.title
