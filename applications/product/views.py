@@ -51,11 +51,26 @@ class ListSubCatProducts(ListView):
 
 class ListCompanyProducts(ListView):
 	template_name = 'company.html'
+	paginate_by = 20
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
 		object_list = Products.objects.all().filter(company__id=id, available=True)
 		return object_list
+	
+	def get_context_data(self, **kwargs):
+		id = self.kwargs['pk']
+		context = super(ListCompanyProducts, self).get_context_data(**kwargs)
+		company_select = Company.objects.get(id=id)
+		context['companySelect'] = company_select
+		return context
+
+
+class ListCompanyDelivery(ListView):
+	template_name = 'delivery.html'
+	paginate_by = 50
+	model = Company
+	context_object_name = 'delivery'
 
 
 def listproducts(request):
@@ -125,6 +140,14 @@ def lessProduct(request):
 	page = request.GET.get('page', 1)
 	contacts = paginator.get_page(page)
 	return render(request, 'less100.html', {'lessProd': contacts})
+
+
+def covidProduct(request):
+	covid_prod = Products.objects.all().filter(virus=True)
+	paginator = Paginator(covid_prod, 20)
+	page = request.GET.get('page', 1)
+	contacts = paginator.get_page(page)
+	return render(request, 'covid.html', {'covidProd': contacts})
 
 
 def handler400(request, exception):

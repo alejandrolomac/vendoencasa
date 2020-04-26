@@ -803,7 +803,7 @@ FORMS ACCOUNT STYLES
 	width: 40px;
 	margin: 10px auto;
 	transition: all 0.15s ease-out 0s;
-	border: none;
+	border: 1px solid #ccc;
 	color: #fff;
 	cursor: pointer;
 	display: block;

@@ -15,18 +15,21 @@
 										<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail">
 									</div>
 								{% else %}
-									<div class="item">
-										<img src="{{ lp.imagef.url }}" class="d-block w-100 thumbnail">
+									<div class="item image-zoom">
+										<img src="{{ lp.imagef.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
+>
 									</div class="item">
 								{% endif %}
 								{% if lp.images.url != '' %}
-									<div class="item">
-										<img src="{{ lp.images.url }}" class="d-block w-100 thumbnail">
+									<div class="item image-zoom">
+										<img src="{{ lp.images.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
+>
 									</div>
 								{% endif %}
 								{% if lp.imaget.url != '' %}
-									<div class="item">
-										<img src="{{ lp.imaget.url }}" class="d-block w-100 thumbnail">
+									<div class="item image-zoom">
+										<img src="{{ lp.imaget.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
+>
 									</div>
 								{% endif %}
 							</div>

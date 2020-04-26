@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block content %}
+	{% load static %}
+	<div class="container-fluid product-container">
+		<div class="container">
+			<div class="row" style="margin-bottom: 40px;">
+				<form class="input-group" action="/search/" method='GET'>
+					<input type="search" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Buscar Empresa..." name="search-field" style="outline: none; border-top: 1px solid #f3f3f3 !important; border-bottom: 1px solid #f3f3f3 !important;" value="{{ request.GET.search }}">
+					<div class="input-group-postpend">
+						<button class="btn btn-outline-success" type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+			<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Lista de Empresas</h3>
+			<div class="row  wrap-products-list">
+				<table class="table table-hover w-100" style="margin-top: 30px;">
+					<thead>
+						<tr>
+						<th scope="col">#</th>
+						<th scope="col">Empresa</th>
+						<th scope="col">Teléfono</th>
+						<th scope="col">Dirección</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for delivery in delivery  %}
+							<tr>
+								<th scope="row">{{delivery.id}}</th>
+								<td><a href="{% url 'product_app:company-products' delivery.slug delivery.id %}" style="width: max-content;">{{delivery.name}}</a></td>
+								<td>{{delivery.phone}}</td>
+								<td>{{delivery.address}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<nav id="pagination">
+				<div class="btn-group" role="group" aria-label="Basic example">
+					{% if is_paginated %}
+						{% if page_obj.has_previous %}
+							<a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+			            {% endif %}
+			            {% for i in paginator.page_range %}
+			                <a href="?page={{i}}" {% if page_obj.number == i %} class="btn btn-secondary active" {% else %} class="btn btn-secondary" {% endif %}>{{ i }}</a>
+			            {% endfor %}
+			            {% if page_obj.has_next %}
+			            	<a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+			            {% endif %}
+					{% endif %}
+				</div>
+			</nav>
+		</div>
+	</div>
+
+{% endblock content %}
