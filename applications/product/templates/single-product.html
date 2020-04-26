@@ -91,15 +91,27 @@
 										<p>Colores Disponibles:</p>
 										<form action="{{ lp.get_add_to_cart_url }}" method='POST' style="width: 100%;">
 											{% csrf_token %}
-											<select class="custom-select" name="colorlist" style="float:left; width: 100%;">
+											<!--<select class="custom-select" name="colorlist" style="float:left; width: 100%;">
 												{% for color in lp.colors.all %}
-													<option value="{{color.name}}">{{color.name}}</option>
+													<option value="{{color.name}}" style="border-left: 100px solid {{color.color}} !important;" class="option-color">
+														{{color.name}}
+													</option>
 												{% endfor %}
-											</select>
+											</select>-->
+											<div id="wrap-colors">
+												{% for color in lp.colors.all %}
+													<label>
+														<input type="radio" class="option-input radio" name="colorlist" style="background: {{color.color}};" value="{{color.name}}" checked />
+														{{color.name}}
+													</label>
+												{% endfor %}
+											</div>
 											<button class="btn" type="submit" style="float:left;">
 												Agregar al Carrito <i class="fa fa-shopping-cart"></i>
 											</button>
 										</form>
+
+										
 									{% else %}
 										<a href="{{ lp.get_add_to_cart_url }}" class="btn">Agregar al Carrito <i class="fa fa-shopping-cart"></i></a>
 									{% endif %}

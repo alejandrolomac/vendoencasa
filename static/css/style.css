@@ -785,3 +785,79 @@ PLANS STYLES
 /*------------------------------------------------------
 FORMS ACCOUNT STYLES
 ------------------------------------------------------*/
+#wrap-colors
+{
+	width: 100%;
+	padding: 10px 0px;
+	overflow: hidden;
+}
+
+#wrap-colors input[type="radio"]
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	height: 40px;
+	width: 40px;
+	margin: 10px auto;
+	transition: all 0.15s ease-out 0s;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	outline: none;
+	position: relative;
+	z-index: 1000;
+}
+
+#wrap-colors input[type="radio"]:hover
+{
+	opacity: .8;
+}
+
+#wrap-colors input[type="radio"]:checked::before
+{
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	content: '\25CF';
+	display: inline-block;
+	font-size: 45px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 28px;
+	color: #fff;
+}
+
+#wrap-colors input[type="radio"]:checked::after
+{
+	background: #40e0d0;
+	content: '';
+	display: block;
+	position: relative;
+	z-index: 100;
+}
+
+#wrap-colors input[type="radio"].radio
+{
+	border-radius: 50%;
+}
+
+#wrap-colors input[type="radio"].radio::after
+{
+	border-radius: 50%;
+}
+
+#wrap-colors label
+{
+	display: block;
+	line-height: 20px;
+	width: max-content;
+	float: left;
+	padding: 10px;
+	font-size: 15px;
+	text-align: center;
+	min-width: 100px;
+}
