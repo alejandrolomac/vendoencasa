@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+
+{% block content %}
+	{% load static %}
+	<div class="container-fluid product-container">
+		<div class="container">
+			<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%;">Empresas y Servicios</h3>
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 wrap-products-list">
+				{% if services %}
+					{% for s in services %}
+						<div class="card text-left prod-item" style="border:none; padding: 10px;">
+							<a href="{% url 'services_app:single-services' s.slug %}" class="thumbnail">
+								{% if s.logo.url == '' %}
+									<img src="{% static 'img/default_thumbnail.jpg' %}">
+								{% else %}
+									<img src="{{ s.logo.url }}">
+								{% endif %}
+							</a>
+							<div class="card-body" style="padding: 15px 0px;">
+								<h5 class="card-title">{{ s.name }}</h5>
+							</div>
+						</div><!-- End Of Product -->
+					{% endfor %}
+				{% else %}
+					<h3 class="text-center" style="padding: 100px 0px; font-size: 20px; width: 100% !important; margin: 0px auto;">No encontramos resultados</h3>
+				{% endif %}
+			</div>
+
+			<nav id="pagination">
+				<div class="btn-group" role="group" aria-label="Basic example">
+					{% if is_paginated %}
+						{% if page_obj.has_previous %}
+							<a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+			            {% endif %}
+			            {% for i in paginator.page_range %}
+			                <a href="?page={{i}}" {% if page_obj.number == i %} class="btn btn-secondary active" {% else %} class="btn btn-secondary" {% endif %}>{{ i }}</a>
+			            {% endfor %}
+			            {% if page_obj.has_next %}
+			            	<a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+			            {% endif %}
+					{% endif %}
+				</div>
+			</nav>
+		</div>
+	</div>
+
+{% endblock content %}

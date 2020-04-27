@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'applications.product',
     'applications.cart',
     'applications.useradmin',
+    'applications.services',
     'storages',
     'mathfilters',
 ]

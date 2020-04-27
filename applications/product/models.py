@@ -109,3 +109,11 @@ class Products(models.Model):
 
 	def get_remove_from_cart_url(self):
 		return reverse("cart_app:remove-to-cart", kwargs={"slug": self.slug})
+	
+	def offer_save(self):
+		if self.priceAnchor:
+			savedt = self.priceAnchor - self.pricePromo 
+		else:
+			savedt = self.price - self.pricePromo 
+		offer_total = (savedt * 100) / self.priceAnchor
+		return offer_total
