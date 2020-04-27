@@ -115,5 +115,6 @@ class Products(models.Model):
 			savedt = self.priceAnchor - self.pricePromo 
 		else:
 			savedt = self.price - self.pricePromo 
+		
 		offer_total = (savedt * 100) / self.priceAnchor
 		return offer_total

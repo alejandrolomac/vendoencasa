@@ -9,34 +9,42 @@
 				<div class="row">
 					<div class="image-prod col-12 col-md-6">
 						<div id="wrap-slider-product">
-							<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail">
-						</div><!-- endof Slider Single Product-->
+							{% if lp.logo.url == '' %}
+								<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail">
+							{% else %}
+								<img src="{{lp.logo.url}}" class="d-block w-100 thumbnail">
+							{% endif %}
+						</div><!-- endof Single Services-->
 					</div>
 					<div class="info-prod col-12 col-md-6">
 						{% load mathfilters %}
 						<div class="wrap-info">
 							<h2 class="card-title">{{ lp.name }}</h2>
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item">
-									<p>Teléfono: {{lp.phone}}</p>
-								</li>
-								<li class="list-group-item">
-									<p>
-										Encuentranos en: 
-										{% if lp.facebook %}
-											<a href="{{lp.facebook}}" target="_blank"><i class="fa fa-facebook"></i></a>
-										{% endif %}
-										{% if lp.instagram %}
-											<a href="{{lp.instagram}}" target="_blank"><i class="fa fa-instagram"></i></a>
-										{% endif %}
-										{% if lp.twitter %}
-											<a href="{{lp.twitter}}" target="_blank"><i class="fa fa-twitter"></i></a>
-										{% endif %}
-										{% if lp.youtube %}
-											<a href="{{lp.youtube}}" target="_blank"><i class="fa fa-youtube"></i></a>
-										{% endif %}
-									</p>
-								</li>
+								{% if lp.phone %}
+									<li class="list-group-item">
+										<p>Teléfono: {{lp.phone}}</p>
+									</li>
+								{% endif %}
+								{% if lp.facebook %}
+									<li class="list-group-item">
+										<p>
+											Encuentranos en: 
+											{% if lp.facebook %}
+												<a href="{{lp.facebook}}" target="_blank"><i class="fa fa-facebook"></i></a>
+											{% endif %}
+											{% if lp.instagram %}
+												<a href="{{lp.instagram}}" target="_blank"><i class="fa fa-instagram"></i></a>
+											{% endif %}
+											{% if lp.twitter %}
+												<a href="{{lp.twitter}}" target="_blank"><i class="fa fa-twitter"></i></a>
+											{% endif %}
+											{% if lp.youtube %}
+												<a href="{{lp.youtube}}" target="_blank"><i class="fa fa-youtube"></i></a>
+											{% endif %}
+										</p>
+									</li>
+								{% endif %}
 								{% if lp.website %}
 									<li class="list-group-item">
 										<a href="{{lp.website}}">Nuestro Sitio Web</a>
