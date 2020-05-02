@@ -1,4 +1,6 @@
 {% extends "account/base.html" %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 {% block content %}
 
@@ -9,7 +11,7 @@
         <h4 class="card-title text-center mb-3 mt-1">Registrarse</h4>
         <hr>
         <p>
-          <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i> Registrarse via facebook</a>
+          <!--<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i> Registrarse via facebook</a>-->
         </p>
         <form class="login" method="POST" action="">
           {% csrf_token %}

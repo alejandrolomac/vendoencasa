@@ -15,14 +15,14 @@ def registerPage(request):
             form = CreateUserForm(data=request.POST)
             profile_form = ProfileForm(data=request.POST)
             if form.is_valid() and profile_form.is_valid():
-                user = form.save(commit=False)
+                user = form.save()
+                user.profile.gender = profile_form.cleaned_data['gender']
+                user.profile.location = profile_form.cleaned_data['location']
+                user.profile.phone = profile_form.cleaned_data['phone']
+                user.profile.save()
                 user.save()
-                
-                profile = profile_form.save(commit=False)
-                profile.user = user
-                #profile.save()
 
-                messages.success(request, "Se ha creado tu cuenta " + str(user))
+                messages.success(request, "¡Gracias por unirtenos!")
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password1')
                 user = authenticate(username=username, password=password)

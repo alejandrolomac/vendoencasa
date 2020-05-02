@@ -15,9 +15,6 @@ class Profile(models.Model):
     location = models.CharField('Direccion', max_length=400, blank=True, null=True)
     phone = models.CharField('Telefono', max_length=15, blank=True, null=True)
 
-    def __str__(self):
-        return self.user.username
-
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

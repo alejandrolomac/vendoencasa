@@ -6,11 +6,12 @@ class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Products, on_delete=models.CASCADE)
     color = models.CharField(max_length=50, blank=True)
+    size = models.CharField(max_length=50, blank=True)
     quantity = models.IntegerField(default=1)
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.quantity} de {self.item.title}"
+        return f"{self.quantity} de {self.item.title}: {self.color} Talla: {self.size}"
     
     def get_total_item_price(self):
         precio_total = self.quantity * self.item.price
@@ -35,6 +36,13 @@ class OrderItem(models.Model):
         else:
             colortext = ''
         return colortext
+    
+    def get_size(self):
+        if self.size:
+            sizetext = ' -Talla: ' + str(self.size) + '- ' 
+        else:
+            sizetext = ''
+        return sizetext
 
     def get_quantity(self):
         quantitytext = self.quantity
@@ -59,5 +67,5 @@ class Order(models.Model):
     def stringNames(self):
         text = ''
         for name in self.items.all():
-            text += '- ' + name.item.title + ': ' + name.get_color() + str(name.get_quantity()) + ' > ' + name.item.company.name + '%0D%0A'
+            text += '- ' + name.item.title + ': ' + name.get_color() + name.get_size() + str(name.get_quantity()) + ' > ' + name.item.company.name + '%0D%0A'
         return text

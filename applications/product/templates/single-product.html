@@ -90,8 +90,7 @@
 									
 								</li>
 								<li class="list-group-item">
-									{% if lp.colors.all %}
-										<p>Colores Disponibles:</p>
+									{% if lp.colors.all or lp.sizes.all %}
 										<form action="{{ lp.get_add_to_cart_url }}" method='POST' style="width: 100%;">
 											{% csrf_token %}
 											<!--<select class="custom-select" name="colorlist" style="float:left; width: 100%;">
@@ -101,22 +100,54 @@
 													</option>
 												{% endfor %}
 											</select>-->
-											<div id="wrap-colors">
-												{% for color in lp.colors.all %}
-													<label>
-														<input type="radio" class="option-input radio" name="colorlist" style="background: {{color.color}};" value="{{color.name}}" checked />
-														{{color.name}}
-													</label>
-												{% endfor %}
+											{% if lp.sizes.all %}
+												<div id="wrap-size">
+													<p>Tallas Disponibles:</p>
+													{% for size in lp.sizes.all %}
+														<label>
+															<input type="radio" class="option-input radio" name="sizelist" value="{{size.name}}" checked />
+															<span class="sizespan">{{size.name}}</span>
+														</label>
+													{% endfor %}
+												</div>
+											{% endif %}
+
+											{% if lp.colors.all %}
+												<div id="wrap-colors">
+													<p>Colores Disponibles:</p>
+													{% for color in lp.colors.all %}
+														<label>
+															<input type="radio" class="option-input radio" name="colorlist" style="background: {{color.color}};" value="{{color.name}}" checked />
+															{{color.name}}
+														</label>
+													{% endfor %}
+												</div>
+											{% endif %}
+											<div style="width:100%; float:left;">
+												Cantidad: <input type="number" name="product_quantity" name="tentacles" value="1" min="1" max="100">
 											</div>
-											<button class="btn" type="submit" style="float:left;">
-												Agregar al Carrito <i class="fa fa-shopping-cart"></i>
-											</button>
+											<div style="width:100%;">
+												<button class="btn" type="submit" style="float:left;">
+													Agregar al Carrito <i class="fa fa-shopping-cart"></i>
+												</button>
+											</div>
 										</form>
 
 										
 									{% else %}
-										<a href="{{ lp.get_add_to_cart_url }}" class="btn">Agregar al Carrito <i class="fa fa-shopping-cart"></i></a>
+										<!--<a href="{{ lp.get_add_to_cart_url }}" class="btn">Agregar al Carrito <i class="fa fa-shopping-cart"></i></a>-->
+										<form action="{{ lp.get_add_to_cart_url }}" method='POST' style="width: 100%;">
+											{% csrf_token %}
+											<div style="width:100%; float:left;">
+												Cantidad: <input type="number" name="product_quantity" name="tentacles" value="1" min="1" max="100">
+											</div>
+											<div style="width:100%;">
+												<button class="btn" type="submit" style="float:left;">
+													Agregar al Carrito <i class="fa fa-shopping-cart"></i>
+												</button>
+											</div>
+										</form>
+
 									{% endif %}
 									
 								</li>

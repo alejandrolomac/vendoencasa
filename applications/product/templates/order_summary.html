@@ -6,12 +6,12 @@
 	<div class="container-fluid list-cats">
 		<div class="container">
 			<div class="cart-top text-left" style="padding-bottom: 40px; padding-top: 100px;">
-				<h2>Pedido de <b>{% if request.user.first_name %} {{request.user.first_name}} {{request.user.last_name}} {% else %} {{request.user.username}} {% endif %}</b></h2>
-				{% if request.user.profile.location %}
-					<h5><b>Ubicación:</b> {{ request.user.profile.location }}</h5>
+				<h2>Pedido de <b>{% if user.first_name %} {{user.first_name}} {{user.last_name}} {% else %} {{user.username}} {% endif %}</b></h2>
+				{% if user.profile.location %}
+					<h5><b>Ubicación:</b> {{ user.profile.location }}</h5>
 				{% endif %}
-				{% if request.user.profile.location %}
-					<h5><b>Teléfono:</b> {{ request.user.profile.phone }}</h5>
+				{% if user.profile.location %}
+					<h5><b>Teléfono:</b> {{ user.profile.phone }}</h5>
 				{% endif %}
 			</div>
 			<div class="table-responsive">
@@ -29,14 +29,17 @@
 						{% for oreder_item in object.items.all %}
 							<tr>
 								<td>
-									<a href="{% url 'cart_app:remove-item-cart' oreder_item.item.slug %}"><i class="fa fa-minus mr-2"></i></a>
+									<!--<a href="{% url 'cart_app:remove-item-cart' oreder_item.item.slug %}"><i class="fa fa-minus mr-2"></i></a>-->
 										{{ oreder_item.quantity }}
-									<a href="{% url 'cart_app:add-to-cart' oreder_item.item.slug %}"><i class="fa fa-plus ml-2"></i></a>
+									<!--<a href="{% url 'cart_app:add-to-cart' oreder_item.item.slug %}"><i class="fa fa-plus ml-2"></i></a>-->
 								</td>
 								<td>
 									<a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title }}</a>
 									{% if oreder_item.color %}
 										<span class="badge badge-primary">{{ oreder_item.color }}</span>
+									{% endif %}
+									{% if oreder_item.size %}
+										<span class="badge badge-success">{{ oreder_item.size }}</span>
 									{% endif %}
 								</td>
 								<td>
@@ -49,10 +52,10 @@
 								<td>
 									{% if oreder_item.item.pricePromo %}
 										{% if oreder_item.quantity != 0 %}
-											{{oreder_item.get_total_discount_item_price|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-primary">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
+											{{oreder_item.get_total_discount_item_price|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-warning">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
 											</span>
 										{% else %}
-											{{oreder_item.item.pricePromo|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-primary">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
+											{{oreder_item.item.pricePromo|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-warning">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
 											</span>
 										{% endif %}
 									{% else %}
@@ -62,7 +65,18 @@
 											{{oreder_item.item.price|floatformat:2}}<span style="font-size: .8em;">L.</span>
 										{% endif %}
 									{% endif %}
-									<a href="{% url 'cart_app:remove-to-cart' oreder_item.item.slug %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+
+
+									{% if oreder_item.color and oreder_item.size %}
+										<a href="{% url 'cart_app:remove-to-cart-size-color' oreder_item.item.slug oreder_item.color oreder_item.size %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+									{% elif oreder_item.color and not oreder_item.size %}
+										<a href="{% url 'cart_app:remove-to-cart-color' oreder_item.item.slug oreder_item.color %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+									{% elif oreder_item.size and not oreder_item.color %}
+										<a href="{% url 'cart_app:remove-to-cart-size' oreder_item.item.slug oreder_item.size %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+									{% else %}
+										<a href="{% url 'cart_app:remove-to-cart' oreder_item.item.slug %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+									{% endif %}
+									
 								</td>
 							</tr>
 						{% empty %}
@@ -87,7 +101,9 @@
 							</tr>
 							<tr>
 								<td scope="col"></td>
-								<td scope="col"></td>
+								<td scope="col">
+									<a href="{% url 'cart_app:clean-cart' %}" style="float: left; margin-top: 15px;">Limpiar Carrito</a>
+								</td>
 								<td scope="col">
 									<a href="/" style="float: left; margin-top: 15px;">Continuar Comprando</a>
 								</td>

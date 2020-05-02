@@ -819,16 +819,18 @@ FORMS ACCOUNT STYLES
 
 #wrap-colors input[type="radio"]:checked::before
 {
-	height: 40px;
-	width: 40px;
+	height: 20px;
+	width: 20px;
 	position: absolute;
-	content: '\25CF';
-	display: inline-block;
-	font-size: 45px;
-	font-weight: bold;
-	text-align: center;
-	line-height: 28px;
-	color: #fff;
+	/*content: '\25CF';*/
+	content: '';
+	display: block;
+	font-size: 0px;
+	background: #fff;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 100%;
 }
 
 #wrap-colors input[type="radio"]:checked::after
@@ -860,4 +862,98 @@ FORMS ACCOUNT STYLES
 	font-size: 15px;
 	text-align: center;
 	min-width: 100px;
+}
+
+
+
+#wrap-size
+{
+	width: 100%;
+	padding: 10px 0px;
+	overflow: hidden;
+}
+
+#wrap-size input[type="radio"]
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	height: 40px;
+	width: 40px;
+	margin: 10px auto;
+	transition: all 0.15s ease-out 0s;
+	border: 1px solid #ccc;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	outline: none;
+	position: relative;
+	z-index: 1000;
+}
+
+#wrap-size input[type="radio"]:hover
+{
+	opacity: .8;
+}
+
+#wrap-size input[type="radio"]:checked::before
+{
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	/*content: '\25CF';*/
+	content: '';
+	display: block;
+	font-size: 0px;
+	background: #ccc;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 0%;
+}
+
+#wrap-size input[type="radio"]:checked::after
+{
+	background: #40e0d0;
+	content: '';
+	display: block;
+	position: relative;
+	z-index: 100;
+}
+
+#wrap-size input[type="radio"].radio
+{
+	border-radius: 5%;
+}
+
+#wrap-size input[type="radio"].radio::after
+{
+	border-radius: 5%;
+}
+
+#wrap-size label
+{
+	display: block;
+	line-height: 20px;
+	width: max-content;
+	float: left;
+	padding: 10px;
+	font-size: 15px;
+	text-align: center;
+	position: relative;
+}
+
+#wrap-size label .sizespan
+{
+	position: absolute;
+	font-size: 14px;
+	font-weight: normal;
+	width: 40px;
+	color: #444;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999;
 }

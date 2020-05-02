@@ -4,6 +4,7 @@ from django.views.generic import (
 	ListView,
 )
 from .models import Company, Category, SubCategory, Products
+from applications.services.models import Services
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import get_template
@@ -130,8 +131,9 @@ def search(request):
 def plan(request):
 	companysCount = Company.objects.all().count()
 	productsCount = Products.objects.all().count()
+	servicesCount = Services.objects.all().count()
 	usersCount = User.objects.all().count()
-	return render(request, 'plan.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount, 'UsersCount': usersCount})
+	return render(request, 'plan.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount, 'UsersCount': usersCount, 'ServicesCount': servicesCount})
 
 
 def lessProduct(request):

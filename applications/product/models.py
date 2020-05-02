@@ -69,6 +69,12 @@ class Color(models.Model):
 	def __str__(self):
 		return self.name
 
+class Size(models.Model):
+	name = models.CharField('Talla', max_length=100)
+
+	def __str__(self):
+		return self.name
+
 class Products(models.Model):
 	title = models.CharField('Titulo', max_length=300, blank=False)
 	company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -86,6 +92,7 @@ class Products(models.Model):
 	season = models.BooleanField('Temporada', default=False)
 	virus = models.BooleanField('Virus', default=False)
 	colors = models.ManyToManyField(Color, blank=True)
+	sizes = models.ManyToManyField(Size, blank=True)
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	pub_date = models.DateTimeField(editable=False, auto_now=True)
