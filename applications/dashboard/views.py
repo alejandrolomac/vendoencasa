@@ -23,6 +23,7 @@ def dashproduct(request):
         formprod = form.save(commit=False)
         formprod.imagef = request.FILES['imagef']
         formprod.save()
+        form.save_m2m()
         return redirect("dashboard_app:dashprod")
     return render(request,'dash-prod.html', {'form':form})
 
