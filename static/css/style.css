@@ -688,11 +688,12 @@ SLIDERS STYLES
 	padding: 6px;
 }
 
-img {
+.slider img {
 	width: 100%;
 	height: auto;
 }
-img:hover {
+
+.slider img:hover {
 	opacity: 0.9;
 }
 

@@ -5,8 +5,48 @@
 	<div class="container-fluid plans-container">
 		<div class="container">
 
-			<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Nuestros Planes</h3>
+			<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; font-size: 40px;">Nuestros Planes</h3>
 			<p style="width:100%; text-align: right; color: #666; margin-top: 14px;">Elige el plan que mejor se adapte a tu necesidad</p>
+
+			<div class="row">
+				<div class="text-center w-100" style="margin: 50px auto;">
+					<img src="{% static 'img/page/logo.png' %}" class="text-center">
+				</div>
+				<p class="col-12 text-center" style="font-size: 19px; padding-bottom: 10px;">Somos una plataforma de ventas online con entregas a domicilio a nivel de Honduras.</p>
+				<p class="col-12 text-center" style="font-size: 19px; padding-bottom: 10px;">Creamos un sistema más simple de utilizar que el resto del mercado, sabemos que todos temen comprar en línea, así que decidimos crear un nuevo sistema para facilitar el proceso de adaptación.</p>
+				<p class="col-12 text-center" style="font-size: 19px; padding-bottom: 10px;">Con nosotros tus clientes pueden realizar su compra en la plataforma y finalizarla a través de Whatsapp con nuestro delivery, esto hace que la compra sea algo personal, haciendo el sistema más amigable con los usuarios sin experiencia en ventas o compras online.</p>
+				<p class="col-12 text-center" style="font-size: 19px; padding-bottom: 10px;">Lo mejor de todo es que ¡Pagas hasta que llega tu Pedido¡ no corres ningún riesgo, el sistema más seguro y fácil de utilizar.</p>
+				<p class="col-12 text-center" style="font-size: 19px; padding-bottom: 10px;">Puedes subir hasta ¡30 Productos! Completamente gratis y así evaluar si te conviene seguir trabajando con nosotros, tan solo tiene que contactarnos y nosotros hacemos el resto por vos, así de fácil tendrás un vendedor 24/7.</p>
+				<h4 class="col-12 text-center" style="font-size: 30px; padding: 50px 0px; color: #ef4036;">No necesitas una página web, lo que necesitas es <b>VENDO EN CASA</b></h4>
+			</div>
+
+			<div class="text-center">
+				<h2 class="my-5 h2">contamos con</h2>
+			</div>
+			<div class="row" style="margin-bottom: 25px;">
+				<div class="col-lg-4 col-md-12 mb-4">
+					<div class="text-center">
+						<h2 class="h1 mb-0">{{CompanysCount}}</h2>
+						<p>Empresas</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4">
+					<div class="text-center">
+						<h2 class="h1 mb-0">{{ProductsCount}}</h2>
+						<p>Productos</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 mb-4">
+					<div class="text-center">
+						<h2 class="h1 mb-0">{{ServicesCount}}</h2>
+						<p>Servicios</p>
+					</div>
+				</div>
+			</div><!-- End of Stats -->
+			<div class="text-center">
+				<h2 class="my-5 h2" style="font-size: 40px; padding: 50px 0px; color: #ef4036;">¿Y tú qué esperas para comenzar a vender? </h2>
+			</div>
+
 			<div class="pricing row row-cols-1 row-cols-sm-2 row-cols-md-3">
 				<div class="col mb-4">
 					<div class="card mb-5 mb-lg-0">
@@ -92,30 +132,6 @@
 					</div>
 				</div><!-- Franquiciador -->
 			</div><!-- End Of Planes -->
-
-			<div class="text-center">
-				<h2 class="my-5 h2">Estadísticas de Vende en Casa</h2>
-			</div>
-			<div class="row" style="margin-bottom: 25px;">
-				<div class="col-lg-4 col-md-12 mb-4">
-					<div class="text-center">
-						<h2 class="h1 mb-0">{{CompanysCount}}</h2>
-						<p>Empresas</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="text-center">
-						<h2 class="h1 mb-0">{{ProductsCount}}</h2>
-						<p>Productos</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<div class="text-center">
-						<h2 class="h1 mb-0">{{ServicesCount}}</h2>
-						<p>Servicios</p>
-					</div>
-				</div>
-			</div><!-- End of Stats -->
 
 		</div>
 	</div>
