@@ -1,0 +1,29 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+{% load static %}
+
+<h1>Productos</h1>
+<div class="card">
+	<h4 class="card-header"></h4>
+	<div class="card-body">
+		<form class="login" method="POST" action="">
+			{% csrf_token %}
+			{% for field in form %}
+				<div class="form-group">
+				{{ field.label }}
+				{{ field }}
+				</div>
+			{% endfor %}
+			<div class="row">
+				<div class="col-md-12">
+				<div class="form-group text-center" style="margin-top: 20px;">
+					<button class="primaryAction btn" name="Create User" type="submit">Crear Producto</button>
+				</div>
+				</div>  
+			</div>
+		</form>
+	</div>
+</div>
+
+{% endblock content %}

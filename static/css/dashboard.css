@@ -1,0 +1,99 @@
+#body-row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#sidebar-container {
+	min-height: 100vh;
+	background-color: #ef4036;
+	padding: 0;
+	/* flex: unset; */
+}
+
+.sidebar-expanded {
+	width: 230px;
+}
+
+.sidebar-collapsed {
+	/*width: 60px;*/
+	width: 100px;
+}
+
+#sidebar-container .list-group a {
+	height: 50px;
+	color: white;
+	border-radius: 0px !important;
+}
+
+#sidebar-container .list-group li.list-group-item {
+	background-color: #ef4036;
+	border-radius: 0px !important;
+}
+
+#sidebar-container .list-group .sidebar-submenu a {
+	height: 45px;
+	padding-left: 30px;
+	border-radius: 0px !important;
+}
+
+.sidebar-submenu {
+	font-size: 0.9rem;
+	border-radius: 0px !important;
+}
+
+.sidebar-separator-title {
+	background-color: #ef4036;
+	height: 35px;
+	border-radius: 0px !important;
+}
+
+.sidebar-separator {
+	background-color: #ef4036;
+	height: 25px;
+	border-radius: 0px !important;
+}
+
+.logo-separator {
+	background-color: #ef4036;
+	height: 60px;
+	border-radius: 0px !important;
+}
+
+.list-group a.bg-dark {
+	background-color: #ef4036 !important;
+	border-radius: 0px !important;
+}
+
+.list-group a.bg-dark:hover
+{
+	background-color: #A31C15 !important;
+	border-radius: 0px !important;
+}
+
+li span {
+	color: #fff;
+	border-radius: 0px !important;
+}
+
+#dashstats
+{
+	margin: 50px auto;
+	border: 1px solid #ccc;
+	border-radius: 10px !important;
+}
+
+#dashstats h2
+{
+	margin-top: 8px;
+}
+
+#dashgraphics ul
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+#dashgraphics li
+{
+	list-style: none !important;
+}

@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'applications.cart',
     'applications.useradmin',
     'applications.services',
+    'applications.dashboard',
     'storages',
     'mathfilters',
 ]

@@ -14,6 +14,7 @@ urlpatterns = [
     re_path('', include('applications.cart.urls')),
     re_path('', include('applications.useradmin.urls')),
     re_path('', include('applications.services.urls')),
+    re_path('', include('applications.dashboard.urls')),
     re_path('accounts/', include('allauth.urls')),
     re_path('login/', auth_views.LoginView.as_view(), name='login'),
     re_path('logout/', auth_views.LogoutView.as_view(next_page='logout')), 

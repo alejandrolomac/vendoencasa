@@ -80,7 +80,7 @@ class Products(models.Model):
 	company = models.ForeignKey(Company, on_delete=models.CASCADE)
 	subCategory = models.ForeignKey(SubCategory, models.SET_NULL, null=True)
 	resume = models.TextField('Descripcion', blank=True)
-	imagef = models.ImageField('Imagen 1', upload_to='Product', blank=True)
+	imagef = models.ImageField('Imagen 1', upload_to='Product', null=False)
 	images = models.ImageField('Imagen 2', upload_to='Product', blank=True)
 	imaget = models.ImageField('Imagen 3', upload_to='Product', blank=True)
 	price = models.FloatField('Precio', blank=False)
