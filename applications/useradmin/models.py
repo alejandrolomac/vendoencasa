@@ -6,7 +6,7 @@ from django.dispatch import receiver
 GENDER_CHOICES = (
     ('Feminimo','Femenino'),
     ('Masculino', 'Masculino'),
-    ('otro','otro'),
+    ('Otro','Otro'),
 )
 
 class Profile(models.Model):
