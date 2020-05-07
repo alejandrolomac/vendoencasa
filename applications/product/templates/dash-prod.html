@@ -8,7 +8,7 @@
 	<h4 class="card-header"></h4>
 	<div class="card-body">
 	
-		<form class="login" method="POST" action="" enctype="multipart/form-data" novalidate>
+		<form class="login" method="POST" action="{% url "dashboard_app:dashprod" %}" enctype="multipart/form-data">
 			{% csrf_token %}
 			<!--{% for field in form %}
 				<div class="form-group">
@@ -17,17 +17,15 @@
 				</div>
 			{% endfor %}-->
 
-			
-			{{ form.non_field_errors }}
-			{{form.title}}
-			{{form.price}}
-			{{form.imagef}}
+			{{ form.title }}
+			{{ form.price }}
+			{{ form.imagef }}
 			
 			<div class="row">
 				<div class="col-md-12">
-				<div class="form-group text-center" style="margin-top: 20px;">
-					<button class="primaryAction btn" name="Create User" type="submit">Crear Producto</button>
-				</div>
+					<div class="form-group text-center" style="margin-top: 20px;">
+						<button class="primaryAction btn" name="Create User" type="submit">Crear Producto</button>
+					</div>
 				</div>  
 			</div>
 		</form>
