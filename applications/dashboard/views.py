@@ -21,6 +21,10 @@ def dashproduct(request):
     form = ProductForm(request.POST, request.FILES)
     if form.is_valid():
         formprod = form.save(commit=False)
+        formprod.title = request.POST.get('title')
+        print("TITULO: " + request.POST.get('title'))
+        print("Precio: " + request.POST.get('price'))
+        formprod.price = request.POST.get('price')
         formprod.imagef = request.FILES['imagef']
         formprod.save()
         form.save_m2m()

@@ -7,14 +7,22 @@
 <div class="card">
 	<h4 class="card-header"></h4>
 	<div class="card-body">
-		<form class="login" method="POST" action="" enctype="multipart/form-data">
+	
+		<form class="login" method="POST" action="" enctype="multipart/form-data" novalidate>
 			{% csrf_token %}
-			{% for field in form %}
+			<!--{% for field in form %}
 				<div class="form-group">
 				{{ field.label }}
 				{{ field }}
 				</div>
-			{% endfor %}
+			{% endfor %}-->
+
+			
+			{{ form.non_field_errors }}
+			{{form.title}}
+			{{form.price}}
+			{{form.imagef}}
+			
 			<div class="row">
 				<div class="col-md-12">
 				<div class="form-group text-center" style="margin-top: 20px;">

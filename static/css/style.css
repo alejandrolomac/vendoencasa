@@ -92,6 +92,12 @@ a:hover
 	transition: all .2s linear;
 }
 
+
+input::selection, input:focus, input:active, textarea:focus, *:focus, *:active, *:active, *::selection
+{
+	outline: none !important;
+}
+
 /*------------------------------------------------------
 HEADER STYLES
 ------------------------------------------------------*/
@@ -488,8 +494,8 @@ SEARCH STYLES
 
 .search-container, .product-container, .list-cats, .plans-container
 {
-	margin-top: 50px !important;
-	padding-top: 100px !important;
+	margin-top: 100px !important;
+	padding-top: 50px !important;
 	padding-bottom: 100px !important;
 	height: auto !important;
 	overflow: hidden !important;
@@ -498,7 +504,7 @@ SEARCH STYLES
 
 .list-cats
 {
-	margin-top: 50px !important;
+	margin-top: 100px !important;
 	padding-top: 0px !important;
 	padding-bottom: 50px !important;
 	height: auto !important;
@@ -550,11 +556,6 @@ SEARCH STYLES
 /*------------------------------------------------------
 CATEGORYS STYLES
 ------------------------------------------------------*/
-
-.list-cats
-{
-	margin-top: 25px !important;
-}
 
 .list-cats h3
 {
@@ -957,4 +958,12 @@ FORMS ACCOUNT STYLES
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 9999;
+}
+
+
+.login input[type="text"], .login input[type="password"], .login input[type="email"], .login select
+{
+	width: 100% !important;
+	padding: 10px !important;
+	border: 1px solid #dedede !important;
 }

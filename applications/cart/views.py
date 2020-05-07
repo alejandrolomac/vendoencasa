@@ -188,7 +188,12 @@ class OrderSummaryView(LoginRequiredMixin, View):
                 usuario_name = self.request.user.first_name + " " + self.request.user.last_name
             else:
                 usuario_name = self.request.user.username
-            final_message = purchase_message + 'VendoenCasa%0D%0A' + '--- Nuevo pedido de ' + usuario_name + '---%0D%0A%0D%0A'+ title_product + '%0D%0A' + "----- Pago total: " + str(price_total) + "L.";
+
+            if (self.request.user.profile.location):
+                location = '%0D%0ADirección: ' + self.request.user.profile.location
+            else:
+                location = ''
+            final_message = purchase_message + 'VendoenCasa%0D%0A' + '--- Nuevo pedido de ' + usuario_name + '---%0D%0A%0D%0A'+ title_product + '%0D%0A' + "----- Pago total: " + str(price_total) + "L." + location;
             #mensaje de compra
             context = {
                 'object': order,
