@@ -3,33 +3,38 @@
 {% block content %}
 {% load static %}
 
-<h1>Productos</h1>
-<div class="card">
-	<h4 class="card-header"></h4>
-	<div class="card-body">
-	
-		<form class="login" method="POST" action="{% url "dashboard_app:dashprod" %}" enctype="multipart/form-data">
-			{% csrf_token %}
-			<!--{% for field in form %}
-				<div class="form-group">
-				{{ field.label }}
-				{{ field }}
-				</div>
-			{% endfor %}-->
+<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%; margin-top: 20px; font-size: 40px;">Productos</h3>
 
-			{{ form.title }}
-			{{ form.price }}
-			{{ form.imagef }}
-			
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group text-center" style="margin-top: 20px;">
-						<button class="primaryAction btn" name="Create User" type="submit">Crear Producto</button>
-					</div>
-				</div>  
+<div class="row">
+	<div class="col-12 mt-3">
+		<div class="row mb-3">
+			<div class="col-6 text-left">
+				<small>Tienes {{countprod}} productos</small>
 			</div>
-		</form>
+			<div class="col-6 text-right">
+				<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
+			</div>
+		</div>
+		<table class="table table-hover">
+			<thead class="thead-dark">
+				<tr>
+				<th scope="col">Nombre Producto</th>
+				<th scope="col">Categoría</th>
+				<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for prod in productlist %}
+					<tr>
+						<td><a href="{% url "dashboard_app:editproduct" prod.id %}">{{prod.title}}</a></td>
+						<td>{{prod.subCategory}}</td>
+						<td class="text-right"><a href="{% url 'dashboard_app:deleteproduct' prod.id %}" class=""><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
 </div>
+
 
 {% endblock content %}

@@ -13,3 +13,14 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('gender', 'location', 'phone')
+
+
+class CreateCompanyForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+
+class CompanyForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('gender', 'location', 'phone')

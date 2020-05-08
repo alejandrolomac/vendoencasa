@@ -61,3 +61,35 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect("useradmin_app:entrar")
+
+
+@transaction.atomic
+def registerCompany(request):
+    if request.user.is_authenticated:
+        return redirect('product_app:index')
+    else:
+        if request.method == 'POST':
+            form = CreateUserForm(data=request.POST)
+            profile_form = ProfileForm(data=request.POST)
+            if form.is_valid() and profile_form.is_valid():
+                user = form.save()
+                user.profile.gender = profile_form.cleaned_data['gender']
+                user.profile.location = profile_form.cleaned_data['location']
+                user.profile.phone = profile_form.cleaned_data['phone']
+                user.profile.save()
+                user.save()
+
+                messages.success(request, "¡Gracias por unirtenos!")
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password1')
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect("product_app:index")
+        else:
+            form = CreateUserForm()
+            profile_form = ProfileForm()
+
+        return render(request, 'registration/register.html', {
+            'form':form,
+            'profile_form':profile_form
+        })

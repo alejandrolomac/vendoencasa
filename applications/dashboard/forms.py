@@ -1,17 +1,22 @@
 from django.forms import ModelForm
 from django import forms
-from applications.product.models import Products
+from applications.product.models import Products, Color, Size
+from django.forms.widgets import CheckboxSelectMultiple
 
 class ProductForm(forms.ModelForm):
-    title = forms.CharField(max_length=100)
-    price = forms.CharField(max_length=30)
-    imagef = forms.ImageField(max_length=30)
+    title = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Nombre del producto'}))
+    price = forms.FloatField(widget=forms.TextInput(attrs={'placeholder':'Precio'}))
+    pricePromo = forms.FloatField(widget=forms.TextInput(attrs={'placeholder':'Precio Promoción', 'class':'mt-2'}))
+    resume = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Descripción del producto', 'class':'mt-3'}))
+    
     class Meta:
         model = Products
-        fields = ('title', 'company', 'subCategory', 'resume', 'imagef', 'images', 'imaget', 'price', 'priceAnchor', 'pricePromo', 'promotion', 'exhausted', 'colors', 'sizes')
+        fields = ('title', 'company', 'subCategory', 'imagef', 'images', 'imaget', 'price', 'pricePromo', 'promotion', 'colors', 'resume', 'sizes', 'available')
     
-    def clean(self):
-        cleaned_data = super(ProductForm, self).clean()
-        title = cleaned_data.get('title')
-        price = cleaned_data.get('price')
-        imagef = cleaned_data.get('imagef')
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+        self.fields['pricePromo'].required=False
+        self.fields["colors"].widget = CheckboxSelectMultiple()
+        self.fields["colors"].queryset = Color.objects.all()
+        self.fields["sizes"].widget = CheckboxSelectMultiple()
+        self.fields["sizes"].queryset = Size.objects.all()

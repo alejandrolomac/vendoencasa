@@ -1,3 +1,13 @@
+body
+{
+	background: #f7f7f7 !important;
+}
+
+input::selection, input:focus, input:active, textarea:focus, *:focus, *:active, *:active, *::selection
+{
+	outline: none !important;
+}
+
 #body-row {
 	margin-left: 0;
 	margin-right: 0;
@@ -96,4 +106,59 @@ li span {
 #dashgraphics li
 {
 	list-style: none !important;
+}
+
+/*------------------------------------------------------
+PRODUCT STYLES
+------------------------------------------------------*/
+
+.newprod
+{
+	margin-top: 50px;
+}
+
+.newprod input[type="text"], .newprod input[type="password"], .newprod input[type="email"], .newprod select, .newprod textarea
+{
+	width: 100% !important;
+	padding: 10px !important;
+	border: 1px solid #dedede !important;
+}
+
+.card-header
+{
+	background: #fff !important;
+	font-size: 19px !important;
+	font-weight: lighter !important;
+}
+
+.btn
+{
+	background: #ef4036 !important;
+	color: #fff !important;
+}
+
+.btn:hover
+{
+	background: #A31C15 !important;
+	color: #fff !important;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+.newprod .card .card-body ul
+{
+	width: 100%;
+	padding: 0px;
+}
+
+.newprod .card .card-body ul li
+{
+	list-style: none;
+	width: max-content;
+	float: left;
+	display: inline-block;
+	padding-right: 20px;
 }
