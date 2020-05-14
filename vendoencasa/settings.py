@@ -10,7 +10,7 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 THUMBNAIL_DEBUG = False
 
-ALLOWED_HOSTS = ['*', 'vendoencasa.net', 'http://www.vendoencasa.net', 'https://vendoencasa.net', 'http://vendoencasa.herokuapp.com/']
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
