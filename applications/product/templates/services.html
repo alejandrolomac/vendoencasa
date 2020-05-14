@@ -17,7 +17,7 @@
 								{% endif %}
 							</a>
 							<div class="card-body" style="padding: 15px 0px;">
-								<h5 class="card-title">{{ s.name }}</h5>
+								<h5 class="card-title">{{ s.name|truncatechars:19 }}</h5>
 							</div>
 						</div><!-- End Of Product -->
 					{% endfor %}

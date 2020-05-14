@@ -163,3 +163,20 @@ def handler403(request, exception):
 def handler404(request, exception):
 	data = {}
 	return render(request,'404.html', data)
+
+
+class ListUserCompanyProducts(ListView):
+	template_name = 'company.html'
+	paginate_by = 20
+
+	def get_queryset(self):
+		id = self.kwargs['pk']
+		object_list = Products.objects.all().filter(user__id=id, available=True)
+		return object_list
+	
+	def get_context_data(self, **kwargs):
+		id = self.kwargs['pk']
+		context = super(ListUserCompanyProducts, self).get_context_data(**kwargs)
+		user_company_select = User.objects.get(id=id)
+		context['companySelect'] = user_company_select
+		return context

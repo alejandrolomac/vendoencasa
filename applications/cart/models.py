@@ -67,5 +67,8 @@ class Order(models.Model):
     def stringNames(self):
         text = ''
         for name in self.items.all():
-            text += '- ' + name.item.title + ': ' + name.get_color() + name.get_size() + str(name.get_quantity()) + ' > ' + name.item.company.name + '%0D%0A'
+            if( not name.item.company ):
+                text += '- ' + str(name.item.title) + ': ' + str(name.get_color()) + str(name.get_size()) + str(name.get_quantity()) + ' > ' + str(name.item.user.profile.name) + '%0D%0A'
+            else:
+                text += '- ' + str(name.item.title) + ': ' + str(name.get_color()) + str(name.get_size()) + str(name.get_quantity()) + ' > ' + str(name.item.company.name) + '%0D%0A'
         return text

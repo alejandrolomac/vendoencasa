@@ -24,7 +24,7 @@
 							</a>
 							<div class="card-body" style="padding: 15px 0px;">
 								<h2 class="card-title"><b>{{ s.price|floatformat:2 }}</b><span>L.</span></h2>
-								<h5 class="card-title">{{ s.title }}</h5>
+								<h5 class="card-title">{{ s.title|truncatechars:19 }}</h5>
 								<a href="{% url 'product_app:single-product' s.slug %}" class="btn">Comprar</a>
 							</div>
 						</div><!-- End Of Product -->

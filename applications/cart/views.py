@@ -193,7 +193,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
                 location = '%0D%0ADirección: ' + self.request.user.profile.location
             else:
                 location = ''
-            final_message = purchase_message + 'VendoenCasa%0D%0A' + '--- Nuevo pedido de ' + usuario_name + '---%0D%0A%0D%0A'+ title_product + '%0D%0A' + "----- Pago total: " + str(price_total) + "L." + location;
+            final_message = str(purchase_message) + '--- Nuevo pedido de ' + str(usuario_name) + '---%0D%0A%0D%0A'+ str(title_product) + '%0D%0A' + "----- Pago total: " + str(price_total) + "L." + str(location);
             #mensaje de compra
             context = {
                 'object': order,

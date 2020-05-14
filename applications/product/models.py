@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Company(models.Model):
 	name = models.CharField('Nombre', max_length=150, blank=False)
@@ -77,7 +78,8 @@ class Size(models.Model):
 
 class Products(models.Model):
 	title = models.CharField('Titulo', max_length=300, blank=False)
-	company = models.ForeignKey(Company, on_delete=models.CASCADE)
+	company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
+	user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
 	subCategory = models.ForeignKey(SubCategory, models.SET_NULL, null=True)
 	resume = models.TextField('Descripcion', blank=True)
 	imagef = models.ImageField('Imagen Principal', upload_to='Product', null=False)
@@ -123,5 +125,5 @@ class Products(models.Model):
 		else:
 			savedt = self.price - self.pricePromo 
 		
-		offer_total = (savedt * 100) / self.priceAnchor
+		offer_total = (savedt * 100) / self.price
 		return offer_total

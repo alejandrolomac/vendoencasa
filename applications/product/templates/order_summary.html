@@ -34,7 +34,7 @@
 									<!--<a href="{% url 'cart_app:add-to-cart' oreder_item.item.slug %}"><i class="fa fa-plus ml-2"></i></a>-->
 								</td>
 								<td>
-									<a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title }}</a>
+									<a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title|truncatechars:19 }}</a>
 									{% if oreder_item.color %}
 										<span class="badge badge-primary">{{ oreder_item.color }}</span>
 									{% endif %}

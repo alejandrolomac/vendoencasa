@@ -2,6 +2,9 @@ from django.forms import ModelForm
 from django import forms
 from applications.product.models import Products, Color, Size
 from django.forms.widgets import CheckboxSelectMultiple
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from applications.useradmin.models import Profile
 
 class ProductForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Nombre del producto'}))
@@ -11,7 +14,7 @@ class ProductForm(forms.ModelForm):
     
     class Meta:
         model = Products
-        fields = ('title', 'company', 'subCategory', 'imagef', 'images', 'imaget', 'price', 'pricePromo', 'promotion', 'colors', 'resume', 'sizes', 'available')
+        fields = ('title', 'subCategory', 'imagef', 'images', 'imaget', 'price', 'pricePromo', 'promotion', 'colors', 'resume', 'sizes', 'available')
     
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -20,3 +23,15 @@ class ProductForm(forms.ModelForm):
         self.fields["colors"].queryset = Color.objects.all()
         self.fields["sizes"].widget = CheckboxSelectMultiple()
         self.fields["sizes"].queryset = Size.objects.all()
+
+
+
+class CreateCompanyForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
+
+class CompanyForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('name', 'resume', 'location', 'phone', 'logo', 'facebook', 'instagram', 'website')

@@ -106,7 +106,7 @@
 											</a>
 											<div class="card-body" style="padding: 15px 0px 0px 0px;">
 												<h2 class="card-title" style="font-size: 18px;">{{ nprod.price|floatformat:2 }}<span>L.</span></h2>
-												<h5 class="card-title" style="color: #343a40;font-size: 14px;">{{ nprod.title }}</h5>
+												<h5 class="card-title" style="color: #343a40;font-size: 14px;">{{ nprod.title|truncatechars:19 }}</h5>
 											</div>
 										</div><!-- End Of item -->
 									{% endif %}
@@ -137,7 +137,7 @@
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
 									<h2 class="card-title" style="font-size: 22px;">{{ nprod.price|floatformat:2 }}<span>L.</span></h2>
-									<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
+									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
 								</div>
 				  			</div><!-- End Of item -->
 						{% endfor %}
@@ -163,7 +163,7 @@
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
 									<h2 class="card-title" style="font-size: 22px;">{{ nprod.price|floatformat:2 }}<span>L.</span></h2>
-									<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
+									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
 								</div>
 				  			</div><!-- End Of item -->
 						{% endfor %}
@@ -204,7 +204,7 @@
 											{{ nprod.price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
 										{% endif %}
 									</h2>
-									<h5 class="card-title" style="color: #343a40;">{{ nprod.title }}</h5>
+									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
 								</div>
 				  			</div><!-- End Of item -->
 						{% endfor %}
@@ -227,7 +227,7 @@
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
 									<h2 class="card-title" style="font-size: 22px;">{{ lprod.price|floatformat:2 }}<span>L.</span></h2>
-									<h5 class="card-title" style="color: #343a40;">{{ lprod.title }}</h5>
+									<h5 class="card-title" style="color: #343a40;">{{ lprod.title|truncatechars:19 }}</h5>
 								</div>
 							</div><!-- End Of item -->
 						{% endfor %}

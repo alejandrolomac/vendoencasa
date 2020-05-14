@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 
-<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%; margin-top: 20px; font-size: 40px;">Agregar Producto</h3>
+<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%; margin-top: 20px; font-size: 40px;">Editar Producto</h3>
 
 <form class="row newprod mb-5" method="POST" action="" enctype="multipart/form-data">
 	{% csrf_token %}
@@ -51,7 +51,7 @@
 		<div class="card">
 			<h4 class="card-header">Publicar</h4>
 			<div class="card-body">
-				<small><b>Fecha de Publicacion</b>: 20/05/2019</small>
+				<small><b>Fecha de Publicacion</b>: {{ fechapub.pub_date|date:"d F, Y" }}</small>
 				<div class="row" style="padding: 10px 0px; margin-top: 10px;">
 					<div class="col-12 text-center">
 						<button class="primaryAction btn" name="actualizar producto" type="submit">Actualizar Producto</button>

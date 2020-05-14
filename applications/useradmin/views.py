@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import CreateUserForm, ProfileForm
+from .forms import CreateUserForm, ProfileForm, CompanyForm, CreateCompanyForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.contrib.auth.models import Permission
 
 @transaction.atomic
 def registerPage(request):
@@ -69,13 +70,17 @@ def registerCompany(request):
         return redirect('product_app:index')
     else:
         if request.method == 'POST':
-            form = CreateUserForm(data=request.POST)
-            profile_form = ProfileForm(data=request.POST)
-            if form.is_valid() and profile_form.is_valid():
+            form = CreateCompanyForm(request.POST)
+            company_form = CompanyForm(request.POST, request.FILES)
+            if form.is_valid() and company_form.is_valid():
                 user = form.save()
-                user.profile.gender = profile_form.cleaned_data['gender']
-                user.profile.location = profile_form.cleaned_data['location']
-                user.profile.phone = profile_form.cleaned_data['phone']
+                user.profile.location = company_form.cleaned_data['location']
+                user.profile.phone = company_form.cleaned_data['phone']
+                user.profile.name = company_form.cleaned_data['name']
+                user.profile.resume = company_form.cleaned_data['resume']
+                user.profile.logo = company_form.cleaned_data['logo']
+                permission = Permission.objects.get(name='Can add products')
+                user.user_permissions.add(permission)
                 user.profile.save()
                 user.save()
 
@@ -86,10 +91,10 @@ def registerCompany(request):
                 login(request, user)
                 return redirect("product_app:index")
         else:
-            form = CreateUserForm()
-            profile_form = ProfileForm()
+            form = CreateCompanyForm()
+            company_form = CompanyForm()
 
-        return render(request, 'registration/register.html', {
+        return render(request, 'registration/register-company.html', {
             'form':form,
-            'profile_form':profile_form
+            'company_form':company_form
         })
