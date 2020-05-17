@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '&mcng4k3l9@5y4&(8(4j*1$o022z%3(^v2hfe#y=!71@k@#ja$'
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = False
 THUMBNAIL_DEBUG = False
 
@@ -128,16 +128,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-
-#SMTP Configuration
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '*********'
-EMAIL_HOST_PASSWORD = '*********'
-
 #S3 BUCKETS CONFIG
 
 AWS_ACCESS_KEY_ID = 'AKIAVGNJBAVWJ7HSPCCW'
@@ -171,21 +161,9 @@ AUTHENTICATION_BACKENDS = (
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-#LOGIN_URL = '/accounts/login/'
-#LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '1101009556925363'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '1c9ae744a8357026cdbac1c16544d8e4'  # App Secret
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'fields': 'id, name, email, picture.type(large), link'
-}
-SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
-    ('name', 'name'),
-    ('email', 'email'),
-    ('picture', 'picture'),
-    ('link', 'profile_url'),
-]
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'

@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
-from django.conf.urls import handler400, handler403, handler404 
+from django.conf.urls import handler400, handler403, handler404, handler500
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 
+handler500 = 'applications.product.views.handler500'
 handler404 = 'applications.product.views.handler404'
 handler403 = 'applications.product.views.handler403'
 handler400 = 'applications.product.views.handler400'

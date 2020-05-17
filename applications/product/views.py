@@ -164,6 +164,11 @@ def handler404(request, exception):
 	data = {}
 	return render(request,'404.html', data)
 
+def handler500(request):
+	data = {}
+	print(str(request))
+	return render(request,'500.html', data)
+
 
 class ListUserCompanyProducts(ListView):
 	template_name = 'company.html'
