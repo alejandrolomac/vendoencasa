@@ -93,7 +93,7 @@ a:hover
 }
 
 
-input::selection, input:focus, input:active, textarea:focus, *:focus, *:active, *:active, *::selection
+input::selection, input:focus, input:active, textarea:focus
 {
 	outline: none !important;
 }
