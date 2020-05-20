@@ -43,7 +43,7 @@ class ProductsAdmin(admin.ModelAdmin):
 	)
 
 	search_fields = ( 'title', )
-	list_filter = ( 'subCategory', )
+	list_filter = ( 'subCategory', 'season', 'virus', )
 
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Category, CategoryAdmin)
