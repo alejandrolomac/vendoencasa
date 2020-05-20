@@ -166,7 +166,6 @@ def handler404(request, exception):
 
 def handler500(request):
 	data = {}
-	print(str(request))
 	return render(request,'500.html', data)
 
 
