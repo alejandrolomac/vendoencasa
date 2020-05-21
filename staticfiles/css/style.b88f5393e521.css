@@ -54,7 +54,7 @@ a:hover
 	-ms-transition: all .2s linear;
 	-o-transition: all .2s linear;
 	transition: all .2s linear;
-	border: 1px solid #ccc;
+	border: 1px solid #ccc !important;
 	border-radius: 5px;
 	overflow: hidden;
 }
@@ -67,6 +67,35 @@ a:hover
 	-ms-transition: all .2s linear;
 	-o-transition: all .2s linear;
 	transition: all .2s linear;
+}
+
+.thumbnail-cat
+{
+	opacity: 1;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
+	border: none !important;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.thumbnail-cat:hover
+{
+	opacity: .8;
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+
+input::selection, input:focus, input:active, textarea:focus
+{
+	outline: none !important;
 }
 
 /*------------------------------------------------------
@@ -172,7 +201,7 @@ header .navbar-car
 	font-size: 1.6em;
 	color: #ef4036;
 	padding: 0px;
-	margin-right: 20px;
+	margin-right: 10px;
 }
 
 header .navbar-car:hover
@@ -370,6 +399,13 @@ HOME STYLES
 	border-radius: 25px 25px 0px 0px;
 }
 
+.wrap-title-season
+{
+	background: #ff94c4;
+	padding: 15px 15px;
+	border-radius: 25px 25px 0px 0px;
+}
+
 /*------------------------------------------------------
 PRODUCTS STYLES
 ------------------------------------------------------*/
@@ -458,8 +494,8 @@ SEARCH STYLES
 
 .search-container, .product-container, .list-cats, .plans-container
 {
-	margin-top: 50px !important;
-	padding-top: 100px !important;
+	margin-top: 100px !important;
+	padding-top: 50px !important;
 	padding-bottom: 100px !important;
 	height: auto !important;
 	overflow: hidden !important;
@@ -468,7 +504,7 @@ SEARCH STYLES
 
 .list-cats
 {
-	margin-top: 50px !important;
+	margin-top: 100px !important;
 	padding-top: 0px !important;
 	padding-bottom: 50px !important;
 	height: auto !important;
@@ -520,11 +556,6 @@ SEARCH STYLES
 /*------------------------------------------------------
 CATEGORYS STYLES
 ------------------------------------------------------*/
-
-.list-cats
-{
-	margin-top: 25px !important;
-}
 
 .list-cats h3
 {
@@ -658,11 +689,12 @@ SLIDERS STYLES
 	padding: 6px;
 }
 
-img {
+.slider img {
 	width: 100%;
 	height: auto;
 }
-img:hover {
+
+.slider img:hover {
 	opacity: 0.9;
 }
 
@@ -755,3 +787,251 @@ PLANS STYLES
 /*------------------------------------------------------
 FORMS ACCOUNT STYLES
 ------------------------------------------------------*/
+#wrap-colors
+{
+	width: 100%;
+	padding: 10px 0px;
+	overflow: hidden;
+}
+
+#wrap-colors input[type="radio"]
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	height: 40px;
+	width: 40px;
+	margin: 10px auto;
+	transition: all 0.15s ease-out 0s;
+	border: 1px solid #ccc;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	outline: none;
+	position: relative;
+	z-index: 1000;
+}
+
+#wrap-colors input[type="radio"]:hover
+{
+	opacity: .8;
+}
+
+#wrap-colors input[type="radio"]:checked::before
+{
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	/*content: '\25CF';*/
+	content: '';
+	display: block;
+	font-size: 0px;
+	background: #fff;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 100%;
+}
+
+#wrap-colors input[type="radio"]:checked::after
+{
+	background: #40e0d0;
+	content: '';
+	display: block;
+	position: relative;
+	z-index: 100;
+}
+
+#wrap-colors input[type="radio"].radio
+{
+	border-radius: 50%;
+}
+
+#wrap-colors input[type="radio"].radio::after
+{
+	border-radius: 50%;
+}
+
+#wrap-colors label
+{
+	display: block;
+	line-height: 20px;
+	width: max-content;
+	float: left;
+	padding: 10px;
+	font-size: 15px;
+	text-align: center;
+	min-width: 100px;
+}
+
+
+
+#wrap-size
+{
+	width: 100%;
+	padding: 10px 0px;
+	overflow: hidden;
+}
+
+#wrap-size input[type="radio"]
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	height: 40px;
+	width: 40px;
+	margin: 10px auto;
+	transition: all 0.15s ease-out 0s;
+	border: 1px solid #ccc;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	outline: none;
+	position: relative;
+	z-index: 1000;
+}
+
+#wrap-size input[type="radio"]:hover
+{
+	opacity: .8;
+}
+
+#wrap-size input[type="radio"]:checked::before
+{
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	/*content: '\25CF';*/
+	content: '';
+	display: block;
+	font-size: 0px;
+	background: #ccc;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 0%;
+}
+
+#wrap-size input[type="radio"]:checked::after
+{
+	background: #40e0d0;
+	content: '';
+	display: block;
+	position: relative;
+	z-index: 100;
+}
+
+#wrap-size input[type="radio"].radio
+{
+	border-radius: 5%;
+}
+
+#wrap-size input[type="radio"].radio::after
+{
+	border-radius: 5%;
+}
+
+#wrap-size label
+{
+	display: block;
+	line-height: 20px;
+	width: max-content;
+	float: left;
+	padding: 10px;
+	font-size: 15px;
+	text-align: center;
+	position: relative;
+}
+
+#wrap-size label .sizespan
+{
+	position: absolute;
+	font-size: 14px;
+	font-weight: normal;
+	width: 40px;
+	color: #444;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999;
+}
+
+
+.login input[type="text"], .login input[type="password"], .login input[type="email"], .login select, .login textarea, .login input[type="url"]
+{
+	width: 100% !important;
+	padding: 10px !important;
+	border: 1px solid #dedede !important;
+}
+
+/*------------------------------------------------------
+MAGNIFIER STYLES
+------------------------------------------------------*/
+
+.magnifier-thumb-wrapper {
+    position: relative;
+    display: block;
+    top: 0;
+    left: 0
+}
+
+.magnifier-lens {
+    position: absolute;
+    border: solid 1px #ccc;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    overflow: hidden
+}
+
+.magnifier-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: solid 1px #ccc;
+    color: #fff;
+    text-align: center;
+    background: transparent;
+    background: rgba(50, 50, 50, 0.5);
+    z-index: 1000;
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F323232,endColorstr=#7F323232)";
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F323232,endColorstr=#7F323232)
+}
+
+.magnifier-loader-text {
+    font: 13px Arial;
+    margin-top: 10px
+}
+
+.magnifier-large {
+    position: absolute;
+    z-index: 100
+}
+
+.magnifier-preview {
+    padding: 0;
+    width: 100%;
+    height: 150px;
+    position: relative;
+    overflow: hidden
+}
+
+.magnifier-preview img {
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.opaque {
+    opacity: .5;
+    filter: alpha(opacity=50);
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50)
+}
+
+.hidden {
+    display: none
+}

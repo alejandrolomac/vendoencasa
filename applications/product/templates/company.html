@@ -3,6 +3,7 @@
 {% block content %}
 
 	{% load static %}
+	{% load thumbnail %}
 	<div class="container-fluid list-cats">
 		<div class="container">
 			<h1 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 30px; padding-top: 50px;">Productos de {{companySelect.name}}</h1>
@@ -14,7 +15,9 @@
 								{% if comp.imagef.url == '' %}
 									<img src="{% static 'img/default_thumbnail.jpg' %}">
 								{% else %}
-									<img src="{{ comp.imagef.url }}">
+									{% thumbnail comp.imagef "300x300" crop="center" as im %}
+										<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+									{% endthumbnail %}
 								{% endif %}
 							</a>
 							<div class="card-body" style="padding: 15px 0px;">
