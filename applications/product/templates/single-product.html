@@ -83,9 +83,19 @@
 							    <li class="list-group-item">
 									Empresa: 
 									{% if lp.company %}
-										<a href="{% url 'product_app:company-products' lp.company.slug lp.company.id %}">{{ lp.company }}</a>
+										<a href="{% url 'product_app:company-products' lp.company.slug lp.company.id %}">
+											{% if lp.company.plan == 'Empresario' or lp.company.plan == 'Franquiciador' %}
+												<span style="width: 20px; height: 16px; display: inline-block; background: url({% static 'img/page/crown.png' %}) center center no-repeat; background-size: contain;" data-toggle="tooltip" data-placement="top" title="Empresa Premium"></span>
+											{% endif %}
+											{{ lp.company }}
+										</a>
 									{% else %}
-										<a href="{% url 'product_app:user-company-products' lp.user.profile.slug lp.user.id %}">{{ lp.user.profile.name }}</a>
+										<a href="{% url 'product_app:user-company-products' lp.user.profile.slug lp.user.id %}">
+											{% if lp.user.profile.plan == 'Empresario' or lp.user.profile.plan == 'Franquiciador' %}
+												<span style="width: 20px; height: 16px; display: inline-block; background: url({% static 'img/page/crown.png' %}) center center no-repeat; background-size: contain;" data-toggle="tooltip" data-placement="top" title="Empresa Premium"></span>
+											{% endif %}
+											{{ lp.user.profile.name }}
+										</a>
 									{% endif %}
 								</li>
 							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume }}</p></li>

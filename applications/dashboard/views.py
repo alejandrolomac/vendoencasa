@@ -25,15 +25,45 @@ def dashboard(request):
 
 @login_required(login_url='useradmin_app:entrar')
 def dashnewprod(request):
+    iduser = request.user.id
+    countprod = Products.objects.all().filter(user__id=iduser).count()
+    userprofile = get_object_or_404(Profile, pk=request.user.profile.id)
     form = ProductForm(request.POST, request.FILES)
-    if form.is_valid():
-        formprod = form.save(commit=False)
-        formprod.imagef = request.FILES['imagef']
-        formprod.user = request.user
-        formprod.available = True
-        formprod.save()
-        form.save_m2m()
-        return redirect("dashboard_app:dashprod")
+    if userprofile.plan == 'Vendedor':
+        if countprod < 3:
+            if form.is_valid():
+                formprod = form.save(commit=False)
+                formprod.imagef = request.FILES['imagef']
+                formprod.user = request.user
+                formprod.available = True
+                formprod.save()
+                form.save_m2m()
+                return redirect("dashboard_app:dashprod")
+            else:
+                print("LIMITE DE PRODUCTOS VENDEDOR")
+    elif userprofile.plan == 'Empresario':
+        if countprod < 4:
+            if form.is_valid():
+                formprod = form.save(commit=False)
+                formprod.imagef = request.FILES['imagef']
+                formprod.user = request.user
+                formprod.available = True
+                formprod.save()
+                form.save_m2m()
+                return redirect("dashboard_app:dashprod")
+        else:
+            print("LIMITE DE PRODUCTOS EMPRESARIO")
+    elif userprofile.plan == 'Franquiciador':
+        if form.is_valid():
+            formprod = form.save(commit=False)
+            formprod.imagef = request.FILES['imagef']
+            formprod.user = request.user
+            formprod.available = True
+            formprod.save()
+            form.save_m2m()
+            return redirect("dashboard_app:dashprod")
+
+        
     return render(request,'dash-new-prod.html', {'form':form})
 
 
@@ -71,7 +101,9 @@ def dashproduct(request):
     iduser = request.user.id
     productlist = Products.objects.all().filter(user__id=iduser)
     countprod = Products.objects.all().filter(user__id=iduser).count()
-    context = {'productlist': productlist, 'countprod': countprod}
+    userprofile = get_object_or_404(Profile, pk=request.user.profile.id)
+
+    context = {'productlist': productlist, 'countprod': countprod, 'userprofile': userprofile}
     return render(request,'dash-prod.html', context)
 
 

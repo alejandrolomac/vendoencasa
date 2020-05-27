@@ -13,8 +13,8 @@ def registerPage(request):
         return redirect('product_app:index')
     else:
         if request.method == 'POST':
-            form = CreateUserForm(data=request.POST)
-            profile_form = ProfileForm(data=request.POST)
+            form = CreateUserForm(request.POST)
+            profile_form = ProfileForm(request.POST)
             if form.is_valid() and profile_form.is_valid():
                 user = form.save()
                 user.profile.gender = profile_form.cleaned_data['gender']
@@ -23,7 +23,7 @@ def registerPage(request):
                 user.profile.save()
                 user.save()
 
-                messages.success(request, "¡Gracias por unirtenos!")
+                messages.success(request, "¡Gracias por unirte!")
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password1')
                 user = authenticate(username=username, password=password)
@@ -67,7 +67,7 @@ def logoutUser(request):
 @transaction.atomic
 def registerCompany(request):
     if request.user.is_authenticated:
-        return redirect('product_app:index')
+        return redirect('dashboard_app:dashboard')
     else:
         if request.method == 'POST':
             form = CreateCompanyForm(request.POST)
@@ -79,17 +79,18 @@ def registerCompany(request):
                 user.profile.name = company_form.cleaned_data['name']
                 user.profile.resume = company_form.cleaned_data['resume']
                 user.profile.logo = company_form.cleaned_data['logo']
+                user.profile.plan = 'Vendedor'
                 permission = Permission.objects.get(name='Can add products')
                 user.user_permissions.add(permission)
                 user.profile.save()
                 user.save()
 
-                messages.success(request, "¡Gracias por unirtenos!")
+                messages.success(request, "¡Gracias por unirte!")
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password1')
                 user = authenticate(username=username, password=password)
                 login(request, user)
-                return redirect("product_app:index")
+                return redirect("dashboard_app:dashboard")
         else:
             form = CreateCompanyForm()
             company_form = CompanyForm()

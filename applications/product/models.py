@@ -5,6 +5,13 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+PLAN_CHOICES = (
+    ('Vendedor','Vendedor'),
+    ('Empresario', 'Empresario'),
+    ('Franquiciador','Franquiciador'),
+)
+
+
 class Company(models.Model):
 	name = models.CharField('Nombre', max_length=150, blank=False)
 	address = models.CharField('Direccion', max_length=400, blank=True)
@@ -18,7 +25,7 @@ class Company(models.Model):
 	phone = models.CharField('Telefono', max_length=15, blank=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	resume = models.TextField('Resumen', blank=True)
-	plan = models.BooleanField('Premium', default=False)
+	plan = models.TextField('Plan', max_length=50, choices=PLAN_CHOICES, blank=True, default='Vendedor')
 	delivery = models.BooleanField('Nuestro Delivery', default=True)
 	phoneDelivery = models.CharField('Telefono de Delivery', max_length=15, blank=True)
 

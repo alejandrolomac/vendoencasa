@@ -12,7 +12,16 @@
 				<small>Tienes {{countprod}} productos</small>
 			</div>
 			<div class="col-6 text-right">
-				<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
+				{% if userprofile.plan == 'Vendedor' and countprod < 3 %}
+					<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
+				{% elif userprofile.plan == 'Empresario' and countprod < 4 %}
+					<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
+				{% elif userprofile.plan == 'Franquiciador' %}
+					<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
+				{% else %}
+					<a href="#" class="primaryAction btn disabled">Agregar Producto</a>
+					<small style="width:100%; float: right; text-align:right;">Límite de productos del plan alcanzado.</small>
+				{% endif %}
 			</div>
 		</div>
 		<table class="table table-hover">

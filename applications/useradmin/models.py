@@ -14,6 +14,7 @@ GENDER_CHOICES = (
 )
 
 PLAN_CHOICES = (
+    ('Comprador','Comprador'),
     ('Vendedor','Vendedor'),
     ('Empresario', 'Empresario'),
     ('Franquiciador','Franquiciador'),
@@ -30,7 +31,7 @@ class Profile(models.Model):
     instagram = models.URLField('Instagram', blank=True)
     website = models.URLField('Sitio Web', blank=True)
     resume = models.TextField('Descripción Empresa', blank=True)
-    plan = models.TextField('Plan', max_length=50, choices=PLAN_CHOICES, blank=True, default='Vendedor')
+    plan = models.TextField('Plan', max_length=50, choices=PLAN_CHOICES, blank=True, default='Comprador')
     points = models.IntegerField('Puntos', default=0, blank=True, null=True )
     slug = models.SlugField('Slug', blank=True, unique=True)
 
@@ -38,6 +39,8 @@ class Profile(models.Model):
         if( self.name ):
             self.slug = slugify(self.name)
             super(Profile, self).save(*args, **kwargs)
+        else:
+            pass
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
