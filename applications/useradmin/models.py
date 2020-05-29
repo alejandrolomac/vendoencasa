@@ -40,7 +40,8 @@ class Profile(models.Model):
             self.slug = slugify(self.name)
             super(Profile, self).save(*args, **kwargs)
         else:
-            pass
+            self.slug = slugify(self.user.username)
+            super(Profile, self).save(*args, **kwargs)
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
