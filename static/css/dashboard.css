@@ -3,11 +3,6 @@ body
 	background: #f7f7f7 !important;
 }
 
-input::selection, input:focus, input:active, textarea:focus, *:focus, *:active, *:active, *::selection
-{
-	outline: none !important;
-}
-
 #body-row {
 	margin-left: 0;
 	margin-right: 0;
