@@ -47,8 +47,13 @@
 			<div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
 				<ul class="list-group" style="position:relative; height:100%;">
 					<li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed" style="padding-top: 30px; padding-bottom: 30px;">
-						<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px;"/>
-						<span>Terracron</span>
+						{% if user.profile.logo %}
+							<div style="margin-right:10px; background: url({{ user.profile.logo.url }}) center center no-repeat; background-size: cover; width: 30px; height: 30px;"></div>
+						{% else %}
+							<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px;"/>
+						{% endif %}
+						
+						<span>{{ user.profile.name }}</span>
 					</li>
 					
 					<a href="{% url 'dashboard_app:dashboard' %}" class="bg-dark list-group-item list-group-item-action">
