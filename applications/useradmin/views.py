@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.models import Permission
 
+def registerDefault(request):
+    context = {}
+    return render(request, 'registration/register.html', context)
+
 @transaction.atomic
 def registerPage(request):
     if request.user.is_authenticated:
@@ -33,12 +37,37 @@ def registerPage(request):
             form = CreateUserForm()
             profile_form = ProfileForm()
 
-        return render(request, 'registration/register.html', {
+        return render(request, 'registration/register-usuario.html', {
             'form':form,
             'profile_form':profile_form
         })
 
+def loginDefault(request):
+    context = {}
+    return render(request, 'registration/login.html', context)
+
 def loginPage(request):
+    form = AuthenticationForm()
+    if request.user.is_authenticated:
+        return redirect('dashboard_app:miempresa')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('product_app:index')
+                messages.success(request, "Bienvenido " + user)
+            else:
+                messages.error(request, "Usuario o Contraseña Incorrecto")
+
+        context = {'form':form}
+        return render(request, 'registration/login-company.html', context)
+
+def loginUsuarios(request):
     form = AuthenticationForm()
     if request.user.is_authenticated:
         return redirect('product_app:index')
@@ -57,7 +86,8 @@ def loginPage(request):
                 messages.error(request, "Usuario o Contraseña Incorrecto")
 
         context = {'form':form}
-        return render(request, 'registration/login.html', context)
+        return render(request, 'registration/login-user.html', context)
+
 
 def logoutUser(request):
     logout(request)
