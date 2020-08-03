@@ -59,7 +59,7 @@ def loginPage(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('product_app:index')
+                return redirect('dashboard_app:dashboard')
                 messages.success(request, "Bienvenido " + user)
             else:
                 messages.error(request, "Usuario o Contraseña Incorrecto")
