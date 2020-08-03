@@ -49,7 +49,7 @@ def loginDefault(request):
 def loginPage(request):
     form = AuthenticationForm()
     if request.user.is_authenticated:
-        return redirect('dashboard_app:miempresa')
+        return redirect('dashboard_app:dashboard')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
