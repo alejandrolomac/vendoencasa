@@ -51,7 +51,9 @@ def add_to_cart(request, slug):
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(user=request.user, ordered_date=ordered_date)
+        order.orderCode = str(order.id) + '-' + str(request.user.id) + '-' + str(order.ordered_date.strftime('%Y%m%d'))
         order.items.add(order_item)
+        order.save()
         order_item.color = colorid
         order_item.size = sizeid
         order_item.quantity = prodquantity
@@ -178,6 +180,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
+            orCode = order.orderCode
             #mensaje de compra
             purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
             price_total = Order.objects.get(user=self.request.user, ordered=False).get_total()
@@ -197,6 +200,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
             #mensaje de compra
             context = {
                 'object': order,
+                'code': orCode,
                 'purchase_message': final_message,
             }
             return render(self.request, 'order_summary.html', context)

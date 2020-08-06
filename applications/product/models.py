@@ -42,6 +42,7 @@ class Company(models.Model):
 class Category(models.Model):
 	name = models.CharField('Categoria', max_length=100, unique=False)
 	icono = models.ImageField('Icono', upload_to='Category', blank=True)
+	categoryCode = models.CharField('Codigo Categoría', max_length=1, blank=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 
 	def __unicode__(self):
@@ -106,6 +107,7 @@ class Products(models.Model):
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	pub_date = models.DateTimeField(editable=False, auto_now=True)
 	quantity = models.IntegerField('Cantidad', default=1)
+	productCode = models.CharField("Codigo de Producto", max_length=100, blank=True)
 
 	def __str__(self):
 		return self.title
@@ -114,7 +116,16 @@ class Products(models.Model):
 		return self.title
 
 	def save(self, *args, **kwargs):
+		catCode = self.subCategory.category.categoryCode + str(self.subCategory.id).zfill(2)
+		#proCode = str(self.id).zfill(6)
+		#compaCode = str(self.company.id).zfill(5)
+		proCode = str(self.id)
+		if self.company:
+			compaCode = str(self.company.id)
+		else:
+			compaCode = str(self.user.id)
 		self.slug = slugify(self.title)
+		self.productCode = catCode + '-' + proCode + '-' + compaCode
 		super(Products, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):

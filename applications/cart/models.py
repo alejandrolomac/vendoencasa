@@ -9,9 +9,17 @@ class OrderItem(models.Model):
     size = models.CharField(max_length=50, blank=True)
     quantity = models.IntegerField(default=1)
     ordered = models.BooleanField(default=False)
+    orderItemCode = models.CharField("Codigo de Item", max_length=100, blank=True)
 
     def __str__(self):
-        return f"{self.quantity} de {self.item.title}: {self.color} Talla: {self.size}"
+        if self.orderItemCode:
+            return f"{self.quantity} de {self.item.title}: {self.color} Talla: {self.size} Codigo: {self.orderItemCode}"
+        else:
+            return f"{self.quantity} de {self.item.title}: {self.color} Talla: {self.size}"
+
+    def save(self, *args, **kwargs):
+        self.orderItemCode =  str(self.item.productCode)
+        super(OrderItem, self).save(*args, **kwargs)
     
     def get_total_item_price(self):
         precio_total = self.quantity * self.item.price
@@ -54,9 +62,14 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
+    orderCode = models.CharField("Codigo de Pedido", max_length=300, blank=True)
     
     def __str__(self):
         return self.user.username
+
+    def save(self, *args, **kwargs):
+        self.orderCode =  str(self.id) + '-' + str(self.user.id) + '-' + str(self.ordered_date.strftime('%Y%m%d'))
+        super(Order, self).save(*args, **kwargs)
     
     def get_total(self):
         total = 0

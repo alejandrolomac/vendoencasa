@@ -13,6 +13,7 @@
 				{% if user.profile.location %}
 					<h5><b>Teléfono:</b> {{ user.profile.phone }}</h5>
 				{% endif %}
+				<h5><b>N.° Pedido:</b> {{ code }}</h5>
 			</div>
 			<div class="table-responsive">
 				<table class="table table-hover">
@@ -96,7 +97,7 @@
 							<tr>
 								<td scope="col"></td>
 								<td scope="col"></td>
-								<td scope="col">Total a pagar: </td>
+								<td scope="col"><strong>Total a pagar: </strong></td>
 								<td scope="col"><strong>{{ object.get_total|floatformat:2 }}</strong><span>L.</span></td>
 							</tr>
 							<tr>
