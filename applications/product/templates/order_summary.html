@@ -51,7 +51,7 @@
 								{% endif %}
 								</td>
 								<td>
-									{% if oreder_item.item.pricePromo %}
+									{% if oreder_item.get_amount_saved != 0 %}
 										{% if oreder_item.quantity != 0 %}
 											{{oreder_item.get_total_discount_item_price|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-warning">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
 											</span>
