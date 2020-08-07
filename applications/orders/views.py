@@ -45,7 +45,7 @@ class SingleOrders(ListView):
 		product_select = OrdersProducts.objects.get(slug=id)
 		products_cats = OrdersProducts.objects.all().filter(subCategory=product_select.subCategory, available=True)[:10]
 		context['related_prod'] = products_cats
-		purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
+		purchase_message = 'https://api.whatsapp.com/send?phone=50497009694&text='
 		if self.request.user.is_authenticated:
 			#name
 			if self.request.user.first_name != '' and self.request.user.last_name != '':
