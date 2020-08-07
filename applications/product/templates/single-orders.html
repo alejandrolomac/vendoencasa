@@ -1,0 +1,212 @@
+{% extends "index.html" %}
+
+{% block content %}
+	{% load static %}
+	{% load thumbnail %}
+	<div class="container-fluid wrap-single-product">
+		<div class="container">
+		<h5>Single order</h5>
+			{% for lp in singleOrder %}
+				<div class="row">
+					<div class="image-prod col-12 col-md-6">
+						<div id="wrap-slider-product">
+							<div class="slider-for">
+								{% if lp.imagef.url == '' %}
+									<div class="item">
+										<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail">
+									</div>
+								{% else %}
+									<div class="item image-zoom">
+										<img src="{{ lp.imagef.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
+>
+									</div class="item">
+								{% endif %}
+								{% if lp.images.url != '' %}
+									<div class="item image-zoom">
+										<img src="{{ lp.images.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
+>
+									</div>
+								{% endif %}
+								{% if lp.imaget.url != '' %}
+									<div class="item image-zoom">
+										<img src="{{ lp.imaget.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
+>
+									</div>
+								{% endif %}
+							</div>
+							<div class="slider-nav">
+								{% if lp.imagef.url == '' %}
+									<div class="item">
+										<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+									</div>
+								{% else %}
+									<div class="item">
+										<img src="{{ lp.imagef.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+									</div class="item">
+								{% endif %}
+								{% if lp.images.url != '' %}
+									<div class="item">
+										<img src="{{ lp.images.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+									</div>
+								{% endif %}
+								{% if lp.imaget.url != '' %}
+									<div class="item">
+										<img src="{{ lp.imaget.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+									</div>
+								{% endif %}
+							</div>
+						</div><!-- endof Slider Single Product-->
+					</div>
+					<div class="info-prod col-12 col-md-6">
+					{% load mathfilters %}
+						<div class="wrap-info">
+							<h2 class="card-title">{{ lp.title }}</h2>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<h5 class="card-title" style="font-size: 30px; font-weight: bold !important;">
+										{% if lp.priceAnchor %}
+											<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.priceAnchor|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
+										{% endif %}
+										{% if lp.pricePromo %}
+											{{ lp.pricePromo|floatformat:2 }}<span style="font-size: 14px;">L.</span>
+										{% else %}
+											{{ lp.price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
+										{% endif %}
+										{% if lp.priceAnchor %}
+											<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.priceAnchor|sub:lp.price|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
+										{% endif %}
+									</h5>
+								</li>
+							    <!--<li class="list-group-item">
+									Categoría: <a href="{% url 'product_app:sub-categorys' lp.subCategory.category.slug lp.subCategory.category.id %}">{{ lp.subCategory.category }}</a> - Sub Categoría: <a href="{% url 'product_app:sub-catproducts' lp.subCategory.slug lp.subCategory.id %}">{{ lp.subCategory }}</a>
+								</li>-->
+								{% if lp.company.plan == 'Empresario' or lp.company.plan == 'Franquiciador' or lp.user.profile.plan == 'Empresario' or lp.user.profile.plan == 'Franquiciador' %}
+									<li class="list-group-item">
+										Empresa: 
+										{% if lp.company %}
+											<a href="{% url 'product_app:company-products' lp.company.slug lp.company.id %}">
+												{% if lp.company.plan == 'Empresario' or lp.company.plan == 'Franquiciador' %}
+													<span style="width: 20px; height: 16px; display: inline-block; background: url({% static 'img/page/crown.png' %}) center center no-repeat; background-size: contain;" data-toggle="tooltip" data-placement="top" title="Empresa Premium"></span>
+												{% endif %}
+												{{ lp.company }}
+											</a>
+										{% else %}
+											<a href="{% url 'product_app:user-company-products' lp.user.profile.slug lp.user.id %}">
+												{% if lp.user.profile.plan == 'Empresario' or lp.user.profile.plan == 'Franquiciador' %}
+													<span style="width: 20px; height: 16px; display: inline-block; background: url({% static 'img/page/crown.png' %}) center center no-repeat; background-size: contain;" data-toggle="tooltip" data-placement="top" title="Empresa Premium"></span>
+												{% endif %}
+												{{ lp.user.profile.name }}
+											</a>
+										{% endif %}
+									</li>
+								{% endif %}
+							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume }}</p></li>
+							    <li class="list-group-item">
+							    	<p>Compartir: 
+										<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-facebook"></i></a>
+										<a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}%20{{ lp.resume }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-twitter" ></i></a>
+										<a href="whatsapp://send?text={{ request.build_absolute_uri }}" target="_blank" data-action="share/whatsapp/share" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-whatsapp" ></i></a>
+									</p>
+									
+								</li>
+								<li class="list-group-item">
+									{% if lp.colors.all or lp.sizes.all %}
+										<form action="{{ lp.get_add_to_cart_url }}" method='POST' style="width: 100%;">
+											{% csrf_token %}
+											<!--<select class="custom-select" name="colorlist" style="float:left; width: 100%;">
+												{% for color in lp.colors.all %}
+													<option value="{{color.name}}" style="border-left: 100px solid {{color.color}} !important;" class="option-color">
+														{{color.name}}
+													</option>
+												{% endfor %}
+											</select>-->
+											{% if lp.sizes.all %}
+												<div id="wrap-size">
+													<p>Tallas Disponibles:</p>
+													{% for size in lp.sizes.all %}
+														<label>
+															<input type="radio" class="option-input radio" name="sizelist" value="{{size.name}}" checked />
+															<span class="sizespan">{{size.name}}</span>
+														</label>
+													{% endfor %}
+												</div>
+											{% endif %}
+
+											{% if lp.colors.all %}
+												<div id="wrap-colors">
+													<p>Colores Disponibles:</p>
+													{% for color in lp.colors.all %}
+														<label>
+															<input type="radio" class="option-input radio" name="colorlist" style="background: {{color.color}};" value="{{color.name}}" checked />
+															{{color.name}}
+														</label>
+													{% endfor %}
+												</div>
+											{% endif %}
+											<div style="width:100%; float:left;">
+												Cantidad: <input type="number" name="product_quantity" name="tentacles" value="1" min="1" max="100">
+											</div>
+											<div style="width:100%;">
+												<!--<button class="btn" type="submit" style="float:left;">
+													Realizar Pedido <i class="fa fa-shopping-cart"></i>
+												</button>-->
+												<a class="btn float-left" href="{{purchase_message}}">Realizar Compra <i class="fa fa-shopping-bag"></i></a>
+											</div>
+										</form>
+
+										
+									{% else %}
+										<!--<a href="{{ lp.get_add_to_cart_url }}" class="btn">Agregar al Carrito <i class="fa fa-shopping-cart"></i></a>-->
+										<form action="{{ lp.get_add_to_cart_url }}" method='POST' style="width: 100%;">
+											{% csrf_token %}
+											<div style="width:100%; float:left;">
+												Cantidad: <input type="number" name="product_quantity" name="tentacles" value="1" min="1" max="100">
+											</div>
+											<div style="width:100%;">
+												<button class="btn" type="submit" style="float:left;">
+													Agregar al Carrito <i class="fa fa-shopping-cart"></i>
+												</button>
+											</div>
+										</form>
+
+									{% endif %}
+									
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+			{% endfor %}
+
+				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px;">
+				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px;">Productos Relacionados</h3>
+				  	<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
+					    {% for nprod in related_prod %}
+							<div class="card text-left" style="border: none !important; padding: 5px;">
+				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
+									{% if nprod.imagef.url == '' %}
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
+									{% else %}
+										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
+										{% endthumbnail %}
+										
+									{% endif %}
+								</a>
+								<div class="card-body" style="padding: 15px 0px 0px 0px;">
+									<h2 class="card-title"><b>{{ nprod.price|floatformat:2 }}</b><span>L.</span></h2>
+									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
+								</div>
+				  			</div><!-- End Of item -->
+						{% endfor %}
+					</div>
+				</div><!-- End Of Related objets -->
+
+				<!--<div class="wrap-comments col-12">
+					<h3>Comentarios</h3>
+				</div>-->
+		</div>
+	</div>
+
+{% endblock content %}
