@@ -46,25 +46,26 @@ class SingleOrders(ListView):
 		products_cats = OrdersProducts.objects.all().filter(subCategory=product_select.subCategory, available=True)[:10]
 		context['related_prod'] = products_cats
 		purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
+		if self.request.user.is_authenticated:
+			#name
+			if self.request.user.first_name != '' and self.request.user.last_name != '':
+				usuario_name = self.request.user.first_name
+			elif self.request.user.first_name != '':
+				usuario_name = self.request.user.first_name + " " + self.request.user.last_name
+			else:
+				usuario_name = self.request.user.username
+
+			#location
+			if self.request.user.profile.location != '':
+				location = '%0D%0ADirección: ' + self.request.user.profile.location
+
+			#product
+			title_product = OrdersProducts.objects.get(slug=id).title
+			price_total = OrdersProducts.objects.get(slug=id).total_price()
+		else:
+			usuario_name = ''
+			location = ''
+		
+		final_message = str(purchase_message) + '--- Nuevo pedido de ' + str(usuario_name) + '---%0D%0A%0D%0A'+ str(title_product) + '%0D%0A' + "----- Pago total: " + str(price_total) + "L." + str(location)
+		context['purchase_message'] = final_message
 		return context
-
-
-@login_required(login_url='useradmin_app:entrar')
-def make_order(request):
-	purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
-	if self.request.user.first_name:
-		usuario_name = self.request.user.first_name
-	elif( self.request.user.first_name and self.request.user.last_name ):
-		usuario_name = self.request.user.first_name + " " + self.request.user.last_name
-	else:
-		usuario_name = self.request.user.username
-
-	if self.request.user.profile.location:
-		location = '%0D%0ADirección: ' + self.request.user.profile.location
-	else:
-		location = ''
-	final_message = str(purchase_message) + '--- Nuevo pedido de ' + str(usuario_name) + '---%0D%0A%0D%0A' + str(location)
-	context = {
-		'purchase_message': final_message,
-	}
-	return render(request, 'single-orders.html', context)

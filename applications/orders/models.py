@@ -54,7 +54,7 @@ class OrdersProducts(models.Model):
 		return reverse("product_app:product", kwargs={"slug": self.slug})
 	
 	def get_add_to_cart_url(self):
-		return reverse("orders_app:make-order", kwargs={"slug": self.slug})
+		return reverse("orders_app:single-orders", kwargs={"slug": self.slug})
 
 	def get_remove_from_cart_url(self):
 		return reverse("cart_app:remove-to-cart", kwargs={"slug": self.slug})
@@ -67,3 +67,12 @@ class OrdersProducts(models.Model):
 		
 		offer_total = (savedt * 100) / self.price
 		return offer_total
+
+	def total_price(self):
+		if self.pricePromo:
+			total = self.pricePromo 
+		else:
+			total = self.price
+		
+		totalPrice = total
+		return totalPrice
