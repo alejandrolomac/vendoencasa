@@ -5,7 +5,6 @@
 	{% load thumbnail %}
 	<div class="container-fluid wrap-single-product">
 		<div class="container">
-		<h5>Single order</h5>
 			{% for lp in singleOrder %}
 				<div class="row">
 					<div class="image-prod col-12 col-md-6">
@@ -143,14 +142,19 @@
 													{% endfor %}
 												</div>
 											{% endif %}
-											<div style="width:100%; float:left;">
+											<!--<div style="width:100%; float:left;">
 												Cantidad: <input type="number" name="product_quantity" name="tentacles" value="1" min="1" max="100">
-											</div>
+											</div>-->
 											<div style="width:100%;">
 												<!--<button class="btn" type="submit" style="float:left;">
 													Realizar Pedido <i class="fa fa-shopping-cart"></i>
 												</button>-->
-												<a class="btn float-left" href="{{purchase_message}}">Realizar Compra <i class="fa fa-shopping-bag"></i></a>
+												
+												{% if user.is_authenticated %}
+													<a class="btn float-left" href="{{purchase_message}}">Realizar Compra <i class="fa fa-shopping-bag"></i></a>
+												{% else %}
+													<a class="btn float-left" href="{% url 'useradmin_app:entrar' %}">Debes registrarte para comprar <i class="fa fa-user"></i></a>
+												{% endif %}
 											</div>
 										</form>
 
@@ -163,9 +167,14 @@
 												Cantidad: <input type="number" name="product_quantity" name="tentacles" value="1" min="1" max="100">
 											</div>
 											<div style="width:100%;">
-												<button class="btn" type="submit" style="float:left;">
+												<!--<button class="btn" type="submit" style="float:left;">
 													Agregar al Carrito <i class="fa fa-shopping-cart"></i>
-												</button>
+												</button>-->
+												{% if user.is_authenticated %}
+													<a class="btn float-left" href="{{purchase_message}}">Realizar Compra <i class="fa fa-shopping-bag"></i></a>
+												{% else %}
+													<a class="btn float-left" href="{% url 'useradmin_app:entrar' %}">Debes registrarte para comprar <i class="fa fa-user"></i></a>
+												{% endif %}
 											</div>
 										</form>
 

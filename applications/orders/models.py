@@ -39,8 +39,6 @@ class OrdersProducts(models.Model):
 
 	def save(self, *args, **kwargs):
 		catCode = self.subCategory.category.categoryCode + str(self.subCategory.id).zfill(2)
-		#proCode = str(self.id).zfill(6)
-		#compaCode = str(self.company.id).zfill(5)
 		proCode = str(self.id)
 		if self.company:
 			compaCode = str(self.company.id)

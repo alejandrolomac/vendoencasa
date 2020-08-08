@@ -58,14 +58,13 @@ class SingleOrders(ListView):
 			#location
 			if self.request.user.profile.location != '':
 				location = '%0D%0ADirección: ' + self.request.user.profile.location
-
-			#product
-			title_product = OrdersProducts.objects.get(slug=id).title
-			price_total = OrdersProducts.objects.get(slug=id).total_price()
 		else:
 			usuario_name = ''
 			location = ''
-		
-		final_message = str(purchase_message) + '--- Nuevo pedido de ' + str(usuario_name) + '---%0D%0A%0D%0A'+ str(title_product) + '%0D%0A' + "----- Pago total: " + str(price_total) + "L." + str(location)
+			
+		title_product = OrdersProducts.objects.get(slug=id).title
+		price_total = OrdersProducts.objects.get(slug=id).total_price()
+		product_code = OrdersProducts.objects.get(slug=id).productCode
+		final_message = str(purchase_message) + '--- Nuevo pedido de ' + str(usuario_name) + '---%0D%0A%0D%0A'+ str(title_product) + ' - Código: ' + str(product_code) + '%0D%0A%0D%0A' + "----- Pago total: " + str(price_total) + "L" + str(location)
 		context['purchase_message'] = final_message
 		return context
