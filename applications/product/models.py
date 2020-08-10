@@ -4,6 +4,8 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 PLAN_CHOICES = (
     ('Vendedor','Vendedor'),
@@ -116,16 +118,7 @@ class Products(models.Model):
 		return self.title
 
 	def save(self, *args, **kwargs):
-		catCode = self.subCategory.category.categoryCode + str(self.subCategory.id).zfill(2)
-		#proCode = str(self.id).zfill(6)
-		#compaCode = str(self.company.id).zfill(5)
-		proCode = str(self.id)
-		if self.company:
-			compaCode = str(self.company.id)
-		else:
-			compaCode = str(self.user.id)
 		self.slug = slugify(self.title)
-		self.productCode = catCode + '-' + proCode + '-' + compaCode
 		super(Products, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):
@@ -145,3 +138,17 @@ class Products(models.Model):
 		
 		offer_total = (savedt * 100) / self.price
 		return offer_total
+
+@receiver(post_save, sender=Products)
+def save_code(sender, instance, **kwargs):
+	catCode = instance.subCategory.category.categoryCode + str(instance.subCategory.id).zfill(2)
+	proCode = str(instance.id)
+	if instance.company:
+		compaCode = str(instance.company.id)
+	else:
+		compaCode = str(instance.user.id)
+
+	codeFinal = str(catCode + '-' + proCode + '-' + compaCode)
+	if instance.productCode != codeFinal:
+		instance.productCode = codeFinal
+		instance.save()
