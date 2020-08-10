@@ -5,6 +5,8 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.models import User
 from applications.product.models import Color, Size, SubCategory, Category, Company
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class OrdersProducts(models.Model):
 	title = models.CharField('Titulo', max_length=300, blank=False)
@@ -38,14 +40,7 @@ class OrdersProducts(models.Model):
 		return self.title
 
 	def save(self, *args, **kwargs):
-		catCode = self.subCategory.category.categoryCode + str(self.subCategory.id).zfill(2)
-		proCode = str(self.id)
-		if self.company:
-			compaCode = str(self.company.id)
-		else:
-			compaCode = str(self.user.id)
 		self.slug = slugify(self.title)
-		self.productCode = catCode + '-' + proCode + '-' + compaCode
 		super(OrdersProducts, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):
@@ -74,3 +69,19 @@ class OrdersProducts(models.Model):
 		
 		totalPrice = total
 		return totalPrice
+
+@receiver(post_save, sender=OrdersProducts)
+def save_code(sender, instance, **kwargs):
+	catCode = instance.subCategory.category.categoryCode + str(instance.subCategory.id).zfill(2)
+	proCode = str(instance.id)
+	if instance.company:
+		compaCode = str(instance.company.id)
+	else:
+		compaCode = str(instance.user.id)
+
+	codeFinal = str(catCode + '-' + proCode + '-' + compaCode)
+	if instance.productCode != codeFinal:
+		instance.productCode = codeFinal
+		instance.save()
+
+#post_save.connect(save_code, sender=OrdersProducts)

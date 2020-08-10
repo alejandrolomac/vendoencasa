@@ -1121,3 +1121,15 @@ ORDER STYLES
 {
 	background: #b84151 !important;
 }
+
+.header-orders
+{
+	margin-top: 50px;
+}
+
+@media (max-width: 767px) {
+	.header-orders
+	{
+		margin-top: 100px;
+	}
+}

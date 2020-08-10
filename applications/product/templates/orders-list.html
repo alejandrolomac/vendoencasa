@@ -3,7 +3,7 @@
 {% block content %}
 	{% load static %}
 	{% load thumbnail %}
-	<img src="{% static 'img/pedidos.jpg' %}" class="img-fluid" alt="Responsive image">
+	<img src="{% static 'img/pedidos.jpg' %}" class="img-fluid header-orders">
 	<div class="container-fluid product-container">
 		<div class="container">
             <!--<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; font-size: 40px;">Pedidos</h3>
@@ -18,7 +18,7 @@
 					</ul>
 				</div>-->
 				<div class="col-12 col-md-12 col-lg-12">
-					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 wrap-products-list" style="margin-top: -10px;">
+					<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 wrap-products-list" style="margin-top: -10px;">
 						{% for p in contacts %}
 							<div class="card text-left prod-item" style="border:none; padding: 10px; overflow: hidden;">
 								<div class="thumbnail-order">
@@ -32,9 +32,9 @@
 									<a href="#" class="btn order-btn2">Agrega a Lista de Deseos</a>
 									<a href="{% url 'orders_app:single-orders' p.slug %}" class="btn order-btn">Detalles de Producto</a>
 								</div>
-								<div class="card-body" style="padding: 15px 0px;">
-									<h2 class="card-title"><b>{{ p.price|floatformat:2 }}</b><span>L.</span></h2>
-									<h5 class="card-title">{{ p.title|truncatechars:19 }}</h5>
+								<div class="card-body" style="padding: 15px 0px; text-align: center !important;">
+									<h2 class="card-title" class="text-center" style="font-size: 18px; font-weight: bold;"><b>{{ p.title|truncatechars:19 }}</b></h2>
+									<h5 class="card-title" class="text-center" style="font-size: 15px; color: #444;"><b>{{ p.price|floatformat:2 }}</b><span style="font-size: 10px;">L</span></h5>
 								</div>
 							</div><!-- End Of Product -->
 						{% endfor %}
