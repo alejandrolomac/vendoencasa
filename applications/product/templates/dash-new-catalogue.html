@@ -1,0 +1,81 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+{% load static %}
+
+<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%; margin-top: 20px; font-size: 40px;">Agregar Producto al Catálogo</h3>
+
+<form class="row newprod mb-5" method="POST" action="" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="col-lg-8">
+		{{ form.title }}
+		{{ form.resume }}
+		{{ form.company }}
+		<div class="card mt-3">
+			<h4 class="card-header">Imagenes del producto</h4>
+			<div class="card-body">
+				<div class="mt-0">
+					{{ form.imagef }}
+				</div>
+				<div class="mt-3">
+					{{ form.images }}
+				</div>
+				<div class="mt-3">
+					{{ form.imaget }}
+				</div>
+			</div>
+		</div><!-- End Of Images -->
+
+		<div class="row mt-3">
+			<div class="col-12 col-md-6">
+				<div class="card">
+					<h4 class="card-header">Colores Disponibles</h4>
+					<div class="card-body">
+						{{ form.colors }}
+					</div>
+				</div>
+			</div><!-- End Of Colors -->
+
+			<div class="col-12 col-md-6">
+				<div class="card">
+					<h4 class="card-header">Tamaños Disponibles</h4>
+					<div class="card-body">
+						{{ form.sizes }}
+					</div>
+				</div>
+			</div><!-- End Of Sizes -->
+		</div><!-- End Of Colors and Sizes -->
+		
+	</div><!-- End Of main info product -->
+	<div class="col-lg-4">
+		<div class="card">
+			<h4 class="card-header">Publicar</h4>
+			<div class="card-body">
+				<div class="row" style="padding: 10px 0px; margin-top: 10px;">
+					<div class="col-12 text-center">
+						<button class="primaryAction btn" name="create producto" type="submit">Crear Producto</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- End Of Publish -->
+
+		<div class="card mt-3">
+			<h4 class="card-header">Categoría</h4>
+			<div class="card-body">
+				{{ form.subCategory }}
+			</div>
+		</div><!-- End Of Category -->
+		
+		<div class="card mt-3">
+			<h4 class="card-header">Precio</h4>
+			<div class="card-body">
+				{{ form.price }}
+				{{ form.pricePromo }}
+				<p class="mt-3">{{ form.promotion }} promoción</p>
+			</div>
+		</div><!-- End Of Price -->
+	</div><!-- End Of sidebar info product -->
+</form>
+
+
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+{% load static %}
+
+<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%; margin-top: 20px; font-size: 40px;">Catálogo</h3>
+
+<div class="row">
+	<div class="col-12 mt-3">
+		<div class="row mb-3">
+			<div class="col-6 text-left">
+				<small>Tienes {{countprod}} productos</small>
+			</div>
+			<div class="col-6 text-right">
+				{% if userprofile.plan == 'Vendedor' and countprod < 3 %}
+					<a href="{% url 'dashboard_app:newcatalogue' %}" class="primaryAction btn">Agregar Producto</a>
+				{% elif userprofile.plan == 'Empresario' and countprod < 4 %}
+					<a href="{% url 'dashboard_app:newcatalogue' %}" class="primaryAction btn">Agregar Producto</a>
+				{% elif userprofile.plan == 'Franquiciador' %}
+					<a href="{% url 'dashboard_app:newcatalogue' %}" class="primaryAction btn">Agregar Producto</a>
+				{% else %}
+					<a href="#" class="primaryAction btn disabled">Agregar Producto</a>
+					<small style="width:100%; float: right; text-align:right;">Límite de productos del plan alcanzado.</small>
+				{% endif %}
+			</div>
+		</div>
+		<table class="table table-hover">
+			<thead class="thead-dark">
+				<tr>
+				<th scope="col">Nombre Producto</th>
+				<th scope="col">Categoría</th>
+				<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for prod in productlist %}
+					<tr>
+						<td><a href="{% url "dashboard_app:editcatalogue" prod.id %}">{{prod.title}}</a></td>
+						<td>{{prod.subCategory}}</td>
+						<td class="text-right"><a href="{% url 'dashboard_app:deletecatalogue' prod.id %}" class=""><i class="fa fa-trash"></i></a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
+{% endblock content %}

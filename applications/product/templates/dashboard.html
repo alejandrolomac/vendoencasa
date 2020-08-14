@@ -68,6 +68,16 @@
 							<span class="menu-collapsed">Productos</span>    
 						</div>
 					</a>
+					{% if user.profile.plan == 'Franquiciador' %}
+						<a href="{% url 'dashboard_app:dashcatalogue' %}" class="bg-dark list-group-item list-group-item-action">
+							<div class="d-flex w-100 justify-content-start align-items-center">
+								<span class="fa fa-book fa-fw mr-3"></span>
+								<span class="menu-collapsed">Catálogo
+								<span style="width: 20px; height: 16px; display: inline-block; background: url({% static 'img/page/crown.png' %}) center center no-repeat; background-size: contain; filter: brightness(0) invert(1);" data-toggle="tooltip" data-placement="top" title="Empresa Premium"></span>
+								</span>    
+							</div>
+						</a>
+					{% endif %}
 					<a href="{% url 'dashboard_app:dashserv' %}" class="bg-dark list-group-item list-group-item-action">
 						<div class="d-flex w-100 justify-content-start align-items-center">
 							<span class="fa fa-tasks fa-fw mr-3"></span>
