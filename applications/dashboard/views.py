@@ -5,7 +5,7 @@ from applications.useradmin.models import Profile
 from applications.orders.models import OrdersProducts
 from django.db.models import Count
 from django.contrib.auth.models import User
-from .forms import ProductForm
+from .forms import ProductForm, OrdersForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
@@ -152,7 +152,7 @@ def dashnewcatalogue(request):
     iduser = request.user.id
     countprod = OrdersProducts.objects.all().filter(user__id=iduser).count()
     userprofile = get_object_or_404(Profile, pk=request.user.profile.id)
-    form = ProductForm(request.POST, request.FILES)
+    form = OrdersForm(request.POST, request.FILES)
     if form.is_valid():
         formprod = form.save(commit=False)
         formprod.imagef = request.FILES['imagef']
