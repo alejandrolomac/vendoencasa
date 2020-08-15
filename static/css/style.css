@@ -1047,7 +1047,7 @@ ORDER STYLES
 	position: absolute;
 	bottom: 0px;
 	right: -100%;
-	z-index: 9999;
+	z-index: 1;
 	-webkit-transition: all .3s linear;
 	-moz-transition: all .3s linear;
 	-ms-transition: all .3s linear;
@@ -1063,7 +1063,7 @@ ORDER STYLES
 	top: 0px;
 	left: -100%;
 	background: #f25268 !important;
-	z-index: 9999;
+	z-index: 1;
 	-webkit-transition: all .3s linear;
 	-moz-transition: all .3s linear;
 	-ms-transition: all .3s linear;
@@ -1124,6 +1124,9 @@ ORDER STYLES
 
 .header-orders
 {
+	display: block;
+	width: 100%;
+	height: auto;
 	margin-top: 50px;
 }
 
@@ -1133,3 +1136,5 @@ ORDER STYLES
 		margin-top: 100px;
 	}
 }
+
+

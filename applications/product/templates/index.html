@@ -33,13 +33,13 @@
 		    			<li><a href="/productos">Productos</a></li>
 						<li><a href="/servicios">Servicios</a></li>
 		    			<li><a href="/planes">Quiero Vender</a></li>
-						{% if request.user.is_authenticated %}
+						<!--{% if request.user.is_authenticated %}
 							<li>
 								<a class="navbar-car btn" href="{% url 'useradmin_app:salir' %}" style="font-size: 1em;">
 									Salir <i class="fa fa-user"></i>
 								</a>
 							</li>
-						{% endif %}
+						{% endif %}-->
 					</ul>
 				</div>
 			</div>
@@ -71,10 +71,34 @@
 					<div class="col-9 col-md-4 col-lg-3 text-right float-right third " style="padding:0px;">
 						{% if request.user.is_authenticated %}
 							<a class="navbar-car" href="{% url 'cart_app:order' %}">
-								<span style="font-size: .5em;">{{request.user.username}}</span>
 								<i class="fa fa-shopping-cart"></i>
 								<span style="padding: 0px 5px;font-size: .5em; border-radius: 5px; background: #fff;">{{ request.user|cart_item_count }}</span>
 							</a>
+
+							<div style="display: inline-block;">
+								<a href="#" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="font-size: 1.6em; margin-right: 10px;">
+									<i class="fa fa-user"></i>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<span class="dropdown-item-text">
+										{% if user.profile.logo %}
+											<div style="margin-right:10px; background: url({{ user.profile.logo.url }}) center center no-repeat; background-size: cover; width: 30px; height: 30px; border-radius: 100%;"></div>
+										{% else %}
+											<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px; border-radius: 100%;"/>
+										{% endif %}
+										{{request.user.username}}
+									</span>
+
+									
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{% url 'dashboard_app:dashboard' %}">Mi Perfil</a>
+									<a class="dropdown-item" href="{% url 'cart_app:order' %}">Mis Pedidos</a>
+									<a class="dropdown-item" href="#">Lista de Deseos</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{% url 'useradmin_app:salir' %}">Salir</a>
+								</div>
+							</div>
+
 						{% else %}
 							<a class="navbar-car" href="{% url 'useradmin_app:entrar' %}" style="font-size: 1.3em;">Entrar <i class="fa fa-user"></i></a>
 						{% endif %}
