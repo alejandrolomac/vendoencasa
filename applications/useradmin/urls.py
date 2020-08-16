@@ -12,4 +12,5 @@ urlpatterns = [
     path('nueva-empresa/', views.registerCompany, name="registercompany"),
     path('nuevo-usuario/', views.registerPage, name="registerusuario"),
     path('entrar-miempresa/', views.loginPage, name='logincompany'),
+    path('perfil/', views.perfil, name='perfil'),
 ] 

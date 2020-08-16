@@ -82,16 +82,17 @@
 								<div class="dropdown-menu dropdown-menu-right">
 									<span class="dropdown-item-text">
 										{% if user.profile.logo %}
-											<div style="margin-right:10px; background: url({{ user.profile.logo.url }}) center center no-repeat; background-size: cover; width: 30px; height: 30px; border-radius: 100%;"></div>
+											<div style="margin-right:10px; background: url({{ user.profile.logo.url }}) center center no-repeat; background-size: cover; width: 30px; height: 30px; border-radius: 100%; display: inline-block;"></div>
 										{% else %}
-											<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px; border-radius: 100%;"/>
+											<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px; border-radius: 100%; display: inline-block;"/>
 										{% endif %}
 										{{request.user.username}}
 									</span>
 
 									
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="{% url 'dashboard_app:dashboard' %}">Mi Perfil</a>
+									<a class="dropdown-item" href="{% url 'useradmin_app:perfil' %}">Mi Perfil</a>
+									<a class="dropdown-item" href="{% url 'dashboard_app:dashboard' %}">Mi Empresa</a>
 									<a class="dropdown-item" href="{% url 'cart_app:order' %}">Mis Pedidos</a>
 									<a class="dropdown-item" href="#">Lista de Deseos</a>
 									<div class="dropdown-divider"></div>

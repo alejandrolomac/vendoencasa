@@ -129,3 +129,7 @@ def registerCompany(request):
             'form':form,
             'company_form':company_form
         })
+
+def perfil(request):
+    context = {}
+    return render(request, 'perfil.html', context)
