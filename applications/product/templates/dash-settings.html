@@ -7,7 +7,9 @@
 <div class="card">
 	<h4 class="card-header">Configuracion de la cuenta</h4>
 	<div class="card-body">
-		<p>Logo: <img src="{{user.profile.logo.url}}" height="90" ></p>
+		{% if user.profile.logo %}
+			<p>Logo: <img src="{{user.profile.logo.url}}" height="90" ></p>
+		{% endif %}
 		<p>Nombre Empresa: {{ user.profile.name }}</p>
 		<p>Descripción: {{ user.profile.resume }}</p>
 		<p>Ubicacion: {{ user.profile.location }}</p>

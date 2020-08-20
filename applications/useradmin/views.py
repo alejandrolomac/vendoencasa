@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import CreateUserForm, ProfileForm, CompanyForm, CreateCompanyForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
+from .forms import CreateUserForm, ProfileForm, CompanyForm, CreateCompanyForm, UserSettingForm, UserSettingProfileForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth.models import Permission
+from django.contrib.auth.models import User
+from applications.useradmin.models import Profile
 
 def registerDefault(request):
     context = {}
@@ -130,6 +132,21 @@ def registerCompany(request):
             'company_form':company_form
         })
 
+@login_required(login_url='useradmin_app:entrar')
 def perfil(request):
-    context = {}
-    return render(request, 'perfil.html', context)
+    product_to_edit = get_object_or_404(User, pk=request.user.id)
+    profile_to_edit = get_object_or_404(Profile, pk=request.user.profile.id)
+    form = UserSettingForm(instance=product_to_edit)
+    formp = UserSettingProfileForm(instance=profile_to_edit)
+    if request.method == 'POST':
+        form = CreateCompanyForm(request.POST, request.FILES, instance=product_to_edit)
+        formp = CompanyForm(instance=profile_to_edit)
+        if form.is_valid():
+            form.save()
+            formp.save()
+            return redirect('useradmin_app:perfil')
+        else:
+            form = CreateCompanyForm(instance=product_to_edit)
+            formp = CompanyForm(instance=profile_to_edit)
+
+    return render(request, "perfil.html", {'form': form, 'formp': formp, 'product': product_to_edit})

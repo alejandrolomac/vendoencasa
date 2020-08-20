@@ -11,8 +11,9 @@ handler400 = 'applications.product.views.handler400'
 
 urlpatterns = [
     re_path('admin/', admin.site.urls),
-	re_path('', include('applications.product.urls')),
+    re_path('', include('applications.product.urls')),
     re_path('', include('applications.cart.urls')),
+    re_path('', include('applications.wish.urls')),
     re_path('', include('applications.useradmin.urls')),
     re_path('', include('applications.services.urls')),
     re_path('', include('applications.dashboard.urls')),

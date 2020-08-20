@@ -76,6 +76,9 @@
 							</a>
 
 							<div style="display: inline-block;">
+								<a href="{% url 'wish_app:wish' %}" style="font-size: 1.6em; margin-right: 10px;">
+									<i class="fa fa-heart"></i>
+								</a>
 								<a href="#" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="font-size: 1.6em; margin-right: 10px;">
 									<i class="fa fa-user"></i>
 								</a>
@@ -92,9 +95,11 @@
 									
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="{% url 'useradmin_app:perfil' %}">Mi Perfil</a>
-									<a class="dropdown-item" href="{% url 'dashboard_app:dashboard' %}">Mi Empresa</a>
+									{% if user.profile.plan != 'Comprador' %}
+										<a class="dropdown-item" href="{% url 'dashboard_app:dashboard' %}">Mi Empresa</a>
+									{% endif %}
 									<a class="dropdown-item" href="{% url 'cart_app:order' %}">Mis Pedidos</a>
-									<a class="dropdown-item" href="#">Lista de Deseos</a>
+									<a class="dropdown-item" href="{% url 'wish_app:wish' %}">Lista de Deseos</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="{% url 'useradmin_app:salir' %}">Salir</a>
 								</div>

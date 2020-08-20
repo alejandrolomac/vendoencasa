@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'applications.services',
     'applications.dashboard',
     'applications.orders',
+    'applications.wish',
     'storages',
     'mathfilters',
     'sorl.thumbnail',

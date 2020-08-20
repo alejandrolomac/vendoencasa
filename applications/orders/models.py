@@ -40,7 +40,13 @@ class OrdersProducts(models.Model):
 		return self.title
 
 	def save(self, *args, **kwargs):
-		self.slug = slugify(self.title)
+		origin_slug = slugify(self.title)
+		unique_slug = origin_slug
+		numb = 1
+		while OrdersProducts.objects.filter(slug=unique_slug).exists():
+			unique_slug = '%s-%d' % (origin_slug, numb)
+			numb += 1
+		self.slug = unique_slug
 		super(OrdersProducts, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):

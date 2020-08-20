@@ -118,7 +118,13 @@ class Products(models.Model):
 		return self.title
 
 	def save(self, *args, **kwargs):
-		self.slug = slugify(self.title)
+		origin_slug = slugify(self.title)
+		unique_slug = origin_slug
+		numb = 1
+		while Products.objects.filter(slug=unique_slug).exists():
+			unique_slug = '%s-%d' % (origin_slug, numb)
+			numb += 1
+		self.slug = unique_slug
 		super(Products, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):
@@ -126,6 +132,9 @@ class Products(models.Model):
 	
 	def get_add_to_cart_url(self):
 		return reverse("cart_app:add-to-cart", kwargs={"slug": self.slug})
+
+	def get_add_to_wish_url(self):
+		return reverse("wish_app:add_to_whis", kwargs={"slug": self.slug})
 
 	def get_remove_from_cart_url(self):
 		return reverse("cart_app:remove-to-cart", kwargs={"slug": self.slug})
