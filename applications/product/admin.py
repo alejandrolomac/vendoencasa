@@ -1,6 +1,14 @@
 from django.contrib import admin
-from .models import Company, Category, SubCategory, Products, Color, Size
+from .models import Company, Category, SubCategory, Products, Color, Size, Comment
 
+class CommentAdmin(admin.ModelAdmin):
+	list_display = (
+		'product',
+		'user',
+		'pub_date',
+		'comment',
+	)
+	
 class ColorAdmin(admin.ModelAdmin):
 	list_display = (
 		'name',
@@ -52,3 +60,4 @@ admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Products, ProductsAdmin)
 admin.site.register(Color, ColorAdmin)
 admin.site.register(Size, SizeAdmin)
+admin.site.register(Comment, CommentAdmin)

@@ -8,6 +8,7 @@ app_name = "product_app"
 urlpatterns = [
 	path('', views.index, name="index"),
 	path('productos', views.listproducts, name="list-products"),
+	path('comentario', views.newComment, name="comments"),
 	path('menos100', views.lessProduct, name="less-products"),
 	path('covid', views.covidProduct, name="virus-products"),
 	path('empresas-delivery', views.ListCompanyDelivery.as_view(), name="delivery"),

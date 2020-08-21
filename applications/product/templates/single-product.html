@@ -155,9 +155,15 @@
 
 										<form action="{{ lp.get_add_to_wish_url }}" method='POST' style="width: 100%;">
 											{% csrf_token %}
-											<button class="btn" type="submit" style="float:left;">
-												<i class="fa fa-heart"></i>
-											</button>
+											{% if produch_wish %}
+												<button class="btn" type="submit" style="float:left;">
+													<i class="fa fa-heart"></i>
+												</button>
+											{% else %}
+												<button class="btn" type="submit" style="float:left; background: #fff !important; border: 1px solid #ef4036 !important;">
+													<i class="fa fa-heart" style="color: #ef4036 !important;"></i>
+												</button>
+											{% endif %}
 										</form>
 
 										
@@ -175,20 +181,28 @@
 											</form>
 
 											<form action="{{ lp.get_add_to_wish_url }}" method='POST' style="width: 100%;">
-												{% csrf_token %}<button class="btn" type="submit" style="float:left;">
-													<i class="fa fa-heart"></i>
-												</button>
+												{% csrf_token %}
+												{% if produch_wish %}
+													<button class="btn" type="submit" style="float:left;">
+														<i class="fa fa-heart"></i>
+													</button>
+												{% else %}
+													<button class="btn" type="submit" style="float:left; background: #fff !important; border: 1px solid #ef4036 !important;">
+														<i class="fa fa-heart" style="color: #ef4036 !important;"></i>
+													</button>
+												{% endif %}
 											</form>
 										</div>
 
 									{% endif %}
-									
+									{% if wish_count >= 1 %}
+										<span class="text-muted w-100 float-left">{{wish_count}} lo desean</span>
+									{% endif %}
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				
 			{% endfor %}
 
 				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px;">
@@ -215,9 +229,34 @@
 					</div>
 				</div><!-- End Of Related objets -->
 
-				<!--<div class="wrap-comments col-12">
-					<h3>Comentarios</h3>
-				</div>-->
+			<div class="fluid-cotainer pb-5" style="padding: 0px; margin: 30px 0px;">
+				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px; margin-bottom: 30px;">{{countcomments}} Evaluaciones de Clientes</h3>
+				<ul class="list-group list-group-flush">
+					{% if countcomments > 1 %}
+						{% for comm in comments %}
+							<li class="list-group-item" style="padding: 40px 20px; margin-bottom: 10px; border: 1px solid #ccc;">
+								<h4><b>{{comm.user.username}}</b></h4>
+								<span class="text-muted">{{comm.pub_date|date:'d b, Y'}}</span>
+								<p class="mt-2">{{comm.comment}}</p>
+							</li>
+						{% endfor %}
+					{% else %}
+						<h6>No hay evaluaciones</h6>
+					{% endif %}
+				</ul>
+
+				<!--<form class="row mb-5" method="POST" action="{{ lp.get_add_to_cart_url }}" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="col-12">
+						{{ form.comment }}
+						{{ form.calification }}
+						{{ form.imagef }}
+						{{ form.images }}
+						{{ form.imaget }}
+						<button class="primaryAction btn" name="create comment" type="submit">Publicar Evaluacion</button>
+					</div>
+				</form>-->
+			</div><!-- End Of Comments -->
 		</div>
 	</div>
 

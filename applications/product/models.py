@@ -13,6 +13,14 @@ PLAN_CHOICES = (
     ('Franquiciador','Franquiciador'),
 )
 
+CALIFICATION_CHOICES = (
+    ('1','1'),
+    ('2', '2'),
+    ('3','3'),
+	('4','4'),
+	('5','5'),
+)
+
 
 class Company(models.Model):
 	name = models.CharField('Nombre', max_length=150, blank=False)
@@ -161,3 +169,16 @@ def save_code(sender, instance, **kwargs):
 	if instance.productCode != codeFinal:
 		instance.productCode = codeFinal
 		instance.save()
+
+class Comment(models.Model):
+	product = models.ForeignKey(Products, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
+	comment = models.TextField('Comentario', blank=True)
+	calification = models.TextField('Calificacion', blank=True, default=1, choices=CALIFICATION_CHOICES)
+	imagef = models.ImageField('Imagen 1', upload_to='Comment', blank=True)
+	images = models.ImageField('Imagen 2', upload_to='Comment', blank=True)
+	imaget = models.ImageField('Imagen 3', upload_to='Comment', blank=True)
+	pub_date = models.DateTimeField(editable=False, auto_now=True)
+
+	def __str__(self):
+		return self.comment

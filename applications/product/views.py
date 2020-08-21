@@ -1,15 +1,20 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import (
 	TemplateView, 
 	ListView,
 )
-from .models import Company, Category, SubCategory, Products
+from .models import Company, Category, SubCategory, Products, Comment
 from applications.services.models import Services
+from applications.wish.models import Wish, WishItem
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.db.models import Count
+from .forms import CommentForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from applications.useradmin.models import Profile
 
 def index(request):
 	categorys = Category.objects.all()
@@ -102,9 +107,31 @@ class SingleProduct(ListView):
 		context = super(SingleProduct, self).get_context_data(**kwargs)
 		product_select = Products.objects.get(slug=id)
 		products_cats = Products.objects.all().filter(subCategory=product_select.subCategory, available=True)[:10]
+		user_wish = self.request.user
+		produch_wish = WishItem.objects.all().filter(item__id=product_select.id, user=user_wish)
+		wish_count = WishItem.objects.all().filter(item__id=product_select.id).count()
+		comments = Comment.objects.all().filter(product__id=product_select.id)
+		countcomments = Comment.objects.all().filter(product__id=product_select.id).count()
 		context['related_prod'] = products_cats
+		context['produch_wish'] = produch_wish
+		context['wish_count'] = wish_count
+		context['comments'] = comments
+		context['countcomments'] = countcomments
 		return context
 
+@login_required(login_url='useradmin_app:entrar')
+def newComment(request):
+	product_select = Products.objects.get(slug=request.slug)
+	user_wish = request.user
+	userprofile = get_object_or_404(Profile, pk=user_wish.profile.id)
+	form = CommentForm(request.POST, request.FILES)
+	if form.is_valid():
+		formprod = form.save(commit=False)
+		formprod.user = user_wish
+		formprod.product = product_select
+		formprod.save()
+		form.save_m2m()
+	return render(request, "comments.html", {'form': form})
 
 def search(request):
 	query = request.GET.get('search-field')
