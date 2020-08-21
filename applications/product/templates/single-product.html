@@ -232,7 +232,7 @@
 			<div class="fluid-cotainer pb-5" style="padding: 0px; margin: 30px 0px;">
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px; margin-bottom: 30px;">{{countcomments}} Evaluaciones de Clientes</h3>
 				<ul class="list-group list-group-flush">
-					{% if countcomments > 1 %}
+					{% if countcomments >= 1 %}
 						{% for comm in comments %}
 							<li class="list-group-item" style="padding: 40px 20px; margin-bottom: 10px; border: 1px solid #ccc;">
 								<h4><b>{{comm.user.username}}</b></h4>
