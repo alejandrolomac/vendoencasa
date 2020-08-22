@@ -183,18 +183,21 @@
 												</button>
 											</form>
 
-											<form action="{{ lp.get_add_to_wish_url }}" method='POST' style="width: 100%;">
-												{% csrf_token %}
-												{% if produch_wish %}
+											{% if produch_wish %}
+												<form action="{{ lp.get_remove_from_wish_url }}" method='POST' style="width: 100%;">
+													{% csrf_token %}
 													<button class="btn" type="submit" style="float:left;">
 														<i class="fa fa-heart"></i>
 													</button>
-												{% else %}
+												</form>
+											{% else %}
+												<form action="{{ lp.get_add_to_wish_url }}" method='POST' style="width: 100%;">
+													{% csrf_token %}
 													<button class="btn" type="submit" style="float:left; background: #fff !important; border: 1px solid #ef4036 !important;">
 														<i class="fa fa-heart" style="color: #ef4036 !important;"></i>
 													</button>
-												{% endif %}
-											</form>
+												</form>
+											{% endif %}
 										</div>
 
 									{% endif %}
