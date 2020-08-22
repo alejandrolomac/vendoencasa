@@ -56,6 +56,34 @@ def add_to_whis(request, slug):
         messages.success(request, "Se agrego el producto a tu lista de deseos")
         return redirect("wish_app:wish")
 
+
+@login_required(login_url='useradmin_app:entrar')
+def remove_from_whis(request, slug):
+    item = get_object_or_404(Products, slug=slug)
+    order_qs = Wish.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item = WishItem.objects.filter(
+            item=item,
+            user=request.user,
+            ordered=False
+        )[0]
+        if order.items.filter(item__slug=item.slug).exists():
+            order.items.filter(item__slug=item.slug).delete()
+            messages.info(request, "Se elimino el producto de la lista de deseos")
+        else:
+            messages.error(request, "Este producto no existe en tu lista de deseos")
+            return redirect("product_app:single-product", slug=slug)
+            
+    else:
+        messages.info(request, "Tu lista de deseos esta vacia")
+        return redirect("product_app:single-product", slug=slug)
+    return redirect("product_app:single-product", slug=slug)
+
+
 class WishSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
