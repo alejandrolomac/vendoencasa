@@ -108,7 +108,10 @@ class SingleProduct(ListView):
 		product_select = Products.objects.get(slug=id)
 		products_cats = Products.objects.all().filter(subCategory=product_select.subCategory, available=True)[:10]
 		user_wish = self.request.user
-		produch_wish = WishItem.objects.all().filter(item__id=product_select.id, user=user_wish)
+		if user_wish.is_authenticated:
+			produch_wish = WishItem.objects.all().filter(item__id=product_select.id, user=user_wish)
+		else:
+			produch_wish = ''
 		wish_count = WishItem.objects.all().filter(item__id=product_select.id).count()
 		comments = Comment.objects.all().filter(product__id=product_select.id)
 		countcomments = Comment.objects.all().filter(product__id=product_select.id).count()
