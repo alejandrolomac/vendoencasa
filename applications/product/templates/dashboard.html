@@ -85,11 +85,11 @@
 								</a>
 								<div class="dropdown-menu dropdown-menu-right">
 									<span class="dropdown-item-text">
-										{% if user.profile.logo %}
+										<!--{% if user.profile.logo %}
 											<div style="margin-right:10px; background: url({{ user.profile.logo.url }}) center center no-repeat; background-size: cover; width: 30px; height: 30px; border-radius: 100%; display: inline-block;"></div>
 										{% else %}
 											<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px; border-radius: 100%; display: inline-block;"/>
-										{% endif %}
+										{% endif %}-->
 										{{request.user.username}}
 									</span>
 
@@ -141,11 +141,11 @@
 			<div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
 				<ul class="list-group" style="position:relative; height:100%;">
 					<li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed" style="padding-top: 34px; padding-bottom: 30px;">
-						{% if user.profile.logo %}
+						<!--{% if user.profile.logo %}
 							<div style="margin-right:10px; background: url({{ user.profile.logo.url }}) center center no-repeat; background-size: cover; width: 30px; height: 30px;"></div>
 						{% else %}
 							<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px;"/>
-						{% endif %}
+						{% endif %}-->
 						
 						<span>{{ user.profile.name }}</span>
 					</li>
@@ -172,12 +172,12 @@
 							</div>
 						</a>
 					{% endif %}
-					<a href="{% url 'dashboard_app:dashserv' %}" class="bg-dark list-group-item list-group-item-action">
+					<!--<a href="{% url 'dashboard_app:dashserv' %}" class="bg-dark list-group-item list-group-item-action">
 						<div class="d-flex w-100 justify-content-start align-items-center">
 							<span class="fa fa-tasks fa-fw mr-3"></span>
 							<span class="menu-collapsed">Servicios</span>    
 						</div>
-					</a>
+					</a>-->
 					<a href="{% url 'dashboard_app:settings' %}" class="bg-dark list-group-item list-group-item-action">
 						<div class="d-flex w-100 justify-content-start align-items-center">
 							<span class="fa fa-cog fa-fw mr-3"></span>

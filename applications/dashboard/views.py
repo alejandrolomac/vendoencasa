@@ -37,6 +37,7 @@ def dashnewprod(request):
                 formprod.imagef = request.FILES['imagef']
                 formprod.user = request.user
                 formprod.available = True
+                formprod.quantity = request.quantity
                 formprod.save()
                 form.save_m2m()
                 return redirect("dashboard_app:dashprod")
@@ -49,6 +50,7 @@ def dashnewprod(request):
                 formprod.imagef = request.FILES['imagef']
                 formprod.user = request.user
                 formprod.available = True
+                formprod.quantity = request.quantity
                 formprod.save()
                 form.save_m2m()
                 return redirect("dashboard_app:dashprod")
@@ -60,6 +62,7 @@ def dashnewprod(request):
             formprod.imagef = request.FILES['imagef']
             formprod.user = request.user
             formprod.available = True
+            formprod.quantity = request.quantity
             formprod.save()
             form.save_m2m()
             return redirect("dashboard_app:dashprod")

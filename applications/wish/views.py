@@ -36,14 +36,14 @@ def add_to_whis(request, slug):
         if order.items.filter(item__slug=item.slug, color=order_item.color, size=order_item.size).exists():
             order_item.save()
             messages.info(request, "Se agrego el producto a tu lista de deseos")
-            return redirect("wish_app:wish")
+            return redirect("product_app:single-product", slug=slug)
         else:
             messages.success(request, "Se agrego el producto a tu lista de deseos")
             order.items.add(order_item)
             order_item.color = colorid
             order_item.size = sizeid
             order_item.save()
-            return redirect("wish_app:wish")
+            return redirect("product_app:single-product", slug=slug)
     else:
         ordered_date = timezone.now()
         order = Wish.objects.create(user=request.user, ordered_date=ordered_date)
@@ -54,7 +54,7 @@ def add_to_whis(request, slug):
         order_item.size = sizeid
         order_item.save()
         messages.success(request, "Se agrego el producto a tu lista de deseos")
-        return redirect("wish_app:wish")
+        return redirect("product_app:single-product", slug=slug)
 
 
 @login_required(login_url='useradmin_app:entrar')

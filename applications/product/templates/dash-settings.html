@@ -4,7 +4,7 @@
 {% load static %}
 
 <h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%; margin-top: 20px; font-size: 40px;">Editar Perfil</h3>
-<div class="card">
+<!--<div class="card">
 	<h4 class="card-header">Configuracion de la cuenta</h4>
 	<div class="card-body">
 		{% if user.profile.logo %}
@@ -18,7 +18,7 @@
 		<p>Sitio Web: {{ user.profile.website }}</p>
 		<p>Slug: {{ user.profile.slug }}</p>
 	</div>
-</div>
+</div>-->
 
 <form class="row newprod mb-5" method="POST" action="" enctype="multipart/form-data">
 	{% csrf_token %}

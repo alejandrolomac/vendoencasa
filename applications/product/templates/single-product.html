@@ -7,6 +7,7 @@
 		<div class="container">
 
 			{% for lp in singleProduct %}
+			<!--<a href="{% url 'product_app:comments' lp.slug %}">Evaluar</a>-->
 				<div class="row">
 					<div class="image-prod col-12 col-md-6">
 						<div id="wrap-slider-product">
@@ -236,32 +237,69 @@
 				</div><!-- End Of Related objets -->
 
 			<div class="fluid-cotainer pb-5" style="padding: 0px; margin: 30px 0px;">
-				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px; margin-bottom: 30px;">Evaluaciones de Clientes {{countcomments}}</h3>
+				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px; margin-bottom: 30px;">Evaluaciones de Clientes ( <b>{{countcomments}}</b> )</h3>
 				<ul class="list-group list-group-flush">
 					{% if countcomments >= 1 %}
 						{% for comm in comments %}
 							<li class="list-group-item" style="padding: 40px 20px; margin-bottom: 10px; border: 1px solid #ccc;">
-								<h4><b>{{comm.user.username}}</b></h4>
-								<span class="text-muted">{{comm.pub_date|date:'d b, Y'}}</span>
-								<p class="mt-2">{{comm.comment}}</p>
+								<h5 style="width: max-content; float: left; padding-right: 15px;"><b>{{comm.user.username}}</b></h5>
+								<fieldset class="rating">
+									{% if comm.calification == "1" %}
+										<label class = "half" for="star5" title="Awesome - 5 stars"></label>
+										<label class = "half" for="star4" title="Pretty good - 4 stars"></label>
+										<label class = "half" for="star3" title="Meh - 3 stars"></label>
+										<label class = "half" for="star2" title="Kinda bad - 2 stars"></label>
+										<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+									{% elif comm.calification == "2" %}
+										<label class = "half" for="star5" title="Awesome - 5 stars"></label>
+										<label class = "half" for="star4" title="Pretty good - 4 stars"></label>
+										<label class = "half" for="star3" title="Meh - 3 stars"></label>
+										<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+										<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+									{% elif comm.calification == "3" %}
+										<label class = "half" for="star5" title="Awesome - 5 stars"></label>
+										<label class = "half" for="star4" title="Pretty good - 4 stars"></label>
+										<label class = "full" for="star3" title="Meh - 3 stars"></label>
+										<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+										<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+									{% elif comm.calification == "4" %}
+										<label class = "half" for="star5" title="Awesome - 5 stars"></label>
+										<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+										<label class = "full" for="star3" title="Meh - 3 stars"></label>
+										<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+										<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+									{% elif comm.calification == "5" %}
+										<label class = "full" for="star5" title="Awesome - 5 stars"></label>
+										<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+										<label class = "full" for="star3" title="Meh - 3 stars"></label>
+										<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+										<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+									{% else %}
+										<label class = "half" for="star1" title="Sucks big time - 1 star"></label>
+										<label class = "half" for="star2" title="Kinda bad - 2 stars"></label>
+										<label class = "half" for="star3" title="Meh - 3 stars"></label>
+										<label class = "half" for="star4" title="Pretty good - 4 stars"></label>
+										<label class = "half" for="star5" title="Awesome - 5 stars"></label>
+									{% endif %}
+								</fieldset>
+								<span class="text-muted w-100 float-left" style="font-size: 14px;">{{comm.pub_date|date:'d b, Y'}}</span>
+								<p class="mt-2 w-100 float-left">{{comm.comment}}</p>
+								{% if comm.imagef.url != '' %}
+									<img src="{{ comm.imagef.url }}" class="d-block comment-image">
+								{% endif %}
+								{% if comm.images.url != '' %}
+									<img src="{{ comm.images.url }}" class="d-block comment-image">
+								{% endif %}
+								{% if comm.imaget.url != '' %}
+									<img src="{{ comm.imaget.url }}" class="d-block comment-image">
+								{% endif %}
 							</li>
 						{% endfor %}
 					{% else %}
 						<h6>No hay evaluaciones</h6>
 					{% endif %}
+					
 				</ul>
-
-				<!--<form class="row mb-5" method="POST" action="{{ lp.get_add_to_cart_url }}" enctype="multipart/form-data">
-					{% csrf_token %}
-					<div class="col-12">
-						{{ form.comment }}
-						{{ form.calification }}
-						{{ form.imagef }}
-						{{ form.images }}
-						{{ form.imaget }}
-						<button class="primaryAction btn" name="create comment" type="submit">Publicar Evaluacion</button>
-					</div>
-				</form>-->
 			</div><!-- End Of Comments -->
 		</div>
 	</div>

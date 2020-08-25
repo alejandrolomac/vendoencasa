@@ -116,7 +116,7 @@ class Products(models.Model):
 	calification = models.IntegerField('Calificacion', blank=True, default=0)
 	slug = models.SlugField('Slug', blank=True, unique=True)
 	pub_date = models.DateTimeField(editable=False, auto_now=True)
-	quantity = models.IntegerField('Cantidad', default=1)
+	quantity = models.IntegerField('Cantidad', default=1, blank=False)
 	productCode = models.CharField("Codigo de Producto", max_length=100, blank=True)
 
 	def __str__(self):
@@ -140,6 +140,9 @@ class Products(models.Model):
 	
 	def get_add_to_cart_url(self):
 		return reverse("cart_app:add-to-cart", kwargs={"slug": self.slug})
+
+	def get_add_to_cart_from_wish_url(self):
+		return reverse("cart_app:add-to-cart-from-wish", kwargs={"slug": self.slug})
 
 	def get_add_to_wish_url(self):
 		return reverse("wish_app:add_to_whis", kwargs={"slug": self.slug})

@@ -29,6 +29,7 @@
 				<tr>
 				<th scope="col">Nombre Producto</th>
 				<th scope="col">Categoría</th>
+				<th scope="col">Inventario</th>
 				<th scope="col"></th>
 				</tr>
 			</thead>
@@ -37,6 +38,7 @@
 					<tr>
 						<td><a href="{% url "dashboard_app:editproduct" prod.id %}">{{prod.title}}</a></td>
 						<td>{{prod.subCategory}}</td>
+						<td>{{prod.quantity}}</td>
 						<td class="text-right"><a href="{% url 'dashboard_app:deleteproduct' prod.id %}" class=""><i class="fa fa-trash"></i></a></td>
 					</tr>
 				{% endfor %}

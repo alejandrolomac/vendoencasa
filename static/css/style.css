@@ -1129,3 +1129,89 @@ ORDER STYLES
 }
 
 
+
+/*------------------------------------------------------
+WISH STYLES
+------------------------------------------------------*/
+
+.wish-btn
+{
+	width: 100%;
+	border-radius: 0px !important;
+	-webkit-transition: all .3s linear;
+	-moz-transition: all .3s linear;
+	-ms-transition: all .3s linear;
+	-o-transition: all .3s linear;
+	transition: all .3s linear;
+}
+
+.wish-btn2
+{
+	width: 100%;
+	border-radius: 0px !important;
+	background: #f25268 !important;
+	-webkit-transition: all .3s linear;
+	-moz-transition: all .3s linear;
+	-ms-transition: all .3s linear;
+	-o-transition: all .3s linear;
+	transition: all .3s linear;
+}
+
+.wish-btn2:hover
+{
+	-webkit-transition: all .3s linear;
+	-moz-transition: all .3s linear;
+	-ms-transition: all .3s linear;
+	-o-transition: all .3s linear;
+	transition: all .3s linear;
+	background: #b84151 !important;
+}
+
+.exhausted
+{
+	width: 100%;
+	height: auto;
+	position: absolute;
+	background: hsla(3, 85%, 57%, .4);
+	color: #fff;
+	display: block;
+	top: 50%;
+	left: 0;
+	right: 0;
+	transform: translateY(-50%);
+	text-align: center;
+	padding: 20px 10px;
+}
+
+
+
+.rating { 
+	border: none;
+	float: left;
+}
+
+.rating > label:before { 
+	font-size: 1em;
+	font-family: FontAwesome;
+	display: inline-block;
+	content: "\f005";
+}
+
+.rating > label { 
+	float: right; 
+}
+
+.rating .full { 
+	color: #FFD700;
+}
+
+.rating .half { 
+	color: #ccc;
+}
+
+.comment-image
+{
+	width: 10%;
+	float: left;
+	height: auto;
+}

@@ -84,11 +84,11 @@
 								</a>
 								<div class="dropdown-menu dropdown-menu-right">
 									<span class="dropdown-item-text">
-										{% if user.profile.logo %}
+										<!--{% if user.profile.logo %}
 											<div style="margin-right:10px; background: url({{ user.profile.logo.url }}) center center no-repeat; background-size: cover; width: 30px; height: 30px; border-radius: 100%; display: inline-block;"></div>
 										{% else %}
 											<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px; border-radius: 100%; display: inline-block;"/>
-										{% endif %}
+										{% endif %}-->
 										{{request.user.username}}
 									</span>
 
@@ -166,6 +166,7 @@
 						<a href="https://www.youtube.com/channel/UCy9F1eY_jK7SlocIBagDQdQ"><i class="fa fa-youtube"></i></a>
 					</li>
 					<li>
+						<!--<a href="https://www.tiktok.com/@vendoencasa"><i class="fa fa-tiktok" style="width: 25px; height: 35px; background: url({% static 'img/tiktok.png' %})center center no-repeat; background-size: contain;"></i></a>-->
 						<a href="https://www.tiktok.com/@vendoencasa"><i class="fa fa-tiktok"></i></a>
 					</li>
 				</ul>

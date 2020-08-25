@@ -2,11 +2,21 @@
 
 {% block content %}
 	{% load static %}
-	{% load thumbnail %}
 	<div class="container-fluid wrap-single-product">
 		<div class="container">
 
-			Comentarios
+			<h2>Comentarios</h2>
+			<form class="row mb-5" method="POST" action="{{ lp.get_add_to_cart_url }}" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="col-12">
+					{{ form.comment }}
+					{{ form.calification }}
+					{{ form.imagef }}
+					{{ form.images }}
+					{{ form.imaget }}
+					<button class="primaryAction btn" name="create comment" type="submit">Publicar Evaluacion</button>
+				</div>
+			</form>
 			
 		</div>
 	</div>

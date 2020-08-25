@@ -12,10 +12,11 @@ class ProductForm(forms.ModelForm):
     price = forms.FloatField(widget=forms.TextInput(attrs={'placeholder':'Precio'}))
     pricePromo = forms.FloatField(widget=forms.TextInput(attrs={'placeholder':'Precio Promoción', 'class':'mt-2'}))
     resume = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Descripción del producto', 'class':'mt-3'}))
+    quantity = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder':'Cantidad'}))
     
     class Meta:
         model = Products
-        fields = ('title', 'subCategory', 'imagef', 'images', 'imaget', 'price', 'pricePromo', 'promotion', 'colors', 'resume', 'sizes', 'available')
+        fields = ('title', 'subCategory', 'imagef', 'images', 'imaget', 'price', 'pricePromo', 'promotion', 'colors', 'resume', 'sizes', 'available', 'quantity')
     
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)

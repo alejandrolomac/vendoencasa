@@ -10,6 +10,9 @@
 					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mi Cuenta</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" id="points-tab" data-toggle="tab" href="#points" role="tab" aria-controls="points" aria-selected="false">Mis Puntos</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mis Compras</a>
 				</li>
 			</ul>
@@ -55,8 +58,15 @@
 
 					</form>
 
-				</div>
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding: 30px 0px;">...</div>
+				</div><!-- End Of Profile -->
+
+				<div class="tab-pane fade" id="points" role="tabpanel" aria-labelledby="points-tab" style="padding: 30px 0px;">
+					<h2 class="text-center"><b>Mis Puntos</b></h2>
+					<a href="#" class="text-muted text-center w-100" style="font-size: 14px; display: block;">Conoce cómo obtener puntos Vendo en Casa <i class="fa fa-question-circle"></i></a>
+					<h2 class="text-center pt-5 pb-5" style="font-size: 70px;color: #ef4036;"><b>{{ user.profile.points }}</b></h2>
+				</div><!-- End Of Points -->
+
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding: 30px 0px;">...</div><!-- End Of history -->
 			</div>
 		</div>
 	</div>

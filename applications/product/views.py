@@ -18,11 +18,11 @@ from applications.useradmin.models import Profile
 
 def index(request):
 	categorys = Category.objects.all()
-	virus_prod = Products.objects.all().filter(available=True, virus=True).order_by('?')
-	new_prod = Products.objects.all().filter(available=True).order_by('?')[:10]
-	promo_prod = Products.objects.all().filter(promotion=True, available=True).order_by('?')[:10]
-	season_prod = Products.objects.all().filter(season=True, available=True).order_by('?')
-	less_prod = Products.objects.all().filter(price__lte=100).order_by('?')
+	virus_prod = Products.objects.all().filter(available=True, quantity__gte=1, virus=True).order_by('?')
+	new_prod = Products.objects.all().filter(available=True, quantity__gte=1).order_by('?')[:10]
+	promo_prod = Products.objects.all().filter(promotion=True, quantity__gte=1, available=True).order_by('?')[:10]
+	season_prod = Products.objects.all().filter(season=True, quantity__gte=1, available=True).order_by('?')
+	less_prod = Products.objects.all().filter(price__lte=100, quantity__gte=1).order_by('?')
 	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod, 'promoProd': promo_prod, 'seasonProd': season_prod, 'lessProd': less_prod, 'virusProd': virus_prod})
 
 
@@ -39,7 +39,7 @@ class ListSubCategorys(ListView):
 		id = self.kwargs['pk']
 		context = super(ListSubCategorys, self).get_context_data(**kwargs)
 		cats_selected = Category.objects.get(id=id)
-		products_cats = Products.objects.all().filter(subCategory_id__category_id__id=id, available=True)
+		products_cats = Products.objects.all().filter(subCategory_id__category_id__id=id, available=True, quantity__gte=1)
 		context['catSelect'] = cats_selected
 		context['productsCatSelect'] = products_cats
 		return context
@@ -51,7 +51,7 @@ class ListSubCatProducts(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = Products.objects.all().filter(subCategory__id=id, available=True)
+		object_list = Products.objects.all().filter(subCategory__id=id, available=True, quantity__gte=1)
 		return object_list
 
 
@@ -61,7 +61,7 @@ class ListCompanyProducts(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = Products.objects.all().filter(company__id=id, available=True)
+		object_list = Products.objects.all().filter(company__id=id, available=True, quantity__gte=1)
 		return object_list
 	
 	def get_context_data(self, **kwargs):
@@ -82,7 +82,7 @@ class ListCompanyDelivery(ListView):
 def listproducts(request):
 	paginate_by = 18
 	categorys = Category.objects.all()
-	productslist = Products.objects.all().filter(available=True).order_by('-pub_date')
+	productslist = Products.objects.all().filter(available=True, quantity__gte=1).order_by('-pub_date')
 	paginator = Paginator(productslist, 18)
 
 	page = request.GET.get('page')
@@ -123,17 +123,24 @@ class SingleProduct(ListView):
 		return context
 
 @login_required(login_url='useradmin_app:entrar')
-def newComment(request):
-	product_select = Products.objects.get(slug=request.slug)
+def newComment(request, slug):
+	product_select = Products.objects.get(slug=slug)
 	user_wish = request.user
 	userprofile = get_object_or_404(Profile, pk=user_wish.profile.id)
-	form = CommentForm(request.POST, request.FILES)
-	if form.is_valid():
-		formprod = form.save(commit=False)
-		formprod.user = user_wish
-		formprod.product = product_select
-		formprod.save()
-		form.save_m2m()
+	new_comment = None
+	if request.method == 'POST':
+		form = CommentForm(request.POST, request.FILES)
+		if form.is_valid():
+			formprod = form.save(commit=False)
+			formprod.user = user_wish
+			formprod.product = product_select
+			userprofile.points += 10
+			userprofile.save()
+			formprod.save()
+			form.save_m2m()
+			return redirect("product_app:single-product", slug=slug)
+	else:
+		form = CommentForm()
 	return render(request, "comments.html", {'form': form})
 
 def search(request):
@@ -145,12 +152,12 @@ def search(request):
 		queryset = ( 
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.all().filter(queryset, available=True).distinct().order_by('-pub_date')
+		results = Products.objects.all().filter(queryset, available=True, quantity__gte=1).distinct().order_by('-pub_date')
 	else:
 		queryset = (
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.all().filter(queryset, available=True).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
+		results = Products.objects.all().filter(queryset, available=True, quantity__gte=1).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
 	
 	paginator = Paginator(results, 20)
 	page = request.GET.get('page', 1)
@@ -167,7 +174,7 @@ def plan(request):
 
 
 def lessProduct(request):
-	less_prod = Products.objects.all().filter(price__lte=100)
+	less_prod = Products.objects.all().filter(price__lte=100, quantity__gte=1)
 	paginator = Paginator(less_prod, 20)
 	page = request.GET.get('page', 1)
 	contacts = paginator.get_page(page)
@@ -175,7 +182,7 @@ def lessProduct(request):
 
 
 def covidProduct(request):
-	covid_prod = Products.objects.all().filter(virus=True)
+	covid_prod = Products.objects.all().filter(virus=True, quantity__gte=1)
 	paginator = Paginator(covid_prod, 20)
 	page = request.GET.get('page', 1)
 	contacts = paginator.get_page(page)
@@ -205,7 +212,7 @@ class ListUserCompanyProducts(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = Products.objects.all().filter(user__id=id, available=True)
+		object_list = Products.objects.all().filter(user__id=id, available=True, quantity__gte=1)
 		return object_list
 	
 	def get_context_data(self, **kwargs):
