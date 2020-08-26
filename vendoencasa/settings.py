@@ -181,7 +181,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_USE_TLS = True
 
 django_heroku.settings(locals())
