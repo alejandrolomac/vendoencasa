@@ -1183,6 +1183,22 @@ WISH STYLES
 	padding: 25px 10px;
 }
 
+.exhausted2
+{
+	width: 100%;
+	height: auto;
+	position: absolute;
+	background: hsla(3, 85%, 57%, .4);
+	color: #fff;
+	display: block;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: center;
+	padding: 5px 10px;
+	font-size: 12px;
+}
+
 
 .rating { 
 	border: none;

@@ -221,3 +221,12 @@ class ListUserCompanyProducts(ListView):
 		user_company_select = User.objects.get(id=id)
 		context['companySelect'] = user_company_select
 		return context
+
+
+def terms(request):
+	data = {}
+	return render(request,'terms.html', data)
+
+def contract(request):
+	data = {}
+	return render(request,'contract.html', data)

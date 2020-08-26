@@ -18,5 +18,7 @@ urlpatterns = [
 	path('empresa/<slug>/<pk>/', views.ListCompanyProducts.as_view(), name="company-products"),
 	path('uempresa/<slug>/<pk>/', views.ListUserCompanyProducts.as_view(), name="user-company-products"),
 	path('search/', views.search, name='search'),
-	path('planes/', views.plan, name='planes')
+	path('planes/', views.plan, name='planes'),
+	path('terms/', views.terms, name='terms'),
+	path('contract/', views.contract, name='contract')
 ] 

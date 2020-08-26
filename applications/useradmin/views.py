@@ -8,6 +8,10 @@ from django.db import transaction
 from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
 from applications.useradmin.models import Profile
+from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 def registerDefault(request):
     context = {}
@@ -15,6 +19,19 @@ def registerDefault(request):
 
 @transaction.atomic
 def registerPage(request):
+    #:::::: EMAIL ::::::
+    title = 'Bienvenido a Vendo en Casa'
+    to = 'reikrad@gmail.com'
+    html_content = render_to_string('welcome_email.html', {'title': title})
+    text_content = strip_tags(html_content)
+    email = EmailMultiAlternatives(
+        title,
+        text_content,
+        settings.EMAIL_HOST_USER,
+        [to]
+    )
+    email.attach_alternative(html_content, "text/html")
+    #:::::: EMAIL ::::::
     if request.user.is_authenticated:
         return redirect('product_app:index')
     else:
@@ -29,6 +46,7 @@ def registerPage(request):
                 user.profile.save()
                 user.save()
 
+                email.send()
                 messages.success(request, "¡Gracias por unirte!")
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password1')
@@ -98,6 +116,19 @@ def logoutUser(request):
 
 @transaction.atomic
 def registerCompany(request):
+    #:::::: EMAIL ::::::
+    title = 'Bienvenido a Vendo en Casa'
+    to = 'reikrad@gmail.com'
+    html_content = render_to_string('welcome_email_company.html', {'title': title})
+    text_content = strip_tags(html_content)
+    email = EmailMultiAlternatives(
+        title,
+        text_content,
+        settings.EMAIL_HOST_USER,
+        [to]
+    )
+    email.attach_alternative(html_content, "text/html")
+    #:::::: EMAIL ::::::
     if request.user.is_authenticated:
         return redirect('dashboard_app:dashboard')
     else:
@@ -110,13 +141,14 @@ def registerCompany(request):
                 user.profile.phone = company_form.cleaned_data['phone']
                 user.profile.name = company_form.cleaned_data['name']
                 user.profile.resume = company_form.cleaned_data['resume']
-                user.profile.logo = company_form.cleaned_data['logo']
+                #user.profile.logo = company_form.cleaned_data['logo']
                 user.profile.plan = 'Vendedor'
                 permission = Permission.objects.get(name='Can add products')
                 user.user_permissions.add(permission)
                 user.profile.save()
                 user.save()
 
+                email.send()
                 messages.success(request, "¡Gracias por unirte!")
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password1')

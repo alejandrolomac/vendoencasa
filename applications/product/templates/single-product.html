@@ -103,13 +103,22 @@
 								{% endif %}
 							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume }}</p></li>
 							    <li class="list-group-item">
-							    	<p>Compartir: 
-										<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-facebook"></i></a>
-										<a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}%20{{ lp.resume }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-twitter" ></i></a>
-										<a href="whatsapp://send?text={{ request.build_absolute_uri }}" target="_blank" data-action="share/whatsapp/share" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-whatsapp" ></i></a>
-									</p>
+							    	Compartir: 
+									<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-facebook"></i></a>
+									<a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}%20{{ lp.resume }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-twitter" ></i></a>
+									<a href="whatsapp://send?text={{ request.build_absolute_uri }}" target="_blank" data-action="share/whatsapp/share" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-whatsapp" ></i></a>
 									
 								</li>
+								{% if lp.quantity == 1 %}
+									<li class="list-group-item" style="background: #f1f0f0;">
+										Solo queda {{lp.quantity}} en inventario, pero se traeran más.
+									</li>
+								{% elif lp.quantity > 1 and lp.quantity < 4 %}
+									<li class="list-group-item" style="background: #f1f0f0;">
+										Solo quedan {{lp.quantity}} en inventario, pero se traeran más.
+									</li>
+								{% endif %}
+								
 								<li class="list-group-item">
 									{% if lp.colors.all or lp.sizes.all %}
 										<form action="{{ lp.get_add_to_cart_url }}" method='POST' style="width: 100%;">

@@ -23,7 +23,7 @@ class CreateCompanyForm(UserCreationForm):
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('name', 'resume', 'location', 'phone', 'logo', 'facebook', 'instagram', 'website')
+        fields = ('name', 'resume', 'location', 'phone', 'facebook', 'instagram', 'website')
 
 
 class UserSettingForm(UserChangeForm):

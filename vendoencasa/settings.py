@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '&mcng4k3l9@5y4&(8(4j*1$o022z%3(^v2hfe#y=!71@k@#ja$'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://www.vendoencasa.net', 'http://www.vendoencasa.net', 'www.vendoencasa.net', 'http://vendoencasa.herokuapp.com']
 
@@ -177,5 +177,11 @@ LOGIN_REDIRECT_URL = 'product_app:index'
 
 SITE_ID = 2
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'vendoencasahn@gmail.com'
+EMAIL_HOST_PASSWORD = 'yvacem93'
+EMAIL_USE_TLS = True
 
 django_heroku.settings(locals())

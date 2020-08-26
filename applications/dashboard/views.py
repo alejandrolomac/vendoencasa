@@ -13,11 +13,16 @@ from django.views.generic import (
 	ListView,
 )
 from .forms import CreateCompanyForm, CompanyForm
+from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 @login_required(login_url='useradmin_app:entrar')
 def dashboard(request):
+    iduser = request.user.id
     companysCount = Company.objects.all().count()
-    productsCount = Products.objects.all().count()
+    productsCount = Products.objects.all().filter(user__id=iduser).count()
     servicesCount = Services.objects.all().count()
     usersCount = User.objects.all().count()
     showProducts = Products.objects.all()[:10]
@@ -37,7 +42,6 @@ def dashnewprod(request):
                 formprod.imagef = request.FILES['imagef']
                 formprod.user = request.user
                 formprod.available = True
-                formprod.quantity = request.quantity
                 formprod.save()
                 form.save_m2m()
                 return redirect("dashboard_app:dashprod")
@@ -50,7 +54,6 @@ def dashnewprod(request):
                 formprod.imagef = request.FILES['imagef']
                 formprod.user = request.user
                 formprod.available = True
-                formprod.quantity = request.quantity
                 formprod.save()
                 form.save_m2m()
                 return redirect("dashboard_app:dashprod")
@@ -62,7 +65,6 @@ def dashnewprod(request):
             formprod.imagef = request.FILES['imagef']
             formprod.user = request.user
             formprod.available = True
-            formprod.quantity = request.quantity
             formprod.save()
             form.save_m2m()
             return redirect("dashboard_app:dashprod")
