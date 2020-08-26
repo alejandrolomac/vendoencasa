@@ -177,11 +177,14 @@ LOGIN_REDIRECT_URL = 'product_app:index'
 
 SITE_ID = 2
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+SENDGRID_API_KEY = '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'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = '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'
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'vendoencasahn@gmail.com'
 
 django_heroku.settings(locals())
