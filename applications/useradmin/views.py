@@ -19,19 +19,6 @@ def registerDefault(request):
 
 @transaction.atomic
 def registerPage(request):
-    #:::::: EMAIL ::::::
-    title = 'Bienvenido a Vendo en Casa'
-    to = 'reikrad@gmail.com'
-    html_content = render_to_string('welcome_email.html', {'title': title})
-    text_content = strip_tags(html_content)
-    email = EmailMultiAlternatives(
-        title,
-        text_content,
-        settings.EMAIL_HOST_USER,
-        [to]
-    )
-    email.attach_alternative(html_content, "text/html")
-    #:::::: EMAIL ::::::
     if request.user.is_authenticated:
         return redirect('product_app:index')
     else:
@@ -45,8 +32,21 @@ def registerPage(request):
                 user.profile.phone = profile_form.cleaned_data['phone']
                 user.profile.save()
                 user.save()
-
+                
+                #:::::: EMAIL ::::::
+                title = 'Bienvenido a Vendo en Casa'
+                to = form.email
+                html_content = render_to_string('welcome_email.html', {'title': title})
+                text_content = strip_tags(html_content)
+                email = EmailMultiAlternatives(
+                    title,
+                    text_content,
+                    settings.EMAIL_HOST_USER,
+                    [to]
+                )
+                email.attach_alternative(html_content, "text/html")
                 email.send()
+                #:::::: EMAIL ::::::
                 messages.success(request, "¡Gracias por unirte!")
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password1')
@@ -116,19 +116,6 @@ def logoutUser(request):
 
 @transaction.atomic
 def registerCompany(request):
-    #:::::: EMAIL ::::::
-    title = 'Bienvenido a Vendo en Casa'
-    to = 'reikrad@gmail.com'
-    html_content = render_to_string('welcome_email_company.html', {'title': title})
-    text_content = strip_tags(html_content)
-    email = EmailMultiAlternatives(
-        title,
-        text_content,
-        settings.EMAIL_HOST_USER,
-        [to]
-    )
-    email.attach_alternative(html_content, "text/html")
-    #:::::: EMAIL ::::::
     if request.user.is_authenticated:
         return redirect('dashboard_app:dashboard')
     else:
@@ -148,7 +135,21 @@ def registerCompany(request):
                 user.profile.save()
                 user.save()
 
+                #:::::: EMAIL ::::::
+                title = 'Bienvenido a Vendo en Casa'
+                to = form.email
+                html_content = render_to_string('welcome_email_company.html', {'title': title})
+                text_content = strip_tags(html_content)
+                email = EmailMultiAlternatives(
+                    title,
+                    text_content,
+                    settings.EMAIL_HOST_USER,
+                    [to]
+                )
+                email.attach_alternative(html_content, "text/html")
                 email.send()
+                #:::::: EMAIL ::::::
+
                 messages.success(request, "¡Gracias por unirte!")
                 username = form.cleaned_data.get('username')
                 password = form.cleaned_data.get('password1')
