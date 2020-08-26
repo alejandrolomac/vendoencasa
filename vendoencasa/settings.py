@@ -178,10 +178,10 @@ LOGIN_REDIRECT_URL = 'product_app:index'
 SITE_ID = 2
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'vendoencasahn@gmail.com'
-EMAIL_HOST_PASSWORD = 'yvacem93'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_USE_TLS = True
 
 django_heroku.settings(locals())
