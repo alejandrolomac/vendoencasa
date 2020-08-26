@@ -35,7 +35,7 @@ def registerPage(request):
                 
                 #:::::: EMAIL ::::::
                 title = 'Bienvenido a Vendo en Casa'
-                to = form.email
+                to = user.email
                 html_content = render_to_string('welcome_email.html', {'title': title})
                 text_content = strip_tags(html_content)
                 email = EmailMultiAlternatives(
@@ -137,7 +137,7 @@ def registerCompany(request):
 
                 #:::::: EMAIL ::::::
                 title = 'Bienvenido a Vendo en Casa'
-                to = form.email
+                to = user.email
                 html_content = render_to_string('welcome_email_company.html', {'title': title})
                 text_content = strip_tags(html_content)
                 email = EmailMultiAlternatives(
