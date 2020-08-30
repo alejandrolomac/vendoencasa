@@ -8,6 +8,7 @@ from django.db import transaction
 from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
 from applications.useradmin.models import Profile
+from applications.product.models import RegistrationCode
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -30,6 +31,7 @@ def registerPage(request):
                 user.profile.gender = profile_form.cleaned_data['gender']
                 user.profile.location = profile_form.cleaned_data['location']
                 user.profile.phone = profile_form.cleaned_data['phone']
+                user.profile.code = profile_form.cleaned_data['code']
                 user.profile.save()
                 user.save()
                 
@@ -167,8 +169,15 @@ def registerCompany(request):
 
 @login_required(login_url='useradmin_app:entrar')
 def perfil(request):
+    acode = RegistrationCode.objects.all().filter(associated=request.user.id)
+    if acode:
+        affiliatecode = RegistrationCode.objects.get(associated=request.user.id)
+        affiliates = Profile.objects.all().filter(code=affiliatecode).count()
+    else:
+        affiliatecode = ''
+        affiliates = ''
     product_to_edit = get_object_or_404(User, pk=request.user.id)
-    profile_to_edit = get_object_or_404(Profile, pk=request.user.profile.id)
+    profile_to_edit = get_object_or_404(Profile, user=request.user.id)
     form = UserSettingForm(instance=product_to_edit)
     formp = UserSettingProfileForm(instance=profile_to_edit)
     if request.method == 'POST':
@@ -182,4 +191,4 @@ def perfil(request):
             form = CreateCompanyForm(instance=product_to_edit)
             formp = CompanyForm(instance=profile_to_edit)
 
-    return render(request, "perfil.html", {'form': form, 'formp': formp, 'product': product_to_edit})
+    return render(request, "perfil.html", {'form': form, 'formp': formp, 'product': product_to_edit, 'affiliatecode': affiliatecode, 'affiliates': affiliates})

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Company, Category, SubCategory, Products, Color, Size, Comment
+from .models import Company, Category, SubCategory, Products, Color, Size, Comment, DiscountCode, RegistrationCode
 
 class CommentAdmin(admin.ModelAdmin):
 	list_display = (
@@ -54,6 +54,27 @@ class ProductsAdmin(admin.ModelAdmin):
 	search_fields = ( 'title', 'productCode', )
 	list_filter = ( 'subCategory', 'season', 'virus', )
 
+class RegistrationCodeAdmin(admin.ModelAdmin):
+	list_display = (
+		'associated',
+		'code',
+	)
+
+	search_fields = ( 'associated', 'code', )
+
+class DiscountCodeAdmin(admin.ModelAdmin):
+	list_display = (
+		'associated',
+		'code',
+		'typediscount',
+		'discount',
+	)
+
+	search_fields = ( 'associated', 'code', )
+
+
+admin.site.register(RegistrationCode, RegistrationCodeAdmin)
+admin.site.register(DiscountCode, DiscountCodeAdmin)
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)

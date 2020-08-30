@@ -28,6 +28,7 @@
 			<thead class="thead-dark">
 				<tr>
 				<th scope="col">Nombre Producto</th>
+				<th scope="col">Código</th>
 				<th scope="col">Categoría</th>
 				<th scope="col"></th>
 				</tr>
@@ -36,6 +37,7 @@
 				{% for prod in productlist %}
 					<tr>
 						<td><a href="{% url "dashboard_app:editcatalogue" prod.id %}">{{prod.title}}</a></td>
+						<td>{{prod.productCode}}</td>
 						<td>{{prod.subCategory}}</td>
 						<td class="text-right"><a href="{% url 'dashboard_app:deletecatalogue' prod.id %}" class=""><i class="fa fa-trash"></i></a></td>
 					</tr>

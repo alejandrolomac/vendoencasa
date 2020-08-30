@@ -15,6 +15,11 @@
 				<li class="nav-item">
 					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mis Compras</a>
 				</li>
+				{% if affiliates != '' %}
+					<li class="nav-item">
+						<a class="nav-link" id="affiliate-tab" data-toggle="tab" href="#affiliate" role="tab" aria-controls="affiliate" aria-selected="false">Afiliados</a>
+					</li>
+				{% endif %}
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="padding: 30px 0px;">
@@ -67,6 +72,17 @@
 				</div><!-- End Of Points -->
 
 				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding: 30px 0px;">...</div><!-- End Of history -->
+
+				{% if affiliates != '' %}
+					<div class="tab-pane fade" id="affiliate" role="tabpanel" aria-labelledby="affiliate-tab" style="padding: 30px 0px;">
+						<h2 class="text-center mt-2"><b>Mi Código de Afiliado</b></h2>
+						<h2 class="text-center pt-0 pb-3" style="font-size: 80px;"><b>{{affiliatecode}}</b></h2>
+						<a href="#" class="text-muted text-center w-100" style="font-size: 14px; display: block;">Beneficios de conseguir afiliados con tu código</a>
+
+						<h2 class="text-center mt-5"><b>Mis Afiliados</b></h2>
+						<h2 class="text-center pt-0 pb-3" style="font-size: 80px; color: #ef4036;"><b>{{affiliates}}</b></h2>
+					</div><!-- End Of affiliates -->
+				{% endif %}
 			</div>
 		</div>
 	</div>

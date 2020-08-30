@@ -34,6 +34,7 @@ class Profile(models.Model):
     plan = models.TextField('Plan', max_length=50, choices=PLAN_CHOICES, blank=True, default='Comprador')
     points = models.IntegerField('Puntos', default=0, blank=True, null=True )
     slug = models.SlugField('Slug', blank=True, unique=True)
+    code = models.CharField("Codigo de Registro", max_length=100, blank=True)
 
     def save(self, *args, **kwargs):
         if( self.name ):

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from applications.product.models import Company, Category, SubCategory, Products
+from applications.product.models import Company, Category, SubCategory, Products, DiscountCode, RegistrationCode
 from applications.services.models import Services
 from applications.useradmin.models import Profile
 from applications.orders.models import OrdersProducts
