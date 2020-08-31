@@ -33,7 +33,8 @@ def add_to_cart(request, slug):
         user=request.user,
         ordered=False
     )
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    order_qs = Order.objects.filter(user=request.user, ordered=False,
+        status='NoPagados')
     if order_qs.exists():
         order = order_qs[0]
         if order.items.filter(item__slug=item.slug, color=order_item.color, size=order_item.size).exists():
@@ -51,7 +52,7 @@ def add_to_cart(request, slug):
             return redirect("cart_app:order")
     else:
         ordered_date = timezone.now()
-        order = Order.objects.create(user=request.user, ordered_date=ordered_date)
+        order = Order.objects.create(user=request.user, ordered_date=ordered_date, status='NoPagados')
         order.orderCode = str(order.id) + '-' + str(request.user.id) + '-' + str(order.ordered_date.strftime('%Y%m%d'))
         order.items.add(order_item)
         order.save()
@@ -250,29 +251,15 @@ def remove_from_cart_sc(request, slug, color, size):
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
-            order = Order.objects.get(user=self.request.user, ordered=False)
+            order = Order.objects.get(user=self.request.user, ordered=False, status='NoPagados')
             orCode = order.orderCode
-            #mensaje de compra
-            purchase_message = 'https://api.whatsapp.com/send?phone=50499394028&text='
-            price_total = Order.objects.get(user=self.request.user, ordered=False).get_total()
-            title_product = Order.objects.get(user=self.request.user, ordered=False).stringNames()
-            if( self.request.user.first_name ):
-                usuario_name = self.request.user.first_name
-            elif( self.request.user.first_name and self.request.user.last_name ):
-                usuario_name = self.request.user.first_name + " " + self.request.user.last_name
-            else:
-                usuario_name = self.request.user.username
-
-            if (self.request.user.profile.location):
-                location = '%0D%0ADirección: ' + self.request.user.profile.location
-            else:
-                location = ''
-            final_message = str(purchase_message) + '--- Nuevo pedido de ' + str(usuario_name) + '---%0D%0A%0D%0A'+ str(title_product) + '%0D%0A' + "----- Pago total: " + str(price_total) + "L." + str(location)
-            #mensaje de compra
+            price_total = Order.objects.get(user=self.request.user, ordered=False, status='NoPagados').get_total()
+            title_product = Order.objects.get(user=self.request.user, ordered=False, status='NoPagados').stringNames()
+            status = Order.objects.get(user=self.request.user, status='NoPagados')
             context = {
                 'object': order,
                 'code': orCode,
-                'purchase_message': final_message,
+                'status': status
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:

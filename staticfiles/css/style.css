@@ -1195,7 +1195,8 @@ WISH STYLES
 	left: 0;
 	right: 0;
 	text-align: center;
-	padding: 10px 10px;
+	padding: 5px 10px;
+	font-size: 12px;
 }
 
 
@@ -1228,4 +1229,11 @@ WISH STYLES
 	width: 10%;
 	float: left;
 	height: auto;
+}
+
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link
+{
+	background: #ef4036 !important;
+	color: #fff !important;
 }

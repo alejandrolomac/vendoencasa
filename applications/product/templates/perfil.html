@@ -71,7 +71,181 @@
 					<h2 class="text-center pt-5 pb-5" style="font-size: 70px;color: #ef4036;"><b>{{ user.profile.points }}</b></h2>
 				</div><!-- End Of Points -->
 
-				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding: 30px 0px;">...</div><!-- End Of history -->
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" style="padding: 30px 0px;">
+					<p class="text-muted pt-2 pb-2">Historial de Compras</p>
+					<ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="pills-nopagado-tab" data-toggle="pill" href="#pills-nopagado" role="tab" aria-controls="pills-nopagado" aria-selected="true">No Pagado</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-procesado-tab" data-toggle="pill" href="#pills-procesado" role="tab" aria-controls="pills-procesado" aria-selected="false">Precesando</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-enviado-tab" data-toggle="pill" href="#pills-enviado" role="tab" aria-controls="pills-enviado" aria-selected="false">Enviado</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-pagado-tab" data-toggle="pill" href="#pills-pagado" role="tab" aria-controls="pills-pagado" aria-selected="false">Pagado</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="pills-comentados-tab" data-toggle="pill" href="#pills-comentados" role="tab" aria-controls="pills-comentados" aria-selected="false">Comentados</a>
+						</li>
+					</ul>
+					<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-nopagado" role="tabpanel" aria-labelledby="pills-nopagado-tab">
+							{% if order != '' %}
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">Código</th>
+												<th scope="col">Fecha de Pedido</th>
+												<th scope="col">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<a href="#">{{ order.orderCode }}</a>
+												</td>
+												<td>
+													<p>{{ order.ordered_date }}</p>
+												</td>
+												<td>
+													<p>{{ order.get_total }}<span style="font-size: .8em;">L.</span></p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							{% else %}
+								<p>No tienes pedidos sin pagar.</p>
+							{% endif %}
+						</div>
+						<div class="tab-pane fade" id="pills-procesado" role="tabpanel" aria-labelledby="pills-procesado-tab">
+							{% if porder != '' %}
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">Código</th>
+												<th scope="col">Fecha de Pedido</th>
+												<th scope="col">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<a href="#">{{ porder.orderCode }}</a>
+												</td>
+												<td>
+													<p>{{ porder.ordered_date }}</p>
+												</td>
+												<td>
+													<p>{{ porder.get_total }}<span style="font-size: .8em;">L.</span></p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							{% else %}
+								<p>No tienes pedidos en proceso.</p>
+							{% endif %}
+						</div>
+
+						<div class="tab-pane fade" id="pills-enviado" role="tabpanel" aria-labelledby="pills-enviado-tab">
+							{% if eorder != '' %}
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">Código</th>
+												<th scope="col">Fecha de Pedido</th>
+												<th scope="col">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<a href="#">{{ eorder.orderCode }}</a>
+												</td>
+												<td>
+													<p>{{ eorder.ordered_date }}</p>
+												</td>
+												<td>
+													<p>{{ eorder.get_total }}<span style="font-size: .8em;">L.</span></p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							{% else %}
+								<p>No tienes pedidos enviados.</p>
+							{% endif %}
+						</div>
+
+						<div class="tab-pane fade" id="pills-pagado" role="tabpanel" aria-labelledby="pills-pagado-tab">
+							{% if pagorder != '' %}
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">Código</th>
+												<th scope="col">Fecha de Pedido</th>
+												<th scope="col">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<a href="#">{{ pagorder.orderCode }}</a>
+												</td>
+												<td>
+													<p>{{ pagorder.ordered_date }}</p>
+												</td>
+												<td>
+													<p>{{ pagorder.get_total }}<span style="font-size: .8em;">L.</span></p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							{% else %}
+								<p>No tienes pedidos pagados.</p>
+							{% endif %}
+						</div>
+						<div class="tab-pane fade" id="pills-comentados" role="tabpanel" aria-labelledby="pills-comentados-tab">
+							{% if comeorder != '' %}
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead class="thead-dark">
+											<tr>
+												<th scope="col">Código</th>
+												<th scope="col">Fecha de Pedido</th>
+												<th scope="col">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<a href="#">{{ comeorder.orderCode }}</a>
+												</td>
+												<td>
+													<p>{{ comeorder.ordered_date }}</p>
+												</td>
+												<td>
+													<p>{{ comeorder.get_total }}<span style="font-size: .8em;">L.</span></p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							{% else %}
+								<p>Aún no has comentado ningún producto.</p>
+							{% endif %}
+						</div>
+					</div>
+
+				</div><!-- End Of history -->
 
 				{% if affiliates != '' %}
 					<div class="tab-pane fade" id="affiliate" role="tabpanel" aria-labelledby="affiliate-tab" style="padding: 30px 0px;">

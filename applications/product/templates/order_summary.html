@@ -14,8 +14,121 @@
 					<h5><b>Teléfono:</b> {{ user.profile.phone }}</h5>
 				{% endif %}
 				<h5><b>N.° Pedido:</b> {{ code }}</h5>
+			</div><!-- End Of Header Orders -->
+
+			<div class="row m-0 mb-5">
+				<div class="col-md-12 col-lg-8 pl-0 mb-4">
+					{% for oreder_item in object.items.all %}
+						<div class="card mb-3 p-2" style="background: #f9f9f9; box-shadow: 0px 4px 7px #ddd; border-radius: 5px; border-bottom: 1px solid #fff !important;">
+							<div class="row no-gutters">
+								<div class="col-2">
+									<img src="{{ oreder_item.item.imagef.url }}" class="card-img">
+								</div>
+								<div class="col-6">
+									<div style="display: block; height: 100%; position: relative;">
+										<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px;">
+											<a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title|truncatechars:50 }}</a>
+											<p class="card-text mb-0">
+												{% if oreder_item.color %}
+													<span class="badge badge-primary">{{ oreder_item.color }}</span>
+												{% endif %}
+												{% if oreder_item.size %}
+													<span class="badge badge-success">{{ oreder_item.size }}</span>
+												{% endif %}
+											</p>
+											<p class="card-text mb-0">
+												{% if oreder_item.item.pricePromo %}
+													{{ oreder_item.item.pricePromo|floatformat:2 }}<span style="font-size: .8em;">L.</span>
+												{% else %}
+													{{ oreder_item.item.price|floatformat:2 }}<span style="font-size: .8em;">L.</span>
+												{% endif %}
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-1">
+									<div style="display: block; height: 100%; position: relative;">
+										<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px;">
+											<a href="{% url 'cart_app:add-to-cart' oreder_item.item.slug %}" style="width: 100%; float: left; text-align: center;"><i class="fa fa-plus"></i></a>
+											<span style="width: 100%; float: left; text-align: center;">{{ oreder_item.quantity }}</span>
+											<a href="{% url 'cart_app:remove-item-cart' oreder_item.item.slug %}" style="width: 100%; float: left; text-align: center;"><i class="fa fa-minus"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="col-2">
+									<div style="display: block; height: 100%; position: relative;">
+										<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px; text-align: center;">
+											{% if oreder_item.get_amount_saved != 0 %}
+												{% if oreder_item.quantity != 0 %}
+													{{oreder_item.get_total_discount_item_price|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-warning">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
+													</span>
+												{% else %}
+													{{oreder_item.item.pricePromo|floatformat:2}}<span style="font-size: .8em;">L.</span> <span class="badge badge-warning">Ahorraste: {{oreder_item.get_amount_saved|floatformat:2}}<span style="font-size: .8em;">L.</span>
+													</span>
+												{% endif %}
+											{% else %}
+												{% if oreder_item.quantity != 0 %}
+													{{oreder_item.get_total_item_price|floatformat:2}}<span style="font-size: .8em;">L.</span>
+												{% else %}
+													{{oreder_item.item.price|floatformat:2}}<span style="font-size: .8em;">L.</span>
+												{% endif %}
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								<div class="col-1">
+									<div style="display: block; height: 100%; position: relative;">
+										<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px; text-align: center;">
+											{% if oreder_item.color and oreder_item.size %}
+												<a href="{% url 'cart_app:remove-to-cart-size-color' oreder_item.item.slug oreder_item.color oreder_item.size %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+											{% elif oreder_item.color and not oreder_item.size %}
+												<a href="{% url 'cart_app:remove-to-cart-color' oreder_item.item.slug oreder_item.color %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+											{% elif oreder_item.size and not oreder_item.color %}
+												<a href="{% url 'cart_app:remove-to-cart-size' oreder_item.item.slug oreder_item.size %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+											{% else %}
+												<a href="{% url 'cart_app:remove-to-cart' oreder_item.item.slug %}" class="float-right"><i class="fa fa-trash ml-2"></i></a>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% empty %}
+						<div class="w-100 pt-5 pb-5">
+							<h5>Tu carrito esta vacio</h5>
+						</div>
+					{% endfor %}
+					<div class="w-100 pt-3">
+						<a href="{% url 'cart_app:clean-cart' %}" style="float: left;">Limpiar Carrito</a>
+						<a href="/" style="float: right;">Continuar Comprando</a>
+					</div>
+				</div>
+				<div class="col-md-12 col-lg-4 w-100 p-0">
+					<div class="bg-dark" style="width: 100%; height: auto; display: block; box-shadow: 0px 4px 7px #ddd; border-radius: 5px; position: relative; padding-bottom: 70px;">
+						<h4 class="text-center p-3" style="color: #ef4036;">Resumen del Pedido</h4>
+						<ul class="list-group list-group-flush p-3">
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #cecece; background: transparent; border-color: #494f56;">
+								Subtotal
+								<span class="badge badge-pill">{{ object.get_total|floatformat:2 }}</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #cecece; background: transparent; border-color: #494f56;">
+								Impuestos
+								<span class="badge badge-pill">{{ object.get_total|floatformat:2 }}</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #cecece; background: transparent; border-color: #494f56;">
+								<b style="font-size: 22px;">Total</b>
+								<span class="badge badge-pill"><b style="font-size: 22px;">{{ object.get_total|floatformat:2 }}</b></span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #cecece; background: transparent; border-color: #494f56;">
+								<input type="text" class="mt-3 p-2 w-100" placeholder="Cupón de Descuento" style="border: 1px solid #485058; background: transparent; border-radius: 5px; outline: 0; color: #cecece;">
+							</li>
+						</ul>
+						<a class="btn float-left mt-3" href="#" style="width: 100%; padding: 12px 0px; border-radius: 0px 0px 5px 5px; position: absolute; bottom: 0; left: 0; right: 0;">Realizar Compra <i class="fa fa-shopping-bag"></i></a>
+					</div>
+				</div>
 			</div>
-			<div class="table-responsive">
+
+			<!--<div class="table-responsive">
 				<table class="table table-hover">
 					<caption>El precio no incluye envío</caption>
 					<thead class="thead-dark">
@@ -30,9 +143,9 @@
 						{% for oreder_item in object.items.all %}
 							<tr>
 								<td>
-									<!--<a href="{% url 'cart_app:remove-item-cart' oreder_item.item.slug %}"><i class="fa fa-minus mr-2"></i></a>-->
+									<a href="{% url 'cart_app:remove-item-cart' oreder_item.item.slug %}"><i class="fa fa-minus mr-2"></i></a>
 										{{ oreder_item.quantity }}
-									<!--<a href="{% url 'cart_app:add-to-cart' oreder_item.item.slug %}"><i class="fa fa-plus ml-2"></i></a>-->
+									<a href="{% url 'cart_app:add-to-cart' oreder_item.item.slug %}"><i class="fa fa-plus ml-2"></i></a>
 								</td>
 								<td>
 									<a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title|truncatechars:19 }}</a>
@@ -115,7 +228,7 @@
 						{% endif %}
 					</tbody>
 				</table>
-			</div>
+			</div>-->
 		</div>
 	</div>
 

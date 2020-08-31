@@ -1231,9 +1231,11 @@ WISH STYLES
 	height: auto;
 }
 
-
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link
+.nav-pills .nav-link
+{
+	color: #fff;
+}
+.nav-pills .nav-link.active
 {
 	background: #ef4036 !important;
-	color: #fff !important;
 }

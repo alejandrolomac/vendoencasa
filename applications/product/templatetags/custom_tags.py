@@ -12,7 +12,7 @@ def show_cats_header():
 @register.filter
 def cart_item_count(user):
 	if user.is_authenticated:
-		qs = Order.objects.all().filter(user=user, ordered=False)
+		qs = Order.objects.all().filter(user=user, ordered=False, status='NoPagados')
 		if qs.exists():
 			return qs[0].items.count()
 	

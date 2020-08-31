@@ -7,11 +7,12 @@ class OrderAdmin(admin.ModelAdmin):
         'id',
 		'orderCode',
 		'user',
+		'status',
         'ordered_date',
 	)
 
 	search_fields = ( 'orderCode', 'user', 'id', )
-	list_filter = ( 'ordered_date', )
+	list_filter = ( 'ordered_date', 'status')
 
 admin.site.register(OrderItem)
 admin.site.register(Order, OrderAdmin)

@@ -2,6 +2,15 @@ from django.conf import settings
 from django.db import models
 from applications.product.models import Products
 
+STATUS_CHOICES = (
+    ('NoPagados','NoPagados'),
+    ('Procesando', 'Procesando'),
+    ('Enviado','Enviado'),
+    ('Pagado','Pagado'),
+    ('Comentado', 'Comentado'),
+    ('Devuelto', 'Devuelto'),
+)
+
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Products, on_delete=models.CASCADE)
@@ -63,6 +72,7 @@ class Order(models.Model):
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     orderCode = models.CharField("Codigo de Pedido", max_length=300, blank=True)
+    status = models.TextField('Estado', max_length=50, choices=STATUS_CHOICES, blank=True, default='NoPagados')
     
     def __str__(self):
         return self.user.username

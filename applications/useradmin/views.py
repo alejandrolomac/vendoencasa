@@ -8,6 +8,7 @@ from django.db import transaction
 from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
 from applications.useradmin.models import Profile
+from applications.cart.models import Order, OrderItem
 from applications.product.models import RegistrationCode
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.conf import settings
@@ -176,6 +177,37 @@ def perfil(request):
     else:
         affiliatecode = ''
         affiliates = ''
+
+    ncorder = Order.objects.all().filter(user=request.user.id, status='NoPagados')
+    if ncorder:
+        order = Order.objects.get(user=request.user.id, status='NoPagados')
+    else:
+        order = ''
+    
+    pcorder = Order.objects.all().filter(user=request.user.id, status='Procesando')
+    if pcorder:
+        porder = Order.objects.get(user=request.user.id, status='Procesando')
+    else:
+        porder = ''
+    
+    ecorder = Order.objects.all().filter(user=request.user.id, status='Enviado')
+    if ecorder:
+        eorder = Order.objects.get(user=request.user.id, status='Enviado')
+    else:
+        eorder = ''
+    
+    pacorder = Order.objects.all().filter(user=request.user.id, status='Pagado')
+    if pacorder:
+        pagorder = Order.objects.get(user=request.user.id, status='Pagado')
+    else:
+        pagorder = ''
+    
+    cocorder = Order.objects.all().filter(user=request.user.id, status='Comentado')
+    if cocorder:
+        comeorder = Order.objects.get(user=request.user.id, status='Comentado')
+    else:
+        comeorder = ''
+
     product_to_edit = get_object_or_404(User, pk=request.user.id)
     profile_to_edit = get_object_or_404(Profile, user=request.user.id)
     form = UserSettingForm(instance=product_to_edit)
@@ -191,4 +223,4 @@ def perfil(request):
             form = CreateCompanyForm(instance=product_to_edit)
             formp = CompanyForm(instance=profile_to_edit)
 
-    return render(request, "perfil.html", {'form': form, 'formp': formp, 'product': product_to_edit, 'affiliatecode': affiliatecode, 'affiliates': affiliates})
+    return render(request, "perfil.html", {'form': form, 'formp': formp, 'product': product_to_edit, 'affiliatecode': affiliatecode, 'affiliates': affiliates, 'order': order, 'porder': porder, 'eorder': eorder, 'pagorder': pagorder, 'comeorder': comeorder})
