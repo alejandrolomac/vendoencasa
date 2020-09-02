@@ -16,10 +16,15 @@
         div p{ display: block; width: max-content; padding: 10px; background: transparent; border: 1px solid #fff; margin: 0px; color: #fff; font-size: 40px; }
 
         .social-buttons{ width: 100%; margin: 20px auto; text-align: center; }
-        .social-buttons a{ padding: 5px; border-radius: 100%; display: inline-block; margin: 5px; width: 45px; height: 45px; font-size: 35px;}
-        .social-buttons a img{ width: 17px; height: 17px; padding: 0px; margin: 0px;}
+        .social-buttons a{ padding: 0px; border-radius: 100%; display: inline-block; margin: 5px; width: 45px; height: 45px; font-size: 35px; background: transparent !important; }
+        .social-buttons a img{ width: 45px; height: 45px; padding: 0px; margin: 0px; opacity: .9; }
+        .social-buttons a:hover img{ opacity: 1; }
         .social-buttons p{ width: 100%; color: #2a2963; text-align: center; text-align: center; font-size: 20px; margin: 0px; padding: 0px; font-weight: bold; border: none; margin-top: 50px; }
-        
+
+        ul{ display: block; margin: 0px auto; overflow: hidden; width: max-content; padding: 20px 0px 60px 0px; }
+        ul li{ display: block; float: left; width: max-content; padding: 5px;}
+        ul li a{ font-size: 16px; padding: 0px; background: transparent; color: #2a2963; margin: 0px; }
+        ul li a:hover{ background: transparent; color: #22214f; }
 
         @media screen and (max-width: 600px) {
             p{ font-size: 14px; }
@@ -40,7 +45,7 @@
     </div>
     <p>*OFERTA VÁLIDA 30 DÍAS DESPUÉS</br> DE SU REGISTRO.</p>
     <a href="https://www.vendoencasa.net/">Confirmar ></a>
-    <p>Por favor, si tiene alguna consulta contacte con nuestro servicio al cliente.</p>
+    <p style="margin-top: 40px;">Por favor, si tiene alguna consulta contacte con nuestro servicio al cliente.</p>
     <p>ATENCIÓN: Es un correo electrónico generado automáticamente, por facor, no lo respondas.</p>
     <p>Vendo en Casa es una marca comercial registrada de STUDIO MOREBI, S. DE R.L. Todos los derechos reservados.</br> Torre Alianza #2, tercer piso, oficinas 304.</p>
 
@@ -51,5 +56,11 @@
         <a href="https://www.facebook.com/vendoencasahn" class="facebook"><img src="https://www.vendoencasa.net/static/img/facebook.png"></a>
         <a href="https://www.tiktok.com/@vendoencasa" class="tiktok"><img src="https://www.vendoencasa.net/static/img/tiktok2.png"></a>
     </div>
+
+    <ul>
+        <li><a href="#">Políticas de Privacidad</a></li>
+        <li>|</li>
+        <li><a href="https://www.vendoencasa.net/terms/">Términos y Condiciones</a></li>
+    </ul>
 </body>
 </html>
