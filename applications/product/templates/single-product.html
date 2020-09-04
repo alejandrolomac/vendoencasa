@@ -290,7 +290,7 @@
 			<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px;">
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px;">Clientes que Compraron este Producto También Vieron</h3>
 				<div class="col-12">
-					<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 wrap-products-list" style="margin-top: -10px;">
+					<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 wrap-products-list">
 						{% for nprod in related_prod %}
 							<div class="card text-left prod-item" style="border:none; padding: 10px;">
 								<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="position:relative;">
