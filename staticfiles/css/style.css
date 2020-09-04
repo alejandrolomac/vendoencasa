@@ -1237,3 +1237,38 @@ WISH STYLES
 	background: #ef4036 !important;
 	color: #fff !important;
 }
+
+@media screen and ( min-width: 600px ) {
+	.normal-order
+	{
+		visibility: visible !important;
+		display: block !important;
+	}
+
+	.responsive-order
+	{
+		visibility: hidden !important;
+		display: none !important;
+	}
+}
+
+@media screen and ( max-width: 559px ) {
+	.normal-order
+	{
+		visibility: hidden !important;
+		display: none !important;
+	}
+
+	.responsive-order
+	{
+		visibility: visible !important;
+		display: block !important;
+	}
+}
+
+@media screen and ( max-width: 991px ) {
+	.wrap-order
+	{
+		padding: 0 !important;
+	}
+}

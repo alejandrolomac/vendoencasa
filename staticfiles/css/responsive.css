@@ -39,11 +39,6 @@
 	{
 		margin-bottom: 50px;
 	}
-
-	.list-cats, .cart-top
-	{
-		margin-top: 150px !important;
-	}
 }
 
 @media screen and ( max-width: 460px )

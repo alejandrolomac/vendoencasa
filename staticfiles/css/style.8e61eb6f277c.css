@@ -1252,7 +1252,7 @@ WISH STYLES
 	}
 }
 
-@media screen and ( max-width: 559px ) {
+@media screen and ( min-width: 0px ) {
 	.normal-order
 	{
 		visibility: hidden !important;
@@ -1263,12 +1263,5 @@ WISH STYLES
 	{
 		visibility: visible !important;
 		display: block !important;
-	}
-}
-
-@media screen and ( max-width: 991px ) {
-	.wrap-order
-	{
-		padding: 0 !important;
 	}
 }

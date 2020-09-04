@@ -221,30 +221,6 @@
 				</div>
 			{% endfor %}
 
-				<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px;">
-				  	<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px;">Clientes que Compraron este Producto También Vieron</h3>
-				  	<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
-					    {% for nprod in related_prod %}
-							<div class="card text-left" style="border: none !important; padding: 5px;">
-				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
-									{% if nprod.imagef.url == '' %}
-										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
-									{% else %}
-										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
-											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
-										{% endthumbnail %}
-										
-									{% endif %}
-								</a>
-								<div class="card-body" style="padding: 15px 0px 0px 0px;">
-									<h2 class="card-title"><b>{{ nprod.price|floatformat:2 }}</b><span>L.</span></h2>
-									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
-								</div>
-				  			</div><!-- End Of item -->
-						{% endfor %}
-					</div>
-				</div><!-- End Of Related objets -->
-
 			<div class="fluid-cotainer pb-5" style="padding: 0px; margin: 30px 0px;">
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px; margin-bottom: 30px;">Evaluaciones de Clientes ( <b>{{countcomments}}</b> )</h3>
 				<ul class="list-group list-group-flush">
@@ -310,6 +286,61 @@
 					
 				</ul>
 			</div><!-- End Of Comments -->
+
+			<div class="fluid-cotainer" style="padding: 0px; margin: 15px 0px;">
+				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 50px;">Clientes que Compraron este Producto También Vieron</h3>
+				<div class="col-12">
+					<div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 wrap-products-list" style="margin-top: -10px;">
+						{% for nprod in related_prod %}
+							<div class="card text-left prod-item" style="border:none; padding: 10px;">
+								<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="position:relative;">
+									{% if nprod.imagef.url == '' %}
+										<img src="{% static 'img/default_thumbnail.jpg' %}">
+									{% else %}
+										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+										{% endthumbnail %}
+									{% endif %}
+
+									{% if nprod.quantity == 1 %}
+										<span class="exhausted2">Solo queda {{nprod.quantity}}</span>
+									{% elif nprod.quantity > 1 and nprod.quantity < 4 %}
+										<span class="exhausted2">Solo quedan {{nprod.quantity}}</span>
+									{% endif %}
+								</a>
+								<div class="card-body" style="padding: 15px 0px;">
+									<h2 class="card-title"><b>{{ nprod.price|floatformat:2 }}</b><span>L.</span></h2>
+									<h5 class="card-title">{{ nprod.title|truncatechars:19 }}</h5>
+									<a href="{% url 'product_app:single-product' nprod.slug %}" class="btn">Comprar</a>
+								</div>
+							</div><!-- End Of Product -->
+						{% endfor %}
+					</div>
+				</div>
+				<!--<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
+					
+					    {% for nprod in related_prod %}
+							<div class="card text-left" style="border: none !important; padding: 5px;">
+				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
+									{% if nprod.imagef.url == '' %}
+										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
+									{% else %}
+										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
+										{% endthumbnail %}
+										
+									{% endif %}
+								</a>
+								<div class="card-body" style="padding: 15px 0px 0px 0px;">
+									<h2 class="card-title"><b>{{ nprod.price|floatformat:2 }}</b><span>L.</span></h2>
+									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
+								</div>
+				  			</div>
+						{% endfor %}
+					</div>-->
+			</div><!-- End Of Related objets -->
+
+				
 		</div>
 	</div>
 

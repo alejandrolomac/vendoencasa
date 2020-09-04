@@ -41,7 +41,7 @@ def add_to_cart(request, slug):
             order_item.quantity = prodquantity
             order_item.save()
             messages.info(request, "Se actualizo el numero de productos")
-            return redirect("cart_app:order")
+            return redirect("product_app:single-product", slug=slug)
         else:
             messages.success(request, "Se agrego el producto al carrito")
             order.items.add(order_item)
@@ -49,7 +49,7 @@ def add_to_cart(request, slug):
             order_item.size = sizeid
             order_item.quantity = prodquantity
             order_item.save()
-            return redirect("cart_app:order")
+            return redirect("product_app:single-product", slug=slug)
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(user=request.user, ordered_date=ordered_date, status='NoPagados')
@@ -61,7 +61,7 @@ def add_to_cart(request, slug):
         order_item.quantity = prodquantity
         order_item.save()
         messages.success(request, "Se agrego el producto al carrito")
-        return redirect("cart_app:order")
+        return redirect("product_app:single-product", slug=slug)
 
 
 @login_required(login_url='useradmin_app:entrar')
