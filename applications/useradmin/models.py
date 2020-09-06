@@ -23,7 +23,9 @@ PLAN_CHOICES = (
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     gender = models.TextField('Genero', max_length=500, choices=GENDER_CHOICES, blank=True, null=True)
-    location = models.CharField('Dirección', max_length=400, blank=True, null=True)
+    location = models.CharField('Dirección #1', max_length=500, blank=True, null=True)
+    locations = models.CharField('Dirección #2', max_length=500, blank=True, null=True)
+    locationt = models.CharField('Dirección #3', max_length=500, blank=True, null=True)
     phone = models.CharField('Teléfono', max_length=15, blank=True, null=True)
     name = models.CharField('Nombre Empresa', max_length=150, blank=True)
     logo = models.ImageField('Logo', upload_to='Company', blank=True)

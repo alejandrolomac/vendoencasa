@@ -267,6 +267,25 @@ class OrderSummaryView(LoginRequiredMixin, View):
             return redirect("/")
 
 
+class OrderSummaryPay(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False, status='NoPagados')
+            orCode = order.orderCode
+            price_total = Order.objects.get(user=self.request.user, ordered=False, status='NoPagados').get_total()
+            title_product = Order.objects.get(user=self.request.user, ordered=False, status='NoPagados').stringNames()
+            status = Order.objects.get(user=self.request.user, status='NoPagados')
+            context = {
+                'object': order,
+                'code': orCode,
+                'status': status
+            }
+            return render(self.request, 'order_summary_pay.html', context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, 'No tienes ninguna lista de compras')
+            return redirect("/")
+
+
 @login_required(login_url='useradmin_app:entrar')
 def remove_single_item_from_cart(request, slug):
     item = get_object_or_404(Products, slug=slug)

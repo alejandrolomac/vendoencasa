@@ -1,0 +1,84 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+	{% load static %}
+	<div class="container-fluid list-cats">
+		<div class="container">
+			<div class="cart-top text-left" style="padding-bottom: 40px; padding-top: 100px;">
+				<h5><b>N.° Pedido:</b> {{ code }}</h5>
+			</div><!-- End Of Header Orders -->
+
+			<form action="">
+			<div class="row m-0 mb-5">
+				<div class="col-md-12 col-lg-8 pl-0 mb-4 wrap-order">
+					<h3 class="text-left mb-4" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Dirección de Envío</h3>
+					<div class="form-group pb-2">
+						<label for="exampleFormControlSelect1">Direcciones Guardadas</label>
+						<select class="form-control" id="exampleFormControlSelect1">
+							<option selected>Dirección...</option>
+							<option>{{ user.profile.location }}</option>
+							<option>{{ user.profile.locations }}</option>
+							<option>{{ user.profile.locationt }}</option>
+						</select>
+					</div>
+					<div class="form-group pb-2">
+						<label for="inputAddress">Otra Dirección</label>
+						<input type="text" class="form-control" id="inputAddress" placeholder="Introducir Nueva Dirección">
+					</div><!-- End Of Dirección -->
+
+					<h3 class="text-left mb-4 mt-5" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Forma de Pago</h3>
+					<div class="form-group pb-2">
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
+							<label class="custom-control-label" for="customRadio1"><i class="fa fa-circle"></i> Efectivo</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" disabled>
+							<label class="custom-control-label" for="customRadio2"><i class="fa fa-paypal"></i>  PayPal</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" disabled>
+							<label class="custom-control-label" for="customRadio3"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> Tarjeta de Crédito/Débito</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" disabled>
+							<label class="custom-control-label" for="customRadio4"><i class="fa fa-link"></i> Enlace de Pago</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio5" name="customRadio" class="custom-control-input" disabled>
+							<label class="custom-control-label" for="customRadio5"><i class="fa fa-university"></i> Depósito Bancario</label>
+						</div>
+						
+					</div>
+
+				</div>
+				<div class="col-md-12 col-lg-4 w-100 p-0">
+					<div style="width: 100%; height: auto; display: block; box-shadow: 0px 4px 7px #b3b3b3; border-radius: 5px; position: relative; padding-bottom: 70px; background: #efefef;">
+						<h4 class="text-center p-3" style="color: #ef4036;">Resumen del Pedido</h4>
+						<ul class="list-group list-group-flush p-3">
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
+								Subtotal
+								<span class="badge badge-pill">{{ object.get_total|floatformat:2 }}</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
+								Envío
+								<span class="badge badge-pill">{{ object.get_total|floatformat:2 }}</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
+								<b style="font-size: 22px;">Total</b>
+								<span class="badge badge-pill"><b style="font-size: 22px;">{{ object.get_total|floatformat:2 }}</b></span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
+								<input type="text" class="mt-3 p-2 w-100 float-left" placeholder="Cupón de Descuento" style="border: 1px solid #485058; background: transparent; border-radius: 5px; outline: 0; color: #444;">
+							</li>
+						</ul>
+						<a class="btn float-left mt-3" href="#" style="width: 100%; padding: 12px 0px; border-radius: 0px 0px 5px 5px; position: absolute; bottom: 0; left: 0; right: 0;">Completar Compra <i class="fa fa-shopping-bag"></i></a>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock content %}

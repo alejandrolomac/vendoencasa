@@ -6,13 +6,13 @@
 	<div class="container-fluid list-cats">
 		<div class="container">
 			<div class="cart-top text-left" style="padding-bottom: 40px; padding-top: 100px;">
-				<h2>Pedido de <b>{% if user.first_name %} {{user.first_name}} {{user.last_name}} {% else %} {{user.username}} {% endif %}</b></h2>
+				<!--<h2>Pedido de <b>{% if user.first_name %} {{user.first_name}} {{user.last_name}} {% else %} {{user.username}} {% endif %}</b></h2>
 				{% if user.profile.location %}
 					<h5><b>Ubicación:</b> {{ user.profile.location }}</h5>
 				{% endif %}
 				{% if user.profile.location %}
 					<h5><b>Teléfono:</b> {{ user.profile.phone }}</h5>
-				{% endif %}
+				{% endif %}-->
 				<h5><b>N.° Pedido:</b> {{ code }}</h5>
 			</div><!-- End Of Header Orders -->
 
@@ -201,7 +201,7 @@
 								<p class="text-muted w-100 text-center">La compra mínima es de L 150</p>
 							</li>
 						</ul>
-						<a class="btn float-left mt-3" href="#" style="width: 100%; padding: 12px 0px; border-radius: 0px 0px 5px 5px; position: absolute; bottom: 0; left: 0; right: 0;">Realizar Compra <i class="fa fa-shopping-bag"></i></a>
+						<a class="btn float-left mt-3" href="{% url 'cart_app:orderpay' %}" style="width: 100%; padding: 12px 0px; border-radius: 0px 0px 5px 5px; position: absolute; bottom: 0; left: 0; right: 0;">Realizar Compra <i class="fa fa-shopping-bag"></i></a>
 					</div>
 				</div>
 			</div>

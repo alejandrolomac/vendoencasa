@@ -25,7 +25,9 @@
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="padding: 30px 0px;">
 					<p><b>Nombre:</b> {% if user.first_name %} {{user.first_name}} {{user.last_name}} {% else %} {{user.username}} {% endif %}</p>
 					<p><b>Teléfono:</b> {{ user.profile.phone }}</p>
-					<p><b>Ubicacion:</b> {{ user.profile.location }}</p>
+					<p><b>Dirección #1:</b> {{ user.profile.location }}</p>
+					<p><b>Dirección #2:</b> {{ user.profile.locations }}</p>
+					<p><b>Dirección #3:</b> {{ user.profile.locationt }}</p>
 
 					<form class="row newprod mb-5" method="POST" action="" enctype="multipart/form-data">
 						{% csrf_token %}
