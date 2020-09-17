@@ -13,6 +13,9 @@ urlpatterns = [
     path('clean/', views.clean_cart, name='clean-cart'),
     path('order/', views.OrderSummaryView.as_view(), name='order'),
     path('order-pay/', views.OrderSummaryPay.as_view(), name='orderpay'),
+    path('order-finish/', views.orderSummaryFinish, name='orderfinish'),
+    path('', views.orderSummaryEnd, name='orderend'),
     path('remove-item/<slug>/', views.remove_single_item_from_cart,
          name='remove-item-cart'),
+    path('vendo-admin-orders/', views.orderAdmin, name='orderadmin'),
 ] 

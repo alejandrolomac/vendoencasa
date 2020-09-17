@@ -179,16 +179,43 @@ PRODUCT STYLES
 		margin: 0;
 		float: left;
 	}
-
-	#sidebar-container .list-group .salir
-	{
-		position: initial !important;
+	
+	#sidebar-container .list-group li.list-group-item {
+		background-color: #ef4036;
+		border-radius: 0px !important;
 	}
-}
-
-@media screen and ( max-width: 768px )
-{
-	#sidebar-container {
-		margin-top: 50px;
+	
+	#sidebar-container .list-group .sidebar-submenu a {
+		height: 45px;
+		padding-left: 30px;
+		border-radius: 0px !important;
+	}
+	
+	.sidebar-submenu {
+		font-size: 0.9rem;
+		border-radius: 0px !important;
+	}
+	
+	.sidebar-separator-title {
+		background-color: #ef4036;
+		height: 35px;
+		border-radius: 0px !important;
+	}
+	
+	.sidebar-separator {
+		background-color: #ef4036;
+		height: 25px;
+		border-radius: 0px !important;
+	}
+	
+	.logo-separator {
+		background-color: #ef4036;
+		height: 60px;
+		border-radius: 0px !important;
+	}
+	
+	.list-group a.bg-dark {
+		background-color: #ef4036 !important;
+		border-radius: 0px !important;
 	}
 }

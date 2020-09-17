@@ -6,48 +6,90 @@
 	<div class="container-fluid list-cats">
 		<div class="container">
 			<div class="cart-top text-left" style="padding-bottom: 40px; padding-top: 100px;">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb" style="background: #fff2f2;">
+						<li class="breadcrumb-item"><a href="{% url 'cart_app:order' %}">Pedido</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Detalles de Pedido</li>
+					</ol>
+				</nav>
 				<h5><b>N.° Pedido:</b> {{ code }}</h5>
 			</div><!-- End Of Header Orders -->
 
-			<form action="">
+			<form action = "{% url "cart_app:orderfinish" %}" method = "POST">
+		 	{% csrf_token %}
 			<div class="row m-0 mb-5">
 				<div class="col-md-12 col-lg-8 pl-0 mb-4 wrap-order">
 					<h3 class="text-left mb-4" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Dirección de Envío</h3>
+					<!--<p class="text-muted">Si cuentas con direcciones guardadas puedes seleccionarla en la siguiente lista</p>-->
 					<div class="form-group pb-2">
-						<label for="exampleFormControlSelect1">Direcciones Guardadas</label>
-						<select class="form-control" id="exampleFormControlSelect1">
-							<option selected>Dirección...</option>
-							<option>{{ user.profile.location }}</option>
-							<option>{{ user.profile.locations }}</option>
-							<option>{{ user.profile.locationt }}</option>
+						<label for="location">Direcciones Guardadas</label>
+						<select class="form-control" id="location" name="location">
+							<option value="" selected>Dirección...</option>
+							{% if user.profile.location %}
+								<option value="{{ user.profile.Department }}, {{ user.profile.location }}">{{ user.profile.Department }} - {{ user.profile.location }}</option>
+							{% endif %}
+							{% if user.profile.locations %}
+								<option value="{{ user.profile.Departments }}, {{ user.profile.locations }}">{{ user.profile.Departments }} - {{ user.profile.locations }}</option>
+							{% endif %}
+							{% if user.profile.locationt %}
+								<option value="{{ user.profile.Departmentt }}, {{ user.profile.locationt }}">{{ user.profile.Departmentt }} - {{ user.profile.locationt }}</option>
+							{% endif %}
 						</select>
 					</div>
 					<div class="form-group pb-2">
-						<label for="inputAddress">Otra Dirección</label>
-						<input type="text" class="form-control" id="inputAddress" placeholder="Introducir Nueva Dirección">
+						<h4>Otra Dirección</h4>
+						<!--<p class="text-muted">Si no tienes una dirección guardada puedes introducir otra en este formulario</p>-->
+						<p class="text-muted">Si no cuentas con direcciones guardadas puedes introducir una nueva</p>
+						<label for="newLocation">Departamento</label>
+						<select class="form-control" id="newLocation" name="newLocation">
+							<option value="" selected>Departamento...</option>
+							<option value="Atlántida">Atlántida</option>
+							<option value="Colón">Colón</option>
+							<option value="Comayagua">Comayagua</option>
+							<option value="Copán">Copán</option>
+							<option value="Cortés">Cortés</option>
+							<option value="Cortés">Cortés</option>
+							<option value="El Paraíso">El Paraíso</option>
+							<option value="Francisco Morazán">Francisco Morazán</option>
+							<option value="Gracias a Dios">Gracias a Dios</option>
+							<option value="Intibucá">Intibucá</option>
+							<option value="Islas de la Bahía">Islas de la Bahía</option>
+							<option value="La Paz">La Paz</option>
+							<option value="Lempira">Lempira</option>
+							<option value="Ocotepeque">Ocotepeque</option>
+							<option value="Olancho">Olancho</option>
+							<option value="Santa Bárbara">Santa Bárbara</option>
+							<option value="Valle">Valle</option>
+							<option value="Yoro">Yoro</option>
+						</select>
+						<label for="newLocationdir">Dirección Detallada</label>
+						<input type="text" class="form-control" id="newLocationdir" name="newLocationdir" placeholder="Introducir Nueva Dirección">
 					</div><!-- End Of Dirección -->
 
 					<h3 class="text-left mb-4 mt-5" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Forma de Pago</h3>
-					<div class="form-group pb-2">
+					<div class="form-group" style="font-size: 18px;">
 						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
+							<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked value="Efectivo">
 							<label class="custom-control-label" for="customRadio1"><i class="fa fa-circle"></i> Efectivo</label>
+							<small id="emailHelp" class="form-text text-muted pb-2">Puedes hacer el pago una vez que el conductor de nuestro delivery te haga la entrega del paquete</small>
 						</div>
 						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" disabled>
+							<input type="radio" id="customRadio5" name="customRadio" class="custom-control-input" value="Depósito Bancario">
+							<label class="custom-control-label" for="customRadio5"><i class="fa fa-university"></i> Depósito Bancario</label>
+							<small id="emailHelp" class="form-text text-muted pb-2">Puedes hacer tu pago con depósito o transferencia bancaria a través de nuestra cuenta</br> BAC: 000000000</small>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" disabled value="PayPal">
 							<label class="custom-control-label" for="customRadio2"><i class="fa fa-paypal"></i>  PayPal</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" disabled>
+							<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" disabled value="Tarjeta de Crédito/Débito">
 							<label class="custom-control-label" for="customRadio3"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> Tarjeta de Crédito/Débito</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" disabled>
+							<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" disabled value="Enlace de Pago">
 							<label class="custom-control-label" for="customRadio4"><i class="fa fa-link"></i> Enlace de Pago</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio5" name="customRadio" class="custom-control-input" disabled>
-							<label class="custom-control-label" for="customRadio5"><i class="fa fa-university"></i> Depósito Bancario</label>
+							<small id="emailHelp" class="form-text text-muted pb-2">Se te enviara un enlace de pago en línea al whatsapp del número asociado a tu cuenta</small>
 						</div>
 						
 					</div>
@@ -62,18 +104,16 @@
 								<span class="badge badge-pill">{{ object.get_total|floatformat:2 }}</span>
 							</li>
 							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
-								Envío
-								<span class="badge badge-pill">{{ object.get_total|floatformat:2 }}</span>
-							</li>
-							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
 								<b style="font-size: 22px;">Total</b>
 								<span class="badge badge-pill"><b style="font-size: 22px;">{{ object.get_total|floatformat:2 }}</b></span>
 							</li>
 							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
-								<input type="text" class="mt-3 p-2 w-100 float-left" placeholder="Cupón de Descuento" style="border: 1px solid #485058; background: transparent; border-radius: 5px; outline: 0; color: #444;">
+								<input type="text" class="mt-3 p-2 w-100 float-left" placeholder="Cupón de Descuento" style="border: 1px solid #485058; background: transparent; border-radius: 5px; outline: 0; color: #444;" name="coupon" id="coupon">
 							</li>
 						</ul>
-						<a class="btn float-left mt-3" href="#" style="width: 100%; padding: 12px 0px; border-radius: 0px 0px 5px 5px; position: absolute; bottom: 0; left: 0; right: 0;">Completar Compra <i class="fa fa-shopping-bag"></i></a>
+						<button class="primaryAction btn float-left mt-3" name="Completar" type="submit" style="width: 100%; padding: 12px 0px; border-radius: 0px 0px 5px 5px; position: absolute; bottom: 0; left: 0; right: 0;"> Completar Compra <i class="fa fa-shopping-bag"></i></button>
+
+						<!--<a class="btn float-left mt-3" href="{% url 'cart_app:orderfinish' %}" style="width: 100%; padding: 12px 0px; border-radius: 0px 0px 5px 5px; position: absolute; bottom: 0; left: 0; right: 0;">Completar Compra <i class="fa fa-shopping-bag"></i></a>-->
 					</div>
 				</div>
 			</div>

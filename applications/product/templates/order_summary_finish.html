@@ -1,0 +1,100 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+	{% load static %}
+	{% load mathfilters %}
+	<div class="container-fluid list-cats">
+		<div class="container">
+			<div class="cart-top text-left" style="padding-bottom: 40px; padding-top: 100px;">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb" style="background: #fff2f2;">
+						<li class="breadcrumb-item"><a href="{% url 'cart_app:order' %}">Pedido</a></li>
+						<li class="breadcrumb-item"><a href="{% url 'cart_app:orderpay' %}">Detalles de Pedido</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Finalazar Pedido</li>
+					</ol>
+				</nav>
+				<h5><b>N.° Pedido:</b> {{ code }}</h5>
+			</div><!-- End Of Header Orders -->
+
+			<form action="">
+			<div class="row m-0 mb-5">
+				<div class="col-md-12 col-lg-8 pl-0 mb-4 wrap-order">
+					<h3 class="text-left mb-4" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Dirección de Envío</h3>
+					<h4 class="text-left mb-2">
+						{% if locationd %}
+							{{location}}, {{locationd}}
+							{% if location != 'Francisco Morazán' %}
+								<p class="text-muted" style="font-size:15px;">El costo del envió será enviado al whatsapp junto con la fecha de entrega.</p>
+							{% endif %}
+						{% else %}
+							{{location}}
+							{% if stringsplit != 'Francisco Morazán' %}
+								<p class="text-muted" style="font-size:15px;">El costo del envió será enviado al whatsapp junto con la fecha de entrega.</p>
+							{% endif %}
+						{% endif %}
+					</h4>
+
+					<h3 class="text-left mb-4 pt-2" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Metodo de Pago</h3>
+					{% if payMethod == 'Efectivo' %}
+						<h4 class="text-left mb-2"><i class="fa fa-circle"></i> {{payMethod}}</h4>
+						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, y deberás realizar el pago en efectivo al momento de la llegada del delivery con el pedido.</p>
+					{% elif payMethod == 'Depósito Bancario' %}
+						<h4 class="text-left mb-2"><i class="fa fa-university"></i> {{payMethod}}</h4>
+						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, Antes de enviar el pedido deberá enviarnos una captura o fotografía del recibo del depósito a nuestra cuenta bancaria, deberá enviarla vía whatsapp luego de ser contactado/a.</br><span class="w-100 text-center pt-2 pb-2" style="font-size: 20px; display: block;">BAC: 000000000</span></p>
+					{% endif %}
+				</div>
+
+				<div class="col-md-12 col-lg-4 w-100 p-0">
+					<div style="width: 100%; height: auto; display: block; box-shadow: 0px 4px 7px #b3b3b3; border-radius: 5px; position: relative; padding-bottom: 70px; background: #efefef;">
+						<h4 class="text-center p-3" style="color: #ef4036;">Resumen del Pedido</h4>
+						<ul class="list-group list-group-flush p-3">
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
+								Subtotal
+								<span class="badge badge-pill">{{ object.get_total|floatformat:2 }}  L</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
+								Envío
+								<span class="badge badge-pill">{{ shipping|floatformat:2 }}  L</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
+								Descuento
+								<span class="badge badge-pill">
+									{% if coupons.discount %}
+										{{ coupons.discount|floatformat:2 }} 
+										{% if coupons.typediscount == 'Fijo' %}
+											L
+										{% else %}
+											%
+										{% endif %}
+									{% else %}
+										0
+									{% endif %}
+								</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center" style="color: #444; background: transparent; border-color: #494f56;">
+								<b style="font-size: 22px;">Total</b>
+								{% if coupons.discount %}
+									{% if coupons.typediscount == 'Fijo' %}
+										<span class="badge badge-pill"><b style="font-size: 22px;">{{ object.get_total|sub:coupons.discount|add:shipping|floatformat:2 }}</b> L</span>
+									{% else %}
+										<span class="badge badge-pill"><b style="font-size: 22px;">{{ object.get_total|sub:discount_total|add:shipping|floatformat:2 }}</b> L</span>
+									{% endif %}
+								{% else %}
+									{% if coupons.typediscount == 'Fijo' %}
+										<span class="badge badge-pill"><b style="font-size: 22px;">{{ object.get_total|add:shipping|floatformat:2 }}</b> L</span>
+									{% else %}
+										<span class="badge badge-pill"><b style="font-size: 22px;">{{ object.get_total|add:shipping|floatformat:2 }}</b> L</span>
+									{% endif %}
+								{% endif %}
+							</li>
+						</ul>
+						<a class="btn float-left mt-3" href="{% url 'cart_app:orderend' %}" style="width: 100%; padding: 12px 0px; border-radius: 0px 0px 5px 5px; position: absolute; bottom: 0; left: 0; right: 0;">Completar Compra <i class="fa fa-shopping-bag"></i></a>
+					</div>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock content %}

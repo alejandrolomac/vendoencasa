@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+	{% load static %}
+	<div class="container-fluid list-cats">
+		<div class="container">
+			<h3 class="text-left mb-4" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Administrador de Ordenes</h3>
+			<div class="row m-0 mb-5 mt-5">
+				<div class="col-12 pl-0 mb-4 wrap-order">
+					{% for orders in object %}
+						<div class="card mb-3 p-2 normal-order" style="background: #f9f9f9; box-shadow: 0px 4px 7px #ddd; border-radius: 5px; border: 2px solid red !important;">
+							<div class="row no-gutters">
+								<p class="w-100">Usuario: {{orders.user}}</p>
+								<p class="w-100">Direccion: {{orders.orderLocation}}</p>
+								<p class="w-100">Metodo de Pago: {{orders.payMethod}}</p>
+								<p class="w-100">Fecha: {{orders.ordered_date}}</p>
+								<p class="w-100">Estado: {{orders.paystaus}}</p>
+								<p class="w-100">Total: {{orders.get_total}}</p>
+							</div>
+							<a href="#" class="btn">Recibido</a>
+							<a href="#" class="btn">Enviado</a>
+							<a href="#" class="btn">Completado</a>
+							<a href="#" class="btn">Cancelado</a>
+							<a href="#" class="btn">Whatsapp</a>
+						</div>
+						
+					{% empty %}
+						<div class="w-100 pt-5 pb-5">
+							<h5>No hay pedidos</h5>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

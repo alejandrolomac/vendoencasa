@@ -11,6 +11,20 @@ STATUS_CHOICES = (
     ('Devuelto', 'Devuelto'),
 )
 
+PAYSTATUS_CHOICES = (
+    ('NoPagados','NoPagados'),
+    ('Procesando', 'Procesando'),
+    ('Pagado','Pagado'),
+)
+
+PAYMETHOD_CHOICES = (
+    ('Efectivo','Efectivo'),
+    ('Tarjeta', 'Tarjeta'),
+    ('PayPal','PayPal'),
+	('Link', 'Link'),
+	('Deposito', 'Deposito'),
+)
+
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Products, on_delete=models.CASCADE)
@@ -73,6 +87,9 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     orderCode = models.CharField("Codigo de Pedido", max_length=300, blank=True)
     status = models.TextField('Estado', max_length=50, choices=STATUS_CHOICES, blank=True, default='NoPagados')
+    orderLocation = models.CharField('Dirección de Envío', max_length=500, blank=True, null=True)
+    payMethod = models.CharField('Metodo de Pago', max_length=500, blank=True, null=True, choices=PAYMETHOD_CHOICES, default='Efectivo')
+    paystaus = models.TextField('Estado de Pago', max_length=50, choices=PAYSTATUS_CHOICES, blank=True, default='NoPagados')
     
     def __str__(self):
         return self.user.username

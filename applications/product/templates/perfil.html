@@ -105,17 +105,19 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>
-													<a href="#">{{ order.orderCode }}</a>
-												</td>
-												<td>
-													<p>{{ order.ordered_date }}</p>
-												</td>
-												<td>
-													<p>{{ order.get_total }}<span style="font-size: .8em;">L.</span></p>
-												</td>
-											</tr>
+											{% for orderf in order %}
+												<tr>
+													<td>
+														<a href="#">{{ orderf.orderCode }}</a>
+													</td>
+													<td>
+														<p>{{ orderf.ordered_date }}</p>
+													</td>
+													<td>
+														<p>{{ orderf.get_total }}<span style="font-size: .8em;">L.</span></p>
+													</td>
+												</tr>
+											{% endfor %}
 										</tbody>
 									</table>
 								</div>
@@ -135,17 +137,19 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>
-													<a href="#">{{ porder.orderCode }}</a>
-												</td>
-												<td>
-													<p>{{ porder.ordered_date }}</p>
-												</td>
-												<td>
-													<p>{{ porder.get_total }}<span style="font-size: .8em;">L.</span></p>
-												</td>
-											</tr>
+											{% for porderf in porder %}
+												<tr>
+													<td>
+														<a href="#">{{ porderf.orderCode }}</a>
+													</td>
+													<td>
+														<p>{{ porderf.ordered_date }}</p>
+													</td>
+													<td>
+														<p>{{ porderf.get_total }}<span style="font-size: .8em;">L.</span></p>
+													</td>
+												</tr>
+											{% endfor %}
 										</tbody>
 									</table>
 								</div>
@@ -166,17 +170,19 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>
-													<a href="#">{{ eorder.orderCode }}</a>
-												</td>
-												<td>
-													<p>{{ eorder.ordered_date }}</p>
-												</td>
-												<td>
-													<p>{{ eorder.get_total }}<span style="font-size: .8em;">L.</span></p>
-												</td>
-											</tr>
+											{% for eorderf in eorder %}
+												<tr>
+													<td>
+														<a href="#">{{ eorderf.orderCode }}</a>
+													</td>
+													<td>
+														<p>{{ eorderf.ordered_date }}</p>
+													</td>
+													<td>
+														<p>{{ eorderf.get_total }}<span style="font-size: .8em;">L.</span></p>
+													</td>
+												</tr>
+											{% endfor %}
 										</tbody>
 									</table>
 								</div>
@@ -197,17 +203,19 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>
-													<a href="#">{{ pagorder.orderCode }}</a>
-												</td>
-												<td>
-													<p>{{ pagorder.ordered_date }}</p>
-												</td>
-												<td>
-													<p>{{ pagorder.get_total }}<span style="font-size: .8em;">L.</span></p>
-												</td>
-											</tr>
+											{% for pagorderf in pagorder %}
+												<tr>
+													<td>
+														<a href="#">{{ pagorderf.orderCode }}</a>
+													</td>
+													<td>
+														<p>{{ pagorderf.ordered_date }}</p>
+													</td>
+													<td>
+														<p>{{ pagorderf.get_total }}<span style="font-size: .8em;">L.</span></p>
+													</td>
+												</tr>
+											{% endfor %}
 										</tbody>
 									</table>
 								</div>
@@ -227,17 +235,19 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>
-													<a href="#">{{ comeorder.orderCode }}</a>
-												</td>
-												<td>
-													<p>{{ comeorder.ordered_date }}</p>
-												</td>
-												<td>
-													<p>{{ comeorder.get_total }}<span style="font-size: .8em;">L.</span></p>
-												</td>
-											</tr>
+											{% for comeorderf in comeorder %}
+												<tr>
+													<td>
+														<a href="#">{{ comeorderf.orderCode }}</a>
+													</td>
+													<td>
+														<p>{{ comeorderf.ordered_date }}</p>
+													</td>
+													<td>
+														<p>{{ comeorderf.get_total }}<span style="font-size: .8em;">L.</span></p>
+													</td>
+												</tr>
+											{% endfor %}
 										</tbody>
 									</table>
 								</div>

@@ -30,6 +30,7 @@ def registerPage(request):
             if form.is_valid() and profile_form.is_valid():
                 user = form.save()
                 user.profile.gender = profile_form.cleaned_data['gender']
+                user.profile.Department = profile_form.cleaned_data['Department']
                 user.profile.location = profile_form.cleaned_data['location']
                 user.profile.phone = profile_form.cleaned_data['phone']
                 user.profile.code = profile_form.cleaned_data['code']
@@ -127,6 +128,7 @@ def registerCompany(request):
             company_form = CompanyForm(request.POST, request.FILES)
             if form.is_valid() and company_form.is_valid():
                 user = form.save()
+                user.profile.Department = company_form.cleaned_data['Department']
                 user.profile.location = company_form.cleaned_data['location']
                 user.profile.phone = company_form.cleaned_data['phone']
                 user.profile.name = company_form.cleaned_data['name']
@@ -180,31 +182,31 @@ def perfil(request):
 
     ncorder = Order.objects.all().filter(user=request.user.id, status='NoPagados')
     if ncorder:
-        order = Order.objects.get(user=request.user.id, status='NoPagados')
+        order = Order.objects.all().filter(user=request.user.id, status='NoPagados')
     else:
         order = ''
     
     pcorder = Order.objects.all().filter(user=request.user.id, status='Procesando')
     if pcorder:
-        porder = Order.objects.get(user=request.user.id, status='Procesando')
+        porder = Order.objects.all().filter(user=request.user.id, status='Procesando')
     else:
         porder = ''
     
     ecorder = Order.objects.all().filter(user=request.user.id, status='Enviado')
     if ecorder:
-        eorder = Order.objects.get(user=request.user.id, status='Enviado')
+        eorder = Order.objects.all().filter(user=request.user.id, status='Enviado')
     else:
         eorder = ''
     
     pacorder = Order.objects.all().filter(user=request.user.id, status='Pagado')
     if pacorder:
-        pagorder = Order.objects.get(user=request.user.id, status='Pagado')
+        pagorder = Order.objects.all().filter(user=request.user.id, status='Pagado')
     else:
         pagorder = ''
     
     cocorder = Order.objects.all().filter(user=request.user.id, status='Comentado')
     if cocorder:
-        comeorder = Order.objects.get(user=request.user.id, status='Comentado')
+        comeorder = Order.objects.all().filter(user=request.user.id, status='Comentado')
     else:
         comeorder = ''
 

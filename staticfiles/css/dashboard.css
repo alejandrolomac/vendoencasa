@@ -158,3 +158,37 @@ PRODUCT STYLES
 	padding-right: 20px;
 }
 
+
+@media screen and ( max-width: 1000px )
+{
+	#sidebar-container {
+		min-height: 0;
+		height: auto;
+		width: 100%;
+	}
+
+	#sidebar-container .list-group {
+		display: block !important;
+	}
+	
+	#sidebar-container .list-group a {
+		height: 50px;
+		color: white !important;
+		border-radius: 0px !important;
+		width: max-content !important;
+		margin: 0;
+		float: left;
+	}
+
+	#sidebar-container .list-group .salir
+	{
+		position: initial !important;
+	}
+}
+
+@media screen and ( max-width: 768px )
+{
+	#sidebar-container {
+		margin-top: 50px;
+	}
+}

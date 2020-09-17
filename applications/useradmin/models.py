@@ -20,12 +20,36 @@ PLAN_CHOICES = (
     ('Franquiciador','Franquiciador'),
 )
 
+DEPARTMENT_CHOICES = (
+    ('Atlántida','Atlántida'),
+    ('Colón','Colón'),
+    ('Comayagua','Comayagua'),
+    ('Copán','Copán'),
+    ('Cortés','Cortés'),
+    ('Choluteca','Choluteca'),
+    ('El Paraíso','El Paraíso'),
+    ('Francisco Morazán','Francisco Morazán'),
+    ('Gracias a Dios','Gracias a Dios'),
+    ('Intibucá','Intibucá'),
+    ('Islas de la Bahía','Islas de la Bahía'),
+    ('La Paz','La Paz'),
+    ('Lempira','Lempira'),
+    ('Ocotepeque','Ocotepeque'),
+    ('Olancho','Olancho'),
+    ('Santa Bárbara','Santa Bárbara'),
+    ('Valle','Valle'),
+    ('Yoro','Yoro'),
+)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     gender = models.TextField('Genero', max_length=500, choices=GENDER_CHOICES, blank=True, null=True)
-    location = models.CharField('Dirección #1', max_length=500, blank=True, null=True)
-    locations = models.CharField('Dirección #2', max_length=500, blank=True, null=True)
-    locationt = models.CharField('Dirección #3', max_length=500, blank=True, null=True)
+    Department = models.CharField('Departamento #1', max_length=500, blank=True, null=True, choices=DEPARTMENT_CHOICES, default='Francisco Morazán')
+    location = models.CharField('Dirección Detallada #1', max_length=500, blank=True, null=True)
+    Departments = models.CharField('Departamento #2', max_length=500, blank=True, null=True, choices=DEPARTMENT_CHOICES, default='Francisco Morazán')
+    locations = models.CharField('Dirección Detallada #2', max_length=500, blank=True, null=True)
+    Departmentt = models.CharField('Departamento #3', max_length=500, blank=True, null=True, choices=DEPARTMENT_CHOICES, default='Francisco Morazán')
+    locationt = models.CharField('Dirección Detallada #3', max_length=500, blank=True, null=True)
     phone = models.CharField('Teléfono', max_length=15, blank=True, null=True)
     name = models.CharField('Nombre Empresa', max_length=150, blank=True)
     logo = models.ImageField('Logo', upload_to='Company', blank=True)

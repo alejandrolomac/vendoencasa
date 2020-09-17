@@ -27,6 +27,12 @@ DISCOUNT_CHOICES = (
     ('Fijo', 'Fijo'),
 )
 
+STATUSPRODUCT_CHOICES = (
+    ('Nuevo','Nuevo'),
+    ('Casi Nuevo', 'Casi Nuevo'),
+	('Usado', 'Usado'),
+)
+
 
 class Company(models.Model):
 	name = models.CharField('Nombre', max_length=150, blank=False)
@@ -124,6 +130,7 @@ class Products(models.Model):
 	pub_date = models.DateTimeField(editable=False, auto_now=True)
 	quantity = models.IntegerField('Cantidad', default=1, blank=False)
 	productCode = models.CharField("Codigo de Producto", max_length=100, blank=True)
+	statusproduct = models.TextField('Estado del Producto', blank=False, default='Nuevo', choices=STATUSPRODUCT_CHOICES)
 
 	def __str__(self):
 		return self.title
