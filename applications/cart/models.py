@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db import models
-from applications.product.models import Products
+from applications.product.models import Products, DiscountCode
 
 STATUS_CHOICES = (
     ('NoPagados','NoPagados'),
@@ -85,6 +85,7 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
+    discountCode = models.CharField("Codigo de Descuento", max_length=100, blank=True)
     orderCode = models.CharField("Codigo de Pedido", max_length=300, blank=True)
     status = models.TextField('Estado', max_length=50, choices=STATUS_CHOICES, blank=True, default='NoPagados')
     orderLocation = models.CharField('Dirección de Envío', max_length=500, blank=True, null=True)
@@ -103,6 +104,36 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
+    
+    def get_price_envio(self):
+        envio = 0
+        for order_item in self.items.all():
+            envio += 1
+        envio = (envio - 1) * 20 + 80
+        return envio
+    
+    def get_discount(self):
+        if self.discountCode:
+            discode = DiscountCode.objects.get(code=self.discountCode)
+            if discode.typediscount == 'Fijo':
+                descuentototal = discode.discount
+            else:
+                descuentototal = discode.discount
+                descuentototal = self.get_total() * discode.discount / 100
+        else:
+            descuentototal = 0
+        return descuentototal
+
+    
+    def get_total_final(self):
+        total = 0
+        envio = 0
+        for order_item in self.items.all():
+            total += order_item.get_final_price()
+            envio += 1
+        envio = (envio - 1) * 20 + 80
+        totalf = total + envio
+        return totalf
 
     def stringNames(self):
         text = ''

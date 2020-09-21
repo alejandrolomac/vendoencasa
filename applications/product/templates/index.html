@@ -292,6 +292,40 @@
 		$(".alert").fadeTo(3000, 2000).slideUp(500, function(){
 			$(".alert").slideUp(500);
 		});
+
+
+		var checkClass = function() {
+			if ( $('.item').hasClass('hide') ) {
+				$('.item').removeClass('hide');
+			}
+		};
+
+		// Category filters
+		$('.all').click( function() {
+			checkClass();
+		});
+		$('.recibido').click( function() {
+			checkClass();
+		$('.item:not(.recibido)').toggleClass('hide');
+		});
+		$('.enviado').click( function() {
+			checkClass();
+		$('.item:not(.enviado)').toggleClass('hide');
+		});
+		$('.completados').click( function() {
+			checkClass();
+		$('.item:not(.completados)').toggleClass('hide');
+		});
+		$('.cancelados').click( function() {
+			checkClass();
+		$('.item:not(.cancelados)').toggleClass('hide');
+		});
+
+		// Active tag
+		$('.filterbtn').click(function(){
+			$('.filterbtn').removeClass('active');
+			$(this).addClass('active');
+		})
 	</script>
 
 	<!-- Bootstrap -->

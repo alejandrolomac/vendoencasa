@@ -9,6 +9,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import OrderForm
+from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.base import RedirectView
+from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
 
 @login_required(login_url='useradmin_app:entrar')
 def add_to_cart(request, slug):
@@ -365,16 +372,6 @@ def orderSummaryEnd(request):
     return redirect("/")
 
 
-@login_required(login_url='useradmin_app:entrar')
-def orderAdmin(request):
-    orders = Order.objects.all().filter(status='Procesando')
-    context = {
-        'object': orders
-    }
-    return render(request, 'order_admin.html', context)
-
-
-
 class OrderSummaryPay(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
@@ -452,3 +449,111 @@ def clean_cart(request):
         order.delete()
 
     return redirect("product_app:index")
+
+
+
+
+@staff_member_required
+def sendOrder(request, pk):
+    order = Order.objects.get(orderCode=pk, ordered=False)
+    order.paystaus = 'Procesando'
+    order.status = 'Enviado'
+    order.save()
+
+    #:::::: EMAIL ::::::
+    title = 'Resumen de Pedido VendoEnCasa'
+    orderCode = order.orderCode
+    to = 'reikrad@gmail.com'
+    data = {
+        'title': title,
+        'order': order,
+        'orderCode': orderCode
+    }
+    html_content = render_to_string('order_email.html', data)
+    text_content = strip_tags(html_content)
+    email = EmailMultiAlternatives(
+        title,
+        text_content,
+        settings.EMAIL_HOST_USER,
+        [to]
+    )
+    email.attach_alternative(html_content, "text/html")
+    email.send()
+    #:::::: EMAIL ::::::
+    return redirect("cart_app:orderadmin")
+
+@staff_member_required
+def completeOrder(request, pk):
+    order = Order.objects.get(orderCode=pk, ordered=False)
+    order.paystaus = 'Pagado'
+    order.status = 'Pagado'
+    order.save()
+    return redirect("cart_app:orderadmin")
+
+@staff_member_required
+def cancelOrder(request, pk):
+    order = Order.objects.get(orderCode=pk, ordered=False)
+    order.paystaus = 'NoPagados'
+    order.status = 'Devuelto'
+    order.save()
+    return redirect("cart_app:orderadmin")
+
+@staff_member_required
+def whatsappOrder(request, pk):
+    order = Order.objects.get(orderCode=pk, ordered=False)
+    orCode = order.orderCode
+    if order.user.profile.phone:
+        orphone = order.user.profile.phone
+    else:
+        orphone = ''
+    
+    if order.orderCode:
+        orderCode = order.orderCode
+    else:
+        orderCode = ''
+    #mensaje de compra
+    purchase_message = 'https://api.whatsapp.com/send?phone=504' + str(orphone) + '&text='
+    price_total = Order.objects.get(orderCode=pk, ordered=False).get_total()
+    price_envio = Order.objects.get(orderCode=pk, ordered=False).get_price_envio()
+    price_totalf = Order.objects.get(orderCode=pk, ordered=False).get_total_final()
+    title_product = Order.objects.get(orderCode=pk, ordered=False).stringNames()
+    if( order.user.first_name and order.user.last_name == ''):
+        usuario_name = order.user.first_name + ' (' + order.user.username + ')'
+    elif( order.user.first_name and order.user.last_name ):
+        usuario_name = order.user.first_name + " " + order.user.last_name + ' (' + order.user.username + ')'
+    else:
+        usuario_name = order.user.username
+
+    if (order.orderLocation):
+        location = '%0D%0ADirección: ' + order.orderLocation
+    else:
+        location = ''
+
+    if order.discountCode:
+        descuento = DiscountCode.objects.get(code=order.discountCode)
+        if descuento:
+            if descuento.typediscount == 'Fijo':
+                discount_total = descuento.discount
+            else:
+                discount_total = price_total * descuento.discount / 100
+            final_message = str(purchase_message) + '--- Nuevo pedido de ' + str(usuario_name) + ' ---' + '%0D%0A--- No. de Pedido ' + str(orderCode) + ' ---%0D%0A%0D%0A' + str(title_product) + '%0D%0A' + "----- Sub Total: " + str(price_total) + "L.%0D%0A" + "----- Envio: " + str(price_envio) + "L.%0D%0A" + "----- Descuento: " + str(discount_total) + "L.%0D%0A" + "----- Total: " + str(price_totalf - discount_total) + "L.%0D%0A" + str(location)
+    else:
+        descuento = ''
+        discount_total = ''
+        final_message = str(purchase_message) + '--- Nuevo pedido de ' + str(usuario_name) + ' ---' + '%0D%0A--- No. de Pedido ' + str(orderCode) + ' ---%0D%0A%0D%0A' + str(title_product) + '%0D%0A' + "----- Sub Total: " + str(price_total) + "L.%0D%0A" + "----- Envio: " + str(price_envio) + "L.%0D%0A" + "----- Total: " + str(price_totalf) + "L.%0D%0A" + str(location)
+
+    #mensaje de compra
+    context = {
+        'purchase_message': final_message
+    }
+    #return context
+    return redirect(final_message)
+
+
+@staff_member_required
+def orderAdmin(request):
+    orders = Order.objects.all()
+    context = {
+        'object': orders
+    }
+    return render(request, 'order_admin.html', context)

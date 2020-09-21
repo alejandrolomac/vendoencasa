@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido</title>
+    <style>
+        a:hover{ background: #22214f; }
+
+        ul li a:hover{ background: transparent; color: #22214f; }
+
+
+        @media screen and (max-width: 1100px) {
+            h1{ font-size: 60px !important; }
+
+            h3{ font-size: 20px !important; }
+        }
+
+        @media screen and (max-width: 890px) {
+            h1{ font-size: 50px !important; }
+
+            h3{ font-size: 20px !important; }
+        }
+
+        @media screen and (max-width: 700px) {
+            p{ font-size: 13px !important; }
+
+            a{ font-size: 14px !important;}
+
+            div p{ font-size: 15px !important; }
+
+            h1{ font-size: 30px !important; }
+
+            h3{ font-size: 15px !important; }
+        }
+
+        @media screen and (max-width: 450px) {
+            ul li{ float: none !important; text-align: center !important; width: 100% !important; }
+        }
+    </style>
+</head>
+<body style="background: #f7f7f7; font-family: helvetica, arial; padding-top: 20px; overflow: hidden;">
+    {% load mathfilters %}
+    <img src="https://www.vendoencasa.net/static/img/page/LogoVC.png" style="display: block; width: 30% !important; height: auto; margin: 0px auto 30px auto;">
+    <h1 style="widht: 100%; color: #2a2963; font-size: 30px; text-align: center; margin-bottom: 0px;">Resumen de Pedido No. {{orderCode}}</h1>
+
+    <ul style="width: 100%; margin-top: 20px; font-size: 20px; list-style: none; display: block; float: left; padding-left: 0px; text-align: center !important;">
+    {% for list in order.items.all %}
+        <li style="border-bottom: 1px solid #ccc; width: 100%; margin-bottom 10px; padding-bottom: 5px; text-align: center !important;">{{list.item.title}} (<b>{{list.get_quantity}}</b>) - <b>{{list.get_total_item_price}}</b> L.</li>
+        
+    {% endfor %}
+    </ul>
+
+    <ul style="width: 100%; margin-top: 40px; font-size: 25px; list-style: none; display: block; float: left; padding-left: 0px; text-align: center !important;">
+        <li style="width: 100%; margin-bottom 10px; padding-bottom: 5px; text-align: center !important;">Sub Total: <b>{{order.get_total}}</b> L.</li>
+        <li style="width: 100%; margin-bottom 10px; padding-bottom: 5px; text-align: center !important;">Envió: <b>{{order.get_price_envio}}</b> L.</li>
+        {% if order.get_discount %}
+            <li style="width: 100%; margin-bottom 10px; padding-bottom: 5px; text-align: center !important;">Descuento: <b>{{order.get_discount}}</b> L.</li>
+            <li style="width: 100%; margin-bottom 10px; padding-bottom: 5px; text-align: center !important;">Total: <b>{{order.get_total_final|sub:order.get_discount}}</b> L.</li>
+        {% else %}
+            <li style="width: 100%; margin-bottom 10px; padding-bottom: 5px; text-align: center !important;">Total: <b>{{order.get_total_final}}</b> L.</li>
+        {% endif %}
+    </ul>
+
+</body>
+</html>

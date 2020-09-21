@@ -3,35 +3,99 @@
 {% block content %}
 
 	{% load static %}
-	<div class="container-fluid list-cats">
+	{% load mathfilters %}
+	<div class="container-fluid list-cats" style="margin-top: 100px;">
 		<div class="container">
-			<h3 class="text-left mb-4" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Administrador de Ordenes</h3>
-			<div class="row m-0 mb-5 mt-5">
-				<div class="col-12 pl-0 mb-4 wrap-order">
+			<div class="row">
+				<div class="col-12">
+					<h3 class="text-left mb-4 mt-5" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Administrador de Ordenes</h3>
+
+					<div class="wrap-filterbtn">
+						<button class="filterbtn all active mt-1">Todas</button>
+						<button class="filterbtn recibido mt-1">Recibidos</button>
+						<button class="filterbtn enviado mt-1">Enviados</button>
+						<button class="filterbtn completados mt-1">Completados</button>
+						<button class="filterbtn cancelados mt-1">Cancelados</button>
+					</div>
+				</div>
+
+				<div class="col-12 m-0 mb-5 mt-5">
 					{% for orders in object %}
-						<div class="card mb-3 p-2 normal-order" style="background: #f9f9f9; box-shadow: 0px 4px 7px #ddd; border-radius: 5px; border: 2px solid red !important;">
-							<div class="row no-gutters">
-								<p class="w-100">Usuario: {{orders.user}}</p>
-								<p class="w-100">Direccion: {{orders.orderLocation}}</p>
-								<p class="w-100">Metodo de Pago: {{orders.payMethod}}</p>
-								<p class="w-100">Fecha: {{orders.ordered_date}}</p>
-								<p class="w-100">Estado: {{orders.paystaus}}</p>
-								<p class="w-100">Total: {{orders.get_total}}</p>
+						{% if orders.status != 'NoPagados' %}
+							{% if orders.status == 'Procesando' %}
+								<div class="item mb-3 p-2 recibido">
+							{% elif orders.status == 'Enviado' %}
+								<div class="item mb-3 p-2 enviado">
+							{% elif orders.status == 'Pagado' %}
+								<div class="item mb-3 p-2 completados">
+							{% elif orders.status == 'Devuelto' %}
+								<div class="item mb-3 p-2 cancelados">
+							{% endif %}
+								<ul class="list-group w-100">
+									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; border: none;">
+										<a href="#"><b>{{orders.orderCode}}</b></a>
+										<span class="badge-pill"><b>{{orders.user}}</b></span>
+									</li>
+
+									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; border: none;">
+										Dirección: {{orders.orderLocation}}
+									</li>
+
+									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; border: none;">
+										Fecha: {{orders.ordered_date}}
+									</li>
+
+									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; border: none;">
+										Metodo de Pago: {{orders.payMethod}}
+										<span class="badge-pill">
+											Total: <b>{{orders.get_total_final|sub:orders.get_discount}}</b>
+										</span>
+									</li>
+								</ul>
+
+								<ul class="nav nav-pills nav-fill">
+									
+									{% if orders.status == 'Procesando' %}
+										<li class="nav-item m-1 ">
+											<a class="nav-link btn enviado" href="{% url 'cart_app:sendorder' orders.orderCode  %}">Enviado</a>
+										</li>
+									{% else %}
+										<li class="nav-item m-1 desactivado">
+											<span class="nav-link btn enviado">Enviado</span>
+										</li>
+									{% endif %}
+
+									{% if orders.status == 'Enviado' %}
+										<li class="nav-item m-1 ">
+											<a class="nav-link btn completados" href="{% url 'cart_app:completeorder' orders.orderCode  %}">Completado</a>
+										</li>
+									{% else %}
+										<li class="nav-item m-1 desactivado">
+											<span class="nav-link btn completados">Completado</span>
+										</li>
+									{% endif %}
+
+									{% if orders.status != 'Pagado' %}
+										<li class="nav-item m-1 ">
+											<a class="nav-link btn cancelados" href="{% url 'cart_app:cancelorder' orders.orderCode  %}">Cancelar</a>
+										</li>
+									{% else %}
+										<li class="nav-item m-1 desactivado">
+											<span class="nav-link btn cancelados">Cancelar</span>
+										</li>
+									{% endif %}
+
+									<li class="nav-item m-1">
+										<a class="nav-link btn whatsapp" href="{% url 'cart_app:whatsapporder' orders.orderCode %}" target="_blank">Whatsapp</a>
+									</li>
+								</ul>
 							</div>
-							<a href="#" class="btn">Recibido</a>
-							<a href="#" class="btn">Enviado</a>
-							<a href="#" class="btn">Completado</a>
-							<a href="#" class="btn">Cancelado</a>
-							<a href="#" class="btn">Whatsapp</a>
-						</div>
-						
-					{% empty %}
-						<div class="w-100 pt-5 pb-5">
-							<h5>No hay pedidos</h5>
-						</div>
+						{% endif %}
 					{% endfor %}
 				</div>
+
 			</div>
+
 		</div>
 	</div>
 

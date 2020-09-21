@@ -1272,3 +1272,56 @@ WISH STYLES
 		padding: 0 !important;
 	}
 }
+
+
+
+/*------------------------------------------------------
+ADMIN STYLES
+------------------------------------------------------*/
+
+.item {
+	width: 100%;
+	border: 1px solid;
+	height: auto;
+	border-radius: 5px;
+	background: #fcfcfc;
+	box-shadow: 0px 4px 7px #ddd;
+}
+
+.item.recibido { border-color: #ffc107; }
+.item.enviado { border-color: #28a745; }
+.item.completados { border-color: #17a2b8; }
+.item.cancelados { border-color: #738a8c; }
+
+.filterbtn.all { background:#ef4036 !important; color: #fff !important; }
+.filterbtn.recibido { background: #ffc107 !important; color: #fff !important; }
+.filterbtn.enviado { background: #28a745 !important; color: #fff !important; }
+.filterbtn.completados { background: #17a2b8 !important; color: #fff !important; }
+.filterbtn.cancelados { background: #738a8c !important; color: #fff !important; }
+.filterbtn.whatsapp { background:#00bb2d !important; color: #fff !important; }
+
+
+.hide { display: none !important; }
+.desactivado {
+	pointer-events: none;
+	opacity: 0.6;
+}
+
+.wrap-filterbtn .filterbtn
+{
+	padding: 10px;
+	border-radius: 3px;
+	border: none;
+	color: #fff;
+	opacity: .6;
+}
+
+.wrap-filterbtn .filterbtn:hover
+{
+	opacity: .8;
+}
+
+.wrap-filterbtn .active 
+{
+	opacity: 1;
+}

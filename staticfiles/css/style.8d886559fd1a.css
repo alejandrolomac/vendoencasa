@@ -1279,42 +1279,26 @@ WISH STYLES
 ADMIN STYLES
 ------------------------------------------------------*/
 
-.item {
-	width: 100%;
-	border: 2px solid;
-	height: auto;
-	border-radius: 5px;
+.grid
+{
+	grid-template-columns: 1fr 1fr 1fr;
+	margin: 0 auto 80px;
+	max-width: 90%;
+	grid-gap: 20px;
+	display: grid;
+	width: 600px;
 }
 
-.item.recibido { border-color: #fff700; }
-.item.enviado { border-color: #0f5; }
-.item.completados { border-color: #00e5ff; }
-.item.cancelados { border-color: #738a8c; }
+.item {
+	border-radius: 4px;
+	height: 100px;
+	width: 100%;
+}
 
-.wrap-filterbtn.all { background:#ef4036; }
-.wrap-filterbtn.recibido { background: #fff700; }
-.wrap-filterbtn.enviado { background: #0f5; }
-.wrap-filterbtn.completados { background: #00e5ff; }
-.wrap-filterbtn.cancelados { background: #738a8c; }
-
+.item.blue { background: #06f; }
+.item.white { background: #fff; }
+.item.grey { background: #8e9aa7; }
+.item.yellow { background: #fdc67e; }
+.item.red { background: #eb7676; }
 
 .hide { display: none !important; }
-
-.wrap-filterbtn .filterbtn
-{
-	padding: 10px;
-	border-radius: 3px;
-	border: none;
-	color: #fff;
-	opacity: .6;
-}
-
-.wrap-filterbtn .filterbtn:hover
-{
-	opacity: .8;
-}
-
-.wrap-filterbtn .active 
-{
-	opacity: 1;
-}
