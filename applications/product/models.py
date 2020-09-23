@@ -107,7 +107,7 @@ class Size(models.Model):
 		return self.name
 
 class Products(models.Model):
-	title = models.CharField('Titulo', max_length=300, blank=False)
+	title = models.CharField('Titulo', max_length=900, blank=False)
 	company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, blank=True)
 	user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, blank=True)
 	subCategory = models.ForeignKey(SubCategory, models.SET_NULL, null=True)
