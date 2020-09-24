@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from applications.product.models import Products, Color, Size
+from applications.product.models import Products, Color, Size, SubCategory
 from django.forms.widgets import CheckboxSelectMultiple
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -25,6 +25,7 @@ class ProductForm(forms.ModelForm):
         self.fields["colors"].queryset = Color.objects.all()
         self.fields["sizes"].widget = CheckboxSelectMultiple()
         self.fields["sizes"].queryset = Size.objects.all()
+        self.fields["subCategory"].queryset = SubCategory.objects.all().order_by('name')
 
 
 

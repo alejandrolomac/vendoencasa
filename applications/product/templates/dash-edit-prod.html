@@ -52,7 +52,7 @@
 			<h4 class="card-header">Publicar</h4>
 			<div class="card-body">
 				<small><b>Fecha de Publicacion</b>: {{ fechapub.pub_date|date:"d F, Y" }}</small>
-				<small class="w-100 float-left"><b>Visualizar: </b><a href="{% url 'product_app:single-product' product.slug %}">{{product.title}}</a></small>
+				<small class="w-100 float-left" style="font-size: 16px;"><b>Visualizar: </b><a href="{% url 'product_app:single-product' product.slug %}">{{product.title}}</a></small>
 				
 				<div class="row" style="padding: 10px 0px; margin-top: 10px;">
 					<div class="col-12 text-center">

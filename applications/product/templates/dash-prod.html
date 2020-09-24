@@ -12,19 +12,47 @@
 				<small>Tienes {{countprod}} productos</small>
 			</div>
 			<div class="col-6 text-right">
-				{% if userprofile.plan == 'Vendedor' and countprod < 3 %}
-					<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
-				{% elif userprofile.plan == 'Empresario' and countprod < 4 %}
-					<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
-				{% elif userprofile.plan == 'Franquiciador' %}
-					<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
-				{% else %}
-					<a href="#" class="primaryAction btn disabled">Agregar Producto</a>
-					<small style="width:100%; float: right; text-align:right;">Límite de productos del plan alcanzado.</small>
-				{% endif %}
+				<a href="{% url 'dashboard_app:newprod' %}" class="primaryAction btn">Agregar Producto</a>
 			</div>
 		</div>
-		<table class="table table-hover">
+		{% for prod in productlist %}
+			<div class="card mb-3 p-2" style="background: #f9f9f9; box-shadow: 0px 4px 7px #ddd; border-radius: 5px; border-bottom: 1px solid #fff !important;">
+				<div class="row no-gutters">
+					<div class="col-3 col-md-2 col-lg-1">
+						<img src="{{ prod.imagef.url }}" class="card-img">
+					</div>
+					<div class="col-7 col-md-8 col-lg-9">
+						<div style="display: block; height: 100%; position: relative;">
+							<div style="padding: 10px;">
+								<a href="{% url "dashboard_app:editproduct" prod.id %}">{{prod.title}}</a>
+								<p class="card-text mb-0">
+									Código: {{prod.productCode}}
+								</p>
+								<p class="card-text mb-0">
+									Categoría: {{prod.subCategory}}
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-1">
+						<div style="display: block; height: 100%; position: relative;">
+							<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px; text-align: center;">
+								<a href="{% url 'product_app:single-product' prod.slug %}" style="margin-right: 10px;" target="blank">Ver</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-1">
+						<div style="display: block; height: 100%; position: relative;">
+							<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px; text-align: center;">
+								<a href="{% url 'dashboard_app:deleteproduct' prod.id %}" class=""><i class="fa fa-trash"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+
+		<!--<table class="table table-hover">
 			<thead class="thead-dark">
 				<tr>
 				<th scope="col">Nombre Producto</th>
@@ -41,13 +69,14 @@
 						<td>{{prod.productCode}}</td>
 						<td>{{prod.subCategory}}</td>
 						<td>{{prod.quantity}}</td>
-						<td class="text-right"><a href="{% url 'dashboard_app:deleteproduct' prod.id %}" class=""><i class="fa fa-trash"></i></a></td>
+						<td class="text-right">
+							<a href="{% url 'product_app:single-product' prod.slug %}" style="margin-right: 10px;" target="blank">Ver</a>
+							<a href="{% url 'dashboard_app:deleteproduct' prod.id %}" class=""><i class="fa fa-trash"></i></a>
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
-		</table>
+		</table>-->
 	</div>
 </div>
-
-
 {% endblock content %}

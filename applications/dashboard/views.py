@@ -80,7 +80,7 @@ def deleteproduct(request, pk):
 @login_required(login_url='useradmin_app:entrar')
 def dashproduct(request):
     iduser = request.user.id
-    productlist = Products.objects.all().filter(user__id=iduser)
+    productlist = Products.objects.all().filter(user__id=iduser).order_by('-pub_date')
     countprod = Products.objects.all().filter(user__id=iduser).count()
     userprofile = get_object_or_404(Profile, pk=request.user.profile.id)
 
