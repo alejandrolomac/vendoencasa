@@ -112,11 +112,27 @@ PRODUCT STYLES
 	margin-top: 50px;
 }
 
-.newprod input[type="text"], .newprod input[type="password"], .newprod input[type="email"], .newprod select, .newprod textarea
+.newprod input[type="text"], .newprod input[type="password"], .newprod input[type="email"], .newprod select, .newprod textarea, .newprod input[type="file"]
 {
+	max-width: 100%;
 	width: 100% !important;
 	padding: 10px !important;
 	border: 1px solid #dedede !important;
+	border-radius: 0px !important;
+	height: auto !important;
+}
+
+.select2-container--default .select2-selection--single
+{
+	border-radius: 0px !important;
+	border: 1px solid #dedede !important;
+	height: auto !important;
+	padding: 10px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow
+{
+	height: 100% !important;
 }
 
 .card-header

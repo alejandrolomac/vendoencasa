@@ -112,9 +112,9 @@ PRODUCT STYLES
 	margin-top: 50px;
 }
 
-.newprod input[type="text"], .newprod input[type="password"], .newprod input[type="email"], .newprod select, .newprod textarea, .newprod input[type="file"]
+.newprod input[type="text"], .newprod input[type="password"], .newprod input[type="email"], .newprod select, .newprod textarea, #id_subCategory, .select2-container--default .select2-selection--single
 {
-	max-width: 100%;
+	min-width: 100%;
 	width: 100% !important;
 	padding: 10px !important;
 	border: 1px solid #dedede !important;
@@ -122,12 +122,20 @@ PRODUCT STYLES
 	height: auto !important;
 }
 
-.select2-container--default .select2-selection--single
+.select2-container
 {
-	border-radius: 0px !important;
-	border: 1px solid #dedede !important;
-	height: auto !important;
-	padding: 10px;
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+.select2-container *
+{
+	max-width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow
+{
+	width: 20px !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow

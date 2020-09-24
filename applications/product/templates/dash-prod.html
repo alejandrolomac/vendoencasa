@@ -3,7 +3,7 @@
 {% block content %}
 {% load static %}
 
-<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%; margin-top: 20px; font-size: 40px;">Productos</h3>
+<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px; width: 100%; margin-top: 20px; font-size: 40px;">Productos Publicados</h3>
 
 <div class="row">
 	<div class="col-12 mt-3">
@@ -18,10 +18,10 @@
 		{% for prod in productlist %}
 			<div class="card mb-3 p-2" style="background: #fff; box-shadow: 0px 4px 7px #cacaca; border-radius: 5px; border-bottom: 1px solid #ccc !important;">
 				<div class="row no-gutters">
-					<div class="col-3 col-md-2 col-lg-1">
+					<div class="col-3 col-md-3 col-lg-2">
 						<img src="{{ prod.imagef.url }}" class="card-img">
 					</div>
-					<div class="col-7 col-md-8 col-lg-9">
+					<div class="col-8 col-md-8 col-lg-9">
 						<div style="display: block; height: 100%; position: relative;">
 							<div style="padding: 10px;">
 								<a href="{% url "dashboard_app:editproduct" prod.id %}">{{prod.title}}</a>
@@ -31,13 +31,7 @@
 								<p class="card-text mb-0">
 									Categoría: {{prod.subCategory}}
 								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-1">
-						<div style="display: block; height: 100%; position: relative;">
-							<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px; text-align: center;">
-								<a href="{% url 'product_app:single-product' prod.slug %}" style="margin-right: 10px;" target="blank">Ver</a>
+								<a href="{% url 'product_app:single-product' prod.slug %}" style="margin-right: 10px; margin-top: 10px; display: block;" target="blank">Visualizar Producto</a>
 							</div>
 						</div>
 					</div>
