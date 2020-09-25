@@ -217,8 +217,38 @@
 	<script>
 		AOS.init();
 
+		function calc() {
+			if( document.getElementById( "num_of_tickets" ) ){
+				var x = document.getElementById("num_of_tickets").value
+				var cat = document.getElementById("id_subCategory").value
+				var porcat = 0;
+
+				if( cat == '1' || cat == '2' ){
+					porcat = parseFloat(0.10);
+				}else if ( cat == '3' )
+				{
+					porcat = parseFloat(0.05);
+				}
+
+				var subtotal = parseInt(x) * parseFloat(porcat)
+				var total = parseInt(subtotal) + parseInt(x)
+				if(subtotal) {
+					document.getElementById("subtotal").innerHTML = subtotal;
+				}else {
+					document.getElementById("subtotal").innerHTML = 0;
+				}
+
+				if(total) {
+					document.getElementById("total").innerHTML = total;
+				}else {
+					document.getElementById("total").innerHTML = 0;
+				}
+			}
+		}
+
 		$(document).ready(function() {
 			$('#id_subCategory').select2();
+			calc();
 		});
 	</script>
 

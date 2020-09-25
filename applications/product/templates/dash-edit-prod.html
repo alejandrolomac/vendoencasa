@@ -85,17 +85,6 @@
 				{{ form.pricePromo }}
 				<p class="mt-3">{{ form.promotion }} promoción</p>
 				<p class="mt-3">{{ form.available }} Disponible</p>
-
-				<script>
-					function calc() {
-						var x = document.getElementById("num_of_tickets").value
-						var cat = document.getElementById("id_subCategory").value
-						var subtotal = parseInt(x * 0.10)
-						var total = parseInt(x * 0.10) + parseInt(x)
-						document.getElementById("total").innerHTML = total;
-						document.getElementById("subtotal").innerHTML = subtotal;
-					}
-				</script>
 			</div>
 		</div><!-- End Of Price -->
 

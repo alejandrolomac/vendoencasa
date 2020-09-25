@@ -32,6 +32,7 @@ class CategoryAdmin(admin.ModelAdmin):
 	list_display = (
 		'id',
 		'name',
+		'commission',
 	)
 
 class SubCategoryAdmin(admin.ModelAdmin):
