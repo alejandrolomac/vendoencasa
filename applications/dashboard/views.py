@@ -40,6 +40,7 @@ def dashnewprod(request):
         formprod = form.save(commit=False)
         formprod.imagef = request.FILES['imagef']
         formprod.user = request.user
+        formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
         formprod.available = True
         formprod.save()
         form.save_m2m()
@@ -62,7 +63,9 @@ def editproduct(request, product_id):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product_to_edit)
         if form.is_valid():
-            form.save()
+            formprod = form.save(commit=False)
+            formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+            formprod.save()
             return redirect('dashboard_app:dashprod')
         else:
             form = ProductForm(instance=product_to_edit)

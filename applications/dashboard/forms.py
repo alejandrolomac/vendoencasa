@@ -9,7 +9,7 @@ from applications.orders.models import OrdersProducts
 
 class ProductForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Nombre del producto'}))
-    price = forms.FloatField(widget=forms.TextInput(attrs={'placeholder':'Precio'}))
+    price = forms.FloatField(widget=forms.TextInput(attrs={'placeholder':'Precio', 'id':'num_of_tickets', 'onkeyup':'calc()'}))
     pricePromo = forms.FloatField(widget=forms.TextInput(attrs={'placeholder':'Precio Promoción', 'class':'mt-2'}))
     resume = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Descripción del producto', 'class':'mt-3'}))
     quantity = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder':'Cantidad'}))

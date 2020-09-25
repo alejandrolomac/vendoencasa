@@ -18,7 +18,7 @@ from applications.useradmin.models import Profile
 
 def index(request):
 	categorys = Category.objects.all()
-	virus_prod = Products.objects.all().filter(available=True, quantity__gte=1, virus=True).order_by('?')
+	virus_prod = Products.objects.all().filter(available=True, quantity__gte=1, subCategory__category__name='Covid-19').order_by('?')
 	new_prod = Products.objects.all().filter(available=True, quantity__gte=1).order_by('?')[:10]
 	promo_prod = Products.objects.all().filter(promotion=True, quantity__gte=1, available=True).order_by('?')[:10]
 	season_prod = Products.objects.all().filter(season=True, quantity__gte=1, available=True).order_by('?')

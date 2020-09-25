@@ -208,3 +208,8 @@ PRODUCT STYLES
 		margin-top: 50px;
 	}
 }
+
+.select2-container
+{
+	max-width: 100% !important;
+}

@@ -18,8 +18,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
@@ -33,13 +33,13 @@
 		    			<li><a href="/productos">Productos</a></li>
 						<li><a href="/servicios">Servicios</a></li>
 		    			<li><a href="/planes">Quiero Vender</a></li>
-						{% if request.user.is_authenticated %}
+						<!--{% if request.user.is_authenticated %}
 							<li>
 								<a class="navbar-car btn" href="{% url 'useradmin_app:salir' %}" style="font-size: 1em;">
 									Salir <i class="fa fa-user"></i>
 								</a>
 							</li>
-						{% endif %}
+						{% endif %}-->
 					</ul>
 				</div>
 			</div>
@@ -71,10 +71,42 @@
 					<div class="col-9 col-md-4 col-lg-3 text-right float-right third " style="padding:0px;">
 						{% if request.user.is_authenticated %}
 							<a class="navbar-car" href="{% url 'cart_app:order' %}">
-								<span style="font-size: .5em;">{{request.user.username}}</span>
 								<i class="fa fa-shopping-cart"></i>
 								<span style="padding: 0px 5px;font-size: .5em; border-radius: 5px; background: #fff;">{{ request.user|cart_item_count }}</span>
 							</a>
+
+							<div style="display: inline-block;">
+								<a href="{% url 'wish_app:wish' %}" style="font-size: 1.6em; margin-right: 10px;">
+									<i class="fa fa-heart"></i>
+								</a>
+								<div class="btn-group" style="vertical-align: unset !important;">
+									<a href="#" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" style="font-size: 1.6em; margin-right: 10px;">
+										<i class="fa fa-user"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right">
+										<span class="dropdown-item-text">
+											<!--{% if user.profile.logo %}
+												<div style="margin-right:10px; background: url({{ user.profile.logo.url }}) center center no-repeat; background-size: cover; width: 30px; height: 30px; border-radius: 100%; display: inline-block;"></div>
+											{% else %}
+												<img src="{% static 'img/default_thumbnail.jpg' %}" width="30" height="30" style="margin-right:10px; border-radius: 100%; display: inline-block;"/>
+											{% endif %}-->
+											{{request.user.username}}
+										</span>
+
+										
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{% url 'useradmin_app:perfil' %}">Mi Perfil</a>
+										{% if user.profile.plan != 'Comprador' %}
+											<a class="dropdown-item" href="{% url 'dashboard_app:dashboard' %}">Mi Empresa</a>
+										{% endif %}
+										<a class="dropdown-item" href="{% url 'cart_app:order' %}">Mis Pedidos</a>
+										<a class="dropdown-item" href="{% url 'wish_app:wish' %}">Lista de Deseos</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="{% url 'useradmin_app:salir' %}">Salir</a>
+									</div>
+								</div>
+							</div>
+
 						{% else %}
 							<a class="navbar-car" href="{% url 'useradmin_app:entrar' %}" style="font-size: 1.3em;">Entrar <i class="fa fa-user"></i></a>
 						{% endif %}
@@ -107,7 +139,6 @@
 		</div>
 		{% endfor %}
 	{% endif %}
-
 
 
   {% block body %}
@@ -148,16 +179,24 @@
 					<li>
 						<a href="https://www.instagram.com/vendoencasa/"><i class="fa fa-instagram"></i></a>
 					</li>
+					<li>
+						<a href="https://www.youtube.com/channel/UCy9F1eY_jK7SlocIBagDQdQ"><i class="fa fa-youtube"></i></a>
+					</li>
+					<li>
+						<!--<a href="https://www.tiktok.com/@vendoencasa"><i class="fa fa-tiktok" style="width: 25px; height: 35px; background: url({% static 'img/tiktok.png' %})center center no-repeat; background-size: contain;"></i></a>-->
+						<a href="https://www.tiktok.com/@vendoencasa"><i class="fa fa-tiktok"></i></a>
+					</li>
 				</ul>
 			</div>
 
 			<div class="row menufooter">
 				<ul style="margin-top: 0px; margin-bottom: 50px;">
 					<li><a href="/">Políticas de Privacidad</a></li>
-		    		<li><a href="/">Términos de Servicio</a></li>
+		    		<li><a href="{% url 'product_app:terms' %}">Términos de Servicio</a></li>
 					<li><a href="/">Preguntas Frecuentes</a></li>
 				</ul>
 			</div>
+
 			<!--<div class="row row-cols-1 row-cols-md-3">
 				<div class="col"></div>
 			</div>-->
@@ -259,9 +298,44 @@
 			focusOnSelect: true
 		});
 		
-		$(".alert").fadeTo(800, 500).slideUp(500, function(){
+		$(".alert").fadeTo(3000, 2000).slideUp(500, function(){
 			$(".alert").slideUp(500);
 		});
+
+
+		var checkClass = function() {
+			if ( $('.item').hasClass('hide') ) {
+				$('.item').removeClass('hide');
+			}
+		};
+
+		// Category filters
+		$('.all').click( function() {
+			checkClass();
+		});
+		$('.recibido').click( function() {
+			checkClass();
+		$('.item:not(.recibido)').toggleClass('hide');
+		});
+		$('.enviado').click( function() {
+			checkClass();
+		$('.item:not(.enviado)').toggleClass('hide');
+		});
+		$('.completados').click( function() {
+			checkClass();
+		$('.item:not(.completados)').toggleClass('hide');
+		});
+		$('.cancelados').click( function() {
+			checkClass();
+		$('.item:not(.cancelados)').toggleClass('hide');
+		});
+
+		// Active tag
+		$('.filterbtn').click(function(){
+			$('.filterbtn').removeClass('active');
+			$(this).addClass('active');
+		})
+
 	</script>
 
 	<!-- Bootstrap -->

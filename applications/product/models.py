@@ -66,6 +66,7 @@ class Category(models.Model):
 	icono = models.ImageField('Icono', upload_to='Category', blank=True)
 	categoryCode = models.CharField('Codigo Categoría', max_length=1, blank=True)
 	slug = models.SlugField('Slug', blank=True, unique=True)
+	commission = models.IntegerField('Comisión', blank=True, default=0)
 
 	def __unicode__(self):
 		return self.name
