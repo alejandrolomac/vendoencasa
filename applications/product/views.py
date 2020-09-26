@@ -16,6 +16,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from applications.useradmin.models import Profile
 from django.db.models import F
+import unicodedata
 
 def index(request):
 	categorys = Category.objects.all()
@@ -153,12 +154,12 @@ def search(request):
 
 	if( cat_query == '' ):
 		queryset = ( 
-			Q(title__icontains=query) | Q(resume__icontains=query)
+			Q(title__icontains=query) | Q(slug__icontains=query) | Q(resume__icontains=query)
 		)
 		results = Products.objects.all().filter(queryset, available=True, quantity__gte=1).distinct().order_by('-pub_date')
 	else:
 		queryset = (
-			Q(title__icontains=query) | Q(resume__icontains=query)
+			Q(title__icontains=query) | Q(slug__icontains=query) | Q(resume__icontains=query)
 		)
 		results = Products.objects.all().filter(queryset, available=True, quantity__gte=1).distinct().filter( subCategory__category__id=cat_query).order_by('-pub_date')
 	

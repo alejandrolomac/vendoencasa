@@ -284,6 +284,7 @@ def orderSummaryFinish(request):
     status = Order.objects.get(user=request.user, status='NoPagados')
     coupon = False
     coupons = ''
+    couponssa = ''
     shipping = 0
     discount_total = 0
     payMethod = ''
@@ -335,13 +336,14 @@ def orderSummaryFinish(request):
                 location = ''
                 locationd = ''
         if request.POST.get('coupon'):
-            coupons = DiscountCode.objects.get(code=request.POST.get('coupon'))
+            coupons = DiscountCode.objects.filter(code=request.POST.get('coupon'))
             if coupons:
                 coupon = True
-                if coupons.typediscount == 'Fijo':
-                    discount_total = price_total - coupons.discount
+                couponssa = DiscountCode.objects.get(code=request.POST.get('coupon'))
+                if couponssa.typediscount == 'Fijo':
+                    discount_total = price_total - couponssa.discount
                 else:
-                    discount_total = price_total * coupons.discount / 100
+                    discount_total = price_total * couponssa.discount / 100
         if request.POST.get('customRadio'):
             payMethod = request.POST.get('customRadio')
             if  payMethod == 'Efectivo':
@@ -360,7 +362,7 @@ def orderSummaryFinish(request):
         'location': location,
         'locationd': locationd,
         'coupon': coupon,
-        'coupons': coupons,
+        'coupons': couponssa,
         'shipping': shipping,
         'cantorder': cantorder,
         'discount_total': discount_total,
@@ -371,18 +373,18 @@ def orderSummaryFinish(request):
 
 
 @login_required(login_url='useradmin_app:entrar')
-def orderSummaryEnd(request):
+def orderSummaryEnds(request):
     order = Order.objects.get(user=request.user, ordered=False, status='NoPagados')
     order.paystaus = 'Procesando'
     order.status = 'Procesando'
     order.save()
-    print("salvado")
+    #messages.error(request, 'Tu pedido está siendo procesado, dentro de poco tiempo serás contactado para más detalles')
 
     context = {
         'object': order
     }
-    messages.error(request, 'Tu pedido está siendo procesado, dentro de poco tiempo serás contactado para más detalles')
-    return redirect("/")
+    #return redirect("/")
+    return render(request, 'order_send.html', context)
 
 
 class OrderSummaryPay(LoginRequiredMixin, View):
@@ -476,7 +478,7 @@ def sendOrder(request, pk):
     #:::::: EMAIL ::::::
     title = 'Resumen de Pedido VendoEnCasa'
     orderCode = order.orderCode
-    to = 'reikrad@gmail.com'
+    to = request.user.email
     data = {
         'title': title,
         'order': order,
