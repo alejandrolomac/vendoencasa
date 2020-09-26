@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from applications.product.models import Company, Category, SubCategory, Products, DiscountCode, RegistrationCode
 from applications.services.models import Services
 from applications.useradmin.models import Profile
+from applications.cart.models import Order
 from applications.orders.models import OrdersProducts
 from django.db.models import Count
 from django.contrib.auth.models import User
@@ -18,6 +19,8 @@ from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.db.models import Avg
+from django.db.models import Sum
 
 @login_required(login_url='useradmin_app:entrar')
 def dashboard(request):
@@ -27,7 +30,12 @@ def dashboard(request):
     servicesCount = Services.objects.all().count()
     usersCount = User.objects.all().count()
     showProducts = Products.objects.all()[:10]
-    return render(request, 'dash-escritorio.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount, 'UsersCount': usersCount, 'ServicesCount': servicesCount, 'ShowProduct': showProducts})
+
+    viewsprod = Products.objects.all().filter(user__id=iduser).aggregate(Sum('views'))
+    sellprod = Order.objects.all().filter(items__user__id=iduser, status='Pagado').count()
+    sellprodlist = Order.objects.all().filter(items__user__id=iduser, status='Pagado')[:10]
+
+    return render(request, 'dash-escritorio.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount, 'UsersCount': usersCount, 'ServicesCount': servicesCount, 'ShowProduct': showProducts, 'viewsprod': viewsprod, 'sellprod': sellprod, 'sellprodlist': sellprodlist})
 
 
 @login_required(login_url='useradmin_app:entrar')

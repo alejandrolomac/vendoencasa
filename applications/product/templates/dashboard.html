@@ -223,10 +223,17 @@
 				var cat = document.getElementById("id_subCategory").value
 				var porcat = 0;
 
-				if( cat == '1' || cat == '2' ){
-					porcat = parseFloat(0.10);
-				}else if ( cat == '3' )
-				{
+				if( cat == '83' || cat == '82' || cat == '37' ){
+					porcat = parseFloat(0.03);
+				}else if( cat == '76' || cat == '43' || cat == '42' || cat == '41' || cat == '23' ){
+					porcat = parseFloat(0.02);
+				}else if( cat == '74' ){
+					porcat = parseFloat(0.01);
+				}else if( cat == '73' ){
+					porcat = parseFloat(0.08);
+				}else if( cat == '12' ){
+					porcat = parseFloat(0.07);
+				}else {
 					porcat = parseFloat(0.05);
 				}
 
@@ -246,9 +253,45 @@
 			}
 		}
 
+		function calcready() {
+			if( document.getElementById( "num_of_tickets" ) ){
+				var x = document.getElementById("num_of_tickets").value
+				var cat = document.getElementById("id_subCategory").value
+				var porcat = 0;
+
+				if( cat == '83' || cat == '82' || cat == '37' ){
+					porcat = parseFloat(0.03);
+				}else if( cat == '76' || cat == '43' || cat == '42' || cat == '41' || cat == '23' ){
+					porcat = parseFloat(0.02);
+				}else if( cat == '74' ){
+					porcat = parseFloat(0.01);
+				}else if( cat == '73' ){
+					porcat = parseFloat(0.08);
+				}else if( cat == '12' ){
+					porcat = parseFloat(0.07);
+				}else {
+					porcat = parseFloat(0.05);
+				}
+
+				var subtotal = parseInt(x) * parseFloat(porcat)
+				var total = parseInt(x)
+				if(subtotal) {
+					document.getElementById("subtotal").innerHTML = subtotal;
+				}else {
+					document.getElementById("subtotal").innerHTML = 0;
+				}
+
+				if(total) {
+					document.getElementById("total").innerHTML = total;
+				}else {
+					document.getElementById("total").innerHTML = 0;
+				}
+			}
+		}
+
 		$(document).ready(function() {
 			$('#id_subCategory').select2();
-			calc();
+			calcready();
 		});
 	</script>
 

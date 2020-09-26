@@ -301,8 +301,13 @@ def orderSummaryFinish(request):
                 if cantorder == 1:
                     shipping = 80
                 else:
-                    cantordera = cantorder - 1
-                    shipping = 80 + (20 * cantordera )
+                    if cantorder <= 4:
+                        cantordera = cantorder - 1
+                        shipping = 80 + (20 * cantordera )
+                    elif cantorder > 6:
+                        shipping = 0
+                    else:
+                        shipping = 140
             else:
                 shipping = 0
         else:
@@ -315,8 +320,13 @@ def orderSummaryFinish(request):
                     if cantorder == 1:
                         shipping = 80
                     else:
-                        cantordera = cantorder - 1
-                        shipping = 80 + (20 * cantordera )
+                        if cantorder <= 4:
+                            cantordera = cantorder - 1
+                            shipping = 80 + (20 * cantordera )
+                        elif cantorder > 6:
+                            shipping = 0
+                        else:
+                            shipping = 140
                 else:
                     shipping = 0
             else:
@@ -352,6 +362,7 @@ def orderSummaryFinish(request):
         'coupon': coupon,
         'coupons': coupons,
         'shipping': shipping,
+        'cantorder': cantorder,
         'discount_total': discount_total,
         'payMethod': payMethod,
         'stringsplit': stringsplit
@@ -365,6 +376,8 @@ def orderSummaryEnd(request):
     order.paystaus = 'Procesando'
     order.status = 'Procesando'
     order.save()
+    print("salvado")
+
     context = {
         'object': order
     }

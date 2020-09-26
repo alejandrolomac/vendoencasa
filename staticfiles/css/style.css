@@ -1325,3 +1325,11 @@ ADMIN STYLES
 {
 	opacity: 1;
 }
+
+.errorlist
+{
+	background: #ef4036;
+    color: #fff;
+    list-style: none;
+    padding: 10px;
+}

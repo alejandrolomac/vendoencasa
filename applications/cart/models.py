@@ -134,6 +134,12 @@ class Order(models.Model):
         envio = (envio - 1) * 20 + 80
         totalf = total + envio
         return totalf
+    
+    def stringTitle(self):
+        text = ''
+        for name in self.items.all():
+            text += '- ' + str(name.item.title)
+        return text
 
     def stringNames(self):
         text = ''

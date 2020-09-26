@@ -132,6 +132,7 @@ class Products(models.Model):
 	quantity = models.IntegerField('Cantidad', default=1, blank=False)
 	productCode = models.CharField("Codigo de Producto", max_length=100, blank=True)
 	statusproduct = models.TextField('Estado del Producto', blank=False, default='Nuevo', choices=STATUSPRODUCT_CHOICES)
+	views = models.PositiveIntegerField(default=0)
 
 	def __str__(self):
 		return self.title

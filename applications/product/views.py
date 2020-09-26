@@ -15,6 +15,7 @@ from .forms import CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from applications.useradmin.models import Profile
+from django.db.models import F
 
 def index(request):
 	categorys = Category.objects.all()
@@ -96,6 +97,7 @@ class SingleProduct(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['slug']
+		Products.objects.filter(slug=id).update(views=F('views') + 1)
 		lista = Products.objects.all().filter(
 			slug=id, 
 			available=True
@@ -115,6 +117,7 @@ class SingleProduct(ListView):
 		wish_count = WishItem.objects.all().filter(item__id=product_select.id).count()
 		comments = Comment.objects.all().filter(product__id=product_select.id)
 		countcomments = Comment.objects.all().filter(product__id=product_select.id).count()
+
 		context['related_prod'] = products_cats
 		context['produch_wish'] = produch_wish
 		context['wish_count'] = wish_count

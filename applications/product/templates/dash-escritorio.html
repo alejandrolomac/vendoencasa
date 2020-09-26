@@ -13,13 +13,14 @@
 	</div>
 	<div class="col-4">
 		<div class="text-center">
-			<h2 class="h1 mb-0">{{CompanysCount}}</h2>
+			<!--<h2 class="h1 mb-0">{{viewsprod.views__avg|floatformat}}</h2>-->
+			<h2>{{viewsprod.views__sum|floatformat}}</h2>
 			<p>Visualizaciones</p>
 		</div>
 	</div>
 	<div class="col-4">
 		<div class="text-center">
-			<h2 class="h1 mb-0">{{ServicesCount}}</h2>
+			<h2 class="h1 mb-0">{{sellprod}}</h2>
 			<p>Compras del mes</p>
 		</div>
 	</div>
@@ -40,8 +41,8 @@
 			<h4 class="card-header">Compras</h4>
 			<div class="card-body">
 				<ul>
-					{% for p in ShowProduct %}
-						<li>{{p.title}}</li>
+					{% for p in sellprodlist %}
+						<li>{{p.stringTitle}}</li>
 					{% endfor %}
 				</ul>
 			</div>

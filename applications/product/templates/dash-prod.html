@@ -32,6 +32,9 @@
 								<p class="card-text mb-0">
 									Categoría: {{prod.subCategory}}
 								</p>
+								<p class="card-text mb-0">
+									Visualizaciones: {{prod.views}}
+								</p>
 								<a href="{% url 'product_app:single-product' prod.slug %}" style="margin-right: 10px; margin-top: 10px; display: block;" target="blank">Visualizar Producto</a>
 							</div>
 						</div>
@@ -39,39 +42,33 @@
 					<div class="col-1">
 						<div style="display: block; height: 100%; position: relative;">
 							<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px; text-align: center;">
-								<a href="{% url 'dashboard_app:deleteproduct' prod.id %}" class=""><i class="fa fa-trash"></i></a>
+								<!--<a href="{% url 'dashboard_app:deleteproduct' prod.id %}"><i class="fa fa-trash"></i></a>-->
+								<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-trash"></i></button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Eliminar Producto</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						¿Estas seguro que quieres eliminarlo?
+					</div>
+					<div class="modal-footer">
+						<a href="{% url 'dashboard_app:deleteproduct' prod.id %}" class="btn"><i class="fa fa-trash"></i></a>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+					</div>
+					</div>
+				</div>
+			</div><!-- End Of Modal -->
 		{% endfor %}
-
-		<!--<table class="table table-hover">
-			<thead class="thead-dark">
-				<tr>
-				<th scope="col">Nombre Producto</th>
-				<th scope="col">Código</th>
-				<th scope="col">Categoría</th>
-				<th scope="col">Inventario</th>
-				<th scope="col"></th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for prod in productlist %}
-					<tr>
-						<td><a href="{% url "dashboard_app:editproduct" prod.id %}">{{prod.title}}</a></td>
-						<td>{{prod.productCode}}</td>
-						<td>{{prod.subCategory}}</td>
-						<td>{{prod.quantity}}</td>
-						<td class="text-right">
-							<a href="{% url 'product_app:single-product' prod.slug %}" style="margin-right: 10px;" target="blank">Ver</a>
-							<a href="{% url 'dashboard_app:deleteproduct' prod.id %}" class=""><i class="fa fa-trash"></i></a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>-->
 	</div>
 </div>
 {% endblock content %}
