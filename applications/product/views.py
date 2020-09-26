@@ -160,7 +160,7 @@ def search(request):
 		queryset = (
 			Q(title__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.all().filter(queryset, available=True, quantity__gte=1).distinct().filter( subCategory__id=cat_query).order_by('-pub_date')
+		results = Products.objects.all().filter(queryset, available=True, quantity__gte=1).distinct().filter( subCategory__category__id=cat_query).order_by('-pub_date')
 	
 	paginator = Paginator(results, 20)
 	page = request.GET.get('page', 1)
