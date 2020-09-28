@@ -9,20 +9,10 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
-
     def __init__(self, *args, **kwargs):
         super(CreateUserForm, self).__init__(*args, **kwargs)
+        self.fields['username'].required=True
         self.fields['email'].required=True
-    
-    def clean(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-        email = self.cleaned_data.get('email')
-        if password1 != password2:
-            raise ValidationError("Las contraseñas no son iguales")
-        if User.objects.filter(email=email).exists():
-            raise ValidationError("El E-mail ya se utilizo en otra cuenta")
-        return self.cleaned_data
 
 class ProfileForm(forms.ModelForm):
     phone = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder':'99999999'}))
@@ -33,19 +23,10 @@ class ProfileForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['gender'].required=True
         self.fields['phone'].required=True
         self.fields['Department'].required=True
         self.fields['location'].required=True
-    
-    def clean_phone(self):
-        phone = self.cleaned_data.get('phone')
-        if phone == '':
-            raise ValidationError("El teléfono es necesario para registrarse")
-        elif isinstance(phone, int):
-            raise ValidationError("El teléfono no debe contener letras o caracteres especiales ")
-        return phone
-    
-    
 
 
 class CreateCompanyForm(UserCreationForm):
@@ -54,7 +35,8 @@ class CreateCompanyForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
     
     def __init__(self, *args, **kwargs):
-        super(CreateUserForm, self).__init__(*args, **kwargs)
+        super(CreateCompanyForm, self).__init__(*args, **kwargs)
+        self.fields['username'].required=True
         self.fields['email'].required=True
 
 class CompanyForm(forms.ModelForm):
@@ -78,4 +60,4 @@ class UserSettingForm(UserChangeForm):
 class UserSettingProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['location', 'phone']
+        fields = ['location', 'Department', 'phone']

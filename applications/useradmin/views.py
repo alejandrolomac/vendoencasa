@@ -14,6 +14,8 @@ from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from django.dispatch import receiver
+from django.db.models.signals import post_save, pre_save
 
 def registerDefault(request):
     context = {}
@@ -36,7 +38,6 @@ def registerPage(request):
                 user.profile.code = profile_form.cleaned_data['code']
                 user.profile.save()
                 user.save()
-                
                 #:::::: EMAIL ::::::
                 title = 'Bienvenido a Vendo en Casa'
                 to = user.email
@@ -57,6 +58,17 @@ def registerPage(request):
                 user = authenticate(username=username, password=password)
                 login(request, user)
                 return redirect("product_app:index")
+            else:
+                usercheck = form.cleaned_data.get('username')
+                userexist = User.objects.all().filter(username=usercheck)
+                emailcheck = form.cleaned_data.get('email')
+                emailexist = User.objects.all().filter(email=emailcheck)
+                if userexist and emailexist:
+                    messages.error(request, "El Usuario o E-mail ya esta siendo utilizado")
+                elif userexist:
+                    messages.error(request, "Ya existe ese Usuario")
+                elif emailexist:
+                    messages.error(request, "Ya existe ese E-Mail")
         else:
             form = CreateUserForm()
             profile_form = ProfileForm()
@@ -65,6 +77,7 @@ def registerPage(request):
             'form':form,
             'profile_form':profile_form
         })
+
 
 def loginDefault(request):
     context = {}

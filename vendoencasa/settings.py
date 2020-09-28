@@ -185,4 +185,6 @@ EMAIL_HOST_PASSWORD = 'wsttpjnauvlvxrhj'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'vendoencasahn@gmail.com'
 
+AUTH_USER_EMAIL_UNIQUE = True
+
 django_heroku.settings(locals())

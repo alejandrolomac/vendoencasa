@@ -123,13 +123,6 @@
 									{% if lp.colors.all or lp.sizes.all %}
 										<form action="{{ lp.get_add_to_cart_url }}" method='POST' style="width: 100%;">
 											{% csrf_token %}
-											<!--<select class="custom-select" name="colorlist" style="float:left; width: 100%;">
-												{% for color in lp.colors.all %}
-													<option value="{{color.name}}" style="border-left: 100px solid {{color.color}} !important;" class="option-color">
-														{{color.name}}
-													</option>
-												{% endfor %}
-											</select>-->
 											{% if lp.sizes.all %}
 												<div id="wrap-size">
 													<p>Tallas Disponibles:</p>

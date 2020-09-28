@@ -73,6 +73,86 @@ def add_to_cart(request, slug):
 
 
 @login_required(login_url='useradmin_app:entrar')
+def add_to_cart_color(request, slug, color):
+    item = get_object_or_404(OrderItem, item__slug=slug, color=color)
+    color = color
+    if color:
+        colorid = item.color
+    else:
+        colorid = ''
+
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item = item
+        if item:
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "Se actualizo la cantidad de productos")
+            return redirect("cart_app:order")
+
+
+@login_required(login_url='useradmin_app:entrar')
+def add_to_cart_size(request, slug, size):
+    item = get_object_or_404(OrderItem, item__slug=slug, size=size)
+    size = size
+    if size:
+        sizeid = item.size
+    else:
+        sizeid = ''
+
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+
+    
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item = item
+        asd = order.items.filter(item__slug=slug, size=sizeid)
+        if item:
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "Se actualizo la cantidad de productos")
+            return redirect("cart_app:order")
+
+
+@login_required(login_url='useradmin_app:entrar')
+def add_to_cart_color_size(request, slug, color, size):
+    item = get_object_or_404(OrderItem, item__slug=slug, color=color, size=size)
+    size = size
+    color = color
+    if size:
+        sizeid = item.size
+    else:
+        sizeid = ''
+    if color:
+        colorid = item.color
+    else:
+        colorid = item.color
+
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item = item
+        asd = order.items.filter(item__slug=slug, size=sizeid, color=colorid)
+        if item:
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "Se actualizo la cantidad de productos")
+            return redirect("cart_app:order")
+
+
+@login_required(login_url='useradmin_app:entrar')
 def add_to_cart_from_wish(request, slug):
     item = get_object_or_404(Products, slug=slug)
     if request.POST:
@@ -109,7 +189,7 @@ def add_to_cart_from_wish(request, slug):
             order_item.save()
             if orderw.items.filter(item__slug=item.slug).exists():
                 orderw.items.filter(item__slug=item.slug).delete()
-            messages.info(request, "Se actualizo el numero de productos")
+            messages.info(request, "Se actualizo la cantidad de productos")
             return redirect("cart_app:order")
         else:
             messages.success(request, "Se agrego el producto al carrito")
@@ -140,120 +220,113 @@ def add_to_cart_from_wish(request, slug):
 
 @login_required(login_url='useradmin_app:entrar')
 def remove_from_cart(request, slug):
-    item = get_object_or_404(Products, slug=slug)
+    item = get_object_or_404(OrderItem, item__slug=slug)
+
     order_qs = Order.objects.filter(
         user=request.user,
         ordered=False
     )
+
     if order_qs.exists():
         order = order_qs[0]
-        order_item = OrderItem.objects.filter(
-            item=item,
-            user=request.user,
-            ordered=False
-        )[0]
-        if order.items.filter(item__slug=item.slug).exists():
-            #order.items.remove(order_item)
-            order_item.delete()
-            messages.info(request, "Se elimino el producto del carrito")
-        else:
-            messages.error(request, "Este producto no existe en tu carrito")
-            return redirect("product_app:single-product", slug=slug)
-            
-    else:
-        messages.info(request, "El carrito esta vacio")
-        return redirect("product_app:single-product", slug=slug)
-    return redirect("product_app:single-product", slug=slug)
+        order_item = item
+        if item:
+            if order_item.quantity == 1:
+                order_item.delete()
+            else:
+                order_item.quantity -= 1
+                order_item.save()
+            messages.info(request, "Se actualizo la cantidad de productos")
+            return redirect("cart_app:order")
+
 
 @login_required(login_url='useradmin_app:entrar')
 def remove_from_cart_c(request, slug, color):
-    item = get_object_or_404(Products, slug=slug)
+    item = get_object_or_404(OrderItem, item__slug=slug, color=color)
+    color = color
+    if color:
+        colorid = item.color
+    else:
+        colorid = ''
+
     order_qs = Order.objects.filter(
         user=request.user,
         ordered=False
     )
+
     if order_qs.exists():
         order = order_qs[0]
-        order_item = OrderItem.objects.filter(
-            item=item,
-            color=color,
-            user=request.user,
-            ordered=False
-        )[0]
-        if order.items.filter(item__slug=item.slug, color=order_item.color).exists():
-            #order.items.remove(order_item)
-            order_item.delete()
-            messages.info(request, "Se elimino el producto del carrito")
-        else:
-            messages.error(request, "Este producto no existe en tu carrito")
-            return redirect("product_app:single-product", slug=slug)
-            
-    else:
-        messages.info(request, "El carrito esta vacio")
-        return redirect("product_app:single-product", slug=slug)
-    return redirect("product_app:single-product", slug=slug)
+        order_item = item
+        if item:
+            if order_item.quantity == 1:
+                order_item.delete()
+            else:
+                order_item.quantity -= 1
+                order_item.save()
+            messages.info(request, "Se actualizo la cantidad de productos")
+            return redirect("cart_app:order")
 
 
 
 @login_required(login_url='useradmin_app:entrar')
 def remove_from_cart_s(request, slug, size):
-    item = get_object_or_404(Products, slug=slug)
+    item = get_object_or_404(OrderItem, item__slug=slug, size=size)
+    size = size
+    if size:
+        sizeid = item.size
+    else:
+        sizeid = ''
+
     order_qs = Order.objects.filter(
         user=request.user,
         ordered=False
     )
+
     if order_qs.exists():
         order = order_qs[0]
-        order_item = OrderItem.objects.filter(
-            item=item,
-            size=size,
-            user=request.user,
-            ordered=False
-        )[0]
-        if order.items.filter(item__slug=item.slug, size=order_item.size).exists():
-            #order.items.remove(order_item)
-            order_item.delete()
-            messages.info(request, "Se elimino el producto del carrito")
-        else:
-            messages.error(request, "Este producto no existe en tu carrito")
-            return redirect("product_app:single-product", slug=slug)
-            
-    else:
-        messages.info(request, "El carrito esta vacio")
-        return redirect("product_app:single-product", slug=slug)
-    return redirect("product_app:single-product", slug=slug)
+        order_item = item
+        asd = order.items.filter(item__slug=slug, size=sizeid)
+        if item:
+            if order_item.quantity == 1:
+                order_item.delete()
+            else:
+                order_item.quantity -= 1
+                order_item.save()
+            messages.info(request, "Se actualizo la cantidad de productos")
+            return redirect("cart_app:order")
 
 
 @login_required(login_url='useradmin_app:entrar')
 def remove_from_cart_sc(request, slug, color, size):
-    item = get_object_or_404(Products, slug=slug)
+    item = get_object_or_404(OrderItem, item__slug=slug, color=color, size=size)
+    size = size
+    color = color
+    if size:
+        sizeid = item.size
+    else:
+        sizeid = ''
+    if color:
+        colorid = item.color
+    else:
+        colorid = item.color
+
     order_qs = Order.objects.filter(
         user=request.user,
         ordered=False
     )
+
     if order_qs.exists():
         order = order_qs[0]
-        order_item = OrderItem.objects.filter(
-            item=item,
-            color=color,
-            size=size,
-            user=request.user,
-            ordered=False
-        )[0]
-        if order.items.filter(item__slug=item.slug, color=order_item.color, size=order_item.size).exists():
-            #order.items.remove(order_item)
-            order_item.delete()
-            messages.info(request, "Se elimino el producto del carrito")
-        else:
-            messages.error(request, "Este producto no existe en tu carrito")
-            return redirect("product_app:single-product", slug=slug)
-            
-    else:
-        messages.info(request, "El carrito esta vacio")
-        return redirect("product_app:single-product", slug=slug)
-    return redirect("product_app:single-product", slug=slug)
-
-
+        order_item = item
+        asd = order.items.filter(item__slug=slug, size=sizeid, color=colorid)
+        if item:
+            if order_item.quantity == 1:
+                order_item.delete()
+            else:
+                order_item.quantity -= 1
+                order_item.save()
+            messages.info(request, "Se actualizo la cantidad de productos")
+            return redirect("cart_app:order")
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -424,35 +497,6 @@ class OrderSummaryFinish(LoginRequiredMixin, View):
             messages.error(self.request, 'No tienes ninguna lista de compras')
             return redirect("/")
 
-
-@login_required(login_url='useradmin_app:entrar')
-def remove_single_item_from_cart(request, slug):
-    item = get_object_or_404(Products, slug=slug)
-    order_qs = Order.objects.filter(
-        user=request.user,
-        ordered=False
-    )
-    if order_qs.exists():
-        order = order_qs[0]
-        # check if the order item is in the order
-        order_item = OrderItem.objects.filter(
-            item=item,
-            user=request.user,
-            ordered=False
-        )[0]
-        if order_item:
-            if order_item.quantity > 1:
-                order_item.quantity -= 1
-                order_item.save()
-            else:
-                order_item.delete()
-            messages.info(request, "Se actualizo el numero de productos")
-            return redirect("cart_app:order")
-    else:
-        messages.info(request, "Se actualizo tu pedido")
-        return redirect("cart_app:order")
-
-
 @login_required(login_url='useradmin_app:entrar')
 def clean_cart(request):
     order_qs = Order.objects.filter(
@@ -464,9 +508,6 @@ def clean_cart(request):
         order.delete()
 
     return redirect("product_app:index")
-
-
-
 
 @staff_member_required
 def sendOrder(request, pk):
@@ -564,7 +605,6 @@ def whatsappOrder(request, pk):
     #return context
     return redirect(final_message)
 
-
 @staff_member_required
 def orderAdmin(request):
     orders = Order.objects.all()
@@ -572,3 +612,95 @@ def orderAdmin(request):
         'object': orders
     }
     return render(request, 'order_admin.html', context)
+
+
+
+
+
+@login_required(login_url='useradmin_app:entrar')
+def delete_item(request, slug):
+    item = get_object_or_404(OrderItem, item__slug=slug)
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item = item
+        if item:
+            order_item.delete()
+            messages.info(request, "Se elimino el producto")
+            return redirect("cart_app:order")
+
+
+@login_required(login_url='useradmin_app:entrar')
+def delete_item_c(request, slug, color):
+    item = get_object_or_404(OrderItem, item__slug=slug, color=color)
+    color = color
+    if color:
+        colorid = item.color
+    else:
+        colorid = ''
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item = item
+        if item:
+            order_item.delete()
+            messages.info(request, "Se elimino el producto")
+            return redirect("cart_app:order")
+
+
+
+@login_required(login_url='useradmin_app:entrar')
+def delete_item_s(request, slug, size):
+    item = get_object_or_404(OrderItem, item__slug=slug, size=size)
+    size = size
+    if size:
+        sizeid = item.size
+    else:
+        sizeid = ''
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item = item
+        asd = order.items.filter(item__slug=slug, size=sizeid)
+        if item:
+            order_item.delete()
+            messages.info(request, "Se elimino el producto")
+            return redirect("cart_app:order")
+
+
+@login_required(login_url='useradmin_app:entrar')
+def delete_item_sc(request, slug, color, size):
+    item = get_object_or_404(OrderItem, item__slug=slug, color=color, size=size)
+    size = size
+    color = color
+    if size:
+        sizeid = item.size
+    else:
+        sizeid = ''
+    if color:
+        colorid = item.color
+    else:
+        colorid = item.color
+
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+
+    if order_qs.exists():
+        order = order_qs[0]
+        order_item = item
+        asd = order.items.filter(item__slug=slug, size=sizeid, color=colorid)
+        if item:
+            order_item.delete()
+            messages.info(request, "Se elimino el producto")
+            return redirect("cart_app:order")
