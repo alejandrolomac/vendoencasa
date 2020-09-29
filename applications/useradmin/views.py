@@ -30,48 +30,57 @@ def registerPage(request):
             form = CreateUserForm(request.POST)
             profile_form = ProfileForm(request.POST)
             if form.is_valid() and profile_form.is_valid():
-                user = form.save()
-                user.profile.gender = profile_form.cleaned_data['gender']
-                user.profile.Department = profile_form.cleaned_data['Department']
-                user.profile.location = profile_form.cleaned_data['location']
-                user.profile.phone = profile_form.cleaned_data['phone']
-                user.profile.code = profile_form.cleaned_data['code']
-                user.profile.save()
-                user.save()
-                #:::::: EMAIL ::::::
-                title = 'Bienvenido a Vendo en Casa'
-                to = user.email
-                html_content = render_to_string('welcome_email.html', {'title': title})
-                text_content = strip_tags(html_content)
-                email = EmailMultiAlternatives(
-                    title,
-                    text_content,
-                    settings.EMAIL_HOST_USER,
-                    [to]
-                )
-                email.attach_alternative(html_content, "text/html")
-                email.send()
-                #:::::: EMAIL ::::::
-                messages.success(request, "¡Gracias por unirte!")
-                username = form.cleaned_data.get('username')
-                password = form.cleaned_data.get('password1')
-                user = authenticate(username=username, password=password)
-                login(request, user)
-                return redirect("product_app:index")
+                emailcheck = form.cleaned_data.get('email')
+                emailexist = User.objects.all().filter(email=emailcheck)
+                if emailexist:
+                    messages.error(request, "Ya se utilizo este E-Mail")
+                    print("email ya existe")
+                else:
+                    user = form.save()
+                    user.profile.gender = profile_form.cleaned_data['gender']
+                    user.profile.Department = profile_form.cleaned_data['Department']
+                    user.profile.location = profile_form.cleaned_data['location']
+                    user.profile.phone = profile_form.cleaned_data['phone']
+                    user.profile.code = profile_form.cleaned_data['code']
+                    user.profile.save()
+                    user.save()
+                    #:::::: EMAIL ::::::
+                    title = 'Bienvenido a Vendo en Casa'
+                    to = user.email
+                    html_content = render_to_string('welcome_email.html', {'title': title})
+                    text_content = strip_tags(html_content)
+                    email = EmailMultiAlternatives(
+                        title,
+                        text_content,
+                        settings.EMAIL_HOST_USER,
+                        [to]
+                    )
+                    email.attach_alternative(html_content, "text/html")
+                    email.send()
+                    #:::::: EMAIL ::::::
+                    messages.success(request, "¡Gracias por unirte!")
+                    username = form.cleaned_data.get('username')
+                    password = form.cleaned_data.get('password1')
+                    user = authenticate(username=username, password=password)
+                    login(request, user)
+                    return redirect("product_app:index")
             else:
                 usercheck = form.cleaned_data.get('username')
                 userexist = User.objects.all().filter(username=usercheck)
-                emailcheck = form.cleaned_data.get('email')
-                emailexist = User.objects.all().filter(email=emailcheck)
-                if userexist and emailexist:
-                    messages.error(request, "El Usuario o E-mail ya esta siendo utilizado")
-                elif userexist:
-                    messages.error(request, "Ya existe ese Usuario")
-                elif emailexist:
-                    messages.error(request, "Ya existe ese E-Mail")
+                if userexist:
+                    messages.error(request, "Ya se utilizo este Usuario")
+                    print("usuario ya existe")
         else:
             form = CreateUserForm()
             profile_form = ProfileForm()
+            if len(request.body) > 0:
+                usercheck = form.cleaned_data.get('username')
+                userexist = User.objects.all().filter(username=usercheck)
+                if userexist:
+                    messages.error(request, "Ya se utilizo este Usuario")
+                    print("usuario ya existe")
+                print("si existe el form")
+            print("error de datos")
 
         return render(request, 'registration/register-usuario.html', {
             'form':form,
