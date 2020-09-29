@@ -34,7 +34,6 @@ def registerPage(request):
                 emailexist = User.objects.all().filter(email=emailcheck)
                 if emailexist:
                     messages.error(request, "Ya se utilizo este E-Mail")
-                    print("email ya existe")
                 else:
                     user = form.save()
                     user.profile.gender = profile_form.cleaned_data['gender']
@@ -65,22 +64,15 @@ def registerPage(request):
                     login(request, user)
                     return redirect("product_app:index")
             else:
-                usercheck = form.cleaned_data.get('username')
-                userexist = User.objects.all().filter(username=usercheck)
+                usercheck = request.POST.get('username')
+                userexist = User.objects.filter(username=usercheck)
                 if userexist:
                     messages.error(request, "Ya se utilizo este Usuario")
-                    print("usuario ya existe")
+                if form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
+                    messages.error(request, "Las contraseñas son diferentes")
         else:
             form = CreateUserForm()
             profile_form = ProfileForm()
-            if len(request.body) > 0:
-                usercheck = form.cleaned_data.get('username')
-                userexist = User.objects.all().filter(username=usercheck)
-                if userexist:
-                    messages.error(request, "Ya se utilizo este Usuario")
-                    print("usuario ya existe")
-                print("si existe el form")
-            print("error de datos")
 
         return render(request, 'registration/register-usuario.html', {
             'form':form,
@@ -149,40 +141,56 @@ def registerCompany(request):
             form = CreateCompanyForm(request.POST)
             company_form = CompanyForm(request.POST, request.FILES)
             if form.is_valid() and company_form.is_valid():
-                user = form.save()
-                user.profile.Department = company_form.cleaned_data['Department']
-                user.profile.location = company_form.cleaned_data['location']
-                user.profile.phone = company_form.cleaned_data['phone']
-                user.profile.name = company_form.cleaned_data['name']
-                user.profile.resume = company_form.cleaned_data['resume']
-                #user.profile.logo = company_form.cleaned_data['logo']
-                user.profile.plan = 'Vendedor'
-                permission = Permission.objects.get(name='Can add products')
-                user.user_permissions.add(permission)
-                user.profile.save()
-                user.save()
+                emailcheck = form.cleaned_data.get('email')
+                emailexist = User.objects.all().filter(email=emailcheck)
+                namecheck = company_form.cleaned_data.get('name')
+                nameexist = Profile.objects.all().filter(name=namecheck)
+                if emailexist:
+                    messages.error(request, "Ya se utilizo este E-Mail")
+                elif nameexist:
+                    messages.error(request, "Ya existe una empresa con ese nombre")
+                else:
+                    user = form.save()
+                    user.profile.Department = company_form.cleaned_data['Department']
+                    user.profile.location = company_form.cleaned_data['location']
+                    user.profile.phone = company_form.cleaned_data['phone']
+                    user.profile.name = company_form.cleaned_data['name']
+                    user.profile.resume = company_form.cleaned_data['resume']
+                    #user.profile.logo = company_form.cleaned_data['logo']
+                    user.profile.plan = 'Vendedor'
+                    permission = Permission.objects.get(name='Can add products')
+                    user.user_permissions.add(permission)
+                    user.profile.save()
+                    user.save()
 
-                #:::::: EMAIL ::::::
-                title = 'Bienvenido a Vendo en Casa'
-                to = user.email
-                html_content = render_to_string('welcome_email_company.html', {'title': title})
-                text_content = strip_tags(html_content)
-                email = EmailMultiAlternatives(
-                    title,
-                    text_content,
-                    settings.EMAIL_HOST_USER,
-                    [to]
-                )
-                email.attach_alternative(html_content, "text/html")
-                email.send()
-                #:::::: EMAIL ::::::
+                    #:::::: EMAIL ::::::
+                    title = 'Bienvenido a Vendo en Casa'
+                    to = user.email
+                    html_content = render_to_string('welcome_email_company.html', {'title': title})
+                    text_content = strip_tags(html_content)
+                    email = EmailMultiAlternatives(
+                        title,
+                        text_content,
+                        settings.EMAIL_HOST_USER,
+                        [to]
+                    )
+                    email.attach_alternative(html_content, "text/html")
+                    email.send()
+                    #:::::: EMAIL ::::::
 
-                messages.success(request, "¡Gracias por unirte!")
-                username = form.cleaned_data.get('username')
-                password = form.cleaned_data.get('password1')
-                user = authenticate(username=username, password=password)
-                login(request, user)
-                return redirect("dashboard_app:dashboard")
+                    messages.success(request, "¡Gracias por unirte!")
+                    username = form.cleaned_data.get('username')
+                    password = form.cleaned_data.get('password1')
+                    user = authenticate(username=username, password=password)
+                    login(request, user)
+                    return redirect("dashboard_app:dashboard")
+            else:
+                usercheck = request.POST.get('username')
+                userexist = User.objects.filter(username=usercheck)
+                if userexist:
+                    messages.error(request, "Ya se utilizo este Usuario")
+                if form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
+                    messages.error(request, "Las contraseñas son diferentes")
         else:
             form = CreateCompanyForm()
             company_form = CompanyForm()

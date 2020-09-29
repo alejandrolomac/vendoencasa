@@ -45,7 +45,7 @@ class CompanyForm(forms.ModelForm):
         fields = ('name', 'resume', 'Department', 'location', 'phone', 'facebook', 'instagram', 'website', 'code')
     
     def __init__(self, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
+        super(CompanyForm, self).__init__(*args, **kwargs)
         self.fields['name'].required=True
         self.fields['phone'].required=True
         self.fields['Department'].required=True
