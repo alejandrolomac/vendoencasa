@@ -170,9 +170,11 @@ class Products(models.Model):
 	
 	def offer_save(self):
 		if self.priceAnchor:
-			savedt = self.priceAnchor - self.pricePromo 
+			savedt = self.priceAnchor - self.pricePromo
+		elif self.pricePromo:
+			savedt = self.price - self.pricePromo  
 		else:
-			savedt = self.price - self.pricePromo 
+			savedt = self.price 
 		
 		offer_total = (savedt * 100) / self.price
 		return offer_total
