@@ -18,14 +18,27 @@
 		{% for prod in productlist %}
 			<div class="card mb-3 p-2" style="background: #fff; box-shadow: 0px 4px 7px #cacaca; border-radius: 5px; border-bottom: 1px solid #ccc !important;">
 				<div class="row no-gutters">
-					<div class="col-3 col-md-3 col-lg-2">
+					<div class="col-12 col-sm-3 col-md-3 col-lg-2">
 						<div class="squere-prod" style="background: url({{ prod.imagef.url }}) center center no-repeat; background-size: cover; padding-bottom: 100%; width: 100%;"></div>
 						<!--<img src="{{ prod.imagef.url }}" class="card-img">-->
 					</div>
-					<div class="col-8 col-md-8 col-lg-9">
+					<div class="col-11 col-sm-8 col-md-8 col-lg-9">
 						<div style="display: block; height: 100%; position: relative;">
 							<div style="padding: 10px;">
-								<a href="{% url "dashboard_app:editproduct" prod.id %}">{{prod.title}}</a>
+								<a href="{% url "dashboard_app:editproduct" prod.id %}">
+									{{prod.title}}
+									{% if prod.pricePromo %}
+										<span class="btn ml-3" style="font-size: 10px;">PROMOCIÓN</span>
+									{% endif %}
+								</a>
+								<p class="card-text mb-0">
+									{% if prod.pricePromo %}
+										Precio: <b>{{ prod.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
+										<span class="ml-2" style="text-decoration: line-through; font-weight: normal; color: #ccc !important;">{{ prod.price|floatformat:2 }}<span style="font-size: 14px;">L.</span></span>
+									{% else %}
+										Precio: <b>{{ prod.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
+									{% endif %}
+								</p>
 								<p class="card-text mb-0">
 									Código: {{prod.productCode}}
 								</p>
@@ -41,7 +54,7 @@
 					</div>
 					<div class="col-1">
 						<div style="display: block; height: 100%; position: relative;">
-							<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 10px; text-align: center;">
+							<div style="width: 100%; height: auto; position: absolute; top: 50%; transform: translateY(-50%); padding: 0px; text-align: center;">
 								<!--<a href="{% url 'dashboard_app:deleteproduct' prod.id %}"><i class="fa fa-trash"></i></a>-->
 								<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-trash"></i></button>
 							</div>
