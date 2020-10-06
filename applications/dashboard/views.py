@@ -46,13 +46,24 @@ def dashnewprod(request):
     form = ProductForm(request.POST, request.FILES)
     if form.is_valid():
         formprod = form.save(commit=False)
-        formprod.imagef = request.FILES['imagef']
-        formprod.user = request.user
-        formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
-        formprod.available = True
-        formprod.save()
-        form.save_m2m()
-        return redirect("dashboard_app:dashprod")
+        if formprod.promotion and formprod.pricePromo:
+            formprod.imagef = request.FILES['imagef']
+            formprod.user = request.user
+            formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+            formprod.available = True
+            formprod.save()
+            form.save_m2m()
+            return redirect("dashboard_app:dashprod")
+        elif formprod.promotion and not formprod.pricePromo:
+            messages.error(request, "Debes ingresar un precio de promoción ")
+        else:
+            formprod.imagef = request.FILES['imagef']
+            formprod.user = request.user
+            formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+            formprod.available = True
+            formprod.save()
+            form.save_m2m()
+            return redirect("dashboard_app:dashprod")
 
     return render(request,'dash-new-prod.html', {'form':form})
 
@@ -72,9 +83,16 @@ def editproduct(request, product_id):
         form = ProductForm(request.POST, request.FILES, instance=product_to_edit)
         if form.is_valid():
             formprod = form.save(commit=False)
-            formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
-            formprod.save()
-            return redirect('dashboard_app:dashprod')
+            if formprod.promotion and formprod.pricePromo:
+                formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+                formprod.save()
+                return redirect("dashboard_app:dashprod")
+            elif formprod.promotion and not formprod.pricePromo:
+                messages.error(request, "Debes ingresar un precio de promoción ")
+            else:
+                formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+                formprod.save()
+                return redirect("dashboard_app:dashprod")
         else:
             form = ProductForm(instance=product_to_edit)
 
