@@ -28,7 +28,13 @@
 								{% endif %}
 							</a>
 							<div class="card-body" style="padding: 15px 0px;">
-								<h2 class="card-title"><b>{{ comp.price }}</b><span>L.</span></h2>
+								<h2 class="card-title">
+									{% if comp.pricePromo %}
+										<b>{{ comp.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
+									{% else %}
+										<b>{{ comp.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
+									{% endif %}
+								</h2>
 								<h5 class="card-title">{{ comp.title }}</h5>
 								<a href="{% url 'product_app:single-product' comp.slug %}" class="btn">Comprar</a>
 							</div>
