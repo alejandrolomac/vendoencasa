@@ -33,7 +33,7 @@
 							{% endif %}
 								<ul class="list-group w-100">
 									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; border: none;">
-										<a href="#"><b>{{orders.orderCode}}</b></a>
+										<a href="{% url 'cart_app:orderadmindetail' orders.orderCode %}"><b>{{orders.orderCode}}</b></a>
 										<span class="badge-pill"><b>{{orders.user}}</b></span>
 									</li>
 

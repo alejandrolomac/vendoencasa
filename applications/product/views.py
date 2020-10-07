@@ -5,6 +5,7 @@ from django.views.generic import (
 )
 from .models import Company, Category, SubCategory, Products, Comment
 from applications.services.models import Services
+from applications.cart.models import Order, OrderItem
 from applications.wish.models import Wish, WishItem
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -119,11 +120,14 @@ class SingleProduct(ListView):
 		comments = Comment.objects.all().filter(product__id=product_select.id)
 		countcomments = Comment.objects.all().filter(product__id=product_select.id).count()
 
+		prodinOrder = Order.objects.all().filter(items__item__slug=id)
+
 		context['related_prod'] = products_cats
 		context['produch_wish'] = produch_wish
 		context['wish_count'] = wish_count
 		context['comments'] = comments
 		context['countcomments'] = countcomments
+		context['prodinOrder'] = prodinOrder
 		return context
 
 @login_required(login_url='useradmin_app:entrar')

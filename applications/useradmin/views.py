@@ -94,13 +94,16 @@ def loginPage(request):
             password = request.POST.get('password')
 
             user = authenticate(request, username=username, password=password)
+            userexist = User.objects.filter(username=username)
 
             if user is not None:
                 login(request, user)
                 return redirect('dashboard_app:dashboard')
                 messages.success(request, "Bienvenido " + user)
+            elif not userexist:
+                messages.error(request, "Usuario Incorrecto")
             else:
-                messages.error(request, "Usuario o Contraseña Incorrecto")
+                messages.error(request, "Password Incorrecto")
 
         context = {'form':form}
         return render(request, 'registration/login-company.html', context)
@@ -115,13 +118,16 @@ def loginUsuarios(request):
             password = request.POST.get('password')
 
             user = authenticate(request, username=username, password=password)
+            userexist = User.objects.filter(username=username)
 
             if user is not None:
                 login(request, user)
                 return redirect('product_app:index')
                 messages.success(request, "Bienvenido " + user)
+            elif not userexist:
+                messages.error(request, "Usuario Incorrecto")
             else:
-                messages.error(request, "Usuario o Contraseña Incorrecto")
+                messages.error(request, "Password Incorrecto")
 
         context = {'form':form}
         return render(request, 'registration/login-user.html', context)

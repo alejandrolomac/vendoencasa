@@ -65,16 +65,18 @@
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<h5 class="card-title" style="font-size: 30px; font-weight: bold !important;">
-										{% if lp.priceAnchor %}
-											<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.priceAnchor|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
-											<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.priceAnchor|sub:lp.price|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
-										{% endif %}
 										{% if lp.pricePromo %}
 											<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.price|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
 											{{ lp.pricePromo|floatformat:2 }}<span style="font-size: 14px;">L.</span>
 											<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.price|sub:lp.pricePromo|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
 										{% else %}
-											{{ lp.price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
+											{% if lp.priceAnchor %}
+												<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.priceAnchor|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
+												{{ lp.price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
+												<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.priceAnchor|sub:lp.price|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
+											{% else %}
+												{{ lp.price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
+											{% endif %}
 										{% endif %}
 									</h5>
 								</li>
@@ -150,9 +152,15 @@
 												Cantidad: <input type="number" name="product_quantity" name="tentacles" value="1" min="1" max="100">
 											</div>
 											<div style="width:100%;">
-												<button class="btn" type="submit" style="float:left; margin-right: 20px;">
-													Agregar al Carrito <i class="fa fa-shopping-cart"></i>
-												</button>
+												{% if prodinOrder %}
+													<span class="btn muted" style="float:left; margin-right: 20px; background: #ccc !important;">
+														Ya Existe en el Carrito <i class="fa fa-shopping-cart"></i>
+													</span>
+												{% else %}
+													<button class="btn" type="submit" style="float:left; margin-right: 20px;">
+														Agregar al Carrito <i class="fa fa-shopping-cart"></i>
+													</button>
+												{% endif %}
 											</div>
 										</form>
 
@@ -181,9 +189,15 @@
 												<div style="width:100%; float:left;">
 													Cantidad: <input type="number" name="product_quantity" name="tentacles" value="1" min="1" max="100">
 												</div>
-												<button class="btn" type="submit" style="float:left; margin-right: 20px;">
-													Agregar al Carrito <i class="fa fa-shopping-cart"></i>
-												</button>
+												{% if prodinOrder %}
+													<span class="btn muted" style="float:left; margin-right: 20px; background: #ccc !important;">
+														Ya Existe en el Carrito <i class="fa fa-shopping-cart"></i>
+													</span>
+												{% else %}
+													<button class="btn" type="submit" style="float:left; margin-right: 20px;">
+														Agregar al Carrito <i class="fa fa-shopping-cart"></i>
+													</button>
+												{% endif %}
 											</form>
 
 											{% if produch_wish %}

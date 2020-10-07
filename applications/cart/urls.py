@@ -19,6 +19,7 @@ urlpatterns = [
     path('order-finish/', views.orderSummaryFinish, name='orderfinish'),
     path('order-send/', views.orderSummaryEnds, name='orderend'),
     path('vendo-admin-orders/', views.orderAdmin, name='orderadmin'),
+    path('vendo-admin-orders/<pk>', views.orderAdminDetail, name='orderadmindetail'),
     path('vendo-admin-orders/s/<pk>', views.sendOrder, name='sendorder'),
     path('vendo-admin-orders/c/<pk>', views.completeOrder, name='completeorder'),
     path('vendo-admin-orders/d/<pk>', views.cancelOrder, name='cancelorder'),

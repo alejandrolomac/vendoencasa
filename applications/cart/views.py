@@ -605,6 +605,8 @@ def whatsappOrder(request, pk):
     #return context
     return redirect(final_message)
 
+
+
 @staff_member_required
 def orderAdmin(request):
     orders = Order.objects.all()
@@ -612,6 +614,14 @@ def orderAdmin(request):
         'object': orders
     }
     return render(request, 'order_admin.html', context)
+
+@staff_member_required
+def orderAdminDetail(request, pk):
+    order = Order.objects.all().filter(orderCode=pk)
+    context = {
+        'object': order
+    }
+    return render(request, 'order_admin_detail.html', context)
 
 
 
