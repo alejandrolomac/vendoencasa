@@ -103,7 +103,7 @@
 										{% endif %}
 									</li>
 								{% endif %}
-							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume }}</p></li>
+							    <li class="list-group-item"><p>Descripción: </br>{{ lp.resume|linebreaks }}</p></li>
 							    <li class="list-group-item">
 							    	Compartir: 
 									<a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-facebook"></i></a>
