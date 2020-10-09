@@ -336,6 +336,30 @@
 			$(this).addClass('active');
 		})
 
+		$(document).ready(function () {
+			$('#showPassalacka').on('click', function(){
+				if($(this).hasClass('glyphicon-eye-open')){
+					$('#passalacka').attr('type', 'text');    
+					$(this).removeClass('glyphicon-eye-open');
+					$(this).addClass('glyphicon-eye-close');
+				} else {
+					$('#passalacka').attr('type', 'password');    
+					$(this).removeClass('glyphicon-eye-close');
+					$(this).addClass('glyphicon-eye-open');
+				}
+			});
+		});
+		$(".toggle-password").click(function() {
+
+			$(this).toggleClass("fa-eye fa-eye-slash");
+			var input = $($(this).attr("toggle"));
+			if (input.attr("type") == "password") {
+			input.attr("type", "text");
+			} else {
+			input.attr("type", "password");
+			}
+		});
+
 	</script>
 
 	<!-- Bootstrap -->

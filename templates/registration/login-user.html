@@ -14,9 +14,21 @@
             <!--<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i> Entrar via facebook</a>-->
         </p>
         <form class="login" method="POST" action="">
-            {{ form.as_p }}
+            <!--{{ form.as_p }}-->
             {% csrf_token %}
             <div class="row">
+
+                <div class="col-12">
+                    <!-- Email -->
+                    <label for="id_username">Usuario o E-Mail</label>
+                    <input type="text" name="username" autofocus="" class="form-control mb-4" placeholder="E-mail o Nombre de Usuario" autocapitalize="none" autocomplete="username" required="" id="id_username">
+
+                    <!-- Password -->
+                    <label for="id_username">Contraseña</label>
+                    <input type="password" name="password" autocomplete="current-password" required="" class="form-control mb-4" placeholder="Contraseña" style="position: relative; padding-right: 10px;"  id="id_password">
+                    <span toggle="#id_password" class="fa fa-fw fa-eye field-icon toggle-password" style="position:absolute; right: 20px; top: 50%; transform: translateY(46px);"></span>
+                </div>
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <button class="primaryAction btn" type="submit">Entrar</button>
@@ -25,8 +37,9 @@
                 <div class="col-md-6 text-right">
                     <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Reiniciar Contraseña</a>
                 </div>   
-            </div>                                               
-      </form>
+            </div>   
+                                                
+        </form>
       
     </article>
   </div>

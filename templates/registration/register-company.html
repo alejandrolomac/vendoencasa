@@ -6,22 +6,165 @@
 
 <div class="row">
 
-  <div class="card form-account" style="margin: 0px auto; border: 1px solid #ccc !important; border-radius: 25px; box-shadow: 0px 0px 10px #dede;">
+  <div class="card form-account" style="margin: 0px auto; border: 1px solid #ccc !important; border-radius: 25px; box-shadow: 0px 0px 10px #dede; min-width: 80%;">
     <article class="card-body">
-        <h4 class="card-title text-center mb-3 mt-1">Registrarse como Vendedor</h4>
+        <h3 class="card-title text-center mb-3 mt-1">Registrarse como Vendedor</h3>
         <hr>
         <p>
           <!--<a href="{% url 'social:begin' 'facebook' %}" class="btn btn-block" style="width: max-content; margin: 10px auto;"><i class="fa fa-facebook-f"></i> Registrarse via facebook</a>-->
         </p>
         <form class="login" method="POST" action="" enctype="multipart/form-data">
           {% csrf_token %}
-          {% for field in form %}
+          <!--{% for field in form %}
             <div class="form-group">
               {{ field.label }}
               {{ field }}
             </div>
           {% endfor %}
-          {{ company_form.as_p }}
+          {{ company_form.as_p }}-->
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="id_first_name">Nombre</label>
+              {% if form.first_name.value %}
+                <input type="text" class="form-control" id="id_first_name" placeholder="Nombre" name="first_name" required="" value="{{form.first_name.value}}">
+              {% else %}
+                <input type="text" class="form-control" id="id_first_name" placeholder="Nombre" name="first_name" required="">
+              {% endif %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="last_name">Apellido</label>
+              {% if form.last_name.value %}
+                <input type="text" class="form-control" id="last_name" placeholder="Apellido" name="last_name" value="{{form.last_name.value}}">
+              {% else %}
+                <input type="text" class="form-control" id="last_name" placeholder="Apellido" name="last_name">
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="id_username">Nombre de Usuario</label>
+              {% if form.username.value %}
+                <input type="text" class="form-control" id="id_username" placeholder="Usuario" name="username" required="" value="{{form.username.value}}">
+              {% else %}
+                <input type="text" class="form-control" id="id_username" placeholder="Usuario" name="username" required="">
+              {% endif %}
+              <small id="phoneHelp" class="form-text text-muted">Ejemplo: miusuario99</small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="id_email">E-mail</label>
+              {% if form.email.value %}
+                <input type="email" class="form-control" id="id_email" placeholder="E-mail" name="email" required="" value="{{form.email.value}}">
+              {% else %}
+                <input type="email" class="form-control" id="id_email" placeholder="E-mail" name="email" required="">
+              {% endif %}
+              <small id="phoneHelp" class="form-text text-muted">Ejemplo: micorreo@mail.com</small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+              <label for="id_password1">Contraseña</label>
+              <input type="password" name="password1" autocomplete="current-password" required="" class="form-control mb-4" placeholder="Contraseña" style="position: relative; padding-right: 10px;"  id="id_password1">
+              <span toggle="#id_password1" class="fa fa-fw fa-eye field-icon toggle-password" style="position:absolute; right: 10px; top: 50%; transform: translateY(-5px);"></span>
+            </div>
+            <div class="form-group col-md-6 mb-0">
+              <label for="id_password2">Confirmacion de Contraseña</label>
+              <input type="password" name="password2" autocomplete="current-password" required="" class="form-control mb-4" placeholder="Confirmacion de Contraseña" style="position: relative; padding-right: 10px;"  id="id_password2">
+              <span toggle="#id_password2" class="fa fa-fw fa-eye field-icon toggle-password" style="position:absolute; right: 10px; top: 50%; transform: translateY(-5px);"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="id_Department">Departamento</label>
+            {{company_form.Department}}
+          </div>
+
+          <div class="form-group">
+            <label for="id_location">Dirección Detallada</label>
+            {% if company_form.location.value %}
+              <input type="text" class="form-control" id="id_location" placeholder="Dirección Detallada" name="location" required="" value="{{company_form.location.value}}">
+            {% else %}
+              <input type="text" class="form-control" id="id_location" placeholder="Dirección Detallada" name="location">
+            {% endif %}
+            <small id="phoneHelp" class="form-text text-muted">Direccíon donde llegara tu pedido</small>
+          </div>
+
+          <hr class="mt-2 mb-2">
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="id_name">Nombre de Empresa</label>
+              {% if company_form.name.value %}
+                <input type="text" class="form-control" id="id_name" placeholder="Nombre de tu Empresa" name="name" required="" value="{{company_form.name.value}}">
+              {% else %}
+                <input type="text" class="form-control" id="id_name" placeholder="Nombre de tu Empresa" name="name" required="">
+              {% endif %}
+              <small id="nameHelp" class="form-text text-muted">Ejemplo: Mi Empresa</small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="id_website">Sitio Web</label>
+              {% if company_form.website.value %}
+                <input type="url" class="form-control" id="id_website" placeholder="Sitio Web" name="website" value="{{company_form.website.value}}">
+              {% else %}
+                <input type="url" class="form-control" id="id_website" placeholder="Sitio Web" name="website">
+              {% endif %}
+              <small id="webHelp" class="form-text text-muted">Ejemplo: https://www.misitio.com</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="id_resume">Descipción de la Empresa</label>
+            {{company_form.resume}}
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="id_facebook">Facebook</label>
+              {% if company_form.facebook.value %}
+                <input type="url" class="form-control" id="id_facebook" placeholder="Facebook de tu Empresa" name="facebook"  value="{{company_form.facebook.value}}">
+              {% else %}
+                <input type="url" class="form-control" id="id_facebook" placeholder="Facebook de tu Empresa" name="facebook">
+              {% endif %}
+              <small id="facebookHelp" class="form-text text-muted">Ejemplo: https://www.facebook.com/miusuario/</small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="id_instagram">Instagram</label>
+              {% if company_form.instagram.value %}
+                <input type="url" class="form-control" id="id_instagram" placeholder="Instagram de tu Empresa" name="instagram" value="{{company_form.instagram.value}}">
+              {% else %}
+                <input type="url" class="form-control" id="id_instagram" placeholder="Instagram de tu Empresa" name="instagram">
+              {% endif %}
+              <small id="webHelp" class="form-text text-muted">Ejemplo: https://www.instagram.com/miusuario/</small>
+            </div>
+          </div>
+
+
+          <div class="form-row">
+
+            <div class="form-group col-md-6">
+              <label for="id_phone">Teléfono</label>
+              {% if company_form.phone.value %}
+                <input type="tel" class="form-control" id="id_phone" placeholder="99999999" name="phone" required="" value="{{company_form.phone.value}}" pattern="[0-9]{8}">
+              {% else %}
+                <input type="tel" class="form-control" id="id_phone" placeholder="99999999" name="phone" required="" pattern="[0-9]{8}">
+              {% endif %}
+              <small id="phoneHelp" class="form-text text-muted">Se te contactara para tus pedidos </small>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="id_code">Codigo de Registro</label>
+              {% if company_form.code.value %}
+                <input type="text" class="form-control" id="id_code" placeholder="Codigo de Registro" name="code" value="{{company_form.code.value}}">
+              {% else %}
+                <input type="text" class="form-control" id="id_code" placeholder="Codigo de Registro" name="code">
+              {% endif %}
+              <small id="phoneHelp" class="form-text text-muted">Si eres referido puedes ingresar el código</small>
+            </div>
+
+          </div>
+
           <div class="row">
             <div class="col-md-12">
               <div class="form-group text-center" style="margin-top: 20px;">

@@ -51,13 +51,15 @@
 													<a href="{% url 'product_app:single-product' lp.item.slug %}" target="_blank">{{lp.item.title}}</a>
 												</div>
 												<div class="col-2">
-													<span class="float-right"><b>{{lp.get_final_price}}</b></span>
+													<span class="float-right"><b>{{lp.get_final_price|floatformat:2}}</b></span>
 												</div>
 												<div class="col-12">
 													{% if lp.item.company %}
 														<p class="mb-0"><b>Empresa</b>: {{lp.item.company}}</p>
+														<p class="mb-0 mt-1"><b>Dirección Empresa</b>: {{lp.item.company.address}}</p>
 													{% else %}
 														<p class="mb-0"><b>Empresa</b>: {{lp.item.user}}</p>
+														<p class="mb-0 mt-1"><b>Dirección Empresa</b>: {{lp.item.user.profile.location}}</p>
 													{% endif %}
 												</div>
 												<div class="col-12">
@@ -77,15 +79,15 @@
 								<ul class="list-group w-100 mt-5 mb-5">
 									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; ">
 										<p class="mb-0">Sub Total: </p>
-										<span class="badge-pill"><b>{{orders.get_total}}</b></span>
+										<span class="badge-pill"><b>{{orders.get_total|floatformat:2}}</b></span>
 									</li>
 									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; ">
 										<p class="mb-0">Envío: </p>
-										<span class="badge-pill"><b>{{orders.get_price_envio}}</b></span>
+										<span class="badge-pill"><b>{{orders.get_price_envio|floatformat:2}}</b></span>
 									</li>
 									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; ">
 										<p class="mb-0">Total: </p>
-										<span class="badge-pill"><b>{{orders.get_total_final}}</b></span>
+										<span class="badge-pill"><b>{{orders.get_total_final|floatformat:2}}</b></span>
 									</li>
 								</ul>
 

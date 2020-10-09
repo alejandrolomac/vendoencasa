@@ -955,7 +955,7 @@ FORMS ACCOUNT STYLES
 }
 
 
-.login input[type="text"], .login input[type="tel"], .login input[type="password"], .login input[type="email"], .login select, .login textarea, .login input[type="url"]
+.login input[type="text"], .login input[type="password"], .login input[type="email"], .login select, .login textarea, .login input[type="url"]
 {
 	width: 100% !important;
 	padding: 10px !important;

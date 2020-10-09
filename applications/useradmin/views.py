@@ -73,6 +73,7 @@ def registerPage(request):
         else:
             form = CreateUserForm()
             profile_form = ProfileForm()
+            messages.info(request, "¡Estas a punto de formar parte de la mejor plataforma del país!")
 
         return render(request, 'registration/register-usuario.html', {
             'form':form,
@@ -161,6 +162,9 @@ def registerCompany(request):
                     user.profile.location = company_form.cleaned_data['location']
                     user.profile.phone = company_form.cleaned_data['phone']
                     user.profile.name = company_form.cleaned_data['name']
+                    user.profile.website = company_form.cleaned_data['website']
+                    user.profile.instagram = company_form.cleaned_data['instagram']
+                    user.profile.facebook = company_form.cleaned_data['facebook']
                     user.profile.resume = company_form.cleaned_data['resume']
                     #user.profile.logo = company_form.cleaned_data['logo']
                     user.profile.plan = 'Vendedor'
