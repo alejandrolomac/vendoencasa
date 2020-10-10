@@ -240,13 +240,13 @@
 				var subtotal = parseInt(x) * parseFloat(porcat)
 				var total = parseInt(subtotal) + parseInt(x)
 				if(subtotal) {
-					document.getElementById("subtotal").innerHTML = subtotal;
+					document.getElementById("subtotal").innerHTML = subtotal.toFixed(2);
 				}else {
 					document.getElementById("subtotal").innerHTML = 0;
 				}
 
 				if(total) {
-					document.getElementById("total").innerHTML = total;
+					document.getElementById("total").innerHTML = total.toFixed(2);
 				}else {
 					document.getElementById("total").innerHTML = 0;
 				}
@@ -276,13 +276,13 @@
 				var subtotal = parseInt(x) * parseFloat(porcat)
 				var total = parseInt(x)
 				if(subtotal) {
-					document.getElementById("subtotal").innerHTML = subtotal;
+					document.getElementById("subtotal").innerHTML = subtotal.toFixed(2);
 				}else {
 					document.getElementById("subtotal").innerHTML = 0;
 				}
 
 				if(total) {
-					document.getElementById("total").innerHTML = total;
+					document.getElementById("total").innerHTML = total.toFixed(2);
 				}else {
 					document.getElementById("total").innerHTML = 0;
 				}

@@ -120,7 +120,7 @@ class SingleProduct(ListView):
 		comments = Comment.objects.all().filter(product__id=product_select.id)
 		countcomments = Comment.objects.all().filter(product__id=product_select.id).count()
 
-		prodinOrder = Order.objects.all().filter(items__item__slug=id)
+		prodinOrder = Order.objects.all().filter(items__item__slug=id, status='NoPagados')
 
 		context['related_prod'] = products_cats
 		context['produch_wish'] = produch_wish

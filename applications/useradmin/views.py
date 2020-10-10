@@ -94,15 +94,22 @@ def loginPage(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
 
-            user = authenticate(request, username=username, password=password)
             userexist = User.objects.filter(username=username)
+            useremailexist = User.objects.filter(email=username)
+
+            if useremailexist:
+                user = authenticate(request, username=User.objects.get(email=username), password=password)
+            else:
+                user = authenticate(request, username=username, password=password)
 
             if user is not None:
                 login(request, user)
                 return redirect('dashboard_app:dashboard')
                 messages.success(request, "Bienvenido " + user)
-            elif not userexist:
+            elif not '@' in username and not userexist:
                 messages.error(request, "Usuario Incorrecto")
+            elif '@' in username and not useremailexist:
+                messages.error(request, "E-mail Incorrecto")
             else:
                 messages.error(request, "Password Incorrecto")
 
@@ -117,16 +124,23 @@ def loginUsuarios(request):
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('password')
-
-            user = authenticate(request, username=username, password=password)
+            
             userexist = User.objects.filter(username=username)
+            useremailexist = User.objects.filter(email=username)
+
+            if useremailexist:
+                user = authenticate(request, username=User.objects.get(email=username), password=password)
+            else:
+                user = authenticate(request, username=username, password=password)
 
             if user is not None:
                 login(request, user)
                 return redirect('product_app:index')
                 messages.success(request, "Bienvenido " + user)
-            elif not userexist:
+            elif not '@' in username and not userexist:
                 messages.error(request, "Usuario Incorrecto")
+            elif '@' in username and not useremailexist:
+                messages.error(request, "E-mail Incorrecto")
             else:
                 messages.error(request, "Password Incorrecto")
 

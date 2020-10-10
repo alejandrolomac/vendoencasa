@@ -514,6 +514,11 @@ def sendOrder(request, pk):
     order = Order.objects.get(orderCode=pk, ordered=False)
     order.paystaus = 'Procesando'
     order.status = 'Enviado'
+
+    for itemorder in order.items.all():
+        itemorder.item.quantity -= itemorder.quantity
+        print("producto reducido: " + str(itemorder))
+        itemorder.item.save()
     order.save()
 
     #:::::: EMAIL ::::::

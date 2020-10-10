@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '&mcng4k3l9@5y4&(8(4j*1$o022z%3(^v2hfe#y=!71@k@#ja$'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://www.vendoencasa.net', 'http://www.vendoencasa.net', 'www.vendoencasa.net', 'http://vendoencasa.herokuapp.com']
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'storages',
     'mathfilters',
     'sorl.thumbnail',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -152,6 +153,8 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 </CORSConfiguration>
 '''
 
+AUTH_AUTHENTICATION_TYPE = 'both'
+
 AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
     'social_core.backends.facebook.FacebookOAuth2',
@@ -186,5 +189,9 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'vendoencasahn@gmail.com'
 
 AUTH_USER_EMAIL_UNIQUE = True
+
+
+SESSION_COOKIE_SAMESITE = None
+
 
 django_heroku.settings(locals())
