@@ -161,6 +161,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.linkedin.LinkedinOAuth2',
     'social_core.backends.instagram.InstagramOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'applications.useradmin.backends.EmailModelBackend'
 )
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
