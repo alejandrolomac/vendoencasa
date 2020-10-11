@@ -98,7 +98,7 @@ def loginPage(request):
             useremailexist = User.objects.filter(email=username)
 
             if useremailexist:
-                user = authenticate(request, username=User.objects.filter(email=username), password=password)
+                user = authenticate(request, username=User.objects.get(email=username).username, password=password)
             else:
                 user = authenticate(request, username=username, password=password)
 
@@ -129,7 +129,7 @@ def loginUsuarios(request):
             useremailexist = User.objects.filter(email=username)
 
             if useremailexist:
-                user = authenticate(request, username=User.objects.get(email=username), password=password)
+                user = authenticate(request, username=User.objects.get(email=username).username, password=password)
             else:
                 user = authenticate(request, username=username, password=password)
 
