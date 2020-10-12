@@ -175,6 +175,8 @@ def registerCompany(request):
                     messages.error(request, "Ya se utilizo este E-Mail")
                 elif nameexist:
                     messages.error(request, "Ya existe una empresa con ese nombre")
+                elif len(form.cleaned_data.get('password1')) <= 6:
+                    messages.error(request, "La contraseña debe tener al menos 6 caracteres")
                 else:
                     user = form.save()
                     user.profile.Department = company_form.cleaned_data['Department']
@@ -218,7 +220,10 @@ def registerCompany(request):
                 userexist = User.objects.filter(username=usercheck)
                 if userexist:
                     messages.error(request, "Ya se utilizo este Usuario")
-                if form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
+
+                if len(form.cleaned_data.get('password1')) <= 6:
+                    messages.error(request, "La contraseña debe tener al menos 6 caracteres")
+                elif form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
                     messages.error(request, "Las contraseñas son diferentes")
         else:
             form = CreateCompanyForm()
