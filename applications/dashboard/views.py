@@ -100,8 +100,8 @@ def editproduct(request, product_id):
 
 
 @login_required(login_url='useradmin_app:entrar')
-def deleteproduct(request, pk):
-    product = get_object_or_404(Products, pk=pk)
+def deleteproduct(request, slug):
+    product = get_object_or_404(Products, slug=slug)
     product.delete()
     return redirect('dashboard_app:dashprod')
 

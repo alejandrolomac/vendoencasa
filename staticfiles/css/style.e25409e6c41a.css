@@ -1336,7 +1336,7 @@ ADMIN STYLES
     padding: 10px;
 }
 
-#alert, .alert
+#alert
 {
 	top: 100px;
 	width: 100% !important;
@@ -1345,5 +1345,4 @@ ADMIN STYLES
 	right: 0px;
 	left: 0;
 	border-radius: 0px !important;
-	text-align: center !important;
 }

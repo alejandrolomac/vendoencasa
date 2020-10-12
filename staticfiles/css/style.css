@@ -1335,3 +1335,15 @@ ADMIN STYLES
     list-style: none;
     padding: 10px;
 }
+
+#alert, .alert
+{
+	top: 100px;
+	width: 100% !important;
+	position: fixed;
+	z-index:99;
+	right: 0px;
+	left: 0;
+	border-radius: 0px !important;
+	text-align: center !important;
+}

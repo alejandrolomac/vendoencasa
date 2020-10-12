@@ -34,6 +34,8 @@ def registerPage(request):
                 emailexist = User.objects.all().filter(email=emailcheck)
                 if emailexist:
                     messages.error(request, "Ya se utilizo este E-Mail")
+                elif len(form.cleaned_data.get('password1')) <= 6:
+                    messages.error(request, "La contraseña debe tener al menos 6 caracteres")
                 else:
                     user = form.save()
                     user.profile.gender = profile_form.cleaned_data['gender']
@@ -68,7 +70,10 @@ def registerPage(request):
                 userexist = User.objects.filter(username=usercheck)
                 if userexist:
                     messages.error(request, "Ya se utilizo este Usuario")
-                if form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
+
+                if len(form.cleaned_data.get('password1')) <= 6:
+                    messages.error(request, "La contraseña debe tener al menos 6 caracteres")
+                elif form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
                     messages.error(request, "Las contraseñas son diferentes")
         else:
             form = CreateUserForm()
