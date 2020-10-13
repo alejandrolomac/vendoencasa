@@ -191,8 +191,8 @@ DEFAULT_FROM_EMAIL = 'vendoencasahn@gmail.com'
 
 AUTH_USER_EMAIL_UNIQUE = True
 
-
+#SameSite=lax
 SESSION_COOKIE_SAMESITE = None
-
+CSRF_COOKIE_SAMESITE = None
 
 django_heroku.settings(locals())
