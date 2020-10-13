@@ -61,7 +61,10 @@
 					<div class="info-prod col-12 col-md-6">
 					{% load mathfilters %}
 						<div class="wrap-info">
-							<h2 class="card-title">{{ lp.title }}</h2>
+							<h2 class="card-title">
+								{{ lp.title }}
+								<button type="button" class="btn" data-toggle="tooltip"  data-placement="bottom" data-html="true" title="<b>Garantia: </b> {{lp.get_warranty_display }}</br><b>Estado: </b> {{lp.get_statusproduct_display}}</br><b>Estatus: </b> {{lp.get_original_display}}</br>" style="width: 20px; height: 20px; border-radius: 100%; padding: 0px; margin: 0px;"><i class="fa fa-info" style="width: 18px; height: 15px; font-size: 15px; float: left;"></i></button>
+							</h2>
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">
 									<h5 class="card-title" style="font-size: 30px; font-weight: bold !important;">

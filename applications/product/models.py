@@ -33,6 +33,23 @@ STATUSPRODUCT_CHOICES = (
 	('Usado', 'Usado'),
 )
 
+WARRANTY_CHOICES = (
+	('1','No Aplica'),
+    ('2','24 Horas'),
+    ('3', '15 Días'),
+	('4', '1 Meses'),
+	('5', '3 Meses'),
+	('6', '6 Meses'),
+	('7', '1 Año'),
+)
+
+ORIGINAL_CHOICES = (
+	('1','Original'),
+    ('2','Réplica'),
+    ('3', 'Copia'),
+	('4', 'Imitación'),
+)
+
 
 class Company(models.Model):
 	name = models.CharField('Nombre', max_length=150, blank=False)
@@ -132,6 +149,8 @@ class Products(models.Model):
 	quantity = models.IntegerField('Cantidad', default=1, blank=False)
 	productCode = models.CharField("Codigo de Producto", max_length=100, blank=True)
 	statusproduct = models.TextField('Estado del Producto', blank=False, default='Nuevo', choices=STATUSPRODUCT_CHOICES)
+	warranty = models.TextField('Garantía', blank=False, default='1', choices=WARRANTY_CHOICES)
+	original = models.TextField('Estatus', blank=False, default='1', choices=ORIGINAL_CHOICES)
 	views = models.PositiveIntegerField(default=0)
 
 	def __str__(self):
