@@ -42,17 +42,23 @@
 									</div>
 								{% else %}
 									<div class="item">
-										<img src="{{ lp.imagef.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+										{% thumbnail lp.imagef "100x100" crop="center" as im %}
+											<img src="{{ im.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+										{% endthumbnail %}
 									</div class="item">
 								{% endif %}
 								{% if lp.images.url != '' %}
 									<div class="item">
-										<img src="{{ lp.images.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+										{% thumbnail lp.images "100x100" crop="center" as im %}
+											<img src="{{ im.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+										{% endthumbnail %}
 									</div>
 								{% endif %}
 								{% if lp.imaget.url != '' %}
 									<div class="item">
-										<img src="{{ lp.imaget.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+										{% thumbnail lp.imaget "100x100" crop="center" as im %}
+											<img src="{{ im.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
+										{% endthumbnail %}
 									</div>
 								{% endif %}
 							</div>
@@ -307,7 +313,7 @@
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}">
 									{% else %}
-										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+										{% thumbnail nprod.imagef "150x150" crop="center" as im %}
 											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
 										{% endthumbnail %}
 									{% endif %}
@@ -335,7 +341,7 @@
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 									{% else %}
-										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+										{% thumbnail nprod.imagef "150x150" crop="center" as im %}
 											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
 										{% endthumbnail %}
 										

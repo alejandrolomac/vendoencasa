@@ -63,7 +63,7 @@
 				        <div class="card text-left" style="padding: 5px; border: none;">
 				        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail-cat" style="border: none; border-radius: 0;">
 								{% if cat.icono.url != '' %}
-									{% thumbnail cat.icono "300x300" crop="center" as im %}
+									{% thumbnail cat.icono "150x150" crop="center" as im %}
 										<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive thumbnail" style="border-radius: 0;">
 									{% endthumbnail %}
 									<!--<img src="{{ cat.icono.url }}" class="img-responsive thumbnail" style="border-radius: 0;">-->
@@ -100,7 +100,7 @@
 												{% if nprod.imagef.url == '' %}
 													<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 												{% else %}
-													{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+													{% thumbnail nprod.imagef "150x150" crop="center" as im %}
 														<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
 													{% endthumbnail %}
 													<!--<img src="{{ nprod.imagef.url }}" style="border-radius: 0;" class="thumbnail">-->
@@ -140,7 +140,7 @@
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 									{% else %}
-										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+										{% thumbnail nprod.imagef "150x150" crop="center" as im %}
 											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
 										{% endthumbnail %}
 									{% endif %}
@@ -174,7 +174,7 @@
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 									{% else %}
-										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+										{% thumbnail nprod.imagef "150x150" crop="center" as im %}
 											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
 										{% endthumbnail %}
 									{% endif %}
@@ -213,7 +213,7 @@
 									{% if nprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail" />
 									{% else %}
-										{% thumbnail nprod.imagef "300x300" crop="center" as im %}
+										{% thumbnail nprod.imagef "150x150" crop="center" as im %}
 											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
 										{% endthumbnail %}
 									{% endif %}
@@ -245,7 +245,7 @@
 									{% if lprod.imagef.url == '' %}
 										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
 									{% else %}
-										{% thumbnail lprod.imagef "300x300" crop="center" as im %}
+										{% thumbnail lprod.imagef "150x150" crop="center" as im %}
 											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
 										{% endthumbnail %}
 									{% endif %}
