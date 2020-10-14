@@ -86,5 +86,37 @@
 			</div><!-- End Of Modal -->
 		{% endfor %}
 	</div>
+	<nav aria-label="Page navigation example" style="margin: 0px auto;">
+		<ul class="pagination">
+			{% if productlist.paginator.num_pages != 1 %}
+				{% if productlist.has_previous %}
+				<li class="page-item">
+					<a class="page-link" href="?page=1" aria-label="Previous">
+					<span aria-hidden="true">&laquo;&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="?page={{ productlist.previous_page_number }}" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				{% endif %}
+				<li class="page-item"><a class="page-link">{{ productlist.number }} de {{ productlist.paginator.num_pages }}</a></li>
+
+				{% if productlist.has_next %}
+				<li class="page-item">
+					<a class="page-link" href="?page={{ productlist.next_page_number }}" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="?page={{ productlist.paginator.num_pages }}" aria-label="Next">
+					<span aria-hidden="true">&raquo;&raquo;</span>
+					</a>
+				</li>
+				{% endif %}
+			{% endif %}
+		</ul>
+	</nav><!-- End of Pagination -->
 </div>
 {% endblock content %}

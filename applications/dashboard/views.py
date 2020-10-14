@@ -7,6 +7,7 @@ from applications.orders.models import OrdersProducts
 from django.db.models import Count
 from django.contrib.auth.models import User
 from .forms import ProductForm, OrdersForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -110,8 +111,12 @@ def dashproduct(request):
     productlist = Products.objects.select_related('user').filter(user__id=iduser).order_by('-pub_date')
     countprod = Products.objects.select_related('user').filter(user__id=iduser).count()
     userprofile = get_object_or_404(Profile, pk=request.user.profile.id)
+    paginator = Paginator(productlist, 9)
 
-    context = {'productlist': productlist, 'countprod': countprod, 'userprofile': userprofile}
+    page = request.GET.get('page')
+    prodpage = paginator.get_page(page)
+
+    context = {'productlist': prodpage, 'countprod': countprod, 'userprofile': userprofile, 'prodpage': prodpage}
     return render(request,'dash-prod.html', context)
 
 
