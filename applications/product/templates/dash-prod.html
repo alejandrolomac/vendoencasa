@@ -20,7 +20,7 @@
 			<div class="card mb-3 p-2" style="background: #fff; box-shadow: 0px 4px 7px #cacaca; border-radius: 5px; border-bottom: 1px solid #ccc !important;">
 				<div class="row no-gutters">
 					<div class="col-12 col-sm-3 col-md-3 col-lg-2">
-							{% thumbnail prod.imagef "150x150" crop="center" as im %}
+						{% thumbnail prod.imagef "150x150" crop="center" as im %}
 							<div class="squere-prod" style="background: url({{ im.url }}) center center no-repeat; background-size: cover; padding-bottom: 100%; width: 100%;"></div>
 						{% endthumbnail %}
 						<!--<img src="{{ prod.imagef.url }}" class="card-img">-->
