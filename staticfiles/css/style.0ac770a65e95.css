@@ -1350,18 +1350,12 @@ ADMIN STYLES
 
 
 form ul.helper-text {
-	display: block;
-	margin-top: 6px;
-	font-size: 12px;
-	line-height: 22px;
-	color: #ef4036;
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 22px;
+  color: red;
 }
-
-form ul.helper-text li
-{
-	list-style: none;
-}
-
 form ul.helper-text li.valid {
-  	color: #0072ff;
+  color: blue;
 }

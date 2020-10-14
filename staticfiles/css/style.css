@@ -1347,3 +1347,21 @@ ADMIN STYLES
 	border-radius: 0px !important;
 	text-align: center !important;
 }
+
+
+form ul.helper-text {
+	display: block;
+	margin-top: 6px;
+	font-size: 12px;
+	line-height: 22px;
+	color: #ef4036;
+}
+
+form ul.helper-text li
+{
+	list-style: none;
+}
+
+form ul.helper-text li.valid {
+  	color: #0072ff;
+}

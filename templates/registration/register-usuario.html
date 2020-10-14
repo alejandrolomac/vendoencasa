@@ -66,22 +66,37 @@
           <div class="form-row mb-3">
             <div class="form-group col-md-6 mb-0">
               <label for="id_password1">Contraseña</label>
-              <input type="password" name="password1" autocomplete="current-password" required="" class="form-control mb-0" placeholder="Contraseña" style="position: relative; padding-right: 10px;"  id="id_password1">
-              <span toggle="#id_password1" class="fa fa-fw fa-eye field-icon toggle-password" style="position:absolute; right: 10px; top: 50%; transform: translateY(-25px);"></span>
-              <small id="passwordHelp" class="form-text text-muted">La contraseña debe tener al menos 6 caracteres</small>
+              <!--<input type="password" name="password1" autocomplete="current-password" required="" class="form-control mb-0" placeholder="Contraseña" style="position: relative; padding-right: 10px;"  id="id_password1">-->
+              <div style="width: 100%; position: relative;">
+                {{form.password1}}
+                <span toggle="#id_password1" class="fa fa-fw fa-eye field-icon toggle-password" style="position:absolute; right: 10px; top: 50%; transform: translateY(-50%);"></span>
+              </div>
+
+              <!--<small id="passwordHelp" class="form-text text-muted">La contraseña debe tener al menos 6 caracteres</small>
               <small id="passwordHelp" class="form-text text-muted">Debe contener Letras [a-z] y Números si desea [0-9]</small>
-              <small id="passwordHelp" class="form-text text-muted">No puede ser solo Números por seguridad</small>
+              <small id="passwordHelp" class="form-text text-muted">No puede ser solo Números por seguridad</small>-->
+
+              <ul class="helper-text">
+                <li class="length">Debe tener al menos 6 caracteres de longitud.</li>
+                <li class="lowercase">Debe contener una letra minúscula.</li>
+                <li class="uppercase">Debe contener una letra mayúscula.</li>
+                <li class="special">Debe contener un número.</li>
+              </ul>
             </div>
             <div class="form-group col-md-6 mb-0">
               <label for="id_password2">Confirmacion de Contraseña</label>
-              <input type="password" name="password2" autocomplete="current-password" required="" class="form-control mb-0" placeholder="Confirmacion de Contraseña" style="position: relative; padding-right: 10px;"  id="id_password2">
-              <span toggle="#id_password2" class="fa fa-fw fa-eye field-icon toggle-password" style="position:absolute; right: 10px; top: 50%; transform: translateY(-25px);"></span>
-              <small id="passwordHelp" class="form-text text-muted">La contraseña debe tener al menos 6 caracteres</small>
+              <div style="width: 100%; position: relative;">
+                {{form.password2}}
+                <span toggle="#id_password2" class="fa fa-fw fa-eye field-icon toggle-password" style="position:absolute; right: 10px; top: 50%; transform: translateY(-50%);"></span>
+              </div>
+              <!--<small id="passwordHelp" class="form-text text-muted">La contraseña debe tener al menos 6 caracteres</small>
               <small id="passwordHelp" class="form-text text-muted">Debe contener Letras [a-z] o Números [0-9]</small>
-              <small id="passwordHelp" class="form-text text-muted">No puede ser solo Números por seguridad</small>
+              <small id="passwordHelp" class="form-text text-muted">No puede ser solo Números por seguridad</small>-->
+              <ul class="helper-text">
+                <li class="equal">Las Contraseñas son Iguales</li>
+              </ul>
             </div>
-            
-          </div>
+          </div><!-- End Of Password -->
 
           <div class="form-group">
             <label for="id_gender">Genero</label>

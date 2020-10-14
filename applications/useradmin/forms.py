@@ -6,6 +6,9 @@ from .models import Profile
 from django.core.exceptions import ValidationError
 
 class CreateUserForm(UserCreationForm):
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Contraseña', 'class':'form-control mb-0 password1', 'style': 'padding-right: 10px;', 'onclick': 'equal()'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirmacion de Contraseña', 'class':'form-control mb-0 password2', 'style': 'padding-right: 10px;', 'onclick': 'equal()'}))
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
@@ -13,6 +16,8 @@ class CreateUserForm(UserCreationForm):
         super(CreateUserForm, self).__init__(*args, **kwargs)
         self.fields['username'].required=True
         self.fields['email'].required=True
+        self.fields['password1'].required=True
+        self.fields['password2'].required=True
 
 class ProfileForm(forms.ModelForm):
     phone = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder':'99999999'}))
@@ -30,6 +35,9 @@ class ProfileForm(forms.ModelForm):
 
 
 class CreateCompanyForm(UserCreationForm):
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Contraseña', 'class':'form-control mb-0 password1', 'style': 'padding-right: 10px;', 'onclick': 'equal()'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Confirmacion de Contraseña', 'class':'form-control mb-0 password2', 'style': 'padding-right: 10px;', 'onclick': 'equal()'}))
+    
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
