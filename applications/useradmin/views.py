@@ -34,7 +34,7 @@ def registerPage(request):
                 emailexist = User.objects.all().filter(email=emailcheck)
                 if emailexist:
                     messages.error(request, "Ya se utilizo este E-Mail")
-                elif len(form.cleaned_data.get('password1')) <= 6:
+                elif len(form.cleaned_data.get('password1')) <= 5:
                     messages.error(request, "La contraseña debe tener al menos 6 caracteres")
                 else:
                     user = form.save()
@@ -71,7 +71,7 @@ def registerPage(request):
                 if userexist:
                     messages.error(request, "Ya se utilizo este Usuario")
 
-                if len(form.cleaned_data.get('password1')) <= 6:
+                if len(form.cleaned_data.get('password1')) <= 5:
                     messages.error(request, "La contraseña debe tener al menos 6 caracteres")
                 elif form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
                     messages.error(request, "Las contraseñas son diferentes")
@@ -175,7 +175,7 @@ def registerCompany(request):
                     messages.error(request, "Ya se utilizo este E-Mail")
                 elif nameexist:
                     messages.error(request, "Ya existe una empresa con ese nombre")
-                elif len(form.cleaned_data.get('password1')) <= 6:
+                elif len(form.cleaned_data.get('password1')) <= 5:
                     messages.error(request, "La contraseña debe tener al menos 6 caracteres")
                 else:
                     user = form.save()
@@ -221,7 +221,7 @@ def registerCompany(request):
                 if userexist:
                     messages.error(request, "Ya se utilizo este Usuario")
 
-                if len(form.cleaned_data.get('password1')) <= 6:
+                if len(form.cleaned_data.get('password1')) <= 5:
                     messages.error(request, "La contraseña debe tener al menos 6 caracteres")
                 elif form.cleaned_data.get('password1') != form.cleaned_data.get('password2'):
                     messages.error(request, "Las contraseñas son diferentes")

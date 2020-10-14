@@ -20,12 +20,12 @@ from django.db.models import F
 import unicodedata
 
 def index(request):
-	categorys = Category.objects.all()
-	virus_prod = Products.objects.all().filter(available=True, quantity__gte=1, subCategory__category__name='Covid-19').order_by('?')
-	new_prod = Products.objects.all().filter(available=True, quantity__gte=1).order_by('?')[:10]
-	promo_prod = Products.objects.all().filter(promotion=True, quantity__gte=1, available=True).order_by('?')[:10]
-	season_prod = Products.objects.all().filter(season=True, quantity__gte=1, available=True).order_by('?')
-	less_prod = Products.objects.all().filter(price__lte=100, quantity__gte=1).order_by('?')
+	categorys = Category.objects.select_related().all()
+	virus_prod = Products.objects.select_related('subCategory').filter(available=True, quantity__gte=1, subCategory__category__name='Covid-19').order_by('?')[:10]
+	new_prod = Products.objects.select_related().filter(available=True, quantity__gte=1).order_by('?')[:10]
+	promo_prod = Products.objects.select_related().filter(pricePromo__gte=1, quantity__gte=1, available=True).order_by('?')[:10]
+	season_prod = Products.objects.select_related().filter(season=True, quantity__gte=1, available=True).order_by('?')[:10]
+	less_prod = Products.objects.select_related().filter(price__lte=100, quantity__gte=1).order_by('?')[:10]
 	return render(request, 'home.html', {'listCategorys': categorys, 'newProd': new_prod, 'promoProd': promo_prod, 'seasonProd': season_prod, 'lessProd': less_prod, 'virusProd': virus_prod})
 
 
@@ -42,7 +42,7 @@ class ListSubCategorys(ListView):
 		id = self.kwargs['pk']
 		context = super(ListSubCategorys, self).get_context_data(**kwargs)
 		cats_selected = Category.objects.get(id=id)
-		products_cats = Products.objects.all().filter(subCategory_id__category_id__id=id, available=True, quantity__gte=1)
+		products_cats = Products.objects.select_related('subCategory').filter(subCategory_id__category_id__id=id, available=True, quantity__gte=1)
 		context['catSelect'] = cats_selected
 		context['productsCatSelect'] = products_cats
 		return context
@@ -54,7 +54,7 @@ class ListSubCatProducts(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = Products.objects.all().filter(subCategory__id=id, available=True, quantity__gte=1)
+		object_list = Products.objects.select_related('subCategory').filter(subCategory__id=id, available=True, quantity__gte=1)
 		return object_list
 
 
@@ -64,7 +64,7 @@ class ListCompanyProducts(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = Products.objects.all().filter(company__id=id, available=True, quantity__gte=1)
+		object_list = Products.objects.select_related('company').filter(company__id=id, available=True, quantity__gte=1)
 		return object_list
 	
 	def get_context_data(self, **kwargs):
@@ -84,8 +84,8 @@ class ListCompanyDelivery(ListView):
 
 def listproducts(request):
 	paginate_by = 18
-	categorys = Category.objects.all()
-	productslist = Products.objects.all().filter(available=True, quantity__gte=1).order_by('-pub_date')
+	categorys = Category.objects.select_related()
+	productslist = Products.objects.select_related().filter(available=True, quantity__gte=1).order_by('-pub_date')
 	paginator = Paginator(productslist, 18)
 
 	page = request.GET.get('page')
@@ -100,7 +100,7 @@ class SingleProduct(ListView):
 	def get_queryset(self):
 		id = self.kwargs['slug']
 		Products.objects.filter(slug=id).update(views=F('views') + 1)
-		lista = Products.objects.all().filter(
+		lista = Products.objects.select_related('subCategory').filter(
 			slug=id, 
 			available=True
 		)
@@ -110,17 +110,17 @@ class SingleProduct(ListView):
 		id = self.kwargs['slug']
 		context = super(SingleProduct, self).get_context_data(**kwargs)
 		product_select = Products.objects.get(slug=id)
-		products_cats = Products.objects.all().filter(subCategory=product_select.subCategory, available=True)[:10]
+		products_cats = Products.objects.select_related('subCategory').filter(subCategory=product_select.subCategory, available=True)[:10]
 		user_wish = self.request.user
 		if user_wish.is_authenticated:
-			produch_wish = WishItem.objects.all().filter(item__id=product_select.id, user=user_wish)
+			produch_wish = WishItem.objects.select_related('item').filter(item__id=product_select.id, user=user_wish)
 		else:
 			produch_wish = ''
-		wish_count = WishItem.objects.all().filter(item__id=product_select.id).count()
-		comments = Comment.objects.all().filter(product__id=product_select.id)
-		countcomments = Comment.objects.all().filter(product__id=product_select.id).count()
+		wish_count = WishItem.objects.select_related('item').filter(item__id=product_select.id).count()
+		comments = Comment.objects.select_related('product').filter(product__id=product_select.id)
+		countcomments = Comment.objects.select_related('product').filter(product__id=product_select.id).count()
 
-		prodinOrder = Order.objects.all().filter(items__item__slug=id, status='NoPagados')
+		prodinOrder = Order.objects.select_related().filter(items__item__slug=id, status='NoPagados')
 
 		context['related_prod'] = products_cats
 		context['produch_wish'] = produch_wish
@@ -160,12 +160,12 @@ def search(request):
 		queryset = ( 
 			Q(title__icontains=query) | Q(slug__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.all().filter(queryset, available=True, quantity__gte=1).distinct().order_by('-pub_date')
+		results = Products.objects.select_related().filter(queryset, available=True, quantity__gte=1).distinct().order_by('-pub_date')
 	else:
 		queryset = (
 			Q(title__icontains=query) | Q(slug__icontains=query) | Q(resume__icontains=query)
 		)
-		results = Products.objects.all().filter(queryset, available=True, quantity__gte=1).distinct().filter( subCategory__category__id=cat_query).order_by('-pub_date')
+		results = Products.objects.select_related().filter(queryset, available=True, quantity__gte=1).distinct().filter( subCategory__category__id=cat_query).order_by('-pub_date')
 	
 	paginator = Paginator(results, 20)
 	page = request.GET.get('page', 1)
@@ -182,7 +182,7 @@ def plan(request):
 
 
 def lessProduct(request):
-	less_prod = Products.objects.all().filter(price__lte=100, quantity__gte=1)
+	less_prod = Products.objects.select_related().filter(price__lte=100, quantity__gte=1)
 	paginator = Paginator(less_prod, 20)
 	page = request.GET.get('page', 1)
 	contacts = paginator.get_page(page)
@@ -190,7 +190,7 @@ def lessProduct(request):
 
 
 def covidProduct(request):
-	covid_prod = Products.objects.all().filter(virus=True, quantity__gte=1)
+	covid_prod = Products.objects.select_related().filter(virus=True, quantity__gte=1)
 	paginator = Paginator(covid_prod, 20)
 	page = request.GET.get('page', 1)
 	contacts = paginator.get_page(page)
@@ -220,7 +220,7 @@ class ListUserCompanyProducts(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = Products.objects.all().filter(user__id=id, available=True, quantity__gte=1)
+		object_list = Products.objects.select_related('user').filter(user__id=id, available=True, quantity__gte=1)
 		return object_list
 	
 	def get_context_data(self, **kwargs):

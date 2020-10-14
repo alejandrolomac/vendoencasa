@@ -517,7 +517,6 @@ def sendOrder(request, pk):
 
     for itemorder in order.items.all():
         itemorder.item.quantity -= itemorder.quantity
-        print("producto reducido: " + str(itemorder))
         itemorder.item.save()
     order.save()
 
@@ -614,7 +613,7 @@ def whatsappOrder(request, pk):
 
 @staff_member_required
 def orderAdmin(request):
-    orders = Order.objects.all()
+    orders = Order.objects.select_related().all()
     context = {
         'object': orders
     }
@@ -622,7 +621,7 @@ def orderAdmin(request):
 
 @staff_member_required
 def orderAdminDetail(request, pk):
-    order = Order.objects.all().filter(orderCode=pk)
+    order = Order.objects.select_related('user').filter(orderCode=pk)
     context = {
         'object': order
     }

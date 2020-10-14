@@ -25,15 +25,15 @@ from django.db.models import Sum
 @login_required(login_url='useradmin_app:entrar')
 def dashboard(request):
     iduser = request.user.id
-    companysCount = Company.objects.all().count()
-    productsCount = Products.objects.all().filter(user__id=iduser).count()
-    servicesCount = Services.objects.all().count()
-    usersCount = User.objects.all().count()
-    showProducts = Products.objects.all()[:10]
+    companysCount = Company.objects.select_related().count()
+    productsCount = Products.objects.select_related().filter(user__id=iduser).count()
+    servicesCount = Services.objects.select_related().count()
+    usersCount = User.objects.select_related().count()
+    showProducts = Products.objects.select_related()[:10]
 
-    viewsprod = Products.objects.all().filter(user__id=iduser).aggregate(Sum('views'))
-    sellprod = Order.objects.all().filter(items__user__id=iduser, status='Pagado').count()
-    sellprodlist = Order.objects.all().filter(items__user__id=iduser, status='Pagado')[:10]
+    viewsprod = Products.objects.select_related('user').filter(user__id=iduser).aggregate(Sum('views'))
+    sellprod = Order.objects.select_related().filter(items__user__id=iduser, status='Pagado').count()
+    sellprodlist = Order.objects.select_related().filter(items__user__id=iduser, status='Pagado')[:10]
 
     return render(request, 'dash-escritorio.html', {'CompanysCount': companysCount, 'ProductsCount': productsCount, 'UsersCount': usersCount, 'ServicesCount': servicesCount, 'ShowProduct': showProducts, 'viewsprod': viewsprod, 'sellprod': sellprod, 'sellprodlist': sellprodlist})
 
@@ -107,8 +107,8 @@ def deleteproduct(request, slug):
 @login_required(login_url='useradmin_app:entrar')
 def dashproduct(request):
     iduser = request.user.id
-    productlist = Products.objects.all().filter(user__id=iduser).order_by('-pub_date')
-    countprod = Products.objects.all().filter(user__id=iduser).count()
+    productlist = Products.objects.select_related('user').filter(user__id=iduser).order_by('-pub_date')
+    countprod = Products.objects.select_related('user').filter(user__id=iduser).count()
     userprofile = get_object_or_404(Profile, pk=request.user.profile.id)
 
     context = {'productlist': productlist, 'countprod': countprod, 'userprofile': userprofile}
@@ -146,8 +146,8 @@ def dashsetting(request):
 @login_required(login_url='useradmin_app:entrar')
 def dashcatalogue(request):
     iduser = request.user.id
-    productlist = OrdersProducts.objects.all().filter(user__id=iduser)
-    countprod = OrdersProducts.objects.all().filter(user__id=iduser).count()
+    productlist = OrdersProducts.objects.select_related('user').filter(user__id=iduser)
+    countprod = OrdersProducts.objects.select_related('user').filter(user__id=iduser).count()
     userprofile = get_object_or_404(Profile, pk=request.user.profile.id)
 
     context = {'productlist': productlist, 'countprod': countprod, 'userprofile': userprofile}
