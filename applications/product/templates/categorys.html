@@ -10,21 +10,21 @@
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 20px;">Sub Categorías de {{ catSelect.name }}</h3>
 				<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
 					{% for cat in object_list %}
+						{% if cat.cats_products > 0 %}
 						<div class="card text-left" style="padding: 5px; border: none;">
-							{% if cat.cats_products > 0 %}
-								<a href="{% url 'product_app:sub-catproducts' cat.slug cat.id %}" class="linkitem thumbnail-cat" style="border: none; border-radius: 0;">
-									{% if cat.icono.url != '' %}
-										{% thumbnail cat.icono "300x300" crop="center" as im %}
-											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive thumbnail" style="border-radius: 0;">
-										{% endthumbnail %}
-									{% else %}
-										<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail" style="border-radius: 0;">
-										
-									{% endif %}
-										<h5 class="card-title" style="padding: 15px 0px 0px 0px;">{{ cat.name }}</h5>
-								</a>
-							{% endif %}
+							<a href="{% url 'product_app:sub-catproducts' cat.slug cat.id %}" class="linkitem thumbnail-cat" style="border: none; border-radius: 0;">
+								{% if cat.icono.url != '' %}
+									{% thumbnail cat.icono "300x300" crop="center" as im %}
+										<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive thumbnail" style="border-radius: 0;">
+									{% endthumbnail %}
+								{% else %}
+									<img src="{% static 'img/categoria.jpg' %}" class="img-responsive thumbnail" style="border-radius: 0;">
+									
+								{% endif %}
+									<h5 class="card-title" style="padding: 15px 0px 0px 0px;">{{ cat.name }}</h5>
+							</a>
 						</div><!-- End Of item -->
+						{% endif %}
 					{% endfor %}
 				</div><!-- End Of Categorias -->
 			{% endif %}
