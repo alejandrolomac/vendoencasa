@@ -101,7 +101,7 @@ class SingleProduct(ListView):
 	def get_queryset(self):
 		id = self.kwargs['slug']
 		Products.objects.filter(slug=id).update(views=F('views') + 1)
-		lista = Products.objects.select_related('subCategory').filter(
+		lista = Products.objects.select_related('subCategory', 'company', 'user').prefetch_related('colors', 'sizes').filter(
 			slug=id, 
 			available=True
 		)
