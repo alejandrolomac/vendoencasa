@@ -20,7 +20,7 @@ from django.db.models import F
 import unicodedata
 
 def index(request):
-	categorys = Category.objects.select_related().all()
+	categorys = Category.objects.select_related().annotate(subcats_products=Count('subcategory__products'))
 	virus_prod = Products.objects.select_related('subCategory').filter(available=True, quantity__gte=1, subCategory__category__name='Covid-19').order_by('?')[:10]
 	new_prod = Products.objects.select_related().filter(available=True, quantity__gte=1).order_by('?')[:10]
 	promo_prod = Products.objects.select_related().filter(pricePromo__gte=1, quantity__gte=1, available=True).order_by('?')[:10]
@@ -35,7 +35,7 @@ class ListSubCategorys(ListView):
 
 	def get_queryset(self):
 		id = self.kwargs['pk']
-		object_list = SubCategory.objects.filter(category__id=id)
+		object_list = SubCategory.objects.filter(category__id=id).annotate(cats_products=Count('products'))
 		return object_list
 	
 	def get_context_data(self, **kwargs):
@@ -84,8 +84,9 @@ class ListCompanyDelivery(ListView):
 
 def listproducts(request):
 	paginate_by = 18
-	categorys = Category.objects.select_related()
+	categorys = Category.objects.annotate(num_products=Count('subcategory__products'))
 	productslist = Products.objects.select_related().filter(available=True, quantity__gte=1).order_by('-pub_date')
+
 	paginator = Paginator(productslist, 18)
 
 	page = request.GET.get('page')

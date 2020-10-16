@@ -60,6 +60,7 @@
 				<h3 class="text-left" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Categorías</h3>
 	    		<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
 				    {% for cat in listCategorys %}
+					{% if cat.subcats_products > 0 %}
 				        <div class="card text-left" style="padding: 5px; border: none;">
 				        	<a href="{% url 'product_app:sub-categorys' cat.slug cat.id %}" class="linkitem thumbnail-cat" style="border: none; border-radius: 0;">
 								{% if cat.icono.url != '' %}
@@ -73,6 +74,7 @@
 								<h5 class="card-title" style="padding: 15px 0px 0px 0px;">{{ cat.name }}</h5>
 				        	</a>
 				        </div><!-- End Of item -->
+					{% endif %}
 					{% endfor %}
 					<div class="card text-left" style="padding: 5px; border: none;">
 						<a href="{% url 'product_app:less-products' %}" class="linkitem thumbnail-cat" style="border: none; border-radius: 0;">
