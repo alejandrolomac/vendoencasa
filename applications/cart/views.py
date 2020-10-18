@@ -423,6 +423,10 @@ def orderSummaryFinish(request):
                 order.payMethod = 'Efectivo'
             elif payMethod == 'Depósito Bancario':
                 order.payMethod = 'Deposito'
+            elif payMethod == 'Tarjeta':
+                order.payMethod = 'Tarjeta'
+            elif payMethod == 'Extra':
+                order.payMethod = 'Extra'
             order.save()
         else:
             messages.error(request, 'Tienes que elegir un metodo de pago para continuar')

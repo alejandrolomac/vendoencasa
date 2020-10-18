@@ -37,11 +37,17 @@
 
 					<h3 class="text-left mb-4 pt-2" style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">Metodo de Pago</h3>
 					{% if payMethod == 'Efectivo' %}
-						<h4 class="text-left mb-2"><i class="fa fa-circle"></i> {{payMethod}}</h4>
+						<h4 class="text-left mb-2"><i class="fa fa-circle"></i> {{object.get_payMethod_display}}</h4>
 						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, y deberás realizar el pago en efectivo al momento de la llegada del delivery con el pedido.</p>
 					{% elif payMethod == 'Depósito Bancario' %}
-						<h4 class="text-left mb-2"><i class="fa fa-university"></i> {{payMethod}}</h4>
+						<h4 class="text-left mb-2"><i class="fa fa-university"></i> {{object.get_payMethod_display}}</h4>
 						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, Antes de enviar el pedido deberá enviarnos una captura o fotografía del recibo del depósito a nuestra cuenta bancaria, deberá enviarla vía whatsapp luego de ser contactado/a.</br><span class="w-100 text-center pt-2 pb-2" style="font-size: 20px; display: block;">BAC: 000000000</span></p>
+					{% elif payMethod == 'Tarjeta' %}
+						<h4 class="text-left mb-2"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> {{object.get_payMethod_display}}</h4>
+						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, el delivery llevara el POS para que puedas efectuar el pago con tu Tarjeta de Crédito o Debito.</p>
+					{% elif payMethod == 'Extra' %}
+						<h4 class="text-left mb-2"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> {{object.get_payMethod_display}}</h4>
+						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, el delivery llevara el POS para que puedas efectuar el pago con tu Tarjeta de Crédito y podrás comprar comprar con 0% de intereses a 12 meses.</p>
 					{% endif %}
 				</div>
 

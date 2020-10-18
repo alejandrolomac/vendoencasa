@@ -19,10 +19,11 @@ PAYSTATUS_CHOICES = (
 
 PAYMETHOD_CHOICES = (
     ('Efectivo','Efectivo'),
-    ('Tarjeta', 'Tarjeta'),
+    ('Tarjeta', 'Tarjeta de Crédito/Débito'),
     ('PayPal','PayPal'),
+    ('Extra','Extra Financiamiento'),
 	('Link', 'Link'),
-	('Deposito', 'Deposito'),
+	('Deposito', 'Deposito Bancario'),
 )
 
 class OrderItem(models.Model):

@@ -79,12 +79,23 @@
 							<small id="emailHelp" class="form-text text-muted pb-2">Puedes hacer tu pago con depósito o transferencia bancaria a través de nuestra cuenta</br> BAC: 000000000</small>
 						</div>
 						<div class="custom-control custom-radio">
+							<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="Tarjeta">
+							<label class="custom-control-label" for="customRadio3"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> Tarjeta de Crédito/Débito</label>
+						</div>
+						{% if object.get_total >= 500 %}
+							<div class="custom-control custom-radio">
+								<input type="radio" id="customRadio6" name="customRadio" class="custom-control-input" value="Extra">
+								<label class="custom-control-label" for="customRadio6"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> Extra Financiamiento</label>
+							</div>
+						{% else %}
+							<div class="custom-control custom-radio">
+								<input type="radio" id="customRadio6" name="customRadio" class="custom-control-input" value="Extra" disabled>
+								<label class="custom-control-label" for="customRadio6"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> Extra Financiamiento</label>
+							</div>
+						{% endif %}
+						<div class="custom-control custom-radio">
 							<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" disabled value="PayPal">
 							<label class="custom-control-label" for="customRadio2"><i class="fa fa-paypal"></i>  PayPal</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" disabled value="Tarjeta de Crédito/Débito">
-							<label class="custom-control-label" for="customRadio3"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> Tarjeta de Crédito/Débito</label>
 						</div>
 						<div class="custom-control custom-radio">
 							<input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" disabled value="Enlace de Pago">
