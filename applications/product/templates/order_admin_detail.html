@@ -27,7 +27,10 @@
 								<ul class="list-group w-100">
 									<li class="list-group-item d-flex justify-content-between align-items-center pt-1 pb-0" style="background: transparent; border: none;">
 										<h2>Pedido N. <b>{{orders.orderCode}}</b></h2>
-										<span class="badge-pill"><b>{{orders.user}}</b></span>
+										<span class="badge-pill">
+											<b style="float: right; width: 100%; text-align: right;">{{orders.user}}</b>
+											<b style="float: right; width: 100%; text-align: right;">{{orders.admin}}</b>
+										</span>
 									</li>
 
 									<li class="list-group-item d-flex justify-content-between align-items-center pt-1 pb-0" style="background: transparent; border: none;">
@@ -55,12 +58,19 @@
 												</div>
 												<div class="col-12">
 													{% if lp.item.company %}
-														<p class="mb-0"><b>Empresa</b>: {{lp.item.company}}</p>
+														<p class="mb-0">
+														<b>Empresa</b>: {{lp.item.company}}
+														</p>
 														<p class="mb-0 mt-1"><b>Dirección Empresa</b>: {{lp.item.company.address}}</p>
 													{% else %}
-														<p class="mb-0"><b>Empresa</b>: {{lp.item.user}}</p>
+														<p class="mb-0"><b>Empresa</b>: <a href="{% url 'product_app:user-company-products' lp.item.user.profile.slug lp.item.user.id %}" target="_blank">{{lp.item.user.profile.name}}</a></p>
 														<p class="mb-0 mt-1"><b>Dirección Empresa</b>: {{lp.item.user.profile.location}}</p>
 													{% endif %}
+												</div>
+												<div class="col-12">
+													<p class="mb-0">
+														<b>Teléfono</b>: {{lp.item.user.profile.phone}}
+													</p>
 												</div>
 												<div class="col-12">
 													<span class="mr-2"><b>Cantidad</b>: {{lp.quantity}}</span>
@@ -92,8 +102,32 @@
 								</ul>
 
 								<ul class="nav nav-pills nav-fill">
-									
+
+									<li class="nav-item m-1">
+										<a class="nav-link btn filterbtn whatsapp" href="{% url 'cart_app:whatsapporder' orders.orderCode %}" target="_blank"><i class="fa fa-whatsapp"></i></a>
+									</li>
+
 									{% if orders.status == 'Procesando' %}
+										<li class="nav-item m-1 ">
+											<a class="nav-link btn revisando" href="{% url 'cart_app:realizarorder' orders.orderCode  %}">Realizado</a>
+										</li>
+									{% else %}
+										<li class="nav-item m-1 desactivado">
+											<span class="nav-link btn revisando">Realizado</span>
+										</li>
+									{% endif %}
+
+									{% if orders.status == 'Realizado' %}
+										<li class="nav-item m-1 ">
+											<a class="nav-link btn revisando" href="{% url 'cart_app:revisionorder' orders.orderCode  %}">Revisando</a>
+										</li>
+									{% else %}
+										<li class="nav-item m-1 desactivado">
+											<span class="nav-link btn revisando">Revisando</span>
+										</li>
+									{% endif %}
+
+									{% if orders.status == 'Revision' %}
 										<li class="nav-item m-1 ">
 											<a class="nav-link btn enviado" href="{% url 'cart_app:sendorder' orders.orderCode  %}">Enviado</a>
 										</li>
@@ -105,11 +139,11 @@
 
 									{% if orders.status == 'Enviado' %}
 										<li class="nav-item m-1 ">
-											<a class="nav-link btn completados" href="{% url 'cart_app:completeorder' orders.orderCode  %}">Completado</a>
+											<a class="nav-link btn completados" href="{% url 'cart_app:completeorder' orders.orderCode  %}">Entregado</a>
 										</li>
 									{% else %}
 										<li class="nav-item m-1 desactivado">
-											<span class="nav-link btn completados">Completado</span>
+											<span class="nav-link btn completados">Entregado</span>
 										</li>
 									{% endif %}
 
@@ -123,9 +157,7 @@
 										</li>
 									{% endif %}
 
-									<li class="nav-item m-1">
-										<a class="nav-link btn whatsapp" href="{% url 'cart_app:whatsapporder' orders.orderCode %}" target="_blank">Whatsapp</a>
-									</li>
+									
 								</ul>
 							</div>
 						{% endif %}

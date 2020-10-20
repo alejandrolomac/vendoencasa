@@ -1283,7 +1283,7 @@ ADMIN STYLES
 
 .item {
 	width: 100%;
-	border: 1px solid #ddd;
+	border: 2px solid #ddd;
 	height: auto;
 	border-radius: 5px;
 	background: #fcfcfc;
@@ -1291,16 +1291,21 @@ ADMIN STYLES
 }
 
 .item.recibido { border-color: #ffc107; }
+.item.realizado { border-color: #e2ff05; }
+.item.revision { border-color: #97ff05; }
 .item.enviado { border-color: #28a745; }
 .item.completados { border-color: #17a2b8; }
 .item.cancelados { border-color: #738a8c; }
 
 .filterbtn.all { background:#ef4036 !important; color: #fff !important; }
 .filterbtn.recibido { background: #ffc107 !important; color: #fff !important; }
+.filterbtn.realizado { background: #d8f500 !important; color: #fff !important; }
+.filterbtn.revision { background:#83e000 !important; color: #fff !important; }
 .filterbtn.enviado { background: #28a745 !important; color: #fff !important; }
 .filterbtn.completados { background: #17a2b8 !important; color: #fff !important; }
 .filterbtn.cancelados { background: #738a8c !important; color: #fff !important; }
 .filterbtn.whatsapp { background:#00bb2d !important; color: #fff !important; }
+.filterbtn.whatsapp:hover { background:#009e25 !important; }
 
 
 .hide { display: none !important; }

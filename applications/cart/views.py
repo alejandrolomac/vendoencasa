@@ -562,6 +562,24 @@ def cancelOrder(request, pk):
     order.save()
     return redirect("cart_app:orderadmin")
 
+
+@staff_member_required
+def realizadoOrder(request, pk):
+    order = Order.objects.get(orderCode=pk, status='Procesando', ordered=False)
+    order.status = 'Realizado'
+    order.admin = request.user.username
+    order.save()
+    return redirect("cart_app:orderadmin")
+
+
+@staff_member_required
+def revisionOrder(request, pk):
+    order = Order.objects.get(orderCode=pk, status='Realizado', ordered=False)
+    order.status = 'Revision'
+    order.save()
+    return redirect("cart_app:orderadmin")
+
+
 @staff_member_required
 def whatsappOrder(request, pk):
     order = Order.objects.get(orderCode=pk, ordered=False)

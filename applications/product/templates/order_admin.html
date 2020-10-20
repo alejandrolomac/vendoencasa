@@ -12,9 +12,11 @@
 
 					<div class="wrap-filterbtn">
 						<button class="filterbtn all active mt-1">Todas</button>
-						<button class="filterbtn recibido mt-1">Recibidos</button>
+						<button class="filterbtn recibido mt-1">Recientes</button>
+						<button class="filterbtn realizado mt-1">Realizados</button>
+						<button class="filterbtn revision mt-1">Revisando</button>
 						<button class="filterbtn enviado mt-1">Enviados</button>
-						<button class="filterbtn completados mt-1">Completados</button>
+						<button class="filterbtn completados mt-1">Entregados</button>
 						<button class="filterbtn cancelados mt-1">Cancelados</button>
 					</div>
 				</div>
@@ -24,6 +26,10 @@
 						{% if orders.status != 'NoPagados' %}
 							{% if orders.status == 'Procesando' %}
 								<div class="item mb-3 p-2 recibido">
+							{% elif orders.status == 'Realizado' %}
+								<div class="item mb-3 p-2 realizado">
+							{% elif orders.status == 'Revision' %}
+								<div class="item mb-3 p-2 revision">
 							{% elif orders.status == 'Enviado' %}
 								<div class="item mb-3 p-2 enviado">
 							{% elif orders.status == 'Pagado' %}
@@ -34,7 +40,10 @@
 								<ul class="list-group w-100">
 									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; border: none;">
 										<a href="{% url 'cart_app:orderadmindetail' orders.orderCode %}"><b>{{orders.orderCode}}</b></a>
-										<span class="badge-pill"><b>{{orders.user}}</b></span>
+										<span class="badge-pill">
+											<b style="float: right; width: 100%; text-align: right;">{{orders.user}}</b>
+											<b style="float: right; width: 100%; text-align: right;">{{orders.admin}}</b>
+										</span>
 									</li>
 
 									<li class="list-group-item d-flex justify-content-between align-items-center" style="background: transparent; border: none;">
@@ -54,8 +63,32 @@
 								</ul>
 
 								<ul class="nav nav-pills nav-fill">
-									
+
+									<li class="nav-item m-1">
+										<a class="nav-link btn filterbtn whatsapp" href="{% url 'cart_app:whatsapporder' orders.orderCode %}" target="_blank"><i class="fa fa-whatsapp"></i></a>
+									</li>
+
 									{% if orders.status == 'Procesando' %}
+										<li class="nav-item m-1 ">
+											<a class="nav-link btn revisando" href="{% url 'cart_app:realizarorder' orders.orderCode  %}">Realizado</a>
+										</li>
+									{% else %}
+										<li class="nav-item m-1 desactivado">
+											<span class="nav-link btn revisando">Realizado</span>
+										</li>
+									{% endif %}
+
+									{% if orders.status == 'Realizado' %}
+										<li class="nav-item m-1 ">
+											<a class="nav-link btn revisando" href="{% url 'cart_app:revisionorder' orders.orderCode  %}">Revisando</a>
+										</li>
+									{% else %}
+										<li class="nav-item m-1 desactivado">
+											<span class="nav-link btn revisando">Revisando</span>
+										</li>
+									{% endif %}
+
+									{% if orders.status == 'Revision' %}
 										<li class="nav-item m-1 ">
 											<a class="nav-link btn enviado" href="{% url 'cart_app:sendorder' orders.orderCode  %}">Enviado</a>
 										</li>
@@ -67,11 +100,11 @@
 
 									{% if orders.status == 'Enviado' %}
 										<li class="nav-item m-1 ">
-											<a class="nav-link btn completados" href="{% url 'cart_app:completeorder' orders.orderCode  %}">Completado</a>
+											<a class="nav-link btn completados" href="{% url 'cart_app:completeorder' orders.orderCode  %}">Entregado</a>
 										</li>
 									{% else %}
 										<li class="nav-item m-1 desactivado">
-											<span class="nav-link btn completados">Completado</span>
+											<span class="nav-link btn completados">Entregado</span>
 										</li>
 									{% endif %}
 
@@ -85,9 +118,7 @@
 										</li>
 									{% endif %}
 
-									<li class="nav-item m-1">
-										<a class="nav-link btn whatsapp" href="{% url 'cart_app:whatsapporder' orders.orderCode %}" target="_blank">Whatsapp</a>
-									</li>
+									
 								</ul>
 							</div>
 						{% endif %}

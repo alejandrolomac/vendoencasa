@@ -319,6 +319,14 @@ src="https://www.facebook.com/tr?id=337540247504791&ev=PageView&noscript=1"
 			checkClass();
 		$('.item:not(.recibido)').toggleClass('hide');
 		});
+		$('.realizado').click( function() {
+			checkClass();
+		$('.item:not(.realizado)').toggleClass('hide');
+		});
+		$('.revision').click( function() {
+			checkClass();
+		$('.item:not(.revision)').toggleClass('hide');
+		});
 		$('.enviado').click( function() {
 			checkClass();
 		$('.item:not(.enviado)').toggleClass('hide');

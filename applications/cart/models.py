@@ -5,6 +5,8 @@ from applications.product.models import Products, DiscountCode
 STATUS_CHOICES = (
     ('NoPagados','NoPagados'),
     ('Procesando', 'Procesando'),
+    ('Realizado', 'Realizado'),
+    ('Revision', 'Revision'),
     ('Enviado','Enviado'),
     ('Pagado','Pagado'),
     ('Comentado', 'Comentado'),
@@ -82,6 +84,7 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    admin = models.CharField("Usuario Administrador", max_length=300, blank=True)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
