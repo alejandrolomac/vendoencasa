@@ -650,6 +650,13 @@ def orderAdminDetail(request, pk):
     return render(request, 'order_admin_detail.html', context)
 
 
+@staff_member_required
+def orderAdminPrint(request, pk):
+    order = Order.objects.select_related('user').filter(orderCode=pk)
+    context = {
+        'object': order
+    }
+    return render(request, 'order_admin_print.html', context)
 
 
 

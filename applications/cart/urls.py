@@ -22,6 +22,7 @@ urlpatterns = [
     path('vendo-admin-orders/<pk>', views.orderAdminDetail, name='orderadmindetail'),
     path('vendo-admin-orders/r/<pk>', views.realizadoOrder, name='realizarorder'),
     path('vendo-admin-orders/re/<pk>', views.revisionOrder, name='revisionorder'),
+    path('vendo-admin-orders/p/<pk>', views.orderAdminPrint, name='printorder'),
     path('vendo-admin-orders/s/<pk>', views.sendOrder, name='sendorder'),
     path('vendo-admin-orders/c/<pk>', views.completeOrder, name='completeorder'),
     path('vendo-admin-orders/d/<pk>', views.cancelOrder, name='cancelorder'),

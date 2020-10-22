@@ -32,11 +32,7 @@
 							</a>
 							<div class="card-body" style="padding: 15px 0px;">
 								<h2 class="card-title">
-									{% if s.pricePromo %}
-										<b>{{ s.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-									{% else %}
-										<b>{{ s.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-									{% endif %}
+									<b>{{ s.absolute_price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
 								</h2>
 								<h5 class="card-title">{{ s.title|truncatechars:19 }}</h5>
 								<a href="{% url 'product_app:single-product' s.slug %}" class="btn">Comprar</a>

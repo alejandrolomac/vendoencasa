@@ -50,7 +50,8 @@ def dashnewprod(request):
         if formprod.pricePromo:
             formprod.imagef = request.FILES['imagef']
             formprod.user = request.user
-            formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+            formprod.price = int(formprod.price)
+            formprod.comissionPriceProd = int(( formprod.price * formprod.subCategory.category.commission ) / 100)
             formprod.available = True
             formprod.save()
             form.save_m2m()
@@ -58,7 +59,8 @@ def dashnewprod(request):
         else:
             formprod.imagef = request.FILES['imagef']
             formprod.user = request.user
-            formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+            formprod.price = int(formprod.price)
+            formprod.comissionPriceProd = int(( formprod.price * formprod.subCategory.category.commission ) / 100)
             formprod.available = True
             formprod.save()
             form.save_m2m()
@@ -83,12 +85,14 @@ def editproduct(request, product_id):
         if form.is_valid():
             formprod = form.save(commit=False)
             if formprod.pricePromo:
-                formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+                formprod.price = int(formprod.price)
+                formprod.comissionPriceProd = int(( formprod.price * formprod.subCategory.category.commission ) / 100)
                 formprod.save()
                 form.save_m2m()
                 return redirect("dashboard_app:dashprod")
             else:
-                formprod.price = (( formprod.price * formprod.subCategory.category.commission ) / 100) + formprod.price
+                formprod.price = int(formprod.price)
+                formprod.comissionPriceProd = int(( formprod.price * formprod.subCategory.category.commission ) / 100)
                 formprod.save()
                 form.save_m2m()
                 return redirect("dashboard_app:dashprod")

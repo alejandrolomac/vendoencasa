@@ -36,10 +36,10 @@
 								</a>
 								<p class="card-text mb-0">
 									{% if prod.pricePromo %}
-										Precio: <b>{{ prod.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
+										Precio: <b>{{ prod.absolute_price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
 										<span class="ml-2" style="text-decoration: line-through; font-weight: normal; color: #ccc !important;">{{ prod.price|floatformat:2 }}<span style="font-size: 14px;">L.</span></span>
 									{% else %}
-										Precio: <b>{{ prod.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
+										Precio: <b>{{ prod.absolute_price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
 									{% endif %}
 								</p>
 								<p class="card-text mb-0">

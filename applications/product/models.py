@@ -137,6 +137,7 @@ class Products(models.Model):
 	price = models.FloatField('Precio', blank=False)
 	priceAnchor = models.FloatField('Precio Anclaje', blank=True, null=True)
 	pricePromo = models.FloatField('Precio Promocion', blank=True, null=True)
+	comissionPriceProd = models.FloatField('Comisión', blank=True, null=True)
 	promotion = models.BooleanField('Promocion', default=False)
 	available = models.BooleanField('Disponible', default=True)
 	exhausted = models.BooleanField('Agotado', default=False)
@@ -187,6 +188,19 @@ class Products(models.Model):
 
 	def get_remove_from_cart_url(self):
 		return reverse("cart_app:remove-to-cart", kwargs={"slug": self.slug})
+
+	def absolute_price(self):
+		if self.comissionPriceProd:
+			if self.pricePromo:
+				absprice = self.pricePromo + self.comissionPriceProd
+			else:
+				absprice = self.price + self.comissionPriceProd
+		else:
+			if self.pricePromo:
+				absprice = int(self.pricePromo + ( self.price * self.subCategory.category.commission ) / 100)
+			else:
+				absprice = int(self.price + ( self.price * self.subCategory.category.commission ) / 100)
+		return absprice
 	
 	def offer_save(self):
 		if self.priceAnchor:

@@ -48,11 +48,11 @@ class OrderItem(models.Model):
         super(OrderItem, self).save(*args, **kwargs)
     
     def get_total_item_price(self):
-        precio_total = self.quantity * self.item.price
+        precio_total = self.quantity * self.item.absolute_price()
         return precio_total
 
     def get_total_discount_item_price(self):
-        precio_descuento_total = self.quantity * self.item.pricePromo
+        precio_descuento_total = self.quantity * self.item.absolute_price()
         return precio_descuento_total
     
     def get_amount_saved(self):
@@ -110,10 +110,10 @@ class Order(models.Model):
         return total
     
     def get_price_envio(self):
-        envio = 0
-        for order_item in self.items.all():
-            envio += 1
-        envio = (envio - 1) * 20 + 80
+        envio = 80
+        #for order_item in self.items.all():
+        #    envio += 1
+        #envio = (envio - 1) * 20 + 80
         return envio
     
     def get_discount(self):

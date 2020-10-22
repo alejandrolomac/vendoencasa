@@ -76,16 +76,14 @@
 									<h5 class="card-title" style="font-size: 30px; font-weight: bold !important;">
 										{% if lp.pricePromo %}
 											<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.price|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
-											{{ lp.pricePromo|floatformat:2 }}<span style="font-size: 14px;">L.</span>
-											<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.price|sub:lp.pricePromo|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
+											{{ lp.absolute_price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
+											<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.price|sub:lp.absolute_price|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
+										{% elif lp.priceAnchor %}
+											<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.priceAnchor|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
+											{{ lp.price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
+											<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.priceAnchor|sub:lp.price|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
 										{% else %}
-											{% if lp.priceAnchor %}
-												<span style="text-decoration: line-through; font-size: 18px; font-weight: normal; color: #ccc !important;">{{ lp.priceAnchor|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
-												{{ lp.price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
-												<span style="font-size: 18px; font-weight: normal; color: #F2B100 !important;">  Ahorras {{ lp.priceAnchor|sub:lp.price|floatformat:2 }}<span style="font-size: 10px;">L.</span></span>
-											{% else %}
-												{{ lp.price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
-											{% endif %}
+											{{ lp.absolute_price|floatformat:2 }}<span style="font-size: 14px;">L.</span>
 										{% endif %}
 									</h5>
 								</li>
@@ -325,7 +323,7 @@
 									{% endif %}
 								</a>
 								<div class="card-body" style="padding: 15px 0px;">
-									<h2 class="card-title"><b>{{ nprod.price|floatformat:2 }}</b><span>L.</span></h2>
+									<h2 class="card-title"><b>{{ nprod.absolute_price|floatformat:2 }}</b><span>L.</span></h2>
 									<h5 class="card-title">{{ nprod.title|truncatechars:19 }}</h5>
 									<a href="{% url 'product_app:single-product' nprod.slug %}" class="btn">Comprar</a>
 								</div>
@@ -333,27 +331,6 @@
 						{% endfor %}
 					</div>
 				</div>
-				<!--<div class="container-fluid catslider" style="padding: 0px; margin: 0px;">
-					
-					    {% for nprod in related_prod %}
-							<div class="card text-left" style="border: none !important; padding: 5px;">
-				  				<a href="{% url 'product_app:single-product' nprod.slug %}" class="thumbnail" style="border: none !important; border-radius: 0;">
-									{% if nprod.imagef.url == '' %}
-										<img src="{% static 'img/default_thumbnail.jpg' %}" style="border-radius: 0;" class="thumbnail">
-									{% else %}
-										{% thumbnail nprod.imagef "150x150" crop="center" as im %}
-											<img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" style="border-radius: 0;" class="thumbnail">
-										{% endthumbnail %}
-										
-									{% endif %}
-								</a>
-								<div class="card-body" style="padding: 15px 0px 0px 0px;">
-									<h2 class="card-title"><b>{{ nprod.price|floatformat:2 }}</b><span>L.</span></h2>
-									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
-								</div>
-				  			</div>
-						{% endfor %}
-					</div>-->
 			</div><!-- End Of Related objets -->
 
 				

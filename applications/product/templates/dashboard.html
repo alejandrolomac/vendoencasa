@@ -274,7 +274,7 @@
 				}
 
 				var subtotal = parseInt(x) * parseFloat(porcat)
-				var total = parseInt(x)
+				var total = parseInt(x) + parseInt(subtotal)
 				if(subtotal) {
 					document.getElementById("subtotal").innerHTML = subtotal.toFixed(2);
 				}else {

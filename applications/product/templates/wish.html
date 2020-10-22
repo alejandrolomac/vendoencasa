@@ -33,7 +33,9 @@
 										
 									<div class="card-body" style="padding: 15px 0px; text-align: center !important;">
 										<h2 class="card-title" class="text-center" style="font-size: 18px; font-weight: bold;"><b><a href="{% url 'product_app:single-product' p.item.slug %}">{{ p.item.title|truncatechars:30 }}</a></b></h2>
-										<h5 class="card-title" class="text-center" style="font-size: 15px; color: #444;"><b>{{ p.item.price|floatformat:2 }}</b><span style="font-size: 10px;">L</span></h5>
+										<h5 class="card-title" class="text-center" style="font-size: 15px; color: #444;"><b>
+											{{ p.item.absolute_price|floatformat:2 }}
+										</b><span style="font-size: 10px;">L</span></h5>
 									</div>
 								</div><!-- End Of Product -->
 							{% endfor %}
@@ -44,47 +46,6 @@
 				</div>
 			</div>
 
-
-
-
-			<!--<div class="table-responsive">
-				<table class="table table-hover">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">Producto</th>
-							<th scope="col">Precio</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for oreder_item in object.items.all %}
-							<tr>
-								<td>
-									<a href="{% url 'product_app:single-product' oreder_item.item.slug %}">{{ oreder_item.item.title|truncatechars:50 }}</a>
-									{% if oreder_item.color %}
-										<span class="badge badge-primary">{{ oreder_item.color }}</span>
-									{% endif %}
-									{% if oreder_item.size %}
-										<span class="badge badge-success">{{ oreder_item.size }}</span>
-									{% endif %}
-								</td>
-								<td>
-								{% if oreder_item.item.pricePromo %}
-									{{ oreder_item.item.pricePromo|floatformat:2 }}<span style="font-size: .8em;">L.</span>
-								{% else %}
-									{{ oreder_item.item.price|floatformat:2 }}<span style="font-size: .8em;">L.</span>
-								{% endif %}
-								</td>
-								<td>
-									<button class="btn" type="submit" style="float:right; margin-left: 20px;">
-										<i class="fa fa-shopping-cart"></i>
-									</button>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>-->
 		</div>
 	</div>
 

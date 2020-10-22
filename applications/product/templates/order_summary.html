@@ -38,11 +38,7 @@
 												{% endif %}
 											</p>
 											<p class="card-text mb-0">
-												{% if oreder_item.item.pricePromo %}
-													{{ oreder_item.item.pricePromo|floatformat:2 }}<span style="font-size: .8em;">L.</span>
-												{% else %}
-													{{ oreder_item.item.price|floatformat:2 }}<span style="font-size: .8em;">L.</span>
-												{% endif %}
+												{{ oreder_item.item.absolute_price|floatformat:2 }}<span style="font-size: .8em;">L.</span>
 											</p>
 										</div>
 									</div>
@@ -87,7 +83,7 @@
 												{% if oreder_item.quantity != 0 %}
 													{{oreder_item.get_total_item_price|floatformat:2}}<span style="font-size: .8em;">L.</span>
 												{% else %}
-													{{oreder_item.item.price|floatformat:2}}<span style="font-size: .8em;">L.</span>
+													{{oreder_item.item.absolute_price|floatformat:2}}<span style="font-size: .8em;">L.</span>
 												{% endif %}
 											{% endif %}
 										</div>
@@ -179,11 +175,7 @@
 												{% endif %}
 											</p>
 											<p class="card-text mb-0">
-												{% if oreder_item.item.pricePromo %}
-													{{ oreder_item.item.pricePromo|floatformat:2 }}<span style="font-size: .8em;">L.</span>
-												{% else %}
-													{{ oreder_item.item.price|floatformat:2 }}<span style="font-size: .8em;">L.</span>
-												{% endif %}
+												{{ oreder_item.item.absolute_price|floatformat:2 }}<span style="font-size: .8em;">L.</span>
 											</p>
 										</div>
 									</div>

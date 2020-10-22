@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Imprimir Pedido</title>
+</head>
+<!--<body onload="javascript:window.print()">-->
+<body>
+	<h1>IMPRIMIR PEDIDO</h1>
+	<h2>Pedido N. <b>{{object.orderCode}}</b></h2>
+	<ul>
+		{% for order in object.items.all %}
+			<li>prod: {{order.item.title}} - {{order}}</li>
+		{% endfor %}
+	</ul>
+	<a href="javascript:window.print()">IMPRIMIR</a>
+</body>
+</html>

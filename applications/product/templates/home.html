@@ -110,11 +110,7 @@
 											</a>
 											<div class="card-body" style="padding: 15px 0px 0px 0px;">
 												<h2 class="card-title" style="font-size: 18px;">
-													{% if nprod.pricePromo %}
-														<b>{{ nprod.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-													{% else %}
-														<b>{{ nprod.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-													{% endif %}
+												<b>{{ nprod.absolute_price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
 												</h2>
 												<h5 class="card-title" style="color: #343a40;font-size: 14px;">{{ nprod.title|truncatechars:19 }}</h5>
 											</div>
@@ -149,11 +145,7 @@
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
 									<h2 class="card-title" style="font-size: 18px;">
-										{% if nprod.pricePromo %}
-											<b>{{ nprod.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-										{% else %}
-											<b>{{ nprod.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-										{% endif %}
+										<b>{{ nprod.absolute_price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
 									</h2>
 									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
 								</div>
@@ -183,11 +175,7 @@
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
 									<h2 class="card-title" style="font-size: 18px;">
-										{% if nprod.pricePromo %}
-											<b>{{ nprod.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-										{% else %}
-											<b>{{ nprod.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-										{% endif %}
+										<b>{{ nprod.absolute_price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
 									</h2>
 									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
 								</div>
@@ -223,11 +211,7 @@
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
 								{% load mathfilters %}
 									<h2 class="card-title" style="font-size: 18px;">
-										{% if nprod.pricePromo %}
-											<b>{{ nprod.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-										{% else %}
-											<b>{{ nprod.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-										{% endif %}
+										<b>{{ nprod.absolute_price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
 									</h2>
 									<h5 class="card-title" style="color: #343a40;">{{ nprod.title|truncatechars:19 }}</h5>
 								</div>
@@ -254,11 +238,7 @@
 								</a>
 								<div class="card-body" style="padding: 15px 0px 0px 0px;">
 									<h2 class="card-title" style="font-size: 18px;">
-										{% if lprod.pricePromo %}
-											<b>{{ lprod.pricePromo|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-										{% else %}
-											<b>{{ lprod.price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
-										{% endif %}
+										<b>{{ lprod.absolute_price|floatformat:2 }}</b><span style="font-size: 14px;">L.</span>
 									</h2>
 									<h5 class="card-title" style="color: #343a40;">{{ lprod.title|truncatechars:19 }}</h5>
 								</div>

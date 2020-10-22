@@ -26,7 +26,7 @@
 							{% endif %}
 								<ul class="list-group w-100">
 									<li class="list-group-item d-flex justify-content-between align-items-center pt-1 pb-0" style="background: transparent; border: none;">
-										<h2>Pedido N. <b>{{orders.orderCode}}</b></h2>
+										<h2>Pedido N. <b>{{orders.orderCode}}</b> <a href="{% url 'cart_app:printorder' orders.orderCode %}" target="_blank"><i class="fa fa-print"></i></a></h2>
 										<span class="badge-pill">
 											<b style="float: right; width: 100%; text-align: right;">{{orders.user}}</b>
 											<b style="float: right; width: 100%; text-align: right;">{{orders.admin}}</b>
