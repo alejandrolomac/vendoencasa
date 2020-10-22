@@ -372,16 +372,7 @@ def orderSummaryFinish(request):
             order.orderLocation = str(location)
             order.save()
             if str(locationsplit[0]) == 'Francisco Morazán':
-                if cantorder == 1:
-                    shipping = 80
-                else:
-                    if cantorder <= 4:
-                        cantordera = cantorder - 1
-                        shipping = 80 + (20 * cantordera )
-                    elif cantorder > 6:
-                        shipping = 0
-                    else:
-                        shipping = 140
+                shipping = 80
             else:
                 shipping = 0
         else:
@@ -391,16 +382,7 @@ def orderSummaryFinish(request):
                 order.orderLocation = str(location + ", " + locationd)
                 order.save()
                 if location == 'Francisco Morazán':
-                    if cantorder == 1:
-                        shipping = 80
-                    else:
-                        if cantorder <= 4:
-                            cantordera = cantorder - 1
-                            shipping = 80 + (20 * cantordera )
-                        elif cantorder > 6:
-                            shipping = 0
-                        else:
-                            shipping = 140
+                    shipping = 80
                 else:
                     shipping = 0
             else:

@@ -13,49 +13,50 @@
 						<div id="wrap-slider-product">
 							<div class="slider-for">
 								{% if lp.imagef.url == '' %}
-									<div class="item">
+									<div>
 										<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail">
 									</div>
 								{% else %}
-									<div class="item image-zoom">
-										<img src="{{ lp.imagef.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
->
-									</div class="item">
+									<div class="image-zoom">
+										{% thumbnail lp.imagef "1100x1100" crop="center" as im %}
+											<img src="{{ im.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200">
+										{% endthumbnail %}
+									</div>
 								{% endif %}
 								{% if lp.images.url != '' %}
-									<div class="item image-zoom">
-										<img src="{{ lp.images.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
->
+									<div class="image-zoom">
+										{% thumbnail lp.images "1100x1100" crop="center" as im %}
+											<img src="{{ im.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200">
+										{% endthumbnail %}
 									</div>
 								{% endif %}
 								{% if lp.imaget.url != '' %}
-									<div class="item image-zoom">
-										<img src="{{ lp.imaget.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200"
->
+									<div class="image-zoom">
+										{% thumbnail lp.imaget "1100x1100" crop="center" as im %}
+											<img src="{{ im.url }}" class="d-block w-100 thumbnail" data-zoom="enabled" lens-width="200">
+										{% endthumbnail %}
 									</div>
 								{% endif %}
 							</div>
 							<div class="slider-nav">
 								{% if lp.imagef.url == '' %}
-									<div class="item">
-										<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
-									</div>
+									<img src="{% static 'img/default_thumbnail.jpg' %}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
 								{% else %}
-									<div class="item">
+									<div class="item" style="border:none;">
 										{% thumbnail lp.imagef "100x100" crop="center" as im %}
 											<img src="{{ im.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
 										{% endthumbnail %}
-									</div class="item">
+									</div>
 								{% endif %}
 								{% if lp.images.url != '' %}
-									<div class="item">
+									<div class="item" style="border:none;">
 										{% thumbnail lp.images "100x100" crop="center" as im %}
 											<img src="{{ im.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
 										{% endthumbnail %}
 									</div>
 								{% endif %}
 								{% if lp.imaget.url != '' %}
-									<div class="item">
+									<div class="item" style="border:none;">
 										{% thumbnail lp.imaget "100x100" crop="center" as im %}
 											<img src="{{ im.url }}" class="d-block w-100 thumbnail" style="border-radius: 0px !important;">
 										{% endthumbnail %}

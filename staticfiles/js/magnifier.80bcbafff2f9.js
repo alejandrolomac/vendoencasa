@@ -11,7 +11,7 @@ window.onload = function(){
 	  zoomWidth: (e.getAttribute('lens-width') != null)?parseInt(e.getAttribute('lens-width')):100,
 	  borderRadius: (e.getAttribute('border-radius') != null)?parseInt(e.getAttribute('border-radius')):100,
 	  zoomImage: (e.getAttribute('data-image') != null)?e.getAttribute('data-image'):e.src,
-	  initalScale: 1.3,
+	  initalScale: 8,
 	  borderColor: (e.getAttribute('border-color') != null)?e.getAttribute('border-color'):'#ef4036',
 	  borderWidth:(e.getAttribute('border-width') != null)?parseInt(e.getAttribute('border-width')):1,
 	}; 
