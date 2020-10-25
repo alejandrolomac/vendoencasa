@@ -1,5 +1,15 @@
 {% extends "index.html" %}
 
+{% block header %}
+	{% for lpheader in singleProduct %}
+		<meta property="og:image" content="{{lpheader.imagef.url}}"/>
+		<meta property="og:site_name" content="Vendo en Casa"/>
+		<meta property="og:title" content="{{lpheader.title}}" />
+		<meta property="og:description" content="{{ lpheader.resume|linebreaks }}" />
+		<meta property="og:url" content="https://www.vendoencasa.net/producto/{{lpheader.slug}}"/>
+	{% endfor %}
+{% endblock header %}
+
 {% block content %}
 	{% load static %}
 	{% load thumbnail %}
