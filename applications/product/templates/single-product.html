@@ -7,6 +7,13 @@
 		<meta property="og:title" content="{{lpheader.title}}" />
 		<meta property="og:description" content="{{ lpheader.resume|linebreaks }}" />
 		<meta property="og:url" content="https://www.vendoencasa.net/producto/{{lpheader.slug}}"/>
+
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="https://www.vendoencasa.net/">
+		<meta name="twitter:title" content="{{lpheader.title}}">
+		<meta name="twitter:description" content="{{ lpheader.resume|linebreaks }}">
+		<meta name="twitter:creator" content="@StudioMorebi">
+		<meta name="twitter:image:src" content="{{lpheader.imagef.url}}">
 	{% endfor %}
 {% endblock header %}
 
