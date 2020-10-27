@@ -6,8 +6,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '&mcng4k3l9@5y4&(8(4j*1$o022z%3(^v2hfe#y=!71@k@#ja$'
 
-DEBUG = True
-#SECURE_SSL_REDIRECT = True
+DEBUG = False
+SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = ['https://www.vendoencasa.net', 'www.vendoencasa.net']
 
