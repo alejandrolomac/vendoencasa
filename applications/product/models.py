@@ -190,16 +190,10 @@ class Products(models.Model):
 		return reverse("cart_app:remove-to-cart", kwargs={"slug": self.slug})
 
 	def absolute_price(self):
-		if self.comissionPriceProd:
-			if self.pricePromo:
-				absprice = self.pricePromo + self.comissionPriceProd
-			else:
-				absprice = self.price + self.comissionPriceProd
+		if self.pricePromo:
+			absprice = int(self.pricePromo)
 		else:
-			if self.pricePromo:
-				absprice = int(self.pricePromo + ( self.price * self.subCategory.category.commission ) / 100)
-			else:
-				absprice = int(self.price + ( self.price * self.subCategory.category.commission ) / 100)
+			absprice = int(self.price)
 		return absprice
 	
 	def offer_save(self):

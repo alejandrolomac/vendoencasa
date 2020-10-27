@@ -33,6 +33,9 @@
 									{% if prod.pricePromo %}
 										<span class="btn ml-3" style="font-size: 10px;">PROMOCIÓN</span>
 									{% endif %}
+									{% if prod.quantity == 0 %}
+										<span class="btn ml-3" style="font-size: 10px;">NO HAY EN INVENTARIO</span>
+									{% endif %}
 								</a>
 								<p class="card-text mb-0">
 									{% if prod.pricePromo %}

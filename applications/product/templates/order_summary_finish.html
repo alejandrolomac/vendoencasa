@@ -25,12 +25,16 @@
 						{% if locationd %}
 							{{location}}, {{locationd}}
 							{% if location != 'Francisco Morazán' %}
-								<p class="text-muted" style="font-size:15px;">El costo del envió será enviado al whatsapp junto con la fecha de entrega.</p>
+								<p class="text-muted" style="font-size:15px;">La fecha de entrega será enviada a tu whatsapp.</p>
+							{% else %}
+								<p class="text-muted" style="font-size:15px;">Tu pedido llegara en un máximo de tiempo de 24 hrs.</p>
 							{% endif %}
 						{% else %}
 							{{location}}
 							{% if stringsplit != 'Francisco Morazán' %}
-								<p class="text-muted" style="font-size:15px;">El costo del envió será enviado al whatsapp junto con la fecha de entrega.</p>
+								<p class="text-muted" style="font-size:15px;">La fecha de entrega será enviada a tu whatsapp.</p>
+							{% else %}
+								<p class="text-muted" style="font-size:15px;">Tu pedido llegara en un máximo de tiempo de 24 hrs.</p>
 							{% endif %}
 						{% endif %}
 					</h4>
@@ -41,7 +45,7 @@
 						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, y deberás realizar el pago en efectivo al momento de la llegada del delivery con el pedido.</p>
 					{% elif payMethod == 'Depósito Bancario' %}
 						<h4 class="text-left mb-2"><i class="fa fa-university"></i> {{object.get_payMethod_display}}</h4>
-						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, Antes de enviar el pedido deberá enviarnos una captura o fotografía del recibo del depósito a nuestra cuenta bancaria, deberá enviarla vía whatsapp luego de ser contactado/a.</br><span class="w-100 text-center pt-2 pb-2" style="font-size: 20px; display: block;">BAC: 000000000</span></p>
+						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, Antes de enviar el pedido deberá enviarnos una captura o fotografía del recibo del depósito a nuestra cuenta bancaria, deberá enviarla vía whatsapp luego de ser contactado/a.</br><span class="w-100 text-center pt-2 pb-2" style="font-size: 20px; display: block;"></br> BAC: 729831361 </br>Atlantida: 014720309641</span></p>
 					{% elif payMethod == 'Tarjeta' %}
 						<h4 class="text-left mb-2"><i class="fa fa-cc-visa"></i><i class="fa fa-cc-mastercard ml-1"></i> {{object.get_payMethod_display}}</h4>
 						<p class="text-muted">Se te enviara la confirmación de tu compra al correo con el que te registraste, el delivery llevara el POS para que puedas efectuar el pago con tu Tarjeta de Crédito o Debito.</p>

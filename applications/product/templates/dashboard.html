@@ -237,8 +237,8 @@
 					porcat = parseFloat(0.05);
 				}
 
-				var subtotal = parseInt(x) * parseFloat(porcat)
-				var total = parseInt(subtotal) + parseInt(x)
+				var subtotal = 0
+				var total = parseInt(x)
 				if(subtotal) {
 					document.getElementById("subtotal").innerHTML = subtotal.toFixed(2);
 				}else {
@@ -273,8 +273,8 @@
 					porcat = parseFloat(0.05);
 				}
 
-				var subtotal = parseInt(x) * parseFloat(porcat)
-				var total = parseInt(x) + parseInt(subtotal)
+				var subtotal = 0
+				var total = parseInt(x)
 				if(subtotal) {
 					document.getElementById("subtotal").innerHTML = subtotal.toFixed(2);
 				}else {

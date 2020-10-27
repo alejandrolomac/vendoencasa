@@ -106,14 +106,20 @@ class Order(models.Model):
     def get_total(self):
         total = 0
         for order_item in self.items.all():
-            total += order_item.get_final_price()
+            if order_item.item.quantity > 0:
+                total += order_item.get_final_price()
         return total
     
     def get_price_envio(self):
-        envio = 80
-        #for order_item in self.items.all():
-        #    envio += 1
-        #envio = (envio - 1) * 20 + 80
+        locations = self.orderLocation
+        locationsplit = locations.split(",")
+        print("Direccion: " + str(locationsplit))
+        if str(locationsplit[0]) == 'Francisco Morazán':
+            envio = 80
+            print("Francisco morazan")
+        else:
+            envio = 150
+            print("otra direccion")
         return envio
     
     def get_discount(self):
@@ -131,12 +137,10 @@ class Order(models.Model):
     
     def get_total_final(self):
         total = 0
-        envio = 0
         for order_item in self.items.all():
-            total += order_item.get_final_price()
-            envio += 1
-        envio = (envio - 1) * 20 + 80
-        totalf = total + envio
+            if order_item.item.quantity > 0:
+                total += order_item.get_final_price()
+        totalf = total + self.get_price_envio()
         return totalf
     
     def stringTitle(self):

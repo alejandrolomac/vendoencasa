@@ -374,7 +374,7 @@ def orderSummaryFinish(request):
             if str(locationsplit[0]) == 'Francisco Morazán':
                 shipping = 80
             else:
-                shipping = 0
+                shipping = 150
         else:
             if request.POST.get('newLocation'):
                 location = request.POST.get('newLocation')
@@ -384,7 +384,7 @@ def orderSummaryFinish(request):
                 if location == 'Francisco Morazán':
                     shipping = 80
                 else:
-                    shipping = 0
+                    shipping = 150
             else:
                 messages.error(request, 'Tienes que elegir una dirección o introducir una nueva para continuar')
                 return redirect("cart_app:orderpay")
