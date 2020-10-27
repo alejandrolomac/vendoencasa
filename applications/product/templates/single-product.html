@@ -135,6 +135,10 @@
 									<a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}%20{{ lp.resume }}" style="margin-right: 15px; font-size: 18px;" target="_blank"><i class="fa fa-twitter" ></i></a>
 									<a href="whatsapp://send?text={{ request.build_absolute_uri }}" target="_blank" data-action="share/whatsapp/share" style="margin-right: 15px; font-size: 18px;"><i class="fa fa-whatsapp" ></i></a>
 								</li>
+								{% if lp.quantity == 0 %}
+									<li class="list-group-item" style="background: #fff2f2;">
+										No hay en inventario, pero se traeran más.
+									</li>
 								{% if lp.quantity == 1 %}
 									<li class="list-group-item" style="background: #fff2f2;">
 										Solo queda {{lp.quantity}} en inventario, pero se traeran más.
